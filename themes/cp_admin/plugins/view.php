@@ -18,14 +18,22 @@
 
 <?= $this->section('headerRight') ?>
 <?php if($plugin->isActive()): ?>
-    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
+    <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="danger"><?= lang('Plugins.deactivate') ?></x-Button>
+        <?php if ($plugin->getSettingsFields('general') !== []): ?>
+        <?php // @icon('equalizer-fill')?>
+        <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
+        <?php endif; ?>
     </form>
 <?php else: ?>
-    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
+    <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="secondary"><?= lang('Plugins.activate') ?></x-Button>
+        <?php if ($plugin->getSettingsFields('general') !== []): ?>
+        <?php // @icon('equalizer-fill')?>
+        <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
+        <?php endif; ?>
     </form>
 <?php endif; ?>
 <?= $this->endSection() ?>
@@ -34,8 +42,10 @@
 <div class="flex flex-col items-start justify-center gap-8 mx-auto xl:flex-row-reverse">
     <aside class="w-full pb-8 border-b xl:sticky xl:max-w-xs top-28 border-subtle xl:border-none">
         <h2 class="mb-2 text-2xl font-bold font-display"><?= lang('Plugins.about') ?></h2>
-        <p><?= $plugin->getDescription() ?></p>
-        <a href="<?= $plugin->getHomepage() ?>" class="inline-flex items-center mt-2 font-semibold hover:underline gap-x-2"><?= icon('link') . $plugin->getHomepage() ?></a>
+        <p class="relative max-w-sm text-skin-muted"><?= $plugin->getDescription() ?? '<span class="absolute inset-0 px-2 m-auto text-sm lowercase shadow-sm w-fit h-fit bg-base">' . lang('Plugins.noDescription') . '</span><span class="block w-full h-4 mt-1 bg-subtle"></span><span class="block w-full h-4 mt-1 bg-subtle"></span><span class="block w-4/5 h-4 mt-1 bg-subtle"></span>' ?></p>
+        <?php if ($plugin->getHomepage()): ?>
+            <a href="<?= $plugin->getHomepage() ?>" class="inline-flex items-center mt-2 font-semibold hover:underline gap-x-2"><?= icon('link') . $plugin->getHomepage() ?></a>
+        <?php endif; ?>
         <?php if ($plugin->getKeywords() !== []): ?>
             <div class="mt-2">
                 <?php foreach ($plugin->getKeywords() as $keyword): ?>
@@ -75,9 +85,26 @@
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
+        <?php if ($plugin->getHooks() !== []): ?>
+            <h3 class="mt-6 text-lg font-bold font-display"><?= lang('Plugins.declaredHooks') ?></h3>
+            <ul>
+                <?php foreach ($plugin->getHooks() as $hook): ?>
+                    <li><?= $hook ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
     </aside>
-    <section class="max-w-2xl prose prose-headings:font-display">
-        <?= $plugin->getReadmeHTML() ?>
-    </section>
+    <?php if($plugin->getReadmeHTML()): ?>
+        <section class="w-full max-w-3xl p-4 prose border rounded-t-lg rounded-b-lg xl:rounded-t-none xl:-mt-12 md:p-6 xl:p-12 prose-headings:font-display bg-elevated border-subtle">
+            <?= $plugin->getReadmeHTML() ?>
+        </section>
+    <?php else: ?>
+        <section class="flex flex-col items-center justify-center w-full max-w-3xl p-4 border rounded-t-lg rounded-b-lg xl:rounded-t-none xl:-mt-12 md:p-6 xl:p-12 bg-elevated border-subtle min-h-96">
+            <?= icon('article-line', [
+                'class' => 'text-gray-300 text-6xl',
+            ]) ?>
+            <p class="mt-2 font-semibold text-skin-muted"><?= lang('Plugins.noReadme') ?></p>
+        </section>
+    <?php endif; ?>
 </div>
 <?= $this->endSection() ?>

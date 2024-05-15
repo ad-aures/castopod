@@ -1,7 +1,7 @@
 <form method="POST" action="<?= $action ?>" class="flex flex-col max-w-xl gap-4 p-4 sm:p-6 md:p-8 bg-elevated border-3 border-subtle rounded-xl" >
 <?= csrf_field() ?>
 <?php $hasDatetime = false; ?>
-<?php foreach ($plugin->getSettingsFields($type) as $field): ?>
+<?php foreach ($fields as $field): ?>
     <?php switch ($field->type): case 'checkbox': ?>
         <x-Forms.Checkbox
             name="<?= $field->key ?>"

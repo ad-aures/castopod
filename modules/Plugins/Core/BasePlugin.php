@@ -108,11 +108,6 @@ abstract class BasePlugin implements PluginInterface
         return in_array($name, $this->manifest->hooks, true);
     }
 
-    final public function getSettings(): ?Settings
-    {
-        return $this->manifest->settings;
-    }
-
     final public function getVersion(): string
     {
         return $this->manifest->version;
@@ -167,12 +162,20 @@ abstract class BasePlugin implements PluginInterface
      */
     final public function getSettingsFields(string $type): array
     {
-        $settings = $this->getSettings();
+        $settings = $this->manifest->settings;
         if (! $settings instanceof Settings) {
             return [];
         }
 
         return $settings->{$type};
+    }
+
+    /**
+     * @return list<string>
+     */
+    final public function getHooks(): array
+    {
+        return $this->manifest->hooks;
     }
 
     final public function getKey(): string

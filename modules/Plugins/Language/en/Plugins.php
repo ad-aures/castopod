@@ -16,7 +16,13 @@ return [
     'authors' => 'Authors',
     'author_email' => 'Email {authorName}',
     'author_homepage' => '{authorName} homepage',
+    'declaredHooks' => 'Declared hooks',
     'settings' => 'Settings',
+    'settingsTitle' => '{type, select,
+        podcast {{pluginName} podcast settings}
+        episode {{pluginName} episode settings}
+        other {{pluginName} general settings}
+    }',
     'view' => 'View',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
@@ -29,6 +35,8 @@ return [
         'analytics' => 'Analytics',
         'accessibility' => 'Accessibility',
     ],
+    'noDescription' => 'No description',
+    'noReadme' => 'No README file found.',
     'messages' => [
         'saveSettingsSuccess' => '{pluginName} settings were successfully saved!',
     ],

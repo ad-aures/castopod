@@ -1,14 +1,14 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('Plugins.settings', [
+<?= lang('Plugins.settingsTitle', [
     'pluginName' => $plugin->getName(),
     'type'       => $type,
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Plugins.settings', [
+<?= lang('Plugins.settingsTitle', [
     'pluginName' => $plugin->getName(),
     'type'       => $type,
 ]) ?>
@@ -30,10 +30,10 @@ if (isset($episode)) {
 ?>
 
 <?= $this->section('content') ?>
-<?= view('plugins/_settings', [
+<?= view('plugins/_settings_form', [
     'plugin'  => $plugin,
     'action'  => route_to(sprintf('plugins-settings-%s-action', $type), ...$params),
-    'type'    => $type,
+    'fields'  => $fields,
     'context' => $context,
 ]) ?>
 <?= $this->endSection() ?>
