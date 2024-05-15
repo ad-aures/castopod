@@ -125,8 +125,15 @@ class PluginController extends BaseController
             $data['episode'] = $episode;
         }
 
+        $fields = $plugin->getSettingsFields($type);
+
+        if ($fields === []) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         $data['type'] = $type;
         $data['context'] = $context;
+        $data['fields'] = $fields;
 
         helper('form');
         replace_breadcrumb_params($breadcrumbReplacements);
@@ -164,8 +171,8 @@ class PluginController extends BaseController
         $rules = [];
         foreach ($plugin->getSettingsFields($type) as $field) {
             $typeRules = $plugins::FIELDS_VALIDATIONS[$field->type];
-            if (! in_array('permit_empty', $typeRules, true) && ! $field->optional) {
-                $typeRules[] = 'required';
+            if (! in_array('permit_empty', $typeRules, true)) {
+                $typeRules[] = $field->optional ? 'permit_empty' : 'required';
             }
 
             $rules[$field->key] = $typeRules;
@@ -182,7 +189,7 @@ class PluginController extends BaseController
 
         foreach ($plugin->getSettingsFields('general') as $field) {
             $value = $validatedData[$field->key] ?? null;
-            $fieldValue = match ($plugins::FIELDS_CASTS[$field->type] ?? 'text') {
+            $fieldValue = $value === '' ? null : match ($plugins::FIELDS_CASTS[$field->type] ?? 'text') {
                 'bool'     => $value === 'yes',
                 'int'      => (int) $value,
                 'uri'      => new URI($value),
@@ -192,7 +199,7 @@ class PluginController extends BaseController
                     $this->request->getPost('client_timezone')
                 )->setTimezone(app_timezone()),
                 'markdown' => new Markdown($value),
-                default    => $value === '' ? null : $value,
+                default    => $value,
             };
             $plugins->setOption($plugin, $field->key, $fieldValue, $context);
         }

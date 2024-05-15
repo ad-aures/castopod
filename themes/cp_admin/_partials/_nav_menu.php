@@ -49,11 +49,11 @@
                 ?>
             <li class="inline-flex">
                 <?php if ($isAllowed): ?> 
-                    <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:content-chevronRightIcon before:absolute before:-ml-5 before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active<?= $isActive
-                        ? ' before:opacity-100 font-semibold inline-flex items-center'
+                    <a class="line-clamp-1 leading-9 relative w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 before:content-chevronRightIcon before:absolute before:top-2 before:-ml-5 before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active<?= $isActive
+                        ? ' before:opacity-100 font-semibold'
                         : ' hover:before:opacity-60 focus:before:opacity-60' ?>" href="<?= $href ?>"><?= $label ?></a>
                 <?php else: ?>
-                    <span data-tooltip="right" title="<?= lang('Navigation.not-authorized') ?>" class="relative w-full py-3 pr-2 text-sm cursor-not-allowed before:inset-y-0 before:my-auto pl-14 hover:opacity-100 before:absolute before:content-prohibitedIcon before:-ml-5 before:opacity-60 before:w-4 before:h-4 hover:bg-navigation-active"><?= $label ?></span>
+                    <span data-tooltip="right" title="<?= lang('Navigation.not-authorized') ?>" class="relative w-full py-3 pr-2 text-sm cursor-not-allowed line-clamp-2 before:inset-y-0 before:my-auto pl-14 hover:opacity-100 before:absolute before:content-prohibitedIcon before:-ml-5 before:opacity-60 before:w-4 before:h-4 hover:bg-navigation-active"><?= $label ?></span>
                 <?php endif; ?>
             </li>
             <?php endforeach; ?>

@@ -46,8 +46,8 @@ class Person extends ManifestObject
 
             $data = [
                 'name'  => $matches['name'],
-                'email' => $matches['email'],
-                'url'   => $matches['url'],
+                'email' => $matches['email'] ?? null,
+                'url'   => $matches['url'] ?? null,
             ];
         }
 
