@@ -46,9 +46,9 @@ class Manifest extends ManifestObject
         'repository' => Repository::class,
     ];
 
-    protected string $name;
+    protected ?string $name = '???';
 
-    protected string $version;
+    protected ?string $version = 'X.Y.Z';
 
     protected ?string $description = null;
 

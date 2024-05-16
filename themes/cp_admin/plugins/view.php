@@ -1,3 +1,7 @@
+<?php use Modules\Plugins\Core\PluginStatus;
+
+?>
+
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
@@ -9,15 +13,20 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>
-<?php if($plugin->isActive()): ?>
+<?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
+    <?php // @icon('check-fill')?>
     <x-Pill variant="success" icon="check-fill" class="lowercase"><?= lang('Plugins.active') ?></x-Pill>
-<?php else: ?>
+<?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
+    <?php // @icon('close-fill')?>
     <x-Pill variant="default" icon="close-fill" class="lowercase"><?= lang('Plugins.inactive') ?></x-Pill>
+<?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
+    <?php // @icon('alert-fill')?>
+    <x-Pill variant="warning" icon="alert-fill" class="lowercase"><?= lang('Plugins.invalid') ?></x-Pill>
 <?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php if($plugin->isActive()): ?>
+<?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
     <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="danger"><?= lang('Plugins.deactivate') ?></x-Button>
@@ -26,7 +35,7 @@
         <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
         <?php endif; ?>
     </form>
-<?php else: ?>
+<?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
     <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="secondary"><?= lang('Plugins.activate') ?></x-Button>
@@ -39,6 +48,16 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<?php if ($plugin->getStatus() === PluginStatus::INVALID): ?>
+    <x-Alert title="<?= lang('Plugins.errors.manifestError') ?>" variant="warning" class="mb-12">
+        <ul>
+            <?php foreach ($plugin->getErrors() as $key => $error): ?>
+                <li><?= $error ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </x-Alert>
+<?php endif; ?>
+
 <div class="flex flex-col items-start justify-center gap-8 mx-auto xl:flex-row-reverse">
     <aside class="w-full pb-8 border-b xl:sticky xl:max-w-xs top-28 border-subtle xl:border-none">
         <h2 class="mb-2 text-2xl font-bold font-display"><?= lang('Plugins.about') ?></h2>
@@ -54,6 +73,9 @@
             </div>
         <?php endif; ?>
         <ul class="flex flex-col gap-2 mt-4">
+            <li class="inline-flex items-center font-mono text-sm gap-x-2"><?= icon('box-2-line', [
+                'class' => 'text-gray-500 text-xl',
+            ]) . $plugin->getVersion() ?></li>
             <?php if ($plugin->getRepository()): ?>
                 <li><a href="<?= $plugin->getRepository()->url ?>" class="inline-flex items-center text-sm gap-x-2 hover:underline" target="_blank" rel="noopener noreferrer"><?= icon('git-repository-fill', [
                     'class' => 'text-gray-500 text-xl',

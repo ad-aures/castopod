@@ -17,16 +17,19 @@ abstract class ManifestObject
     protected const CASTS = [];
 
     /**
-     * @var array<string,string>
+     * @var array<string,array<string,string>>
      */
-    public static array $errors = [];
+    protected static array $errors = [];
 
     /**
      * @param mixed[] $data
      */
     public function __construct(
-        private readonly array $data
+        protected readonly string $pluginKey,
+        private readonly array $data,
     ) {
+        self::$errors[$pluginKey] = [];
+
         $this->load();
     }
 
@@ -52,7 +55,11 @@ abstract class ManifestObject
         $validation->setRules($this::VALIDATION_RULES);
 
         if (! $validation->run($this->data)) {
-            static::$errors = [...static::$errors, ...$validation->getErrors()];
+            foreach ($validation->getErrors() as $key => $message) {
+                $this->addError($key, $message);
+            }
+
+            $validation->reset();
         }
 
         foreach ($validation->getValidated() as $key => $value) {
@@ -62,11 +69,11 @@ abstract class ManifestObject
                 if (is_array($cast)) {
                     if (is_array($value)) {
                         foreach ($value as $valueKey => $valueElement) {
-                            $value[$valueKey] = new $cast[0]($valueElement);
+                            $value[$valueKey] = new $cast[0]($this->pluginKey, $valueElement);
                         }
                     }
                 } else {
-                    $value = new $cast($value);
+                    $value = new $cast($this->pluginKey, $value ?? []);
                 }
             }
 
@@ -77,8 +84,13 @@ abstract class ManifestObject
     /**
      * @return array<string,string>
      */
-    public function getErrors(): array
+    public static function getPluginErrors(string $pluginKey): array
     {
-        return $this->errors;
+        return self::$errors[$pluginKey];
+    }
+
+    protected function addError(string $errorKey, string $errorMessage): void
+    {
+        self::$errors[$this->pluginKey][$errorKey] = $errorMessage;
     }
 }

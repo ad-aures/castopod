@@ -28,6 +28,7 @@ return [
     'deactivate' => 'Deactivate',
     'active' => 'Active',
     'inactive' => 'Inactive',
+    'invalid' => 'Invalid',
     'uninstall' => 'Uninstall',
     'keywords' => [
         'podcasting20' => 'Podcasting 2.0',
@@ -39,5 +40,10 @@ return [
     'noReadme' => 'No README file found.',
     'messages' => [
         'saveSettingsSuccess' => '{pluginName} settings were successfully saved!',
+    ],
+    'errors' => [
+        'manifestError' => 'Plugin manifest has errors',
+        'manifestMissing' => 'Plugin manifest "{manifestPath}" is missing.',
+        'manifestJsonInvalid' => 'Plugin manifest "{manifestPath}" is not a valid JSON.',
     ],
 ];
