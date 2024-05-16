@@ -96,7 +96,7 @@ class Plugins
     {
         $activePlugins = [];
         foreach (static::$plugins as $plugin) {
-            if ($plugin->isActive()) {
+            if ($plugin->getStatus() === PluginStatus::ACTIVE) {
                 $activePlugins[] = $plugin;
             }
         }
@@ -111,7 +111,7 @@ class Plugins
     {
         $pluginsWithPodcastSettings = [];
         foreach (static::$plugins as $plugin) {
-            if (! $plugin->isActive()) {
+            if ($plugin->getStatus() !== PluginStatus::ACTIVE) {
                 continue;
             }
 
@@ -132,7 +132,7 @@ class Plugins
     {
         $pluginsWithEpisodeSettings = [];
         foreach (static::$plugins as $plugin) {
-            if (! $plugin->isActive()) {
+            if ($plugin->getStatus() !== PluginStatus::ACTIVE) {
                 continue;
             }
 
@@ -183,7 +183,7 @@ class Plugins
     {
         foreach (static::$plugins as $plugin) {
             // only run hook on active plugins
-            if (! $plugin->isActive()) {
+            if ($plugin->getStatus() !== PluginStatus::ACTIVE) {
                 continue;
             }
 
@@ -282,7 +282,7 @@ class Plugins
             static::$pluginsByVendor[$vendor][] = $plugin;
             ++static::$installedCount;
 
-            if ($plugin->isActive()) {
+            if ($plugin->getStatus() === PluginStatus::ACTIVE) {
                 ++static::$activeCount;
             }
         }

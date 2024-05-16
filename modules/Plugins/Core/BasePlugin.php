@@ -21,7 +21,6 @@ use Modules\Plugins\Manifest\Manifest;
 use Modules\Plugins\Manifest\Person;
 use Modules\Plugins\Manifest\Repository;
 use Modules\Plugins\Manifest\Settings;
-use RuntimeException;
 
 /**
  * @property string $key
@@ -33,7 +32,12 @@ abstract class BasePlugin implements PluginInterface
 
     protected string $iconSrc;
 
-    protected bool $active;
+    /**
+     * @var array<string,string>
+     */
+    protected array $errors = [];
+
+    protected PluginStatus $status;
 
     protected Manifest $manifest;
 
@@ -51,20 +55,30 @@ abstract class BasePlugin implements PluginInterface
         $manifestContents = file_get_contents($manifestPath);
 
         if (! $manifestContents) {
-            throw new RuntimeException(sprintf('Plugin manifest "%s" is missing!', $manifestPath));
+            $manifestContents = '{}';
+            $this->errors['manifest'] = lang('Plugins.errors.manifestMissing', [
+                'manifestPath' => $manifestPath,
+            ]);
         }
 
         /** @var array<mixed>|null $manifestData */
         $manifestData = json_decode($manifestContents, true);
 
         if ($manifestData === null) {
-            throw new RuntimeException(sprintf('Plugin manifest "%s" is not a valid JSON', $manifestPath), 1);
+            $manifestData = [];
+            $this->errors['manifest'] = lang('Plugins.errors.manifestJsonInvalid', [
+                'manifestPath' => $manifestPath,
+            ]);
         }
 
-        $this->manifest = new Manifest($manifestData);
+        $this->manifest = new Manifest($this->key, $manifestData);
+        $this->errors = [...$this->errors, ...Manifest::getPluginErrors($this->key)];
 
-        // check that plugin is active
-        $this->active = get_plugin_option($this->key, 'active') ?? false;
+        if ($this->errors !== []) {
+            $this->status = PluginStatus::INVALID;
+        } else {
+            $this->status = get_plugin_option($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
+        }
 
         $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
 
@@ -98,9 +112,17 @@ abstract class BasePlugin implements PluginInterface
     {
     }
 
-    final public function isActive(): bool
+    final public function getStatus(): PluginStatus
     {
-        return $this->active;
+        return $this->status;
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    final public function getErrors(): array
+    {
+        return $this->errors;
     }
 
     final public function isHookDeclared(string $name): bool
@@ -142,19 +164,6 @@ abstract class BasePlugin implements PluginInterface
     final public function getIconSrc(): string
     {
         return $this->iconSrc;
-    }
-
-    final public function doesManifestHaveErrors(): bool
-    {
-        return $this->getManifestErrors() !== [];
-    }
-
-    /**
-     * @return array<string,string>
-     */
-    final public function getManifestErrors(): array
-    {
-        return $this->manifest::$errors;
     }
 
     /**

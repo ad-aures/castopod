@@ -1,9 +1,19 @@
-<article class="flex flex-col p-4 rounded-xl relative bg-elevated border-3 <?= $plugin->isActive() ? 'border-accent-base' : 'border-subtle' ?>">
+<?php
+
+use Modules\Plugins\Core\PluginStatus;
+
+?>
+<article class="flex flex-col p-4 rounded-xl relative bg-elevated border-3 <?= $plugin->getStatus() === PluginStatus::ACTIVE ? 'border-accent-base' : 'border-subtle' ?>">
     <div class="self-end -mb-6">
-    <?php if($plugin->isActive()): ?>
+    <?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
+        <?php // @icon('check-fill')?>
         <x-Pill variant="success" icon="check-fill" class="lowercase" size="small"><?= lang('Plugins.active') ?></x-Pill>
-    <?php else: ?>
+    <?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
+        <?php // @icon('close-fill')?>
         <x-Pill variant="default" icon="close-fill" class="lowercase" size="small"><?= lang('Plugins.inactive') ?></x-Pill>
+    <?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
+        <?php // @icon('alert-fill')?>
+        <x-Pill variant="warning" icon="alert-fill" class="lowercase" size="small"><?= lang('Plugins.invalid') ?></x-Pill>
     <?php endif; ?>
     </div>
     <img class="rounded-full min-w-16 max-w-16 aspect-square" src="<?= $plugin->getIconSrc() ?>">
@@ -30,12 +40,12 @@
             <?php endif; ?>
         </div>
         <div class="flex gap-x-2">
-        <?php if($plugin->isActive()): ?>
+        <?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
             <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
                 <?= csrf_field() ?>
                 <x-Button type="submit" variant="danger" size="small"><?= lang('Plugins.deactivate') ?></x-Button>
             </form>
-        <?php else: ?>
+        <?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
             <form class="flex flex-col items-end justify-end gap-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
                 <?= csrf_field() ?>
                 <x-Button type="submit" variant="secondary" size="small"><?= lang('Plugins.activate') ?></x-Button>
