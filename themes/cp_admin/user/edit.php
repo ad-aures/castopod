@@ -23,7 +23,7 @@
     name="role"
     label="<?= esc(lang('User.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
-    selected="<?= esc(get_instance_group($user)) ?>"
+    defaultValue="<?= esc(get_instance_group($user)) ?>"
     isRequired="true" />
 
 <x-Button variant="primary" type="submit" class="self-end mt-4"><?= lang('User.form.submit_edit') ?></x-Button>

@@ -30,7 +30,7 @@
     name="role"
     label="<?= esc(lang('User.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
-    selected="<?= setting('AuthGroups.defaultGroup') ?>"
+    defaultValue="<?= setting('AuthGroups.defaultGroup') ?>"
     isRequired="true" />
 
 <x-Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_create') ?></x-Button>

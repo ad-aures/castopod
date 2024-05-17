@@ -19,7 +19,7 @@
     name="role"
     label="<?= esc(lang('Contributor.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
-    selected="<?= $contributorGroup ?>"
+    defaultValue="<?= $contributorGroup ?>"
     placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
     isRequired="true" />
 

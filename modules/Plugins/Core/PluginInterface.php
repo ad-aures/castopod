@@ -10,9 +10,13 @@ use App\Libraries\SimpleRSSElement;
 
 interface PluginInterface
 {
-    public function channelTag(Podcast $podcast, SimpleRSSElement $channel): void;
+    public function rssBeforeChannel(Podcast $podcast): void;
 
-    public function itemTag(Episode $episode, SimpleRSSElement $item): void;
+    public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void;
+
+    public function rssBeforeItem(Episode $episode): void;
+
+    public function rssAfterItem(Episode $episode, SimpleRSSElement $item): void;
 
     public function siteHead(): void;
 }
