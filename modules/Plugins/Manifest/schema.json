@@ -87,7 +87,13 @@
       "description": "The hooks used by the plugin.",
       "type": "array",
       "items": {
-        "enum": ["channelTag", "itemTag", "siteHead"]
+        "enum": [
+          "rssBeforeChannel",
+          "rssAfterChannel",
+          "rssBeforeItem",
+          "rssAfterItem",
+          "siteHead"
+        ]
       },
       "uniqueItems": true
     },

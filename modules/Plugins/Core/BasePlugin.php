@@ -52,7 +52,7 @@ abstract class BasePlugin implements PluginInterface
 
         // TODO: cache manifest data
         $manifestPath = $directory . '/manifest.json';
-        $manifestContents = file_get_contents($manifestPath);
+        $manifestContents = @file_get_contents($manifestPath);
 
         if (! $manifestContents) {
             $manifestContents = '{}';
@@ -93,18 +93,19 @@ abstract class BasePlugin implements PluginInterface
         $this->{$name} = $value;
     }
 
-    public function init(): void
-    {
-        // add to admin navigation
-
-        // TODO: setup navigation and views?
-    }
-
-    public function channelTag(Podcast $podcast, SimpleRSSElement $channel): void
+    public function rssBeforeChannel(Podcast $podcast): void
     {
     }
 
-    public function itemTag(Episode $episode, SimpleRSSElement $item): void
+    public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
+    {
+    }
+
+    public function rssBeforeItem(Episode $episode): void
+    {
+    }
+
+    public function rssAfterItem(Episode $episode, SimpleRSSElement $item): void
     {
     }
 

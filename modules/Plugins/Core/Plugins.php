@@ -10,9 +10,11 @@ use App\Libraries\SimpleRSSElement;
 use Config\Database;
 
 /**
- * @method void channelTag(Podcast $podcast, SimpleRSSElement $channel)
- * @method void itemTag(Episode $episode, SimpleRSSElement $item)
- * @method string siteHead()
+ * @method void rssBeforeChannel(Podcast $podcast)
+ * @method void rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel)
+ * @method void rssBeforeItem(Episode $episode)
+ * @method void rssAfterItem(Episode $episode, SimpleRSSElement $item)
+ * @method void siteHead()
  */
 class Plugins
 {
@@ -21,7 +23,7 @@ class Plugins
     /**
      * @var list<string>
      */
-    public const HOOKS = ['channelTag', 'itemTag', 'siteHead'];
+    public const HOOKS = ['rssBeforeChannel', 'rssAfterChannel', 'rssBeforeItem', 'rssAfterItem', 'siteHead'];
 
     public const FIELDS_VALIDATIONS = [
         'checkbox'        => ['permit_empty'],

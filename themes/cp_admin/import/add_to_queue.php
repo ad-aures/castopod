@@ -44,7 +44,7 @@
     as="Select"
     name="language"
     label="<?= esc(lang('Podcast.form.language')) ?>"
-    selected="<?= $browserLang ?>"
+    defaultValue="<?= $browserLang ?>"
     isRequired="true"
     options="<?= esc(json_encode($languageOptions)) ?>" />
 

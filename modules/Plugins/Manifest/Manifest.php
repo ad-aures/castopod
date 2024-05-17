@@ -34,7 +34,7 @@ class Manifest extends ManifestObject
         'license'     => 'permit_empty|string',
         'private'     => 'permit_empty|is_boolean',
         'keywords.*'  => 'permit_empty',
-        'hooks.*'     => 'permit_empty|in_list[channelTag,itemTag,siteHead]',
+        'hooks.*'     => 'permit_empty|in_list[rssBeforeChannel,rssAfterChannel,rssBeforeItem,rssAfterItem,siteHead]',
         'settings'    => 'permit_empty|is_list',
         'repository'  => 'permit_empty|is_list',
     ];

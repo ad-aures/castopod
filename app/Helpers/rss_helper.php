@@ -47,6 +47,8 @@ if (! function_exists('get_rss_feed')) {
             "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='{$itunesNamespace}' xmlns:podcast='{$podcastNamespace}' xmlns:atom='{$atomNamespace}' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>"
         );
 
+        $plugins->rssBeforeChannel($podcast);
+
         $channel = $rss->addChild('channel');
 
         $atomLink = $channel->addChild('link', null, $atomNamespace);
@@ -298,12 +300,14 @@ if (! function_exists('get_rss_feed')) {
         }
 
         // run plugins hook at the end
-        $plugins->channelTag($podcast, $channel);
+        $plugins->rssAfterChannel($podcast, $channel);
 
         foreach ($episodes as $episode) {
             if ($episode->is_premium && ! $subscription instanceof Subscription) {
                 continue;
             }
+
+            $plugins->rssBeforeItem($episode);
 
             $item = $channel->addChild('item');
             $item->addChild('title', $episode->title, null, false);
@@ -460,7 +464,7 @@ if (! function_exists('get_rss_feed')) {
                 ], $item);
             }
 
-            $plugins->itemTag($episode, $item);
+            $plugins->rssAfterItem($episode, $item);
         }
 
         return $rss->asXML();

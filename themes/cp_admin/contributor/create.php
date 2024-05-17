@@ -28,7 +28,7 @@
     label="<?= esc(lang('Contributor.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
-    selected="<?= setting('AuthGroups.defaultPodcastGroup') ?>"
+    defaultValue="<?= setting('AuthGroups.defaultPodcastGroup') ?>"
     isRequired="true" />
 
 <x-Button type="submit" class="self-end" variant="primary"><?= lang('Contributor.form.submit_add') ?></x-Button>

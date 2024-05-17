@@ -187,7 +187,7 @@ class PluginController extends BaseController
 
         $validatedData = $this->validator->getValidated();
 
-        foreach ($plugin->getSettingsFields('general') as $field) {
+        foreach ($plugin->getSettingsFields($type) as $field) {
             $value = $validatedData[$field->key] ?? null;
             $fieldValue = $value === '' ? null : match ($plugins::FIELDS_CASTS[$field->type] ?? 'text') {
                 'bool'     => $value === 'yes',
