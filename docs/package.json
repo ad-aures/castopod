@@ -1,21 +1,28 @@
 {
-  "name": "castopod-docs",
-  "version": "0.0.0-development",
-  "description": "Castopod documentation using vitepress",
-  "main": "index.js",
+  "name": "civil-chasm",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vitepress --port=3050",
-    "build": "vitepress build",
-    "serve": "vitepress serve"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prepare": "astro telemetry disable"
   },
-  "author": {
-    "name": "Yassine Doghri",
-    "email": "yassine@doghri.fr",
-    "url": "https://code.castopod.org/yassine"
-  },
-  "license": "AGPL-3.0-or-later",
-  "devDependencies": {
-    "tailwindcss": "^3.2.7",
-    "vitepress": "^0.22.4"
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/starlight": "^0.22.4",
+    "@astrojs/starlight-tailwind": "^2.0.2",
+    "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/inter": "^5.0.18",
+    "@fontsource/rubik": "^5.0.20",
+    "astro": "^4.8.6",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^7.0.1",
+    "postcss-preset-env": "^9.5.13",
+    "sharp": "^0.33.4",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
   }
 }

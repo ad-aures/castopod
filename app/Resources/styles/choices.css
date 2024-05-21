@@ -83,8 +83,7 @@
     height: 0;
     width: 0;
     border-style: solid;
-    border-color: hsl(var(--color-text-muted)) transparent transparent
-      transparent;
+    border-color: hsl(var(--color-text-muted)) transparent transparent;
     border-width: 5px;
     position: absolute;
     right: 11.5px;
@@ -94,8 +93,7 @@
   }
 
   .choices[data-type*="select-one"].is-open::after {
-    border-color: transparent transparent hsl(var(--color-text-muted))
-      transparent;
+    border-color: transparent transparent hsl(var(--color-text-muted));
     margin-top: -7.5px;
   }
 

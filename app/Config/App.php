@@ -127,13 +127,13 @@ class App extends BaseConfig
         'fr',
         'pl',
         'de',
-        'pt-BR',
-        'nn-NO',
+        'pt-br',
+        'nn-no',
         'es',
-        'zh-Hans',
+        'zh-hans',
         'ca',
         'br',
-        'sr-Latn',
+        'sr-latn',
     ];
 
     /**

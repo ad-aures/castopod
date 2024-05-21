@@ -1,0 +1,84 @@
+---
+title: Authentication & Authorization
+---
+
+Castopod handles authentication and authorization using `codeigniter/shield`
+coupled with custom rules. Roles and permissions are defined at two levels:
+
+1. [instance wide](#1-instance-wide-roles-and-permissions)
+2. [per podcast](#2-per-podcast-roles-and-permissions)
+
+## 1. Instance wide roles and permissions
+
+### Instance roles
+
+{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+
+| role            | description                              | permissions                                                                                |
+| --------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Dreistmerour·ez | Ur c'hontroll klok en deus war Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Merour·ez       | Merañ a ra endalc'had Castopod.          | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Podkaster       | Implijerien·ezed kustum Castopod.        | admin.access                                                                               |
+
+{/* AUTH-INSTANCE-ROLES-LIST:END */}
+
+### Instance permissions
+
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+
+| permission              | description                                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------------------- |
+| admin.access            | Gallout a ra gwelet taolenn-stur Castopod.                                                        |
+| admin.settings          | Gallout a ra gwelet arventennoù Castopod.                                                         |
+| users.manage            | Gallout a ra ober war-dro implijerien·ezed Castopod.                                              |
+| persons.manage          | Gallout a ra merañ an emellerien·ezed.                                                            |
+| pages.manage            | Gallout a ra merañ ar pajennoù.                                                                   |
+| podcasts.view           | Gallout a ra gwelet an holl bodkastoù.                                                            |
+| podcasts.create         | Gallout a ra krouiñ podkastoù nevez.                                                              |
+| podcasts.import         | Gallout a ra enporzhiañ podkastoù.                                                                |
+| fediverse.manage-blocks | Gallout a ra mirout aktourien·ezed pe domanioù ar Fediverse ouzh kaout darempredoù gant Castopod. |
+
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+
+## 2. Per podcast roles and permissions
+
+### Per podcast roles
+
+{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+
+| role       | description                                                               | permissions                                                                                                                                                                                                                                                                                 |
+| ---------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Merour·ez  | Ur c'hontroll klok en deus war ar podkast #\{id\}.                        | \*                                                                                                                                                                                                                                                                                          |
+| Embanner   | Merañ a ra endalc'had hag embannadurioù ar podkast #\{id\}.               | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Aozer·ez   | Merañ a ra endalc'had ar podkast #\{id\} met ne c'hall ket embann anezho. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Kouviad·ez | Perzhiad·ez eus ar podkast #\{id\}.                                       | view, episodes.view                                                                                                                                                                                                                                                                         |
+
+{/* AUTH-PODCAST-ROLES-LIST:END */}
+
+### Per podcast permissions
+
+{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+
+| permission                   | description                                                                                                                            |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| view                         | Gallout a ra gwelet taolenn-stur ha muzulioù heklev ar podkast #\{id\}.                                                                |
+| edit                         | Gallout a ra kemmañ ar podkast #\{id\}.                                                                                                |
+| delete                       | Gallout a ra lemel ar podkast #\{id\}.                                                                                                 |
+| manage-import                | Gallout a ra sinkronekaat ar podkast enporzhiet #\{id\}.                                                                               |
+| manage-persons               | Gallout a ra merañ koumanantoù ar podkast #\{id\}.                                                                                     |
+| manage-subscriptions         | Gallout a ra merañ koumanantoù ar podkast #\{id\}.                                                                                     |
+| manage-contributors          | Gallout a ra merañ perzhidi ha perzhiadezed ar podkast #\{id\}.                                                                        |
+| manage-platforms             | Gallout a ra ouzhpennañ pe lemel liammoù etrezek savennoù diavaez evit ar podkast #\{id\}.                                             |
+| manage-publications          | Gallout a ra embann ar podkast #\{id\}.                                                                                                |
+| manage-notifications         | Gallout a ra gwelet kemennoù ar podkast #\{id\} ha lakaat anezho evel lennet.                                                          |
+| interact-as                  | Gallout a ra ober traoù gant identelezh ar podkast #\{id\}: ouzhpennañ ur gemennadenn d'ar re garetañ, rannañ anezhi pe respont dezhi. |
+| episodes.view                | Gallout a ra gwelet taolennoù-stur ha muzulioù heklev rannoù ar podkast #\{id\}.                                                       |
+| episodes.create              | Gallout a ra krouiñ rannoù evit podkast #\{id\}.                                                                                       |
+| episodes.edit                | Gallout a ra kemmañ rannoù ar podkast #\{id\}.                                                                                         |
+| episodes.delete              | Gallout a ra lemel rannoù ar podkast #\{id\}.                                                                                          |
+| episodes.manage-persons      | Gallout a ra merañ emellerien·ezed ar podkast #\{id\}.                                                                                 |
+| episodes.manage-clips        | Gallout a ra merañ klipoù video pe tennadoù son ar podkast #\{id\}.                                                                    |
+| episodes.manage-publications | Gallout a ra embann pe diembann rannoù ha kemennadennoù ar podkast #\{id\}.                                                            |
+| episodes.manage-comments     | Gallout a ra krouiñ/lemel evezhiadennoù evit rannoù ar podkast #\{id\}.                                                                |
+
+{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}

@@ -3,10 +3,11 @@
   "projectOwner": "adaures",
   "repoType": "gitlab",
   "repoHost": "https://code.castopod.org",
-  "files": ["README.md", "docs/src/index.md"],
+  "files": ["README.md", "docs/src/content/docs/en/index.mdx"],
   "imageSize": 100,
   "commit": false,
   "contributorsPerLine": 7,
+  "wrapperTemplate": "\n<table class=\"all-contributors-table\">\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n",
   "contributors": [
     {
       "login": "yassinedoghri",

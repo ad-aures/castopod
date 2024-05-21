@@ -43,15 +43,13 @@ class RolesDoc extends BaseCommand
     public function run(array $params): void
     {
         // loop over all files in path
-        $defaultFile = glob(ROOTPATH . 'docs/src/getting-started/auth.md');
-        $localizedFiles = glob(ROOTPATH . 'docs/src/**/getting-started/auth.md');
+        $files = glob(ROOTPATH . 'docs/src/content/docs/**/getting-started/auth.mdx');
 
-        if (! $localizedFiles) {
-            $localizedFiles = [];
+        if (! $files) {
+            $files = [];
         }
 
-        $files = array_merge($defaultFile, $localizedFiles);
-        CLI::write(implode(', ', $files));
+        CLI::write(implode(PHP_EOL, $files));
 
         if ($files === []) {
             return;
@@ -67,7 +65,7 @@ class RolesDoc extends BaseCommand
             $fileContents = file_get_contents($file);
 
             foreach (self::COMMENT_BLOCK_IDS as $key => $block_id) {
-                $pattern = '/(<!--\s' . $block_id . ':START.*-->)[\S\s]*(<!--\s' . $block_id . ':END.*-->)/';
+                $pattern = '/(\{\/\*\s' . $block_id . ':START.*\*\/\})[\S\s]*(\{\/\*\s' . $block_id . ':END.*\*\/\})/';
 
                 $handleInjectMethod = 'handle' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $key)));
 
@@ -164,7 +162,7 @@ class RolesDoc extends BaseCommand
         $converter = new HtmlConverter();
         $converter->getEnvironment()
             ->addConverter(new TableConverter());
-        $markdownTable = $converter->convert($table->generate());
+        $markdownTable = str_replace(['{', '}'], ['\{', '\}'], $converter->convert($table->generate()));
 
         // insert table between block comments
         $newFileContents = preg_replace(
@@ -182,7 +180,11 @@ class RolesDoc extends BaseCommand
 
     private function detectLocaleFromPath(string $fileKey): string
     {
-        preg_match('~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~', $fileKey, $match);
+        preg_match(
+            '~docs\/src\/content\/docs\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.mdx~',
+            $fileKey,
+            $match
+        );
 
         if ($match === []) {
             return 'en';

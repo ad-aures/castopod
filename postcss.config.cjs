@@ -6,7 +6,7 @@ module.exports = {
     require("tailwindcss/nesting")(require("postcss-nesting")),
     require("tailwindcss"),
     require("postcss-preset-env")({
-      stage: 1,
+      stage: 4,
       features: { "nesting-rules": false },
     }),
     ...(process.env.NODE_ENV === "production"

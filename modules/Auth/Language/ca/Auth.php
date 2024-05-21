@@ -72,16 +72,17 @@ return [
         'manage-publications' => 'Pot publicar el podcast #{id}.',
         'manage-notifications' => 'Pot veure i marcar les notificacions com a llegides per al podcast #{id}.',
         'interact-as' => 'Pot interactuar en nom del podcast #{id} per marcar les publicacions com a preferides, compartir-les o respondre-hi.',
-        'episodes.view' => 'Pot veure taulers i estadístiques dels episodis del podcast #{id}.',
-        'episodes.create' => 'Pot crear episodis per al podcast #{id}.',
-        'episodes.edit' => 'Pot editar episodis del podcast #{id}.',
-        'episodes.delete' => 'Pot suprimir episodis del podcast #{id}.',
-        'episodes.manage-persons' => 'Pot gestionar persones d\'episodi del podcast #{id}.',
-        'episodes.manage-clips' => 'Pot gestionar clips de vídeo o fragments de so del pòdcast #{id}.',
-        'episodes.manage-publications' => 'Pot publicar/anul·lar la publicació d\'episodis i publicacions del pòdcast #{id}.',
-        'episodes.manage-comments' => 'Pot crear/eliminar comentaris d\'episodi del pòdcast #{id}.',
+        'episodes' => [
+            'view' => 'Pot veure taulers i estadístiques dels episodis del podcast #{id}.',
+            'create' => 'Pot crear episodis per al podcast #{id}.',
+            'edit' => 'Pot editar episodis del podcast #{id}.',
+            'delete' => 'Pot suprimir episodis del podcast #{id}.',
+            'manage-persons' => 'Pot gestionar persones d\'episodi del podcast #{id}.',
+            'manage-clips' => 'Pot gestionar clips de vídeo o fragments de so del pòdcast #{id}.',
+            'manage-publications' => 'Pot publicar/anul·lar la publicació d\'episodis i publicacions del pòdcast #{id}.',
+            'manage-comments' => 'Pot crear/eliminar comentaris d\'episodi del pòdcast #{id}.',
+        ],
     ],
-
     // missing keys
     'code' => 'El teu codi de 6 dígits',
 

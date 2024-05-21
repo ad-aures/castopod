@@ -1,0 +1,24 @@
+---
+title: Detalls de seguretat
+---
+
+Castopod està fet amb [CodeIgniter4](https://codeigniter.com/), un framework PHP
+que fomenta les
+[bones pràctiques de seguretat](https://codeigniter.com/user_guide/concepts/security.html).
+
+Per maximitzar la seguretat de la vostra instància i evitar qualsevol atac
+maliciós, us recomanem que actualitzeu tots els permisos dels fitxers de
+Castopod després de la instal·lació o actualitzacions (per evitar qualsevol
+error de permís previ):
+
+- el directori `writable/` ha de ser **llegible** i **escrivible**.
+- el directori `public/media/` ha de ser **llegible** i **escrivible**.
+- qualsevol altre fitxer ha de ser definit com a **només-lectura**.
+
+Per exemple, si utilitzeu Apache o NGINX amb Ubuntu, podeu fer el següent:
+
+```bash
+sudo chown -R root:root /ruta/cap/a/castopod
+sudo chown -R www-data:www-data /ruta/cap/a/castopod/writable
+sudo chown -R www-data:www-data /ruta/cap/a/castopod/public/media
+```

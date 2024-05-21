@@ -33,6 +33,7 @@
         }
       },
       "extensions": [
+        "astro-build.astro-vscode",
         "bmewburn.vscode-intelephense-client",
         "bradlc.vscode-tailwindcss",
         "breezelin.phpstan",
@@ -49,6 +50,7 @@
         "runem.lit-plugin",
         "streetsidesoftware.code-spell-checker",
         "stylelint.vscode-stylelint",
+        "unifiedjs.vscode-mdx",
         "wayou.vscode-todo-highlight",
         "yzhang.markdown-all-in-one"
       ]

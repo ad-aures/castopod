@@ -1,4 +1,4 @@
-image: node:16
+image: node:20
 
 stages:
   - build
@@ -6,25 +6,29 @@ stages:
 
 .documentation-setup:
   before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest-9 --activate
+    - pnpm config set store-dir .pnpm-store
     - cd docs
     - chmod +x ./scripts/i18n-filter.sh
     - ./scripts/i18n-filter.sh src
-    - npm install
+    - pnpm install
 
 cache:
   key:
     files:
-      - docs/package-lock.json
+      - docs/pnpm-lock.yaml
   paths:
-    - docs/node_modules
+    - .pnpm-store
 
 # This job only serves for validating that the docs builds correctly on all non deployment branches
 build:
   extends: .documentation-setup
   stage: build
   script:
-    - npm run build
+    - pnpm run build
   except:
+    - develop
     - main
     - beta
     - alpha
@@ -36,12 +40,13 @@ build-production:
     name: production
     url: https://docs.castopod.org/
   script:
-    - npm run build
+    - pnpm run build --outDir=docs/.dist/$CI_COMMIT_REF_SLUG --base=$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
-      - docs/.vitepress/dist
+      - docs/dist/$CI_COMMIT_REF_SLUG
     expire_in: 30 mins
   only:
+    - develop
     - main
     - beta
     - alpha
@@ -54,10 +59,10 @@ deploy:
   variables:
     HOST: $DOCS_HOST
     USER: $DOCS_USER
-    TEMP_DIRECTORY: $DOCS_TEMP_DIRECTORY
-    DIRECTORY: $DOCS_DIRECTORY
+    TEMP_DIRECTORY: $DOCS_TEMP_DIRECTORY/$CI_COMMIT_REF_SLUG/
+    DIRECTORY: $DOCS_DIRECTORY/$CI_COMMIT_REF_SLUG/
     SSH_PORT: 3242
-    SOURCE_FOLDER: "docs/.vitepress/dist/"
+    SOURCE_FOLDER: "docs/dist/$CI_COMMIT_REF_SLUG/"
   before_script:
     # install rsync for file transfers
     - apt-get update && apt-get install rsync -y
@@ -71,6 +76,7 @@ deploy:
     - rsync -avzuh -e "ssh -p $SSH_PORT" $SOURCE_FOLDER $USER@$HOST:$TEMP_DIRECTORY --progress
     - ssh $USER@$HOST -p $SSH_PORT "rsync -rtv $TEMP_DIRECTORY $DIRECTORY"
   only:
+    - develop
     - main
     - beta
     - alpha

@@ -1,0 +1,23 @@
+---
+title: Tryggleiksspørsmål
+---
+
+Castopod er bygd på [CodeIgniter4](https://codeigniter.com/), som er eit
+PHP-rammeverk som oppmodar til
+[god tryggleikspraksis](https://codeigniter.com/user_guide/concepts/security.html).
+
+For å syta for best mogleg tryggleik på nettstaden din og hindra vondsinna åtak,
+tilrår me at du oppdaterer alle fil-tilgangsrettane til Castopod-filene etter du
+har installert (for å unngå tidlegare feil i tilgangsløyve):
+
+- `writable/`-mappa må vera **lesbar** og **skrivbar**.
+- `public/media/`-mappa må vera **lesbar** og **skrivbar**.
+- alle andre filer skal vera berre **lesbare**.
+
+Viss du til dømes bruker Apache eller NGINX med Ubuntu, kan du gjera dette:
+
+```bash
+sudo chown -R root:root /sti/til/castopod
+sudo chown -R www-data:www-data /sti/til/castopod/writable
+sudo chown -R www-data:www-data /sti/til/castopod/public/media
+```
