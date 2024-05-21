@@ -17,18 +17,19 @@ corrections de bugs 🐛 et des améliorations de performance ⚡.
    - cf.
      [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
 
-1. Go to the
-   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
-   see if your instance is up to date with the latest Castopod version
+1. Allez à la page
+   [des versions](https://code.castopod.org/adaures/castopod/-/releases) et
+   vérifiez si votre instance est à jour avec la dernière version de Castopod
 
    - cf.
      [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
 
-2. Download the latest release package named `Castopod Package`, you may choose
-   between the `zip` or `tar.gz` archives
+2. Téléchargez la dernière version du paquet nommé `Castopod Package`. Vous
+   pouvez choisir entre les archives au format `zip` ou `tar.gz`
 
-   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
-   - Note that you can also download the latest package from
+   - ⚠️ Assurez-vous de bien télécharger le paquet Castopod et **NON** le code
+     source
+   - Notez que vous pouvez également télécharger le dernier paquet depuis
      [castopod.org](https://castopod.org/)
 
 3. Sur votre serveur :
@@ -39,29 +40,30 @@ corrections de bugs 🐛 et des améliorations de performance ⚡.
      ::: info Note
 
      Vous devrez peut-être re-définir les autorisations de fichiers comme
-     effectué durant le processus d'installation. Check
-     [Security Concerns](./security.md).
+     effectué durant le processus d'installation. Vérifiez les
+     [questions de sécurité](./security.md).
 
      :::
 
-4. Update your database schema from your `Castopod Admin` > `About` page or by
-   running:
+4. Mettez à jour votre schéma de base de données depuis
+   `Administrateur Castopod` > `À propos` ou en exécutant :
 
    ```bash
    php spark castopod:database-update
    ```
 
-5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
-   `Housekeeping`
+5. Videz votre cache de votre `Administrateur Castopod` > `Paramètres` >
+   `Général` > `Foyer`
 6. ✨Profitez de votre nouvelle instance, vous avez terminé !
 
-::: info Note
+::: Note d'information
 
 Les versions peuvent être accompagnées d'instructions de mise à jour
 supplémentaires (cf. la
 [page des notes de versions](https://code.castopod.org/adaures/castopod/-/releases)).
 
-- Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?
+- Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire
+  ?</a>
 
 :::
 

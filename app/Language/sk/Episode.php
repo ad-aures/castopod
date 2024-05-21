@@ -25,7 +25,7 @@ return [
     'back_to_episodes' => 'Späť k epizódam {podcast}',
     'comments' => 'Komentáre',
     'activity' => 'Aktivita',
-    'chapters' => 'Chapters',
+    'chapters' => 'Kapitoly',
     'transcript' => 'Transcript',
     'description' => 'Popis epizódy',
     'number_of_comments' => '{numberOfComments, plural,

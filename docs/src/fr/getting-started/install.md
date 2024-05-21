@@ -9,7 +9,7 @@ Castopod a été pensé pour être facile à installer. Que vous utilisiez un
 hébergement dédié ou mutualisé, vous pouvez l'installer sur la plupart des
 serveurs web compatibles avec PHP-MySQL.
 
-::: tip Note
+::: Note d'astuce
 
 Nous avons publié des images officielles Docker pour Castopod!
 
@@ -20,15 +20,16 @@ directement à la [documentation Docker](./docker.md) pour Castopod.
 
 ## Prérequis
 
-- PHP v8.1 or higher
+- PHP v8.1 ou supérieure
 - MySQL version 5.7 ou supérieure ou MariaDB version 10.2 ou supérieure
 - Prise en charge HTTPS
-- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
-  incoming requests
+- Une horloge [synchronisée ntp](https://wiki.debian.org/NTP) pour valider les
+  requêtes fédérés entrantes
 
-### PHP v8.1 or higher
+### PHP v8.1 ou supérieure
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+PHP version 8.1 ou supérieure est requise, avec les extensions suivantes
+installées :
 
 - [intl](https://www.php.net/manual/fr/intl.requirements.php)
 - [libcurl](https://www.php.net/manual/fr/curl.requirements.php)
@@ -128,24 +129,26 @@ le fichier `.env` manuellement en vous appuyant sur le fichier `.env.example`.
 
 :::
 
-### Using CLI
+### Utilisation du CLI
 
-1. Create a `.env` file in the package root based on the `.env.example` file.
-2. Initialize the database using:
+1. Créez un fichier `.env` à la racine du paquet basé sur le fichier
+   `.env.example`.
+2. Initialisez la base de données en exécutant :
 
    ```sh
    php spark install:init-database
    ```
 
-3. Create the superadmin user using:
+3. Créer l'utilisateur super-admin en utilisant :
 
    ```sh
    php spark install:create-superadmin
    ```
 
-4. Head on to your admin gateway to start podcasting!
+4. Rendez-vous sur votre passerelle d'administration pour commencer le
+   podcasting!
 
-### Email/SMTP setup
+### Configuration SMTP∕Email
 
 Email configuration is required for some features to work properly (eg.
 retrieving your forgotten password, sending instructions to premium subscribers,
@@ -205,9 +208,9 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### S3 config options
+#### Options de configuration S3
 
-| Variable name           | Type    | Default     |
+| Nom de la variable      | Type    | Par défaut  |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |
@@ -223,11 +226,11 @@ media.s3.region="your_s3_region"
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
 
-### Install with YunoHost
+### Installation avec Yunohost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) est une distribution basée sur Debian
+GNU/Linux composée de logiciels libres et open source. Cela permet de vous
+simplifier l'auto-hébergement.
 
 <div class="flex flex-wrap items-center gap-4">
 

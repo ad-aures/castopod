@@ -30,9 +30,9 @@ return [
     'publish_error' => 'Aflevering is reeds gepubliceerd.',
     'publish_edit_error' => 'Aflevering is reeds gepubliceerd.',
     'publish_cancel_error' => 'Aflevering is reeds gepubliceerd.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'Aflevering is nog niet gepubliceerd, u kunt de publicatiedatum niet bewerken.',
+    'publish_date_edit_future_error' => 'Aflevering publicatiedatum kan alleen worden ingesteld op een datum in het verleden! Als u het opnieuw wilt inplannen, verwijder dan de publicatie eerst.',
+    'publish_date_edit_success' => 'De publicatiedatum van aflevering is met succes bijgewerkt!',
     'unpublish_error' => 'Aflevering is niet gepubliceerd.',
     'delete' => 'Verwijder',
     'go_to_page' => 'Ga naar pagina',
@@ -70,10 +70,10 @@ return [
             other {This episode is not published.}
         }',
         'publishCancelSuccess' => 'Aflevering publicatie is geannuleerd!',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
+        'unpublishBeforeDeleteTip' => 'Je moet de publicatie van de aflevering ongedaan maken voordat je deze verwijdert.',
+        'scheduleDateError' => 'Geplande datum moet worden ingesteld!',
+        'deletePublishedEpisodeError' => 'Je moet de publicatie van de aflevering ongedaan maken voordat je deze verwijdert.',
+        'deleteSuccess' => 'Aflevering succesvol verwijderd!',
         'deleteError' => 'Failed to delete episode {type, select,
             transcript {transcript}
             chapters {chapters}
@@ -88,7 +88,7 @@ return [
             audio {audio}
             other {media}
         } file {file_key}. You may manually remove it from your disk.',
-        'sameSlugError' => 'An episode with the chosen slug already exists.',
+        'sameSlugError' => 'Er bestaat al een aflevering met de gekozen slug.',
     ],
     'form' => [
         'file_size_error' =>
@@ -99,7 +99,7 @@ return [
         'cover' => 'Aflevering omslag',
         'cover_hint' =>
             'Als je geen omslag instelt, zal de podcast omslag worden gebruikt.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Omslag moet minstens 1400px breed en hoog zijn.',
         'title' => 'Titel',
         'title_hint' =>
             'Moet een duidelijke en beknopte afleveringsnaam bevatten. Geef hier geen aflevering of seizoen nummers op.',

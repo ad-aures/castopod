@@ -35,7 +35,7 @@ return [
     'settings' => 'Nastavenia',
     'settings-general' => 'Všeobecné',
     'settings-theme' => 'Vzhľad',
-    'admin-about' => 'About',
+    'admin-about' => 'O aplikácii',
     'account' => [
         'my-account' => 'Môj účet',
         'change-password' => 'Zmeniť heslo',

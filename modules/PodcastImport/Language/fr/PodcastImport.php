@@ -41,7 +41,7 @@ return [
         'feed' => 'Flux',
         'duration' => 'Durée de l’import',
         'imported_episodes' => 'Épisodes importés',
-        'imported_episodes_hint' => '{newlyImportedCount} newly imported, {alreadyImportedCount} already imported.',
+        'imported_episodes_hint' => '{newlyImportedCount} vient d\'être importé, {alreadyImportedCount} a déjà été importé.',
         'actions' => [
             'cancel' => 'Annuler',
             'retry' => 'Réessayer',

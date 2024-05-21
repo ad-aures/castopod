@@ -41,17 +41,17 @@ return [
         'add_section_subtitle' => 'You may pick several persons and roles.',
         'persons' => 'Osobnosti',
         'persons_hint' =>
-            'You may select one or several persons with the same roles. You need to create the persons first.',
+            'Môžete vybrať jednu, alebo viac osôb s tou istou rolou. Najprv musíte osobnosti vytvoriť.',
         'roles' => 'Úlohy',
         'roles_hint' =>
-            'You may select none, one or several roles for a person.',
+            'Pre osobu môžete vybrať žiadnu, jednu, alebo viac rolí.',
         'submit_add' => 'Pridať osob(y)',
         'remove' => 'Odstrániť',
     ],
     'episode_form' => [
         'title' => 'Spravovať osobnosti',
         'add_section_title' => 'Pridať osobnosti k tejto epizóde',
-        'add_section_subtitle' => 'You may pick several persons and roles.',
+        'add_section_subtitle' => 'Môžete vybrať viacero osôb a rolí.',
         'persons' => 'Osobnosti',
         'persons_hint' =>
             'Môžete vybrať jednu alebo viac osôb s tou istou rolou. Najprv by ste mali osobnosti vytvoriť.',
