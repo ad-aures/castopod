@@ -11,7 +11,7 @@ stages:
     - pnpm config set store-dir .pnpm-store
     - cd docs
     - chmod +x ./scripts/i18n-filter.sh
-    - ./scripts/i18n-filter.sh src
+    - ./scripts/i18n-filter.sh src/content/docs
     - pnpm install
 
 cache:
@@ -40,7 +40,7 @@ build-production:
     name: production
     url: https://docs.castopod.org/
   script:
-    - pnpm run build --outDir=docs/dist/$CI_COMMIT_REF_SLUG --base=$CI_COMMIT_REF_SLUG
+    - pnpm run build --outDir=./dist/$CI_COMMIT_REF_SLUG --base=$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
       - docs/dist/$CI_COMMIT_REF_SLUG
