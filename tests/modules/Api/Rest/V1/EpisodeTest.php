@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace modules\Api\Rest\V1;
+namespace Tests\Modules\Api\Rest\V1;
 
-use App\Database\Seeds\FakeSinglePodcastApiSeeder;
 use CodeIgniter\Database\Seeder;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Tests\Support\Database\Seeds\FakeSinglePodcastApiSeeder;
 
 class EpisodeTest extends CIUnitTestCase
 {

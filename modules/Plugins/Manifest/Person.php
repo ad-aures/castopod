@@ -35,7 +35,7 @@ class Person extends ManifestObject
 
     protected ?URI $url = null;
 
-    public function __construct(string $pluginKey, array|string $data)
+    public function loadData(array|string $data): void
     {
         if (is_string($data)) {
             $result = preg_match(self::AUTHOR_STRING_PATTERN, $data, $matches);
@@ -51,6 +51,6 @@ class Person extends ManifestObject
             ];
         }
 
-        parent::__construct($pluginKey, $data);
+        parent::loadData($data);
     }
 }

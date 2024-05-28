@@ -33,7 +33,11 @@
         },
         "json.schemas": [
           {
-            "fileMatch": ["plugins/**/manifest.json"],
+            "fileMatch": [
+              "plugins/**/manifest.json",
+              "tests/modules/Plugins/Mocks/manifests/*.json",
+              "tests/modules/Plugins/Mocks/plugins/**/manifest.json"
+            ],
             "url": "/workspaces/castopod/modules/Plugins/Manifest/manifest.schema.json"
           }
         ]
