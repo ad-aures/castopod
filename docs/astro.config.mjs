@@ -4,11 +4,12 @@ import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
 const site = "https://docs.castopod.org/";
+const base = process.env.BASE ?? "/docs";
 
 // https://astro.build/config
 export default defineConfig({
   site,
-  base: "/docs",
+  base,
   integrations: [
     starlight({
       title: "Castopod Docs",
@@ -37,7 +38,7 @@ export default defineConfig({
           tag: "meta",
           attrs: {
             property: "og:image",
-            content: site + "open-graph.jpg?v=1",
+            content: base + "/open-graph.jpg?v=1",
           },
         },
         {
