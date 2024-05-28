@@ -21,16 +21,10 @@ abstract class ManifestObject
      */
     protected static array $errors = [];
 
-    /**
-     * @param mixed[] $data
-     */
     public function __construct(
         protected readonly string $pluginKey,
-        private readonly array $data,
     ) {
         self::$errors[$pluginKey] = [];
-
-        $this->load();
     }
 
     public function __get(string $name): mixed
@@ -47,14 +41,41 @@ abstract class ManifestObject
         return property_exists($this, $property);
     }
 
-    public function load(): void
+    public function loadFromFile(string $manifestPath): void
+    {
+        $manifestContents = @file_get_contents($manifestPath);
+
+        if (! $manifestContents) {
+            $manifestContents = '{}';
+            $this->addError('manifest', lang('Plugins.errors.manifestMissing', [
+                'manifestPath' => $manifestPath,
+            ]));
+        }
+
+        /** @var array<mixed>|null $manifestData */
+        $manifestData = json_decode($manifestContents, true);
+
+        if ($manifestData === null) {
+            $manifestData = [];
+            $this->addError('manifest', lang('Plugins.errors.manifestJsonInvalid', [
+                'manifestPath' => $manifestPath,
+            ]));
+        }
+
+        $this->loadData($manifestData);
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    public function loadData(array $data): void
     {
         /** @var Validation $validation */
         $validation = service('validation');
 
         $validation->setRules($this::VALIDATION_RULES);
 
-        if (! $validation->run($this->data)) {
+        if (! $validation->run($data)) {
             foreach ($validation->getErrors() as $key => $message) {
                 $this->addError($key, $message);
             }

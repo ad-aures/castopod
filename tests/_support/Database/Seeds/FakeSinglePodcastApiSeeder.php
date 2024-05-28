@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Database\Seeds;
+namespace Tests\Support\Database\Seeds;
 
+use App\Database\Seeds\AppSeeder;
+use App\Database\Seeds\DevSeeder;
 use CodeIgniter\Database\Seeder;
 
 class FakeSinglePodcastApiSeeder extends Seeder

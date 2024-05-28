@@ -32,11 +32,6 @@ abstract class BasePlugin implements PluginInterface
 
     protected string $iconSrc;
 
-    /**
-     * @var array<string,string>
-     */
-    protected array $errors = [];
-
     protected PluginStatus $status;
 
     protected Manifest $manifest;
@@ -52,29 +47,11 @@ abstract class BasePlugin implements PluginInterface
 
         // TODO: cache manifest data
         $manifestPath = $directory . '/manifest.json';
-        $manifestContents = @file_get_contents($manifestPath);
 
-        if (! $manifestContents) {
-            $manifestContents = '{}';
-            $this->errors['manifest'] = lang('Plugins.errors.manifestMissing', [
-                'manifestPath' => $manifestPath,
-            ]);
-        }
+        $this->manifest = new Manifest($this->key);
+        $this->manifest->loadFromFile($manifestPath);
 
-        /** @var array<mixed>|null $manifestData */
-        $manifestData = json_decode($manifestContents, true);
-
-        if ($manifestData === null) {
-            $manifestData = [];
-            $this->errors['manifest'] = lang('Plugins.errors.manifestJsonInvalid', [
-                'manifestPath' => $manifestPath,
-            ]);
-        }
-
-        $this->manifest = new Manifest($this->key, $manifestData);
-        $this->errors = [...$this->errors, ...Manifest::getPluginErrors($this->key)];
-
-        if ($this->errors !== []) {
+        if ($this->getManifestErrors() !== []) {
             $this->status = PluginStatus::INVALID;
         } else {
             $this->status = get_plugin_option($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
@@ -121,9 +98,9 @@ abstract class BasePlugin implements PluginInterface
     /**
      * @return array<string,string>
      */
-    final public function getErrors(): array
+    final public function getManifestErrors(): array
     {
-        return $this->errors;
+        return Manifest::getPluginErrors($this->key);
     }
 
     final public function isHookDeclared(string $name): bool

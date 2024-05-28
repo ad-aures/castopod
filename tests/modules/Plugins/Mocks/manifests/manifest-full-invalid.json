@@ -1,0 +1,142 @@
+{
+  "name": "acme/hello-world",
+  "description": true,
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Acme Corporation",
+      "email": "acme@example.com",
+      "url": "https://example.com/"
+    }
+  ],
+  "homepage": "https://example.com/",
+  "license": ["MIT", "AGPLv3"],
+  "keywords": ["seo", "analytics"],
+  "hooks": ["rssAfterChannel"],
+  "settings": {
+    "general": [
+      {
+        "type": "radio-group",
+        "key": "name",
+        "label": "Name",
+        "options": [
+          { "label": "Foo", "value": "foo", "hint": "This is a hint." },
+          { "label": "Bar", "value": "bar" }
+        ]
+      },
+      {
+        "type": "email",
+        "key": "email",
+        "label": "Email"
+      },
+      {
+        "type": "url",
+        "key": "url",
+        "label": "Your website URL"
+      },
+      {
+        "type": "toggler",
+        "key": "toggler",
+        "label": "Toggle this?"
+      },
+      {
+        "type": "number",
+        "key": "number",
+        "label": "Number"
+      },
+      {
+        "type": "datetime",
+        "key": "datetime",
+        "label": "Enter a date",
+        "optional": true
+      },
+      {
+        "type": "select",
+        "key": "select",
+        "label": "Select something",
+        "options": [
+          {
+            "label": "Foo",
+            "value": "foo"
+          },
+          {
+            "label": "Bar",
+            "value": "bar"
+          },
+          {
+            "label": "Baz",
+            "value": "baz"
+          }
+        ]
+      },
+      {
+        "type": "select-multiple",
+        "key": "select-multiple",
+        "label": "Select multiple things",
+        "options": [
+          {
+            "label": "Foo",
+            "value": "foo"
+          },
+          {
+            "label": "Bar",
+            "value": "bar"
+          },
+          {
+            "label": "Baz",
+            "value": "baz"
+          }
+        ]
+      },
+      {
+        "type": "radio-group",
+        "key": "radio-group",
+        "label": "Radio Group",
+        "helper": "This is a helper.",
+        "options": [
+          {
+            "label": "Foo",
+            "value": "foo"
+          },
+          {
+            "label": "Bar",
+            "value": "bar"
+          },
+          {
+            "label": "Baz",
+            "value": "baz"
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "key": "texting",
+        "label": "Your text",
+        "hint": "This is a hint."
+      },
+      {
+        "type": "markdown",
+        "key": "hello",
+        "label": "Name Podcast",
+        "hint": "This is a hint.",
+        "optional": true
+      }
+    ],
+    "podcast": [
+      {
+        "type": "text",
+        "key": "name",
+        "label": "Name Podcast",
+        "hint": "This is a hint."
+      }
+    ],
+    "episode": [
+      {
+        "type": "text",
+        "key": "name",
+        "label": "Name Episode",
+        "helper": "This is a helper."
+      }
+    ]
+  }
+}

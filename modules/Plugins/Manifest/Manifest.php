@@ -26,7 +26,7 @@ class Manifest extends ManifestObject
      * @var array<string,string>
      */
     protected const VALIDATION_RULES = [
-        'name'        => 'required|max_length[128]',
+        'name'        => 'required|max_length[128]|regex_match[/^[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9]([_.-]?[a-z0-9]+)*$/]',
         'version'     => 'required|regex_match[/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/]',
         'description' => 'permit_empty|max_length[256]',
         'authors'     => 'permit_empty|is_list',
