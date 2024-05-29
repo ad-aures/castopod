@@ -32,6 +32,7 @@ build:
     - main
     - beta
     - alpha
+    - next
 
 build-production:
   extends: .documentation-setup
@@ -50,6 +51,7 @@ build-production:
     - main
     - beta
     - alpha
+    - next
 
 deploy:
   stage: deploy
@@ -80,3 +82,4 @@ deploy:
     - main
     - beta
     - alpha
+    - next
