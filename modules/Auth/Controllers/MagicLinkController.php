@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Controllers\MagicLinkController as ShieldMagicLinkController;
 use CodeIgniter\Shield\Entities\User;
+use Override;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
@@ -19,6 +20,7 @@ use ViewThemes\Theme;
  */
 class MagicLinkController extends ShieldMagicLinkController
 {
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

@@ -11,9 +11,11 @@ declare(strict_types=1);
 namespace Media\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class RenameMediafileKey extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $fields = [
@@ -26,6 +28,7 @@ class RenameMediafileKey extends BaseMigration
         $this->forge->modifyColumn('media', $fields);
     }
 
+    #[Override]
     public function down(): void
     {
         $fields = [

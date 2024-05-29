@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class MarkdownEditor extends FormComponent
 {
     protected array $props = ['disallowList'];
@@ -18,6 +20,7 @@ class MarkdownEditor extends FormComponent
         $this->disallowList = explode(',', $value);
     }
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('w-full flex flex-col bg-elevated border-3 border-contrast rounded-lg overflow-hidden focus-within:ring-accent');

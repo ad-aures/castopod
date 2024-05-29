@@ -12,6 +12,7 @@ namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\GetID3;
+use Override;
 
 /**
  * @property float $duration
@@ -21,6 +22,7 @@ class Audio extends BaseMedia
 {
     protected string $type = 'audio';
 
+    #[Override]
     public function initFileProperties(): void
     {
         parent::initFileProperties();
@@ -31,6 +33,7 @@ class Audio extends BaseMedia
         }
     }
 
+    #[Override]
     public function setFile(File $file): self
     {
         parent::setFile($file);

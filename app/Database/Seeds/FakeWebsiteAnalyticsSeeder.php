@@ -18,6 +18,7 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Database\Seeder;
 use Exception;
+use Override;
 
 class FakeWebsiteAnalyticsSeeder extends Seeder
 {
@@ -181,6 +182,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
         'WOSBrowser',
     ];
 
+    #[Override]
     public function run(): void
     {
         $podcast = (new PodcastModel())->first();

@@ -13,6 +13,7 @@ namespace Modules\Media\Entities;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use Modules\Media\Models\MediaModel;
+use Override;
 use RuntimeException;
 
 /**
@@ -59,6 +60,7 @@ class BaseMedia extends Entity
     /**
      * @param array<string, mixed> $data
      */
+    #[Override]
     public function injectRawData(array $data): static
     {
         parent::injectRawData($data);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class ReadMore extends Component
@@ -12,6 +13,7 @@ class ReadMore extends Component
 
     protected string $id;
 
+    #[Override]
     public function render(): string
     {
         $readMoreLabel = lang('Common.read_more');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
 use ViewComponents\Component;
 
 class Field extends Component
@@ -37,6 +38,7 @@ class Field extends Component
 
     protected string $hint = '';
 
+    #[Override]
     public function render(): string
     {
         $helperText = '';

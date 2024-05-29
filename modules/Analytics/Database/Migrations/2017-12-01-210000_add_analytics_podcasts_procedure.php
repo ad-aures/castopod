@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Analytics\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddAnalyticsPodcastsProcedure extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         // Creates Procedure for data insertion
@@ -85,6 +87,7 @@ class AddAnalyticsPodcastsProcedure extends BaseMigration
         $this->db->query($createQuery);
     }
 
+    #[Override]
     public function down(): void
     {
         $prefix = $this->db->getPrefix();

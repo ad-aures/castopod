@@ -22,6 +22,7 @@ use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Controllers\PostController as FediversePostController;
+use Override;
 
 class PostController extends FediversePostController
 {
@@ -41,6 +42,7 @@ class PostController extends FediversePostController
      */
     protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc', 'seo', 'premium_podcasts'];
 
+    #[Override]
     public function _remap(string $method, string ...$params): mixed
     {
         if (
@@ -110,6 +112,7 @@ class PostController extends FediversePostController
         return $cachedView;
     }
 
+    #[Override]
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
@@ -161,6 +164,7 @@ class PostController extends FediversePostController
         return redirect()->back();
     }
 
+    #[Override]
     public function attemptReply(): RedirectResponse
     {
         $rules = [
@@ -200,6 +204,7 @@ class PostController extends FediversePostController
         return redirect()->back();
     }
 
+    #[Override]
     public function attemptFavourite(): RedirectResponse
     {
         model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->post);
@@ -207,6 +212,7 @@ class PostController extends FediversePostController
         return redirect()->back();
     }
 
+    #[Override]
     public function attemptReblog(): RedirectResponse
     {
         (new PostModel())->toggleReblog(interact_as_actor(), $this->post);

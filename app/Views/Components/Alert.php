@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class Alert extends Component
@@ -23,6 +24,7 @@ class Alert extends Component
      */
     protected string $variant = 'default';
 
+    #[Override]
     public function render(): string
     {
         $variantData = match ($this->variant) {

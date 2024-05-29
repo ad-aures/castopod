@@ -21,6 +21,7 @@ use Modules\Plugins\Manifest\Manifest;
 use Modules\Plugins\Manifest\Person;
 use Modules\Plugins\Manifest\Repository;
 use Modules\Plugins\Manifest\Settings;
+use Override;
 
 /**
  * @property string $key
@@ -70,22 +71,27 @@ abstract class BasePlugin implements PluginInterface
         $this->{$name} = $value;
     }
 
+    #[Override]
     public function rssBeforeChannel(Podcast $podcast): void
     {
     }
 
+    #[Override]
     public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
     {
     }
 
+    #[Override]
     public function rssBeforeItem(Episode $episode): void
     {
     }
 
+    #[Override]
     public function rssAfterItem(Episode $episode, SimpleRSSElement $item): void
     {
     }
 
+    #[Override]
     public function siteHead(): void
     {
     }

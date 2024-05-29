@@ -10,6 +10,7 @@ use CodeIgniter\Shield\Authentication\AuthenticatorInterface;
 use CodeIgniter\Shield\Config\Auth as ShieldAuth;
 use CodeIgniter\Shield\Entities\User;
 use Modules\Auth\Models\UserModel;
+use Override;
 
 class Auth extends ShieldAuth
 {
@@ -148,6 +149,7 @@ class Auth extends ShieldAuth
      *
      * Redirects to the set-password form if magicLogin
      */
+    #[Override]
     public function loginRedirect(): string
     {
         if (! session('magicLogin')) {

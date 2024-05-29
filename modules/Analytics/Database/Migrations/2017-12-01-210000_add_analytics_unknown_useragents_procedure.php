@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Analytics\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddAnalyticsUnknownUseragentsProcedure extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         // Creates Procedure for data insertion
@@ -33,6 +35,7 @@ class AddAnalyticsUnknownUseragentsProcedure extends BaseMigration
         $this->db->query($createQuery);
     }
 
+    #[Override]
     public function down(): void
     {
         $procedureName = $this->db->prefixTable('analytics_unknown_useragents');

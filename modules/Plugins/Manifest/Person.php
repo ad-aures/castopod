@@ -6,6 +6,7 @@ namespace Modules\Plugins\Manifest;
 
 use CodeIgniter\HTTP\URI;
 use Exception;
+use Override;
 
 /**
  * @property string $name
@@ -35,6 +36,7 @@ class Person extends ManifestObject
 
     protected ?URI $url = null;
 
+    #[Override]
     public function loadData(array|string $data): void
     {
         if (is_string($data)) {

@@ -7,6 +7,7 @@ namespace Modules\Install\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use Config\Database;
 use Config\Services;
+use Override;
 
 class InitDatabase extends BaseCommand
 {
@@ -25,6 +26,7 @@ class InitDatabase extends BaseCommand
      */
     protected $description = 'Runs all database migrations for Castopod.';
 
+    #[Override]
     public function run(array $params): void
     {
         // Run all migrations

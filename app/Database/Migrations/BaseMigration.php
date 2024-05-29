@@ -14,6 +14,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\Migration;
+use Override;
 
 class BaseMigration extends Migration
 {
@@ -24,10 +25,12 @@ class BaseMigration extends Migration
      */
     protected $db;
 
+    #[Override]
     public function up(): void
     {
     }
 
+    #[Override]
     public function down(): void
     {
     }

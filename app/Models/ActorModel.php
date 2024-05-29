@@ -12,6 +12,7 @@ namespace App\Models;
 
 use App\Entities\Actor;
 use Modules\Fediverse\Models\ActorModel as FediverseActorModel;
+use Override;
 
 class ActorModel extends FediverseActorModel
 {
@@ -20,6 +21,7 @@ class ActorModel extends FediverseActorModel
      */
     protected $returnType = Actor::class;
 
+    #[Override]
     public function getActorById(int $id): ?Actor
     {
         return $this->find($id);

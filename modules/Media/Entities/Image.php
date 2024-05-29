@@ -13,6 +13,7 @@ namespace Modules\Media\Entities;
 use CodeIgniter\Files\File;
 use Config\Services;
 use GdImage;
+use Override;
 
 /**
  * @property array $sizes
@@ -26,6 +27,7 @@ class Image extends BaseMedia
      */
     protected array $sizes = [];
 
+    #[Override]
     public function initFileProperties(): void
     {
         parent::initFileProperties();
@@ -55,6 +57,7 @@ class Image extends BaseMedia
     /**
      * @param array<string, string> $data
      */
+    #[Override]
     public function injectRawData(array $data): static
     {
         parent::injectRawData($data);
@@ -73,6 +76,7 @@ class Image extends BaseMedia
         return $this;
     }
 
+    #[Override]
     public function setFile(File $file): self
     {
         parent::setFile($file);
@@ -95,6 +99,7 @@ class Image extends BaseMedia
         return $this;
     }
 
+    #[Override]
     public function saveFile(): void
     {
         if ($this->attributes['sizes'] !== []) {
@@ -105,6 +110,7 @@ class Image extends BaseMedia
         parent::saveFile();
     }
 
+    #[Override]
     public function deleteFile(): bool
     {
         if (parent::deleteFile()) {

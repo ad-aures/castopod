@@ -9,6 +9,7 @@ use CodeIgniter\Shield\Commands\Exceptions\BadInputException;
 use CodeIgniter\Shield\Commands\Exceptions\CancelException;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Validation\ValidationRules;
+use Override;
 
 class CreateSuperadmin extends BaseCommand
 {
@@ -34,6 +35,7 @@ class CreateSuperadmin extends BaseCommand
      */
     private array $validationRules = [];
 
+    #[Override]
     public function run(array $params): void
     {
         // first, check that super admin does not exist

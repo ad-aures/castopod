@@ -11,6 +11,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Router\Router;
 use Modules\PremiumPodcasts\PremiumPodcasts;
+use Override;
 
 class PodcastUnlockFilter implements FilterInterface
 {
@@ -21,6 +22,7 @@ class PodcastUnlockFilter implements FilterInterface
      *
      * @return RequestInterface|ResponseInterface|string|void
      */
+    #[Override]
     public function before(RequestInterface $request, $arguments = null)
     {
         if (! function_exists('is_unlocked')) {
@@ -79,6 +81,7 @@ class PodcastUnlockFilter implements FilterInterface
     /**
      * @param string[]|null $arguments
      */
+    #[Override]
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
     }

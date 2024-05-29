@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Views\Components\Forms;
 
 use App\Views\Components\Hint;
+use Override;
 
 class RadioButton extends FormComponent
 {
@@ -18,6 +19,7 @@ class RadioButton extends FormComponent
 
     protected string $hint = '';
 
+    #[Override]
     public function render(): string
     {
         $data = [

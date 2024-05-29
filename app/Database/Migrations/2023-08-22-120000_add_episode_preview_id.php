@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddEpisodePreviewId extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $fields = [
@@ -28,6 +31,7 @@ class AddEpisodePreviewId extends BaseMigration
         $this->db->query($uniquePreviewId);
     }
 
+    #[Override]
     public function down(): void
     {
         $fields = ['preview_id'];

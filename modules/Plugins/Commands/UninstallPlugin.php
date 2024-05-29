@@ -7,6 +7,7 @@ namespace Modules\Plugins\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Modules\Plugins\Core\Plugins;
+use Override;
 
 class UninstallPlugin extends BaseCommand
 {
@@ -50,6 +51,7 @@ class UninstallPlugin extends BaseCommand
     /**
      * @param list<string> $pluginKeys
      */
+    #[Override]
     public function run(array $pluginKeys): int
     {
         /** @var Plugins $plugins */

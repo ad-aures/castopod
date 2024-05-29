@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddEpisodeComments extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -71,6 +74,7 @@ class AddEpisodeComments extends BaseMigration
         $this->forge->createTable('episode_comments');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('episode_comments');

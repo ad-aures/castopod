@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class Hint extends Component
@@ -13,6 +14,7 @@ class Hint extends Component
         'tabindex'     => '0',
     ];
 
+    #[Override]
     public function render(): string
     {
         $this->attributes['title'] = $this->slot;

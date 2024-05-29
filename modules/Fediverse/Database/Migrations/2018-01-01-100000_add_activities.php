@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddActivities extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -65,6 +67,7 @@ class AddActivities extends BaseMigration
         $this->forge->createTable('fediverse_activities');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('fediverse_activities');

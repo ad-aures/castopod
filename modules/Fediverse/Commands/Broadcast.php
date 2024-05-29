@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
+use Override;
 
 class Broadcast extends BaseCommand
 {
@@ -14,6 +15,7 @@ class Broadcast extends BaseCommand
 
     protected $description = 'Broadcasts new outgoing activity to followers.';
 
+    #[Override]
     public function run(array $params): void
     {
         helper('fediverse');

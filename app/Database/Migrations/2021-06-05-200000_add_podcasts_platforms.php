@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddPodcastsPlatforms extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -52,6 +55,7 @@ class AddPodcastsPlatforms extends BaseMigration
         $this->forge->createTable('podcasts_platforms');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('podcasts_platforms');

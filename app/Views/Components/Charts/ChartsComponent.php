@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Charts;
 
+use Override;
 use ViewComponents\Component;
 
 class ChartsComponent extends Component
@@ -16,6 +17,7 @@ class ChartsComponent extends Component
 
     protected string $type;
 
+    #[Override]
     public function render(): string
     {
         $subtitleBlock = '';

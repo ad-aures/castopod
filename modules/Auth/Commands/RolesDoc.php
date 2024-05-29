@@ -12,13 +12,14 @@ use Config\Services;
 use League\HTMLToMarkdown\Converter\TableConverter;
 use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Config\AuthGroups;
+use Override;
 
 class RolesDoc extends BaseCommand
 {
     /**
      * @var array<string, string>
      */
-    private const COMMENT_BLOCK_IDS = [
+    private const array COMMENT_BLOCK_IDS = [
         'instance_roles'       => 'AUTH-INSTANCE-ROLES-LIST',
         'instance_permissions' => 'AUTH-INSTANCE-PERMISSIONS-LIST',
         'podcast_roles'        => 'AUTH-PODCAST-ROLES-LIST',
@@ -40,6 +41,7 @@ class RolesDoc extends BaseCommand
      */
     protected $description = 'Generates the html table references for roles and permissions in the docs.';
 
+    #[Override]
     public function run(array $params): void
     {
         // loop over all files in path

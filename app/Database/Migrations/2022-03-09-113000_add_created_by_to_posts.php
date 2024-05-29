@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddCreatedByToPosts extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $prefix = $this->db->getPrefix();
@@ -38,6 +41,7 @@ class AddCreatedByToPosts extends BaseMigration
         $this->forge->processIndexes('fediverse_posts');
     }
 
+    #[Override]
     public function down(): void
     {
         $prefix = $this->db->getPrefix();

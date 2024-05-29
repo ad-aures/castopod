@@ -7,6 +7,7 @@ namespace Modules\Media\FileManagers;
 use CodeIgniter\Files\File;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
+use Override;
 
 class FS implements FileManagerInterface
 {
@@ -19,6 +20,7 @@ class FS implements FileManagerInterface
     /**
      * Saves a file to the corresponding folder in `public/media`
      */
+    #[Override]
     public function save(File $file, string $key): string
     {
         helper('media');
@@ -46,6 +48,7 @@ class FS implements FileManagerInterface
         return $key;
     }
 
+    #[Override]
     public function delete(string $key): bool
     {
         helper('media');
@@ -53,11 +56,13 @@ class FS implements FileManagerInterface
         return @unlink($this->media_path_absolute($key));
     }
 
+    #[Override]
     public function getUrl(string $key): string
     {
         return media_url($this->config->root . '/' . $key);
     }
 
+    #[Override]
     public function rename(string $oldKey, string $newKey): bool
     {
         helper('media');
@@ -65,6 +70,7 @@ class FS implements FileManagerInterface
         return rename($this->media_path_absolute($oldKey), $this->media_path_absolute($newKey));
     }
 
+    #[Override]
     public function getFileContents(string $key): string|false
     {
         helper('media');
@@ -72,6 +78,7 @@ class FS implements FileManagerInterface
         return file_get_contents($this->media_path_absolute($key));
     }
 
+    #[Override]
     public function getFileInput(string $key): string
     {
         helper('media');
@@ -79,6 +86,7 @@ class FS implements FileManagerInterface
         return $this->media_path_absolute($key);
     }
 
+    #[Override]
     public function deletePodcastImageSizes(string $podcastHandle): bool
     {
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
@@ -88,6 +96,7 @@ class FS implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function deletePersonImagesSizes(): bool
     {
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
@@ -97,6 +106,7 @@ class FS implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function deleteAll(string $prefix, string $pattern = '*'): bool
     {
         helper('media');
@@ -123,6 +133,7 @@ class FS implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function isHealthy(): bool
     {
         helper('media');

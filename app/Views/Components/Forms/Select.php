@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class Select extends FormComponent
 {
     protected array $props = ['options', 'defaultValue'];
@@ -19,6 +21,7 @@ class Select extends FormComponent
 
     protected string $defaultValue = '';
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('w-full focus:border-contrast border-3 rounded-lg bg-elevated border-contrast');

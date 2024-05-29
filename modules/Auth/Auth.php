@@ -6,6 +6,7 @@ namespace Modules\Auth;
 
 use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Shield\Auth as ShieldAuth;
+use Override;
 
 class Auth extends ShieldAuth
 {
@@ -19,6 +20,7 @@ class Auth extends ShieldAuth
      *
      * @param array{except?:list<string>} $config
      */
+    #[Override]
     public function routes(RouteCollection &$routes, array $config = []): void
     {
         $authRoutes = config('AuthRoutes')

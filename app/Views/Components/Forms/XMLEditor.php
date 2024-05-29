@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class XMLEditor extends FormComponent
 {
     protected array $props = ['content'];
@@ -23,6 +25,7 @@ class XMLEditor extends FormComponent
         $this->content = htmlspecialchars_decode($value);
     }
 
+    #[Override]
     public function render(): string
     {
         $this->attributes['slot'] = 'textarea';

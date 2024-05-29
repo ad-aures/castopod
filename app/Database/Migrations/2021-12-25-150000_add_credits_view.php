@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddCreditsView extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         // Creates View for credit UNION query
@@ -37,6 +40,7 @@ class AddCreditsView extends BaseMigration
         $this->db->query($createQuery);
     }
 
+    #[Override]
     public function down(): void
     {
         $viewName = $this->db->prefixTable('credits');

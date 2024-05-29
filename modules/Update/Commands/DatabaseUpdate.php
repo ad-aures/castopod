@@ -6,6 +6,7 @@ namespace Modules\Update\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use Config\Services;
+use Override;
 
 class DatabaseUpdate extends BaseCommand
 {
@@ -24,6 +25,7 @@ class DatabaseUpdate extends BaseCommand
      */
     protected $description = 'Runs all new database migrations for Castopod.';
 
+    #[Override]
     public function run(array $params): void
     {
         $migrate = Services::migrations();

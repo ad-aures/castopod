@@ -12,11 +12,13 @@ namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
 use Exception;
+use Override;
 
 class Chapters extends BaseMedia
 {
     protected string $type = 'chapters';
 
+    #[Override]
     public function initFileProperties(): void
     {
         parent::initFileProperties();
@@ -28,6 +30,7 @@ class Chapters extends BaseMedia
         }
     }
 
+    #[Override]
     public function setFile(File $file): self
     {
         parent::setFile($file);

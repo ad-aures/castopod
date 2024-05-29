@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class DatetimePicker extends FormComponent
 {
     protected array $attributes = [
         'data-picker' => 'datetime',
     ];
 
+    #[Override]
     public function render(): string
     {
         $dateInput = form_input([

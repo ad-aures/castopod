@@ -25,6 +25,7 @@ use Config\Services;
 use Modules\Analytics\Config\Analytics;
 use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
+use Override;
 use Psr\Log\LoggerInterface;
 
 class EpisodeAudioController extends Controller
@@ -53,6 +54,7 @@ class EpisodeAudioController extends Controller
     /**
      * Constructor.
      */
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

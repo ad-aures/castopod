@@ -10,6 +10,7 @@ use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
 use Exception;
 use Modules\MediaClipper\VideoClipper;
+use Override;
 
 class Generate extends BaseCommand
 {
@@ -19,6 +20,7 @@ class Generate extends BaseCommand
 
     protected $description = 'Displays basic application information.';
 
+    #[Override]
     public function run(array $params): void
     {
         // get number of running clips to prevent from having too much running in parallel

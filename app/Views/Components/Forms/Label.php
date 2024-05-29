@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Views\Components\Forms;
 
 use App\Views\Components\Hint;
+use Override;
 use ViewComponents\Component;
 
 class Label extends Component
@@ -21,6 +22,7 @@ class Label extends Component
 
     protected bool $isOptional = false;
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('text-sm font-semibold');

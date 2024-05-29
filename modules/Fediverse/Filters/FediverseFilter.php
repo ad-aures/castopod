@@ -12,6 +12,7 @@ use CodeIgniter\HTTP\URI;
 use Config\Services;
 use Exception;
 use Modules\Fediverse\HttpSignature;
+use Override;
 
 class FediverseFilter implements FilterInterface
 {
@@ -24,6 +25,7 @@ class FediverseFilter implements FilterInterface
      * @param string[]|null                         $params
      * @return RequestInterface|ResponseInterface|string|void
      */
+    #[Override]
     public function before(RequestInterface $request, $params = null)
     {
         if ($params === null) {
@@ -81,6 +83,7 @@ class FediverseFilter implements FilterInterface
      *
      * @param string[]|null                          $arguments
      */
+    #[Override]
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
     }

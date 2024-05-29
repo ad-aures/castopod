@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class Radio extends FormComponent
 {
     protected array $props = ['isChecked'];
@@ -14,6 +16,7 @@ class Radio extends FormComponent
 
     protected bool $isChecked = false;
 
+    #[Override]
     public function render(): string
     {
         $radioInput = form_radio(

@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddFollowers extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -38,6 +40,7 @@ class AddFollowers extends BaseMigration
         $this->forge->createTable('fediverse_follows');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('fediverse_follows');

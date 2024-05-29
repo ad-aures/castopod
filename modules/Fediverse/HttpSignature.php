@@ -28,7 +28,7 @@ class HttpSignature
     /**
      * @var string
      */
-    private const SIGNATURE_PATTERN = '/
+    private const string SIGNATURE_PATTERN = '/
         (?=.*(keyId="(?P<keyId>https?:\/\/[\w\-\.]+[\w]+(:[\d]+)?[\w\-\.#\/@]+)"))
         (?=.*(signature="(?P<signature>[\w+\/]+={0,2})"))
         (?=.*(headers="\(request-target\)(?P<headers>[\w\\-\s]+)"))?

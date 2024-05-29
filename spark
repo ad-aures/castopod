@@ -37,7 +37,7 @@ if (strpos(PHP_SAPI, 'cgi') === 0) {
  *---------------------------------------------------------------
  */
 
-$minPhpVersion = '8.1'; // If you update this, don't forget to update `public/index.php`.
+$minPhpVersion = '8.3'; // If you update this, don't forget to update `public/index.php`.
 if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
     $message = sprintf(
         'Your PHP version must be %s or higher to run CodeIgniter. Current version: %s',

@@ -15,9 +15,11 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 use CodeIgniter\Shield\Entities\User;
 use Modules\Auth\Models\UserModel;
+use Override;
 
 class DevSuperadminSeeder extends Seeder
 {
+    #[Override]
     public function run(): void
     {
         if ((new UserModel())->where('is_owner', true)->first() instanceof User) {

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class SeeMore extends Component
 {
+    #[Override]
     public function render(): string
     {
         $seeMoreLabel = lang('Common.see_more');

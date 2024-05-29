@@ -13,6 +13,7 @@ namespace App\Entities\Clip;
 use CodeIgniter\Files\File;
 use Modules\Media\Entities\Video;
 use Modules\Media\Models\MediaModel;
+use Override;
 
 /**
  * @property array $theme
@@ -63,6 +64,7 @@ class VideoClip extends BaseClip
         return $this;
     }
 
+    #[Override]
     public function setMedia(File $file, string $fileKey): static
     {
         if ($this->attributes['media_id'] !== null) {

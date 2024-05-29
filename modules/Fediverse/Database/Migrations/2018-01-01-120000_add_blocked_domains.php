@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddBlockedDomains extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -31,6 +33,7 @@ class AddBlockedDomains extends BaseMigration
         $this->forge->createTable('fediverse_blocked_domains');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('fediverse_blocked_domains');

@@ -6,7 +6,7 @@
   "homepage": "https://castopod.org",
   "license": "AGPL-3.0-or-later",
   "require": {
-    "php": "^8.1",
+    "php": "^8.3",
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
     "aws/aws-sdk-php": "^3.305.4",

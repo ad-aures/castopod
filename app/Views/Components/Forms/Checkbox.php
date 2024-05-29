@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Views\Components\Forms;
 
 use App\Views\Components\Hint;
+use Override;
 
 class Checkbox extends FormComponent
 {
@@ -18,6 +19,7 @@ class Checkbox extends FormComponent
 
     protected bool $isChecked = false;
 
+    #[Override]
     public function render(): string
     {
         $checkboxInput = form_checkbox(

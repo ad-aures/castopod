@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddNotifications extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -63,6 +66,7 @@ class AddNotifications extends BaseMigration
         $this->forge->createTable('fediverse_notifications');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('fediverse_notifications');

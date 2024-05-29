@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use Override;
 
 class RefactorPlatforms extends Migration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -80,6 +82,7 @@ class RefactorPlatforms extends Migration
         $this->forge->renameTable('platforms_temp', 'platforms');
     }
 
+    #[Override]
     public function down(): void
     {
         // delete platforms

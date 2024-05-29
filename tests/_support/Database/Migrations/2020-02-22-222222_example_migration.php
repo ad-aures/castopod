@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use Override;
 
 class ExampleMigration extends Migration
 {
@@ -13,6 +14,7 @@ class ExampleMigration extends Migration
      */
     protected $DBGroup = 'tests';
 
+    #[Override]
     public function up(): void
     {
         $fields = [
@@ -61,6 +63,7 @@ class ExampleMigration extends Migration
         $this->forge->createTable('factories');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('factories');

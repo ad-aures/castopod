@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddClips extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -94,6 +97,7 @@ class AddClips extends BaseMigration
         $this->forge->createTable('clips');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('clips');

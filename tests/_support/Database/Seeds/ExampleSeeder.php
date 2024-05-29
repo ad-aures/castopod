@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Tests\Support\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use Override;
 
 class ExampleSeeder extends Seeder
 {
+    #[Override]
     public function run(): void
     {
         $factories = [

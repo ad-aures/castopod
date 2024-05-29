@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ViewComponents;
 
 use CodeIgniter\View\ViewDecoratorInterface;
+use Override;
 
 /**
  * Enables rendering of View Components into the views.
@@ -15,6 +16,7 @@ class Decorator implements ViewDecoratorInterface
 {
     private static ?ComponentRenderer $components = null;
 
+    #[Override]
     public static function decorate(string $html): string
     {
         $components = self::factory();

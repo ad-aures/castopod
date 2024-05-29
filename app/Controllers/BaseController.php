@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
+use Override;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
@@ -52,6 +53,7 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
