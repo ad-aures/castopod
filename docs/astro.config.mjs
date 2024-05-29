@@ -15,6 +15,10 @@ export default defineConfig({
       title: "Castopod Docs",
       description:
         "Check out the Castopod documentation! Install your own free & open-source podcast host, help make it better by contributing, or simply learn more about Castopod!",
+      components: {
+        Header: "./src/components/Header.astro",
+        MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
+      },
       logo: {
         src: "./src/assets/castopod-logo-inline.svg",
         replacesTitle: true,
