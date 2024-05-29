@@ -23,6 +23,7 @@ use Modules\Auth\Models\UserModel;
 use Modules\Platforms\Models\PlatformModel;
 use Modules\PodcastImport\Entities\PodcastImportTask;
 use Modules\PodcastImport\Entities\TaskStatus;
+use Override;
 use PodcastFeed\PodcastFeed;
 use PodcastFeed\Tags\Podcast\PodcastPerson;
 use PodcastFeed\Tags\RSS\Channel;
@@ -91,6 +92,7 @@ class PodcastImport extends BaseCommand
         $this->podcastFeed = new PodcastFeed($this->importTask->feed_url);
     }
 
+    #[Override]
     public function run(array $params): void
     {
         // FIXME: getting named routes doesn't work from v4.3 anymore, so loading all routes before importing

@@ -11,7 +11,7 @@ RUN apt-get update && \
     mv supercronic /usr/local/bin
 
 
-FROM docker.io/php:8.1-fpm
+FROM docker.io/php:8.3-fpm
 
 COPY --from=CRON_BUILDER /usr/local/bin/supercronic /usr/local/bin/supercronic
 

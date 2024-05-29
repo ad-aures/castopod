@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Views\Components;
 
 use Exception;
+use Override;
 use ViewComponents\Component;
 
 class DropdownMenu extends Component
@@ -34,6 +35,7 @@ class DropdownMenu extends Component
         $this->items = json_decode(htmlspecialchars_decode($value), true);
     }
 
+    #[Override]
     public function render(): string
     {
         if ($this->items === []) {

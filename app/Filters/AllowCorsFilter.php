@@ -7,12 +7,14 @@ namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Override;
 
 class AllowCorsFilter implements FilterInterface
 {
     /**
      * @param string[]|null $arguments
      */
+    #[Override]
     public function before(RequestInterface $request, $arguments = null): void
     {
         // Do something here
@@ -21,6 +23,7 @@ class AllowCorsFilter implements FilterInterface
     /**
      * @param string[]|null $arguments
      */
+    #[Override]
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
         if (! $response->hasHeader('Cache-Control')) {

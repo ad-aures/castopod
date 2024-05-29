@@ -19,6 +19,7 @@ use CodeIgniter\Router\Exceptions\RedirectException;
 use CodeIgniter\Router\Exceptions\RouterException;
 use CodeIgniter\Router\Router as CodeIgniterRouter;
 use Config\Services;
+use Override;
 
 class Router extends CodeIgniterRouter
 {
@@ -30,6 +31,7 @@ class Router extends CodeIgniterRouter
      *
      * @return boolean Whether the route was matched or not.
      */
+    #[Override]
     protected function checkRoutes(string $uri): bool
     {
         $routes = $this->collection->getRoutes($this->collection->getHTTPVerb());

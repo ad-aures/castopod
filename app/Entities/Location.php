@@ -26,12 +26,12 @@ class Location extends Entity
     /**
      * @var string
      */
-    private const OSM_URL = 'https://www.openstreetmap.org/';
+    private const string OSM_URL = 'https://www.openstreetmap.org/';
 
     /**
      * @var string
      */
-    private const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
+    private const string NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
 
     public function __construct(
         protected string $name,

@@ -10,6 +10,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
+use Override;
 use RuntimeException;
 
 /**
@@ -22,6 +23,7 @@ class PermissionFilter implements FilterInterface
      *
      * @return RequestInterface|ResponseInterface|string|void
      */
+    #[Override]
     public function before(RequestInterface $request, $arguments = null)
     {
         if ($arguments === null || $arguments === []) {
@@ -42,6 +44,7 @@ class PermissionFilter implements FilterInterface
     /**
      * @param string[]|null $arguments
      */
+    #[Override]
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
     }

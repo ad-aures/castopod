@@ -12,6 +12,7 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use Modules\Fediverse\Entities\Actor as FediverseActor;
+use Override;
 use RuntimeException;
 
 /**
@@ -42,6 +43,7 @@ class Actor extends FediverseActor
         return $this->podcast;
     }
 
+    #[Override]
     public function getAvatarImageUrl(): string
     {
         if ($this->podcast instanceof Podcast) {
@@ -51,6 +53,7 @@ class Actor extends FediverseActor
         return parent::getAvatarImageUrl();
     }
 
+    #[Override]
     public function getAvatarImageMimetype(): string
     {
         if ($this->podcast instanceof Podcast) {

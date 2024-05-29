@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Analytics\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddAnalyticsUnknownUseragents extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -45,6 +47,7 @@ class AddAnalyticsUnknownUseragents extends BaseMigration
         $this->forge->createTable('analytics_unknown_useragents');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('analytics_unknown_useragents');

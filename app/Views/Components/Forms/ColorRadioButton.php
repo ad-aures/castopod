@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class ColorRadioButton extends FormComponent
 {
     protected array $props = ['isSelected'];
@@ -14,6 +16,7 @@ class ColorRadioButton extends FormComponent
 
     protected bool $isSelected = false;
 
+    #[Override]
     public function render(): string
     {
         $data = [

@@ -9,6 +9,7 @@ use App\Models\PodcastModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\HTTP\CURLRequest;
 use Exception;
+use Override;
 
 class Publish extends BaseCommand
 {
@@ -18,6 +19,7 @@ class Publish extends BaseCommand
 
     protected $description = 'Publishes feed updates to websub hubs.';
 
+    #[Override]
     public function run(array $params): void
     {
         if (ENVIRONMENT !== 'production') {

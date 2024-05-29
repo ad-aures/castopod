@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
 use ViewComponents\Component;
 
 class Section extends Component
@@ -14,6 +15,7 @@ class Section extends Component
 
     protected string $subtitle = '';
 
+    #[Override]
     public function render(): string
     {
         $subtitle = $this->subtitle === '' ? '' : '<p class="text-sm text-skin-muted">' . $this->subtitle . '</p>';

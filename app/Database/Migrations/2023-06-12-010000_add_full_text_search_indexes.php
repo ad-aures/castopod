@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddFullTextSearchIndexes extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $prefix = $this->db->getPrefix();
@@ -31,6 +34,7 @@ class AddFullTextSearchIndexes extends BaseMigration
         $this->db->query($createQuery);
     }
 
+    #[Override]
     public function down(): void
     {
         $prefix = $this->db->getPrefix();

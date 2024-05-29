@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddPages extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -48,6 +51,7 @@ class AddPages extends BaseMigration
         $this->forge->createTable('pages');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('pages');

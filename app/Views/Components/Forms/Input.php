@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use Override;
+
 class Input extends FormComponent
 {
     protected array $props = ['type'];
 
     protected string $type = 'text';
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('w-full border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent');

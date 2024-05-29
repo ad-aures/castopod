@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ViewComponents;
 
+use Override;
+
 abstract class Component implements ComponentInterface
 {
     /**
@@ -81,6 +83,7 @@ abstract class Component implements ComponentInterface
         return stringify_attributes($this->attributes);
     }
 
+    #[Override]
     public function render(): string
     {
         return static::class . ': RENDER METHOD NOT IMPLEMENTED';

@@ -11,9 +11,11 @@ declare(strict_types=1);
 namespace Modules\Analytics\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddAnalyticsPodcastsBySubscription extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -48,6 +50,7 @@ class AddAnalyticsPodcastsBySubscription extends BaseMigration
         $this->forge->createTable('analytics_podcasts_by_subscription');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('analytics_podcasts_by_subscription');

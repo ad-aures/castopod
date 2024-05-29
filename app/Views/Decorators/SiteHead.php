@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Views\Decorators;
 
 use CodeIgniter\View\ViewDecoratorInterface;
+use Override;
 
 class SiteHead implements ViewDecoratorInterface
 {
     private static int $renderedCount = 0;
 
+    #[Override]
     public static function decorate(string $html): string
     {
         if (url_is(config('Admin')->gateway . '*') || url_is(config('Install')->gateway)) {

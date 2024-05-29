@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class Button extends Component
@@ -32,6 +33,7 @@ class Button extends Component
 
     protected bool $isExternal = false;
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('shadow gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold rounded-full');

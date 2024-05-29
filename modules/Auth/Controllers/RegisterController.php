@@ -7,6 +7,7 @@ namespace Modules\Auth\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Controllers\RegisterController as ShieldRegisterController;
+use Override;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
@@ -15,6 +16,7 @@ use ViewThemes\Theme;
  */
 class RegisterController extends ShieldRegisterController
 {
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

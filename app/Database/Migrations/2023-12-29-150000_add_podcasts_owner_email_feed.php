@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddPodcastsOwnerEmailRemovedFromFeed extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $fields = [
@@ -28,6 +31,7 @@ class AddPodcastsOwnerEmailRemovedFromFeed extends BaseMigration
         $this->forge->addColumn('podcasts', $fields);
     }
 
+    #[Override]
     public function down(): void
     {
         $fields = ['is_owner_email_removed_from_feed'];

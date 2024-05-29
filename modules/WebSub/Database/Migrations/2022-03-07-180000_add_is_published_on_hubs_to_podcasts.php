@@ -11,9 +11,11 @@ declare(strict_types=1);
 namespace Modules\WebSub\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddIsPublishedOnHubsToPodcasts extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addColumn('podcasts', [
@@ -26,6 +28,7 @@ class AddIsPublishedOnHubsToPodcasts extends BaseMigration
         ]);
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropColumn('podcasts', 'is_published_on_hubs');

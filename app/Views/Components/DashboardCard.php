@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class DashboardCard extends Component
@@ -23,6 +24,7 @@ class DashboardCard extends Component
         $this->subtitle = html_entity_decode($value);
     }
 
+    #[Override]
     public function render(): string
     {
         $glyph = icon($this->glyph, [

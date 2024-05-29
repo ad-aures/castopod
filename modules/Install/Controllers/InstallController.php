@@ -23,6 +23,7 @@ use Config\Services;
 use Dotenv\Dotenv;
 use Dotenv\Exception\ValidationException;
 use Modules\Auth\Models\UserModel;
+use Override;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use ViewThemes\Theme;
@@ -37,6 +38,7 @@ class InstallController extends Controller
     /**
      * Constructor.
      */
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

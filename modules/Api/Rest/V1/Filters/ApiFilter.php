@@ -11,6 +11,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Api\Rest\V1\Config\RestApi;
+use Override;
 
 class ApiFilter implements FilterInterface
 {
@@ -18,6 +19,7 @@ class ApiFilter implements FilterInterface
      * @param Request $request
      * @return RequestInterface|ResponseInterface|string|void
      */
+    #[Override]
     public function before(RequestInterface $request, $arguments = null)
     {
         /** @var RestApi $restApiConfig */
@@ -55,6 +57,7 @@ class ApiFilter implements FilterInterface
         }
     }
 
+    #[Override]
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
         // Do something here

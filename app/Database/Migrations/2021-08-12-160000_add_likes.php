@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddLikes extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -34,6 +37,7 @@ class AddLikes extends BaseMigration
         $this->forge->createTable('likes');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('likes');

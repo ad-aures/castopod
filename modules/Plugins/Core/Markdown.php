@@ -10,6 +10,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
+use Override;
 use Stringable;
 
 class Markdown implements Stringable
@@ -19,6 +20,7 @@ class Markdown implements Stringable
     ) {
     }
 
+    #[Override]
     public function __toString(): string
     {
         return $this->markdown;

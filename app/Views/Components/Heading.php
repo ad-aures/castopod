@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class Heading extends Component
@@ -17,6 +18,7 @@ class Heading extends Component
      */
     protected string $size = 'base';
 
+    #[Override]
     public function render(): string
     {
         $sizeClass = match ($this->size) {

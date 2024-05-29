@@ -9,6 +9,7 @@ use Aws\S3\S3Client;
 use CodeIgniter\Files\File;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
+use Override;
 
 class S3 implements FileManagerInterface
 {
@@ -27,6 +28,7 @@ class S3 implements FileManagerInterface
         ]);
     }
 
+    #[Override]
     public function save(File $file, string $key): string
     {
         $this->s3->putObject([
@@ -44,6 +46,7 @@ class S3 implements FileManagerInterface
         return $key;
     }
 
+    #[Override]
     public function delete(string $key): bool
     {
         try {
@@ -58,11 +61,13 @@ class S3 implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function getUrl(string $key): string
     {
         return media_url($this->prefixKey($key));
     }
 
+    #[Override]
     public function rename(string $oldKey, string $newKey): bool
     {
         try {
@@ -81,6 +86,7 @@ class S3 implements FileManagerInterface
         return $this->delete($oldKey);
     }
 
+    #[Override]
     public function getFileContents(string $key): string|false
     {
         try {
@@ -95,11 +101,13 @@ class S3 implements FileManagerInterface
         return (string) $result->get('Body');
     }
 
+    #[Override]
     public function getFileInput(string $key): string
     {
         return $this->getUrl($key);
     }
 
+    #[Override]
     public function deletePodcastImageSizes(string $podcastHandle): bool
     {
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
@@ -109,6 +117,7 @@ class S3 implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function deletePersonImagesSizes(): bool
     {
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
@@ -118,6 +127,7 @@ class S3 implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function deleteAll(string $prefix, ?string $pattern = '*'): bool
     {
         $prefix = rtrim($this->prefixKey($prefix), '/') . '/'; // make sure that there is a trailing slash
@@ -161,6 +171,7 @@ class S3 implements FileManagerInterface
         return true;
     }
 
+    #[Override]
     public function isHealthy(): bool
     {
         // check that bucket exists

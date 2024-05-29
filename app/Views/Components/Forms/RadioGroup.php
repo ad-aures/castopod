@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Views\Components\Forms;
 
 use App\Views\Components\Hint;
+use Override;
 
 class RadioGroup extends FormComponent
 {
@@ -25,6 +26,7 @@ class RadioGroup extends FormComponent
 
     protected string $hint = '';
 
+    #[Override]
     public function render(): string
     {
         $this->mergeClass('flex flex-col');

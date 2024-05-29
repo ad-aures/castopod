@@ -20,9 +20,11 @@ use CodeIgniter\Database\Seeder;
 use Exception;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
+use Override;
 
 class FakePodcastsAnalyticsSeeder extends Seeder
 {
+    #[Override]
     public function run(): void
     {
         $jsonUserAgents = json_decode(

@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddLanguages extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -31,6 +34,7 @@ class AddLanguages extends BaseMigration
         $this->forge->createTable('languages');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('languages');

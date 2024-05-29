@@ -13,6 +13,7 @@ namespace Modules\Media\Entities;
 use CodeIgniter\Files\File;
 use Exception;
 use Modules\Media\TranscriptParser;
+use Override;
 
 class Transcript extends BaseMedia
 {
@@ -22,6 +23,7 @@ class Transcript extends BaseMedia
 
     protected string $type = 'transcript';
 
+    #[Override]
     public function initFileProperties(): void
     {
         parent::initFileProperties();
@@ -35,6 +37,7 @@ class Transcript extends BaseMedia
         }
     }
 
+    #[Override]
     public function setFile(File $file): self
     {
         parent::setFile($file);
@@ -58,6 +61,7 @@ class Transcript extends BaseMedia
         return $this;
     }
 
+    #[Override]
     public function saveFile(): void
     {
         $this->saveJsonTranscript();
@@ -65,6 +69,7 @@ class Transcript extends BaseMedia
         parent::saveFile();
     }
 
+    #[Override]
     public function deleteFile(): bool
     {
         if (! parent::deleteFile()) {

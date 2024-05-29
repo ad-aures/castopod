@@ -21,7 +21,7 @@ class WebmanifestController extends Controller
     /**
      * @var array<string, array<string, string>>
      */
-    final public const THEME_COLORS = [
+    final public const array THEME_COLORS = [
         'pine' => [
             'theme'      => '#009486',
             'background' => '#F0F9F8',

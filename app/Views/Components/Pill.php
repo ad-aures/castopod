@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
+use Override;
 use ViewComponents\Component;
 
 class Pill extends Component
@@ -23,6 +24,7 @@ class Pill extends Component
 
     protected string $hint = '';
 
+    #[Override]
     public function render(): string
     {
         $variantClass = match ($this->variant) {

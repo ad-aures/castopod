@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Libraries;
 
 use DOMDocument;
+use Override;
 use SimpleXMLElement;
 
 class SimpleRSSElement extends SimpleXMLElement
@@ -47,6 +48,7 @@ class SimpleRSSElement extends SimpleXMLElement
      *
      * @return static The addChild method returns a SimpleXMLElement object representing the child added to the XML node.
      */
+    #[Override]
     public function addChild($name, $value = null, $namespace = null, $escape = true): static
     {
         $newChild = parent::addChild($name, null, $namespace);

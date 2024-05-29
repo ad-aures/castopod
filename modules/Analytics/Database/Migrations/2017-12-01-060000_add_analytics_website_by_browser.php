@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace Modules\Analytics\Database\Migrations;
 
 use App\Database\Migrations\BaseMigration;
+use Override;
 
 class AddAnalyticsWebsiteByBrowser extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $this->forge->addField([
@@ -45,6 +47,7 @@ class AddAnalyticsWebsiteByBrowser extends BaseMigration
         $this->forge->createTable('analytics_website_by_browser');
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropTable('analytics_website_by_browser');

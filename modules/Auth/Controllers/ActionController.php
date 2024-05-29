@@ -7,6 +7,7 @@ namespace Modules\Auth\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Controllers\ActionController as ShieldActionController;
+use Override;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
@@ -15,6 +16,7 @@ use ViewThemes\Theme;
  */
 class ActionController extends ShieldActionController
 {
+    #[Override]
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

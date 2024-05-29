@@ -7,6 +7,7 @@ namespace Tests\Support\Database\Seeds;
 use App\Database\Seeds\AppSeeder;
 use App\Database\Seeds\DevSeeder;
 use CodeIgniter\Database\Seeder;
+use Override;
 
 class FakeSinglePodcastApiSeeder extends Seeder
 {
@@ -188,6 +189,7 @@ class FakeSinglePodcastApiSeeder extends Seeder
         ];
     }
 
+    #[Override]
     public function run(): void
     {
         $this->call(AppSeeder::class);

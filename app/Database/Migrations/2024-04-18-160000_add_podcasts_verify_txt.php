@@ -12,8 +12,11 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
+use Override;
+
 class AddPodcastsVerifyTxtField extends BaseMigration
 {
+    #[Override]
     public function up(): void
     {
         $fields = [
@@ -27,6 +30,7 @@ class AddPodcastsVerifyTxtField extends BaseMigration
         $this->forge->addColumn('podcasts', $fields);
     }
 
+    #[Override]
     public function down(): void
     {
         $this->forge->dropColumn('podcasts', 'verify_txt');
