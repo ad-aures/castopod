@@ -96,6 +96,21 @@ abstract class BasePlugin implements PluginInterface
     {
     }
 
+    final public function getGeneralSetting(string $key): mixed
+    {
+        return get_plugin_option($this->key, $key);
+    }
+
+    final public function getPodcastSetting(int $podcastId, string $key): mixed
+    {
+        return get_plugin_option($this->key, $key, ['podcast', $podcastId]);
+    }
+
+    final public function getEpisodeSetting(int $episodeId, string $key): mixed
+    {
+        return get_plugin_option($this->key, $key, ['episode', $episodeId]);
+    }
+
     final public function getStatus(): PluginStatus
     {
         return $this->status;
