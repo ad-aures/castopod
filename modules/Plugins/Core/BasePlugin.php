@@ -101,6 +101,11 @@ abstract class BasePlugin implements PluginInterface
         return $this->status;
     }
 
+    final public function getDirectory(): string
+    {
+        return $this->directory;
+    }
+
     /**
      * @return array<string,string>
      */

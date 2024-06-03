@@ -34,6 +34,7 @@ if (isset($episode)) {
     'plugin'  => $plugin,
     'action'  => route_to(sprintf('plugins-settings-%s-action', $type), ...$params),
     'fields'  => $fields,
+    'type'    => $type,
     'context' => $context,
 ]) ?>
 <?= $this->endSection() ?>

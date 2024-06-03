@@ -15,6 +15,8 @@ class Services extends BaseService
             return self::getSharedInstance('plugins');
         }
 
-        return new Plugins();
+        $config = config('Plugins');
+
+        return new Plugins($config);
     }
 }

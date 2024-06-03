@@ -49,3 +49,35 @@ if (! function_exists('set_plugin_option')) {
             ->set($key, $value, $context);
     }
 }
+
+if (! function_exists('load_plugins_translations')) {
+    /**
+     * @return array<mixed>
+     */
+    function load_plugins_translations(string $locale): array
+    {
+        $allPlugins = plugins()
+            ->getAllPlugins();
+
+        $translations = [];
+        foreach ($allPlugins as $plugin) {
+            $file = $plugin->getDirectory() . DIRECTORY_SEPARATOR . 'i18n' . DIRECTORY_SEPARATOR . $locale . '.json';
+
+            $jsonContents = @file_get_contents($file);
+
+            if (! $jsonContents) {
+                continue;
+            }
+
+            $contents = json_decode($jsonContents, true);
+
+            if (! $contents) {
+                continue;
+            }
+
+            $translations[$plugin->getKey()] = $contents;
+        }
+
+        return $translations;
+    }
+}

@@ -48,17 +48,31 @@ class Field extends ManifestObject
     /**
      * @return array{label:string,value:string,hint:string}[]
      */
-    public function getOptionsArray(): array
+    public function getOptionsArray(string $i18nKey): array
     {
         $optionsArray = [];
         foreach ($this->options as $option) {
             $optionsArray[] = [
-                'label' => $option->label,
                 'value' => $option->value,
-                'hint'  => (string) $option->hint,
+                'label' => esc($this->getTranslated($i18nKey . '.' . $option->value . '.label', $option->label)),
+                'hint'  => esc($this->getTranslated($i18nKey . '.' . $option->value . '.hint', (string) $option->hint)),
             ];
         }
 
         return $optionsArray;
+    }
+
+    public function getTranslated(string $i18nKey, string $default): string
+    {
+        $key = 'Plugin.' . $i18nKey;
+
+        /** @var string $i18nField */
+        $i18nField = lang($key);
+
+        if ($default === '' || $i18nField === $key) {
+            return $default;
+        }
+
+        return $i18nField;
     }
 }

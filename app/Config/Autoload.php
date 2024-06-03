@@ -96,7 +96,7 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $files = [APPPATH . 'Libraries/ViewComponents/Helpers/view_components_helper.php'];
+    public $files = [];
 
     /**
      * -------------------------------------------------------------------
@@ -110,34 +110,4 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $helpers = ['auth', 'setting', 'icons', 'plugins'];
-
-    public function __construct()
-    {
-        // load plugins namespaces
-        $pluginsPaths = glob(PLUGINS_PATH . '*/*', GLOB_ONLYDIR | GLOB_NOSORT);
-
-        if (! $pluginsPaths) {
-            $pluginsPaths = [];
-        }
-
-        foreach ($pluginsPaths as $pluginPath) {
-            $vendor = basename(dirname($pluginPath));
-            $package = basename($pluginPath);
-
-            // validate plugin pattern
-            if (preg_match('~' . PLUGINS_KEY_PATTERN . '~', $vendor . '/' . $package) === false) {
-                continue;
-            }
-
-            $pluginNamespace = 'Plugins\\' . str_replace(
-                ' ',
-                '',
-                ucwords(str_replace(['-', '_', '.'], ' ', $vendor . '\\' . $package))
-            );
-
-            $this->psr4[$pluginNamespace] = $pluginPath;
-        }
-
-        parent::__construct();
-    }
 }
