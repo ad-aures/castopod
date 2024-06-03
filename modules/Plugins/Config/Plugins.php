@@ -8,6 +8,8 @@ use CodeIgniter\Config\BaseConfig;
 
 class Plugins extends BaseConfig
 {
+    public string $folder = PLUGINS_PATH;
+
     /**
      * @var list<string>
      */

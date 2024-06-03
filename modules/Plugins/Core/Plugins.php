@@ -8,6 +8,7 @@ use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
 use Config\Database;
+use Modules\Plugins\Config\Plugins as PluginsConfig;
 
 /**
  * @method void rssBeforeChannel(Podcast $podcast)
@@ -63,8 +64,9 @@ class Plugins
 
     protected static int $activeCount = 0;
 
-    public function __construct()
-    {
+    public function __construct(
+        protected PluginsConfig $config
+    ) {
         helper('plugins');
 
         $this->registerPlugins();
@@ -89,6 +91,14 @@ class Plugins
     public function getPlugins(int $page, int $perPage): array
     {
         return array_slice(static::$plugins, (($page - 1) * $perPage), $perPage);
+    }
+
+    /**
+     * @return array<BasePlugin>
+     */
+    public function getAllPlugins(): array
+    {
+        return static::$plugins;
     }
 
     /**
@@ -240,8 +250,8 @@ class Plugins
             return false;
         }
 
-        // delete plugin folder from PLUGINS_PATH
-        $pluginFolder = PLUGINS_PATH . $plugin->getKey();
+        // delete plugin folder
+        $pluginFolder = $this->config->folder . $plugin->getKey();
         $rmdirResult = $this->rrmdir($pluginFolder);
 
         $transResult = $db->transCommit();
@@ -252,13 +262,12 @@ class Plugins
     protected function registerPlugins(): void
     {
         // search for plugins in plugins folder
-        $pluginsDirectories = glob(PLUGINS_PATH . '*/*', GLOB_ONLYDIR);
+        $pluginsDirectories = glob($this->config->folder . '*/*', GLOB_ONLYDIR);
 
         if ($pluginsDirectories === false || $pluginsDirectories === []) {
             return;
         }
 
-        $locator = service('locator');
         foreach ($pluginsDirectories as $pluginDirectory) {
             $vendor = basename(dirname($pluginDirectory));
             $package = basename($pluginDirectory);
@@ -267,13 +276,17 @@ class Plugins
                 continue;
             }
 
-            $pluginFile = $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';
+            $className = str_replace(
+                ' ',
+                '',
+                ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $package)) . 'Plugin'
+            );
 
-            $className = $locator->findQualifiedNameFromPath($pluginFile);
-
-            if ($className === false) {
-                continue;
-            }
+            spl_autoload_register(static function ($class) use (&$className, &$pluginDirectory): void {
+                if ($class === $className) {
+                    include $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';
+                }
+            }, true);
 
             $plugin = new $className($vendor, $package, $pluginDirectory);
             if (! $plugin instanceof BasePlugin) {

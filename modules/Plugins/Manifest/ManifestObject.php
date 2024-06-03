@@ -90,11 +90,20 @@ abstract class ManifestObject
                 if (is_array($cast)) {
                     if (is_array($value)) {
                         foreach ($value as $valueKey => $valueElement) {
-                            $value[$valueKey] = new $cast[0]($this->pluginKey, $valueElement);
+                            if (is_subclass_of($cast[0], self::class)) {
+                                $value[$valueKey] = new $cast[0]($this->pluginKey);
+                                $value[$valueKey]->loadData($valueElement);
+                            } else {
+                                $value[$valueKey] = new $cast[0]($valueElement);
+                            }
                         }
                     }
+                } elseif (is_subclass_of($cast, self::class)) {
+                    $valueElement = $value;
+                    $value = new $cast($this->pluginKey);
+                    $value->loadData($valueElement ?? []);
                 } else {
-                    $value = new $cast($this->pluginKey, $value ?? []);
+                    $value = new $cast($value ?? []);
                 }
             }
 
