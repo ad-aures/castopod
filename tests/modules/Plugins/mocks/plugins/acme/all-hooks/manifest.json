@@ -1,0 +1,11 @@
+{
+  "name": "acme/all-hooks",
+  "version": "1.0.0",
+  "hooks": [
+    "rssBeforeChannel",
+    "rssAfterChannel",
+    "rssBeforeItem",
+    "rssAfterItem",
+    "siteHead"
+  ]
+}

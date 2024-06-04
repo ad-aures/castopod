@@ -52,11 +52,7 @@ abstract class BasePlugin implements PluginInterface
         $this->manifest = new Manifest($this->key);
         $this->manifest->loadFromFile($manifestPath);
 
-        if ($this->getManifestErrors() !== []) {
-            $this->status = PluginStatus::INVALID;
-        } else {
-            $this->status = get_plugin_option($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
-        }
+        $this->status = get_plugin_setting($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
 
         $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
 
@@ -98,17 +94,48 @@ abstract class BasePlugin implements PluginInterface
 
     final public function getGeneralSetting(string $key): mixed
     {
-        return get_plugin_option($this->key, $key);
+        return get_plugin_setting($this->key, $key);
     }
 
     final public function getPodcastSetting(int $podcastId, string $key): mixed
     {
-        return get_plugin_option($this->key, $key, ['podcast', $podcastId]);
+        return get_plugin_setting($this->key, $key, ['podcast', $podcastId]);
     }
 
     final public function getEpisodeSetting(int $episodeId, string $key): mixed
     {
-        return get_plugin_option($this->key, $key, ['episode', $episodeId]);
+        return get_plugin_setting($this->key, $key, ['episode', $episodeId]);
+    }
+
+    /**
+     * @return bool true on success, false on failure
+     */
+    final public function activate(): bool
+    {
+        if ($this->status === PluginStatus::ACTIVE) {
+            return false;
+        }
+
+        $this->setStatus(PluginStatus::ACTIVE);
+
+        if ($this->status === PluginStatus::INACTIVE) {
+            return false;
+        }
+
+        set_plugin_setting($this->key, 'active', true);
+        return true;
+    }
+
+    final public function deactivate(): bool
+    {
+        if ($this->status !== PluginStatus::ACTIVE) {
+            return false;
+        }
+
+        $this->setStatus(PluginStatus::INACTIVE);
+        set_plugin_setting($this->key, 'active', false);
+
+        return true;
     }
 
     final public function getStatus(): PluginStatus
@@ -243,14 +270,30 @@ abstract class BasePlugin implements PluginInterface
         return $this->manifest->license ?? 'UNLICENSED';
     }
 
+    /**
+     * @param PluginStatus::ACTIVE|PluginStatus::INACTIVE $value
+     */
+    final protected function setStatus(PluginStatus $value): self
+    {
+        if ($this->getManifestErrors() !== []) {
+            $this->status = PluginStatus::INVALID;
+
+            return $this;
+        }
+
+        $this->status = $value;
+
+        return $this;
+    }
+
     final protected function getOption(string $option): mixed
     {
-        return get_plugin_option($this->key, $option);
+        return get_plugin_setting($this->key, $option);
     }
 
     final protected function setOption(string $option, mixed $value = null): void
     {
-        set_plugin_option($this->key, $option, $value);
+        set_plugin_setting($this->key, $option, $value);
     }
 
     private function loadIcon(string $path): string

@@ -209,12 +209,16 @@ class Plugins
 
     public function activate(BasePlugin $plugin): void
     {
-        set_plugin_option($plugin->getKey(), 'active', true);
+        if ($plugin->activate()) {
+            ++self::$activeCount;
+        }
     }
 
     public function deactivate(BasePlugin $plugin): void
     {
-        set_plugin_option($plugin->getKey(), 'active', false);
+        if ($plugin->deactivate()) {
+            --self::$activeCount;
+        }
     }
 
     /**
@@ -222,7 +226,7 @@ class Plugins
      */
     public function setOption(BasePlugin $plugin, string $name, mixed $value, array $additionalContext = null): void
     {
-        set_plugin_option($plugin->getKey(), $name, $value, $additionalContext);
+        set_plugin_setting($plugin->getKey(), $name, $value, $additionalContext);
     }
 
     public function getInstalledCount(): int
@@ -282,11 +286,22 @@ class Plugins
                 ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $package)) . 'Plugin'
             );
 
-            spl_autoload_register(static function ($class) use (&$className, &$pluginDirectory): void {
-                if ($class === $className) {
-                    include $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';
+            $pluginFile = $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';
+            spl_autoload_register(static function ($class) use (&$className, &$pluginFile): void {
+                if ($class !== $className) {
+                    return;
                 }
+
+                if (! file_exists($pluginFile)) {
+                    return;
+                }
+
+                include_once $pluginFile;
             }, true);
+
+            if (! class_exists($className)) {
+                continue;
+            }
 
             $plugin = new $className($vendor, $package, $pluginDirectory);
             if (! $plugin instanceof BasePlugin) {
