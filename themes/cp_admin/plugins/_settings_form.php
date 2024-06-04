@@ -6,14 +6,14 @@
         <x-Forms.Checkbox
             name="<?= $field->key ?>"
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
-            isChecked="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ? 'true' : 'false' ?>"
+            isChecked="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ? 'true' : 'false' ?>"
             ><?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.label', $plugin->getKey(), $type, $field->key), $field->label)) ?></x-Forms.Checkbox>
     <?php break;
     case 'toggler': ?>
         <x-Forms.Toggler
             name="<?= $field->key ?>"
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
-            isChecked="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ? 'true' : 'false' ?>"
+            isChecked="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ? 'true' : 'false' ?>"
             ><?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.label', $plugin->getKey(), $type, $field->key), $field->label)) ?></x-Forms.Toggler>
     <?php break;
     case 'radio-group': ?>
@@ -24,7 +24,7 @@
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             options="<?= esc(json_encode($field->getOptionsArray(sprintf('%s.settings.%s.%s.options', $plugin->getKey(), $type, $field->key)))) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'select': ?>
@@ -36,7 +36,7 @@
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             options="<?= esc(json_encode($field->getOptionsArray(sprintf('%s.settings.%s.%s.options', $plugin->getKey(), $type, $field->key)))) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'select-multiple': ?>
@@ -48,7 +48,7 @@
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             options="<?= esc(json_encode($field->getOptionsArray(sprintf('%s.settings.%s.%s.options', $plugin->getKey(), $type, $field->key)))) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= esc(json_encode(get_plugin_option($plugin->getKey(), $field->key, $context))) ?>"
+            value="<?= esc(json_encode(get_plugin_setting($plugin->getKey(), $field->key, $context))) ?>"
         />
     <?php break;
     case 'email': ?>
@@ -60,7 +60,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'url': ?>
@@ -73,7 +73,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'number': ?>
@@ -85,7 +85,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'textarea': ?>
@@ -96,7 +96,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'markdown': ?>
@@ -107,7 +107,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     case 'datetime':
@@ -119,7 +119,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php break;
     default: ?>
@@ -130,7 +130,7 @@
             hint="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.hint', $plugin->getKey(), $type, $field->key), $field->hint)) ?>"
             helper="<?= esc($field->getTranslated(sprintf('%s.settings.%s.%s.helper', $plugin->getKey(), $type, $field->key), $field->helper)) ?>"
             isRequired="<?= $field->optional ? 'false' : 'true' ?>"
-            value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
+            value="<?= get_plugin_setting($plugin->getKey(), $field->key, $context) ?>"
         />
     <?php endswitch; ?>
 

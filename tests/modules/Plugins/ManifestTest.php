@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Modules\Api\Rest\V1;
+namespace Tests\Modules\Plugins;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use Modules\Plugins\Manifest\Manifest;
@@ -20,7 +20,7 @@ final class ManifestTest extends CIUnitTestCase
         $this->assertNotEquals($manifest->name, 'acme/hello-world');
         $this->assertNotEquals($manifest->version, '1.0.0');
 
-        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/Mocks/manifests/manifest-required.json');
+        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/mocks/manifests/manifest-required.json');
 
         // no errors
         $this->assertEmpty($manifest->getPluginErrors('acme/hello-world'));
@@ -34,7 +34,7 @@ final class ManifestTest extends CIUnitTestCase
     {
         $manifest = new Manifest('acme/hello-world');
 
-        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/Mocks/manifests/manifest-empty.json');
+        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/mocks/manifests/manifest-empty.json');
 
         $errors = $manifest->getPluginErrors('acme/hello-world');
 
@@ -49,7 +49,7 @@ final class ManifestTest extends CIUnitTestCase
     {
         $manifest = new Manifest('acme/hello-world');
 
-        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/Mocks/manifests/manifest-full-valid.json');
+        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/mocks/manifests/manifest-full-valid.json');
 
         // no errors
         $this->assertEmpty($manifest->getPluginErrors('acme/hello-world'));
@@ -59,7 +59,7 @@ final class ManifestTest extends CIUnitTestCase
     {
         $manifest = new Manifest('acme/hello-world');
 
-        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/Mocks/manifests/manifest-full-invalid.json');
+        $manifest->loadFromFile(TESTPATH . 'modules/Plugins/mocks/manifests/manifest-full-invalid.json');
 
         // errors
         $this->assertNotEmpty($manifest->getPluginErrors('acme/hello-world'));

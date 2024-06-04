@@ -11,11 +11,11 @@ if (! function_exists('plugins')) {
     }
 }
 
-if (! function_exists('get_plugin_option')) {
+if (! function_exists('get_plugin_setting')) {
     /**
      * @param ?array{'podcast'|'episode',int} $additionalContext
      */
-    function get_plugin_option(string $pluginKey, string $option, array $additionalContext = null): mixed
+    function get_plugin_setting(string $pluginKey, string $option, array $additionalContext = null): mixed
     {
         $key = sprintf('Plugins.%s', $option);
         $context = sprintf('plugin:%s', $pluginKey);
@@ -28,11 +28,11 @@ if (! function_exists('get_plugin_option')) {
     }
 }
 
-if (! function_exists('set_plugin_option')) {
+if (! function_exists('set_plugin_setting')) {
     /**
      * @param ?array{'podcast'|'episode',int} $additionalContext
      */
-    function set_plugin_option(
+    function set_plugin_setting(
         string $pluginKey,
         string $option,
         mixed $value = null,
