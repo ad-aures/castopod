@@ -9,47 +9,12 @@ declare(strict_types=1);
  */
 
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\ResponseInterface;
 use Config\Mimes;
-use Config\Services;
 
 if (! function_exists('download_file')) {
     function download_file(string $fileUrl, string $mimetype = ''): File
     {
-        $client = Services::curlrequest();
-
-        $response = $client->get($fileUrl, [
-            'headers' => [
-                'User-Agent' => 'Castopod/' . CP_VERSION,
-            ],
-        ]);
-
-        // redirect to new file location
-        $newFileUrl = $fileUrl;
-        while (
-            in_array(
-                $response->getStatusCode(),
-                [
-                    ResponseInterface::HTTP_MOVED_PERMANENTLY,
-                    ResponseInterface::HTTP_FOUND,
-                    ResponseInterface::HTTP_SEE_OTHER,
-                    ResponseInterface::HTTP_NOT_MODIFIED,
-                    ResponseInterface::HTTP_TEMPORARY_REDIRECT,
-                    ResponseInterface::HTTP_PERMANENT_REDIRECT,
-                ],
-                true,
-            )
-        ) {
-            $newFileUrl = trim($response->header('location')->getValue());
-            $response = $client->get($newFileUrl, [
-                'headers' => [
-                    'User-Agent' => 'Castopod/' . CP_VERSION,
-                ],
-                'http_errors' => false,
-            ]);
-        }
-
-        $fileExtension = pathinfo(parse_url($newFileUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+        $fileExtension = pathinfo(parse_url($fileUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
         $extension = $fileExtension === '' ? Mimes::guessExtensionFromType($mimetype) : $fileExtension;
         $tmpFilename =
             time() .
@@ -57,9 +22,26 @@ if (! function_exists('download_file')) {
             bin2hex(random_bytes(10)) .
             '.' .
             $extension;
-        $tmpfileKey = WRITEPATH . 'uploads/' . $tmpFilename;
-        file_put_contents($tmpfileKey, $response->getBody());
+        $tmpfilePath = WRITEPATH . 'uploads/' . $tmpFilename;
 
-        return new File($tmpfileKey);
+        $file = fopen($tmpfilePath, 'w');
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $fileUrl);
+
+        // output directly to file
+        curl_setopt($ch, CURLOPT_FILE, $file);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['User-Agent: Castopod/' . CP_VERSION]);
+
+        // follow redirects up to 20, like Apple Podcasts
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
+
+        curl_exec($ch);
+        curl_close($ch);
+
+        fclose($file);
+
+        return new File($tmpfilePath);
     }
 }

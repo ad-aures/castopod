@@ -39,6 +39,7 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                     <div class="flex flex-wrap items-center truncate">
                     <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
+                            <?php // @icon('exchange-dollar-fill')?>
                             <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar-fill" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
                             <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
                         </div>
