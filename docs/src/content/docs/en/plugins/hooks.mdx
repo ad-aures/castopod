@@ -1,0 +1,61 @@
+---
+title: Hooks reference
+---
+
+Hooks are methods that live in the Plugin class, they are executed in parts of
+the Castopod codebase.
+
+## List
+
+| Hooks            | Executes in |
+| ---------------- | ----------- |
+| rssBeforeChannel | RSS Feed    |
+| rssAfterChannel  | RSS Feed    |
+| rssBeforeItem    | RSS Feed    |
+| rssAfterItem     | RSS Feed    |
+| siteHead         | Website     |
+
+### rssBeforeChannel
+
+```php
+public function rssBeforeChannel(Podcast $podcast): void
+{
+    // …
+}
+```
+
+### rssAfterChannel
+
+```php
+public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $rss): void
+{
+    // …
+}
+```
+
+### rssBeforeItem
+
+```php
+public function rssBeforeItem(Episode $episode): void
+{
+    // …
+}
+```
+
+### rssAfterItem
+
+```php
+public function rssAfterItem(Epsiode $episode, SimpleRSSElement $rss): void
+{
+    // …
+}
+```
+
+### siteHead
+
+```php
+public function siteHead(): void
+{
+    // …
+}
+```

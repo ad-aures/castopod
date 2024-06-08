@@ -2,15 +2,15 @@
 
 <?= $this->section('title') ?>
 <?= lang('Plugins.settingsTitle', [
-    'pluginName' => $plugin->getName(),
-    'type'       => $type,
+    'pluginTitle' => $plugin->getTitle(),
+    'type'        => $type,
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('Plugins.settingsTitle', [
-    'pluginName' => $plugin->getName(),
-    'type'       => $type,
+    'pluginTitle' => $plugin->getTitle(),
+    'type'        => $type,
 ]) ?>
 <?= $this->endSection() ?>
 

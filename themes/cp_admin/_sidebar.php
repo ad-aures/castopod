@@ -88,7 +88,7 @@ $navigation = [
 foreach (plugins()->getActivePlugins() as $plugin) {
     $route = route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage());
     $navigation['plugins']['items'][] = $route;
-    $navigation['plugins']['items-labels'][$route] = $plugin->getName();
+    $navigation['plugins']['items-labels'][$route] = $plugin->getTitle();
     $navigation['plugins']['items-permissions'][$route] = 'plugins.manage';
 }
 

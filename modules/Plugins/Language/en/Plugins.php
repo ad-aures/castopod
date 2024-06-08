@@ -19,9 +19,9 @@ return [
     'declaredHooks' => 'Declared hooks',
     'settings' => 'Settings',
     'settingsTitle' => '{type, select,
-        podcast {{pluginName} podcast settings}
-        episode {{pluginName} episode settings}
-        other {{pluginName} general settings}
+        podcast {{pluginTitle} podcast settings}
+        episode {{pluginTitle} episode settings}
+        other {{pluginTitle} general settings}
     }',
     'view' => 'View',
     'activate' => 'Activate',
@@ -39,7 +39,7 @@ return [
     'noDescription' => 'No description',
     'noReadme' => 'No README file found.',
     'messages' => [
-        'saveSettingsSuccess' => '{pluginName} settings were successfully saved!',
+        'saveSettingsSuccess' => '{pluginTitle} settings were successfully saved!',
     ],
     'errors' => [
         'manifestError' => 'Plugin manifest has errors',

@@ -5,11 +5,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= $plugin->getName() ?>
+<?= $plugin->getTitle() ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $plugin->getName() ?>
+<?= $plugin->getTitle() ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>
