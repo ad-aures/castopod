@@ -206,7 +206,7 @@ class PluginController extends BaseController
 
         return redirect()->back()
             ->with('message', lang('Plugins.messages.saveSettingsSuccess', [
-                'pluginName' => $plugin->getName(),
+                'pluginTitle' => $plugin->getTitle(),
             ]));
     }
 

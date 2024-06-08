@@ -1,0 +1,133 @@
+---
+title: Castopod Plugins
+---
+
+import { FileTree, Aside } from "@astrojs/starlight/components";
+
+Plugins are ways to extend Castopod's core features.
+
+## Plugin folder structure
+
+<FileTree>
+
+- hello-world
+  - i18n
+    - en.json
+    - fr.json
+    - …
+  - icon.svg
+  - [manifest.json](./manifest) // required
+  - [Plugin.php](#plugin-class) // required
+  - README.md
+
+</FileTree>
+
+Plugins reside in the `plugins` folder under a **vendor** folder, ie. the
+organisation or person who authored the plugin.
+
+<FileTree>
+
+- **plugins**
+  - acme
+    - hello-world/
+    - …
+  - atlantis/
+
+</FileTree>
+
+### manifest.json (required)
+
+The plugin manifest is a JSON file containing your plugin's metadata and
+permissions.
+
+This file will determine whether a plugin is valid or not. The minimal required
+data being:
+
+```json
+{
+  "name": "acme/hello-world",
+  "version": "1.0.0"
+}
+```
+
+Checkout the [manifest.json reference](./manifest).
+
+<h3 id="plugin-class">Plugin class (required)</h3>
+
+This is where your plugin's logic will live.
+
+The Plugin class must extend Castopod's BasePlugin class and implement one or
+multiple [Hooks](./hooks) (methods).
+
+```php
+// Plugin.php
+<?php
+
+declare(strict_types=1);
+
+use Modules\Plugins\Core\BasePlugin;
+
+class AcmeHelloWorldPlugin extends BasePlugin
+{
+    // …
+}
+```
+
+<Aside type="note">
+
+The Plugin class name is determined by its `vendor/name` pair.  
+For example, a plugin living under the `acme/hello-world` folder must be named
+`AcmeHelloWorldPlugin`:
+
+- the first letter of every word is capitalized (ie. PascalCase)
+- any special caracter is removed
+- the `Plugin` suffix is added
+
+</Aside>
+
+### README.md
+
+The `README.md` file is loaded into the plugin's view page for the user to
+read.  
+It should be used for any additional information to help guide the user in using
+the plugin.
+
+### icon.svg
+
+The plugin icon is displayed next to its title, it is an SVG file intended to
+give a graphical representation of the plugin.
+
+The icon should be squared, and be legible in a 64px by 64px circle.
+
+### Internationalization (i18n)
+
+Translation strings live under the `i18n` folder. Translation files are JSON
+files named as locale keys:
+
+<FileTree>
+
+- **i18n**
+  - en.json // default locale
+  - fr.json
+  - de.json
+  - …
+
+</FileTree>
+
+Supported locales are:
+`br`,`ca`,`de`,`en`,`es`,`fr`,`nn-no`,`pl`,`pt-br`,`sr-latn`,`zh-hans`.
+
+The translation strings allow you to translate the title, description and
+settings keys.
+
+```json
+{
+  "title": "Hello, World!",
+  "description": "A Castopod plugin to greet the world!",
+  "settings": {
+    "general": {},
+    "podcast": {},
+    "episode": {}
+  }
+}
+```

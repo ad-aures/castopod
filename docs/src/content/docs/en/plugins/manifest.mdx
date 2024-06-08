@@ -1,0 +1,59 @@
+---
+title: manifest.json reference
+---
+
+This page details the attributes of a Castopod Plugin's manifest, which must be
+a JSON file.
+
+### name (required)
+
+The plugin name, including 'vendor-name/' prefix.
+
+### version (required)
+
+The plugin's semantic version (eg. 1.0.0) - see https://semver.org/
+
+### description
+
+The plugin's description. This helps people discover your plugin as it's listed
+in repositories
+
+### authors
+
+Array one or more persons having authored the plugin. A person is an object with
+a required "name" field and optional "email" and "url" fields:
+
+```json
+{
+  "name": "Jean D'eau",
+  "email": "jean.deau@example.com",
+  "url": "https://example.com/"
+}
+```
+
+Or you can shorten the object into a single string:
+
+```json
+"Jean D'eau <jean.deau@example.com> (https://example.com/)"
+```
+
+### homepage
+
+The URL to the project homepage.
+
+### license
+
+You should specify a license for your plugin so that people know how they are
+permitted to use it, and any restrictions you're placing on it.
+
+### private
+
+### keywords
+
+### hooks
+
+### settings
+
+### files
+
+### repository

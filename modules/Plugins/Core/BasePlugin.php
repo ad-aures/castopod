@@ -233,17 +233,17 @@ abstract class BasePlugin implements PluginInterface
         return $this->package;
     }
 
-    final public function getName(): string
+    final public function getTitle(): string
     {
-        $key = sprintf('Plugin.%s.name', $this->key);
-        /** @var string $name */
-        $name = lang($key);
+        $key = sprintf('Plugin.%s.title', $this->key);
+        /** @var string $title */
+        $title = lang($key);
 
-        if ($name === $key) {
+        if ($title === $key) {
             return $this->manifest->name;
         }
 
-        return $name;
+        return $title;
     }
 
     final public function getDescription(): ?string

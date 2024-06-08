@@ -35,7 +35,7 @@ $episodeNavigation = [
 foreach (plugins()->getPluginsWithEpisodeSettings() as $plugin) {
     $route = route_to('plugins-settings-episode', $plugin->getVendor(), $plugin->getPackage(), $podcast->id, $episode->id);
     $episodeNavigation['plugins']['items'][] = $route;
-    $episodeNavigation['plugins']['items-labels'][$route] = $plugin->getName();
+    $episodeNavigation['plugins']['items-labels'][$route] = $plugin->getTitle();
     $episodeNavigation['plugins']['items-permissions'][$route] = 'episodes.edit';
 }
 

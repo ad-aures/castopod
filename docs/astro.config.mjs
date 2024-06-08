@@ -183,6 +183,35 @@ export default defineConfig({
             },
           ],
         },
+        {
+          label: "Plugins",
+          badge: {
+            text: "Experimental",
+          },
+          items: [
+            {
+              label: "Introduction",
+              link: "/plugins/",
+            },
+            {
+              label: "Creating a plugin",
+              link: "/plugins/create",
+            },
+            {
+              label: "Reference",
+              items: [
+                {
+                  label: "manifest.json",
+                  link: "/plugins/manifest",
+                },
+                {
+                  label: "hooks",
+                  link: "/plugins/hooks",
+                },
+              ],
+            },
+          ],
+        },
       ],
       editLink: {
         baseUrl:

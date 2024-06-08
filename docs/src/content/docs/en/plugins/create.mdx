@@ -1,0 +1,56 @@
+---
+title: Creating a Plugin
+---
+
+import { FileTree, Steps } from "@astrojs/starlight/components";
+
+In order to get started, you first need to
+[setup your Castopod dev environment](https://code.castopod.org/adaures/castopod/-/blob/develop/CONTRIBUTING-DEV.md).
+
+## Using the create command
+
+To quickly get you started, you can create a plugin using the following CLI
+command:
+
+```sh
+php spark plugins:create
+```
+
+👉 Follow the CLI instructions: you will be prompted for metadata and hooks
+definitions to generate the [plugin folder](./#plugin-folder-structure) for you.
+
+## Manual setup
+
+<Steps>
+1. create a plugin folder inside a vendor directory
+
+    <FileTree>
+    - plugins
+        - acme
+            - **hello-world/**
+        - …
+
+    </FileTree>
+
+2. add a manifest.json file
+
+   <FileTree>
+
+   - hello-world
+     - **manifest.json**
+
+   </FileTree>
+
+   See the [manifest reference](./manifest).
+
+3. add the Plugin.php class
+
+   <FileTree>
+
+   - hello-world
+     - manifest.json
+     - **Plugin.php**
+
+   </FileTree>
+
+</Steps>

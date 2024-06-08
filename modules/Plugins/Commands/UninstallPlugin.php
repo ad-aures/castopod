@@ -30,7 +30,7 @@ class UninstallPlugin extends BaseCommand
      *
      * @var string
      */
-    protected $description = '';
+    protected $description = 'Removes a plugin from the plugins directory.';
 
     /**
      * The Command's Usage

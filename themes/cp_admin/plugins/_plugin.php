@@ -18,7 +18,7 @@ use Modules\Plugins\Core\PluginStatus;
     </div>
     <img class="rounded-full min-w-16 max-w-16 aspect-square" src="<?= $plugin->getIconSrc() ?>">
     <div class="flex flex-col items-start mt-2 mb-6">
-        <h2 class="flex items-center text-xl font-bold font-display gap-x-2" title="<?= $plugin->getName() ?>"><a class="line-clamp-1" href="<?= route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage()) ?>" class="hover:underline decoration-accent"><?= $plugin->getName() ?></a></h2>
+        <h2 class="flex items-center text-xl font-bold font-display gap-x-2" title="<?= $plugin->getTitle() ?>"><a class="line-clamp-1" href="<?= route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage()) ?>" class="hover:underline decoration-accent"><?= $plugin->getTitle() ?></a></h2>
         <p class="inline-flex font-mono text-xs">
             <span class="inline-flex tracking-wide bg-gray-100">
                 <a href="<?= route_to('plugins-vendor', $plugin->getVendor()) ?>" class="underline underline-offset-2 decoration-2 decoration-dotted hover:decoration-solid decoration-accent"><?= $plugin->getVendor() ?></a>
