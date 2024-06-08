@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Plugins\Manifest;
 
+use Override;
+
 /**
  * @property Field[] $general
  * @property Field[] $podcast
@@ -40,4 +42,21 @@ class Settings extends ManifestObject
      * @var Field[]
      */
     protected array $episode = [];
+
+    #[Override]
+    public function loadData(array $data): void
+    {
+        $newData = [];
+        foreach ($data as $key => $fields) {
+            $newFields = [];
+            foreach ($fields as $fieldKey => $field) {
+                $field['key'] = $fieldKey;
+                $newFields[] = $field;
+            }
+
+            $newData[$key] = $newFields;
+        }
+
+        parent::loadData($newData);
+    }
 }

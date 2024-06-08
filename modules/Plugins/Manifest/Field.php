@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Plugins\Manifest;
 
 /**
- * @property 'text'|'email'|'url'|'markdown'|'number'|'switch' $type
  * @property string $key
+ * @property 'text'|'email'|'url'|'markdown'|'number'|'switch' $type
  * @property string $label
  * @property string $hint
  * @property string $helper

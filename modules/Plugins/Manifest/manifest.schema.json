@@ -101,28 +101,13 @@
       "type": "object",
       "properties": {
         "general": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/field"
-          },
-          "minItems": 1,
-          "uniqueItems": true
+          "$ref": "#/$defs/fields"
         },
         "podcast": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/field"
-          },
-          "minItems": 1,
-          "uniqueItems": true
+          "$ref": "#/$defs/fields"
         },
         "episode": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/field"
-          },
-          "minItems": 1,
-          "uniqueItems": true
+          "$ref": "#/$defs/fields"
         }
       }
     },
@@ -170,24 +155,12 @@
         }
       }
     },
-    "section": {
+    "fields": {
       "type": "object",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "fields": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/field"
-          },
-          "minItems": 1,
-          "uniqueItems": true
-        }
-      }
+      "patternProperties": {
+        "^[A-Za-z]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/field" }
+      },
+      "additionalProperties": false
     },
     "field": {
       "type": "object",
@@ -208,10 +181,6 @@
             "url"
           ],
           "default": "text"
-        },
-        "key": {
-          "type": "string",
-          "pattern": "^[A-Za-z]+[\\w\\-\\:\\.]*$"
         },
         "label": {
           "type": "string"
@@ -234,7 +203,7 @@
           "uniqueItems": true
         }
       },
-      "required": ["key", "label"],
+      "required": ["label"],
       "additionalProperties": false,
       "allOf": [
         { "$ref": "#/$defs/field-multiple-implies-options-is-required" }
