@@ -4,6 +4,7 @@
 - app/Resources/**
 + app/***
 + modules/***
++ plugins/***
 + public/***
 + themes/***
 + vendor/***

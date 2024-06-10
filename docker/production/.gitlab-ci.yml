@@ -56,7 +56,7 @@ docker-build-main-release:
     refs:
       - main
 
-docker-build-alpha-beta-release:
+docker-build-prerelease:
   stage: build
   image:
     name: docker.io/docker:23.0.3-dind
@@ -86,3 +86,4 @@ docker-build-alpha-beta-release:
     refs:
       - alpha
       - beta
+      - next

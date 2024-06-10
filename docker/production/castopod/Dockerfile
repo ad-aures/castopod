@@ -11,7 +11,7 @@ RUN apt-get update && \
     mv supercronic /usr/local/bin
 
 
-FROM docker.io/php:8.2-cli
+FROM docker.io/php:8.3-cli
 
 ARG UNIT_VERSION=1.31.1
 

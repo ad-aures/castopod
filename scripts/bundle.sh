@@ -2,7 +2,7 @@
 set -e
 
 VERSION=$1
-COMPOSER_VERSION=$(echo "$VERSION" | sed -r 's/(alpha|beta)./\1/g')
+COMPOSER_VERSION=$(echo "$VERSION" | sed -r 's/(alpha|beta|next)./\1/g')
 
 # replace composer.json version using jq
 echo "$( jq '.version = "'$COMPOSER_VERSION'"' composer.json )" > composer.json

@@ -53,6 +53,7 @@ lint-commit-msg:
     - main
     - beta
     - alpha
+    - next
 
 lint-php:
   stage: quality
@@ -120,6 +121,7 @@ bundle:
     - main
     - beta
     - alpha
+    - next
 
 release:
   stage: release
@@ -148,6 +150,7 @@ release:
     - main
     - beta
     - alpha
+    - next
 
 website:
   stage: deploy
@@ -176,5 +179,6 @@ docker:
       - main
       - beta
       - alpha
+      - next
     variables:
       - $CI_PROJECT_NAMESPACE == "adaures"
