@@ -2,24 +2,29 @@
 title: Creating a Plugin
 ---
 
-import { FileTree, Steps } from "@astrojs/starlight/components";
+import { FileTree, Steps, Badge } from "@astrojs/starlight/components";
 
 In order to get started, you first need to
 [setup your Castopod dev environment](https://code.castopod.org/adaures/castopod/-/blob/develop/CONTRIBUTING-DEV.md).
 
-## Using the create command
+## 1. Create the plugin folder
 
-To quickly get you started, you can create a plugin using the following CLI
-command:
+You'll first need to create your [plugin folder](./#plugin-folder-structure) in
+the `plugins/` directory.
+
+### Using the create command <Badge text="Recommended" size="small" />
+
+To quickly get you started, you can have a folder generated for you using the
+following CLI command:
 
 ```sh
 php spark plugins:create
 ```
 
-👉 Follow the CLI instructions: you will be prompted for metadata and hooks
-definitions to generate the [plugin folder](./#plugin-folder-structure) for you.
+👉 You will be prompted for metadata and hooks usage to have a skeleton plugin
+project generated for you!
 
-## Manual setup
+### Manual setup
 
 <Steps>
 1. create a plugin folder inside a vendor directory
@@ -54,3 +59,58 @@ definitions to generate the [plugin folder](./#plugin-folder-structure) for you.
    </FileTree>
 
 </Steps>
+
+## 2. Build your plugin
+
+Now that your plugin folder is set, you can start working on your Plugin's logic
+by implementing [the hooks](./hooks) needed.
+
+### Settings forms
+
+You can prompt users for data through settings forms.
+
+These forms can be built declaratively using the
+[settings attribute](./manifest#settings) in your manifest.
+
+```json
+// manifest.json
+{
+  "settings": {
+    "general": {
+      "field-key": {
+        "type": "text",
+        "label": "Enter a text"
+      }
+    },
+    "podcast": {
+      "field-key": {
+        "type": "text",
+        "label": "Enter a text for this podcast"
+      }
+    },
+    "episode": {
+      "field-key": {
+        "type": "type",
+        "label": "Enter a text for this episode"
+      }
+    }
+  }
+}
+```
+
+This example will generate settings forms at 3 levels:
+
+- `general`: a general form to prompt data to be used by the plugin
+- `podcast`: a form for each podcast to prompt for podcast specific data
+- `episode`: a form for each episode to prompt for episode specific data
+
+The data can then be accessed in the Plugin class methods via helper methods
+taking in the field key:
+
+```php
+$this->getGeneralSetting('field-key');
+
+$this->getPodcastSetting($podcast->id, 'field-key');
+
+$this->getEpisodeSetting($episode->id, 'field-key');
+```

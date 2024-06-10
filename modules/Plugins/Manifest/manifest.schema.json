@@ -195,12 +195,11 @@
           "type": "boolean"
         },
         "options": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/option"
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z0-9]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/option" }
           },
-          "minItems": 1,
-          "uniqueItems": true
+          "additionalProperties": false
         }
       },
       "required": ["label"],
@@ -215,14 +214,11 @@
         "label": {
           "type": "string"
         },
-        "value": {
-          "type": "string"
-        },
         "hint": {
           "type": "string"
         }
       },
-      "required": ["label", "value"],
+      "required": ["label"],
       "additionalProperties": false
     },
     "field-multiple-implies-options-is-required": {

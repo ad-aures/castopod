@@ -14,129 +14,107 @@
   "keywords": ["seo", "analytics"],
   "hooks": ["rssAfterChannel"],
   "settings": {
-    "general": [
-      {
+    "general": {
+      "name": {
         "type": "radio-group",
-        "key": "name",
         "label": "Name",
-        "options": [
-          { "label": "Foo", "value": "foo", "hint": "This is a hint." },
-          { "label": "Bar", "value": "bar" }
-        ]
+        "options": {
+          "foo": { "label": "Foo", "hint": "This is a hint." },
+          "bar": { "label": "Bar" }
+        }
       },
-      {
+      "email": {
         "type": "email",
-        "key": "email",
         "label": "Email"
       },
-      {
+      "url": {
         "type": "url",
-        "key": "url",
         "label": "Your website URL"
       },
-      {
+      "toggler": {
         "type": "toggler",
-        "key": "toggler",
         "label": "Toggle this?"
       },
-      {
+      "number": {
         "type": "number",
-        "key": "number",
         "label": "Number"
       },
-      {
+      "datetime": {
         "type": "datetime",
-        "key": "datetime",
         "label": "Enter a date",
         "optional": true
       },
-      {
+      "select": {
         "type": "select",
-        "key": "select",
         "label": "Select something",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
-      {
+      "select-multiple": {
         "type": "select-multiple",
-        "key": "select-multiple",
         "label": "Select multiple things",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
-      {
+      "radio-group": {
         "type": "radio-group",
-        "key": "radio-group",
         "label": "Radio Group",
         "helper": "This is a helper.",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
-      {
+      "texting": {
         "type": "textarea",
-        "key": "texting",
         "label": "Your text",
         "hint": "This is a hint."
       },
-      {
+      "hello": {
         "type": "markdown",
-        "key": "hello",
         "label": "Name Podcast",
         "hint": "This is a hint.",
         "optional": true
       }
-    ],
-    "podcast": [
-      {
+    },
+    "podcast": {
+      "name": {
         "type": "text",
-        "key": "name",
         "label": "Name Podcast",
         "hint": "This is a hint."
       }
-    ],
-    "episode": [
-      {
+    },
+    "episode": {
+      "name": {
         "type": "text",
-        "key": "name",
         "label": "Name Episode",
         "helper": "This is a helper."
       }
-    ]
+    }
   }
 }
