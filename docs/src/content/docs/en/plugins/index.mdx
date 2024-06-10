@@ -2,7 +2,7 @@
 title: Castopod Plugins
 ---
 
-import { FileTree, Aside } from "@astrojs/starlight/components";
+import { FileTree, Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 
 Plugins are ways to extend Castopod's core features.
 
@@ -16,13 +16,13 @@ Plugins are ways to extend Castopod's core features.
     - fr.json
     - …
   - icon.svg
-  - [manifest.json](./manifest) // required
-  - [Plugin.php](#plugin-class) // required
+  - manifest.json // required
+  - Plugin.php // required
   - README.md
 
 </FileTree>
 
-Plugins reside in the `plugins` folder under a **vendor** folder, ie. the
+Plugins reside in the `plugins/` directory under a `vendor/` folder, ie. the
 organisation or person who authored the plugin.
 
 <FileTree>
@@ -35,15 +35,16 @@ organisation or person who authored the plugin.
 
 </FileTree>
 
-### manifest.json (required)
+### Plugin manifest (required)
 
-The plugin manifest is a JSON file containing your plugin's metadata and
-permissions.
+The plugin manifest is a JSON file containing the plugin's metadata and
+declarations.
 
 This file will determine whether a plugin is valid or not. The minimal required
 data being:
 
 ```json
+// manifest.json
 {
   "name": "acme/hello-world",
   "version": "1.0.0"
@@ -52,12 +53,12 @@ data being:
 
 Checkout the [manifest.json reference](./manifest).
 
-<h3 id="plugin-class">Plugin class (required)</h3>
+### Plugin class (required)
 
-This is where your plugin's logic will live.
+This is where the plugin's logic lives.
 
-The Plugin class must extend Castopod's BasePlugin class and implement one or
-multiple [Hooks](./hooks) (methods).
+The Plugin class extends Castopod's BasePlugin class and implements one or more
+[Hooks](./hooks) (methods) intended to be run throughout Castopod's codebase.
 
 ```php
 // Plugin.php
@@ -69,7 +70,11 @@ use Modules\Plugins\Core\BasePlugin;
 
 class AcmeHelloWorldPlugin extends BasePlugin
 {
-    // …
+    // this rssBeforeChannel method is a Hook
+    public function rssBeforeChannel(Podcast $podcast): void
+    {
+        // …
+    }
 }
 ```
 
@@ -85,14 +90,14 @@ For example, a plugin living under the `acme/hello-world` folder must be named
 
 </Aside>
 
-### README.md
+### Plugin README
 
-The `README.md` file is loaded into the plugin's view page for the user to
-read.  
+The `README.md` file is loaded into the plugin's view page for the user to read
+through.  
 It should be used for any additional information to help guide the user in using
 the plugin.
 
-### icon.svg
+### Plugin icon
 
 The plugin icon is displayed next to its title, it is an SVG file intended to
 give a graphical representation of the plugin.
@@ -101,8 +106,8 @@ The icon should be squared, and be legible in a 64px by 64px circle.
 
 ### Internationalization (i18n)
 
-Translation strings live under the `i18n` folder. Translation files are JSON
-files named as locale keys:
+Plugins can be translated. Translation strings live inside the `i18n` folder.
+Translation files are JSON files named as locale keys:
 
 <FileTree>
 
@@ -118,16 +123,45 @@ Supported locales are:
 `br`,`ca`,`de`,`en`,`es`,`fr`,`nn-no`,`pl`,`pt-br`,`sr-latn`,`zh-hans`.
 
 The translation strings allow you to translate the title, description and
-settings keys.
+settings keys (ie. labels, hints, helpers, etc.).
 
-```json
-{
-  "title": "Hello, World!",
-  "description": "A Castopod plugin to greet the world!",
-  "settings": {
-    "general": {},
-    "podcast": {},
-    "episode": {}
-  }
-}
-```
+<Tabs>
+  <TabItem label="English">
+    ```json
+    // i18n/en.json
+    {
+      "title": "Hello, World!",
+      "description": "A Castopod plugin to greet the world!",
+      "settings": {
+        "general": {
+          "field-key": {
+            "label": "Enter a text",
+            "hint": "You can enter any type of character."
+          }
+        },
+        "podcast": {},
+        "episode": {}
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="French">
+    ```json
+    // i18n/fr.json
+    {
+      "title": "Bonjour, le Monde !",
+      "description": "Un plugin castopod pour saluer le monde !",
+      "settings": {
+        "general": {
+          "field-key": {
+            "label": "Saisissez un texte",
+            "hint": "Vous pouvez saisir n'importe quel type de caractère."
+          }
+        },
+        "podcast": {},
+        "episode": {}
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>

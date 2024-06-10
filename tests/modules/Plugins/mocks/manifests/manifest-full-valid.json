@@ -18,11 +18,11 @@
       "name": {
         "type": "radio-group",
         "label": "Name",
-        "options": [
-          { "label": "Foo", "value": "foo", "hint": "This is a hint." },
-          { "label": "Bar", "value": "bar" },
-          { "label": "Baz", "value": "baz" }
-        ]
+        "options": {
+          "foo": { "label": "Foo", "hint": "This is a hint." },
+          "bar": { "label": "Bar" },
+          "baz": { "label": "Baz" }
+        }
       },
       "email": {
         "type": "email",
@@ -48,57 +48,48 @@
       "select": {
         "type": "select",
         "label": "Select something",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
       "select-multiple": {
         "type": "select-multiple",
         "label": "Select multiple things",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
       "radio-group": {
         "type": "radio-group",
         "label": "Radio Group",
         "helper": "This is a helper.",
-        "options": [
-          {
-            "label": "Foo",
-            "value": "foo"
+        "options": {
+          "foo": {
+            "label": "Foo"
           },
-          {
-            "label": "Bar",
-            "value": "bar"
+          "bar": {
+            "label": "Bar"
           },
-          {
-            "label": "Baz",
-            "value": "baz"
+          "baz": {
+            "label": "Baz"
           }
-        ]
+        }
       },
       "textarea": {
         "type": "textarea",

@@ -2,8 +2,8 @@
 title: Hooks reference
 ---
 
-Hooks are methods that live in the Plugin class, they are executed in parts of
-the Castopod codebase.
+Hooks are methods of the Plugin class, they are executed in parts of the
+Castopod codebase.
 
 ## List
 
@@ -17,6 +17,11 @@ the Castopod codebase.
 
 ### rssBeforeChannel
 
+This hook is executed just before rendering the `<channel>` tag in the Podcast
+RSS feed using the given Podcast object.
+
+Here is a good place to alter the Podcast object.
+
 ```php
 public function rssBeforeChannel(Podcast $podcast): void
 {
@@ -26,14 +31,24 @@ public function rssBeforeChannel(Podcast $podcast): void
 
 ### rssAfterChannel
 
+This hook is executed after rendering all of the `<channel>` tags in the Podcast
+RSS feed.
+
+Here is a good place to add new tags to the generated channel.
+
 ```php
-public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $rss): void
+public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
 {
     // …
 }
 ```
 
 ### rssBeforeItem
+
+This hook is executed before rendering an `<item>` tag in the Podcast RSS feed
+using the given Episode object.
+
+Here is a good place to alter the Episode object.
 
 ```php
 public function rssBeforeItem(Episode $episode): void
@@ -44,14 +59,24 @@ public function rssBeforeItem(Episode $episode): void
 
 ### rssAfterItem
 
+This hook is executed after rendering an `<item>`'s tags in the Podcast RSS
+feed.
+
+Here is a good place to add new tags to the generated item.
+
 ```php
-public function rssAfterItem(Epsiode $episode, SimpleRSSElement $rss): void
+public function rssAfterItem(Epsiode $episode, SimpleRSSElement $item): void
 {
     // …
 }
 ```
 
 ### siteHead
+
+This hook is executed in the public pages' `<head>` tag.
+
+This is a good place to add meta tags and third-party scripts to Castopod's
+public pages.
 
 ```php
 public function siteHead(): void

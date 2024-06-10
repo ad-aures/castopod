@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Plugins\Manifest;
 
+use Override;
+
 /**
  * @property string $key
  * @property 'text'|'email'|'url'|'markdown'|'number'|'switch' $type
@@ -44,6 +46,22 @@ class Field extends ManifestObject
      * @var Option[]
      */
     protected array $options = [];
+
+    #[Override]
+    public function loadData(array $data): void
+    {
+        if (array_key_exists('options', $data)) {
+            $newOptions = [];
+            foreach ($data['options'] as $key => $option) {
+                $option['value'] = $key;
+                $newOptions[] = $option;
+            }
+
+            $data['options'] = $newOptions;
+        }
+
+        parent::loadData($data);
+    }
 
     /**
      * @return array{label:string,value:string,hint:string}[]

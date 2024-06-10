@@ -7,7 +7,14 @@ a JSON file.
 
 ### name (required)
 
-The plugin name, including 'vendor-name/' prefix.
+The plugin name, including 'vendor-name/' prefix. Examples:
+
+- acme/hello-world
+- adaures/click
+
+The name must be lowercase and consist of words separated by `-`, `.` or `_`.
+The complete name should match
+`^[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9]([_.-]?[a-z0-9]+)*$`.
 
 ### version (required)
 
@@ -15,8 +22,8 @@ The plugin's semantic version (eg. 1.0.0) - see https://semver.org/
 
 ### description
 
-The plugin's description. This helps people discover your plugin as it's listed
-in repositories
+The plugin's description. This helps people discover your plugin when listed in
+repositories.
 
 ### authors
 
@@ -25,7 +32,7 @@ a required "name" field and optional "email" and "url" fields:
 
 ```json
 {
-  "name": "Jean D'eau",
+  "name": "Jean Deau",
   "email": "jean.deau@example.com",
   "url": "https://example.com/"
 }
@@ -34,7 +41,7 @@ a required "name" field and optional "email" and "url" fields:
 Or you can shorten the object into a single string:
 
 ```json
-"Jean D'eau <jean.deau@example.com> (https://example.com/)"
+"Jean Deau <jean.deau@example.com> (https://example.com/)"
 ```
 
 ### homepage
@@ -43,17 +50,79 @@ The URL to the project homepage.
 
 ### license
 
-You should specify a license for your plugin so that people know how they are
-permitted to use it, and any restrictions you're placing on it.
+Specify a license for your plugin so that people know how they are permitted to
+use it, and any restrictions you're placing on it.
 
 ### private
 
+Whether or not to publish the plugin in public directories. If set to `true`,
+directories should refuse to publish the plugin.
+
 ### keywords
+
+Array of strings to help your plugin get discovered when listed in repositories.
 
 ### hooks
 
+List of hooks used by the plugin. If the hook is not specified, Castopod will
+not run it.
+
 ### settings
+
+Declare settings forms for persisting user data. The plugin's settings forms can
+be declared at three levels: `general`, `podcast`, and `episode`.
+
+Each level accepts one or more fields, identified by a key.
+
+```json
+{
+  "settings": {
+    "general": { // general settings form
+      "field-key": {
+        "type": "text", // default field type: a text input
+        "label": "Enter a text"
+      },
+      …
+    },
+    "podcast": {…}, // settings form for each podcast
+    "episode": {…}, // settings form for each episode
+  }
+}
+```
+
+The `general`, `podcast`, and `episode` settings are of `Fields` object with
+each property being a field key and the value being a `Field` object.
+
+#### Field object
+
+A field is a form element:
+
+| Property           | Type                                                                                                                                                          | Note                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `type`             | `checkbox` \| `datetime` \| `email` \| `markdown` \| `number` \| `radio-group` \| `select-multiple` \| `select` \| `text` \| `textarea` \| `toggler` \| `url` | Default is `text`                                                  |
+| `label` (required) | `string`                                                                                                                                                      | Can be translated (see i18n)                                       |
+| `hint`             | `string`                                                                                                                                                      | Can be translated (see i18n)                                       |
+| `helper`           | `string`                                                                                                                                                      | Can be translated (see i18n)                                       |
+| `optional`         | `boolean`                                                                                                                                                     | Default is `false`                                                 |
+| `options`          | `Options`                                                                                                                                                     | Required for `radio-group`, `select-multiple`, and `select` types. |
+
+#### Options object
+
+The `Options` object properties are option keys and the value is an `Option`.
+
+##### Option object
+
+| Property           | Type     | Note                         |
+| ------------------ | -------- | ---------------------------- |
+| `label` (required) | `string` | Can be translated (see i18n) |
+| `hint`             | `string` | Can be translated (see i18n) |
 
 ### files
 
+Array of file patterns that describes the entries to be included when your
+plugin is installed.
+
 ### repository
+
+Repository where the plugin's code lives. Helpful for people who want to
+contribute.
