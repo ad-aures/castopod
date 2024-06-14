@@ -1,6 +1,7 @@
 # rsync filter rules to copy required files for Castopod's bundle
 
-- app/Resources/
++ app/Resources/icons/***
+- app/Resources/**
 + app/***
 + modules/***
 + public/***
