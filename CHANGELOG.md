@@ -1,3 +1,82 @@
+# [2.0.0-next.1](https://code.castopod.org/adaures/castopod/compare/v1.11.0...v2.0.0-next.1) (6/19/2024)
+
+### Bug Fixes
+
+- add missing php-icons config file to bundle
+  ([56612f0](https://code.castopod.org/adaures/castopod/commit/56612f0c762aa2d98e3c8c77fba88ffdf6f46a44))
+- **docs:** add base to og image using env variable
+  ([fe67659](https://code.castopod.org/adaures/castopod/commit/fe676590f23a33bdbe8905d234760923c029e350))
+- **import:** rewrite download_file helper to output curl response directly to
+  file
+  ([eb7ad2f](https://code.castopod.org/adaures/castopod/commit/eb7ad2f7e1c0137f222f47e47062887de42c4824))
+- include app/Resources/icons folder to bundle
+  ([3fd5efc](https://code.castopod.org/adaures/castopod/commit/3fd5efc7956977acc19e53182f25b12813964a7d))
+- **platforms:** add platforms service + reduce memory consumption when
+  rendering platform cards
+  ([fe73e9f](https://code.castopod.org/adaures/castopod/commit/fe73e9fae9ea5d5ce946680aec194308bb2e620c))
+- set owner email visibility when editing podcast
+  ([fc4f982](https://code.castopod.org/adaures/castopod/commit/fc4f9825568cd4384c5b3cfe972accd146548807)),
+  closes [#473](https://code.castopod.org/adaures/castopod/issues/473)
+
+### Build System
+
+- release next major version as prerelease
+  ([8275226](https://code.castopod.org/adaures/castopod/commit/827522643e9f8a5ea9be05b4847dc637f0f43a13))
+
+### Features
+
+- add Plugins module with base files for plugins architecture
+  ([7253e13](https://code.castopod.org/adaures/castopod/commit/7253e13ac2118f6f165f54ea0cbcd63d51ab9205))
+- **plugins:** abstract settings form for general, podcast and episode types
+  ([b62b483](https://code.castopod.org/adaures/castopod/commit/b62b483ad9ff114a22a9ee52e1a1a2c9fa444d42))
+- **plugins:** activate / deactivate plugin using settings table
+  ([27d2a1b](https://code.castopod.org/adaures/castopod/commit/27d2a1b0ffba9454dd54cbb4251a2d179b09762a))
+- **plugins:** add aside with plugin metadata next to plugin's readme
+  ([dfb7888](https://code.castopod.org/adaures/castopod/commit/dfb7888aeb689b4066abc37084e08cd7f1d0f15d))
+- **plugins:** add before channel/item hooks to allow podcast/episode data edit
+  when generating rss
+  ([80d2c48](https://code.castopod.org/adaures/castopod/commit/80d2c48ee265cb32ed0d710c488292fcbc120044))
+- **plugins:** add json schema definition for plugin manifest
+  ([b5eddf3](https://code.castopod.org/adaures/castopod/commit/b5eddf351f6f6fa1c299fbac31cbd056ef232330))
+- **plugins:** add methods to easily retrieve general, podcast and episode
+  settings in hooks methods
+  ([3a900bb](https://code.castopod.org/adaures/castopod/commit/3a900bbab68b819cedf8943540d2ee0aeb6e8539))
+- **plugins:** add new field types + validate & cast user data before storing
+  settings
+  ([6f833fc](https://code.castopod.org/adaures/castopod/commit/6f833fc76a3aa6c6b87c27ad18a2fb90e537e21e))
+- **plugins:** add options to manifest for building forms and storing plugin
+  settings
+  ([3d8aedf](https://code.castopod.org/adaures/castopod/commit/3d8aedf9c34e6927b6d3b11445d5f0e669b347d7))
+- **plugins:** add settings page for podcast and episode if defined in the
+  plugin's manifest
+  ([89ac92f](https://code.castopod.org/adaures/castopod/commit/89ac92fb412a04231ce52fd6480c9ab893b19ef5))
+- **plugins:** add siteHead hook to add custom meta tags to public pages
+  ([e80a33b](https://code.castopod.org/adaures/castopod/commit/e80a33bf2ad4fe1b47037add7470a6c2770f4036))
+- **plugins:** display errors when plugin is invalid instead of crashing
+  ([8ec7909](https://code.castopod.org/adaures/castopod/commit/8ec79097bbdbcbce622518ef61c068f20e0ef74e))
+- **plugins:** handle empty states and long strings in UI
+  ([45ac2a4](https://code.castopod.org/adaures/castopod/commit/45ac2a4be96532b9456e6af1d26ba4ada3649303))
+- **plugins:** load and validate plugin manifest.json
+  ([1510e36](https://code.castopod.org/adaures/castopod/commit/1510e36c0acd2b254622ec230acd1d2461ee9bf3))
+- **plugins:** load plugins using file locator service
+  ([587938d](https://code.castopod.org/adaures/castopod/commit/587938d2bf307b823af143586b9ec9e9b44e8dc1))
+- **plugins:** load README.md file to view plugin's instructions in UI
+  ([e6bfdfc](https://code.castopod.org/adaures/castopod/commit/e6bfdfc3902705285701c13c8067fe0f538425c6))
+- **plugins:** register plugins using Plugin.php file instead of namespace +
+  simplify i18n structure
+  ([2035c39](https://code.castopod.org/adaures/castopod/commit/2035c39fd138a1fd408516bd1972ab6a02544c10))
+- **plugins:** uninstall plugins via CLI and admin UI
+  ([9a80de4](https://code.castopod.org/adaures/castopod/commit/9a80de40686bbf4288da21cc2a6dde8036580e47))
+- set owner email to hidden by default in podcast create form
+  ([7a6d9df](https://code.castopod.org/adaures/castopod/commit/7a6d9df6db8a6184b8250ced0475f3e741dde7f4))
+- support podcast:txt tag with verify use case
+  ([57e459e](https://code.castopod.org/adaures/castopod/commit/57e459e187ed048430f4137172e22396cd02bf81)),
+  closes [#468](https://code.castopod.org/adaures/castopod/issues/468)
+
+### BREAKING CHANGES
+
+- next major release including plugins architecture
+
 # [1.11.0](https://code.castopod.org/adaures/castopod/compare/v1.10.5...v1.11.0) (4/17/2024)
 
 ### Bug Fixes
