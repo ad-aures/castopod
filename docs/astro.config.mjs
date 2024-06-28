@@ -124,7 +124,7 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Instroduction",
+          label: "Introduction",
           link: "/",
           translations: {
             fr: "Installer",
