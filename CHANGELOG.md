@@ -1,3 +1,31 @@
+# [1.12.0](https://code.castopod.org/adaures/castopod/compare/v1.11.0...v1.12.0) (6/28/2024)
+
+### Bug Fixes
+
+- add missing php-icons config file to bundle
+  ([56612f0](https://code.castopod.org/adaures/castopod/commit/56612f0c762aa2d98e3c8c77fba88ffdf6f46a44))
+- **docs:** add base to og image using env variable
+  ([fe67659](https://code.castopod.org/adaures/castopod/commit/fe676590f23a33bdbe8905d234760923c029e350))
+- **import:** rewrite download_file helper to output curl response directly to
+  file
+  ([eb7ad2f](https://code.castopod.org/adaures/castopod/commit/eb7ad2f7e1c0137f222f47e47062887de42c4824))
+- include app/Resources/icons folder to bundle
+  ([3fd5efc](https://code.castopod.org/adaures/castopod/commit/3fd5efc7956977acc19e53182f25b12813964a7d))
+- **platforms:** add platforms service + reduce memory consumption when
+  rendering platform cards
+  ([fe73e9f](https://code.castopod.org/adaures/castopod/commit/fe73e9fae9ea5d5ce946680aec194308bb2e620c))
+- set owner email visibility when editing podcast
+  ([fc4f982](https://code.castopod.org/adaures/castopod/commit/fc4f9825568cd4384c5b3cfe972accd146548807)),
+  closes [#473](https://code.castopod.org/adaures/castopod/issues/473)
+
+### Features
+
+- set owner email to hidden by default in podcast create form
+  ([7a6d9df](https://code.castopod.org/adaures/castopod/commit/7a6d9df6db8a6184b8250ced0475f3e741dde7f4))
+- support podcast:txt tag with verify use case
+  ([57e459e](https://code.castopod.org/adaures/castopod/commit/57e459e187ed048430f4137172e22396cd02bf81)),
+  closes [#468](https://code.castopod.org/adaures/castopod/issues/468)
+
 # [1.11.0](https://code.castopod.org/adaures/castopod/compare/v1.10.5...v1.11.0) (4/17/2024)
 
 ### Bug Fixes
