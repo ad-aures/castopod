@@ -12,8 +12,8 @@ byggjeprosessen:
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server):eit
   nginx-oppsett for Castopod
 
-I tillegg krev Castopod ein MySQL-kompatibel database. Du kan leggja til ein
-Redis-database for å handtera mellomlagring.
+Additionally, Castopod requires a MySQL-compatible database. A Redis database
+can be added as a cache handler.
 
 ## Støtta merkelappar
 
@@ -24,88 +24,89 @@ Redis-database for å handtera mellomlagring.
 
 ## Døme på bruk
 
-1.  Installer [docker](https://docs.docker.com/get-docker/) og
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  Lag ei `docker-compose.yml`-fil som inneheld dette:
+1. Installer [docker](https://docs.docker.com/get-docker/) og
+   [docker-compose](https://docs.docker.com/compose/install/)
 
-    ```yml
-    versjon: "3.7"
+2. Lag ei `docker-compose.yml`-fil som inneheld dette:
 
-    tenester:
-      app:
-        bilete: castopod/castopod:latest
-        container_namn: "castopod-app"
-        lagringsvolum:
-          - castopod-media:/var/www/castopod/public/media
-        miljø:
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: endremeg
-          CP_BASEURL: "https://castopod.domene.no"
-          CP_ANALYTICS_SALT: endremeg
-          CP_CACHE_HANDLER: redis
-          CP_REDIS_HOST: redis
-          CP_REDIS_PASSWORD: endremeg
-        nettverk:
-          - castopod-app
-          - castopod-db
-        portar:
-          - 8000:8000
-        restart: unless-stopped
+   ```yml
+   versjon: "3.7"
 
-      mariadb:
-        bilete: mariadb:10.5
-        container_namn: "castopod-mariadb"
-        nettverk:
-          - castopod-db
-        lagringsvolum:
-          - castopod-db:/var/lib/mysql
-        miljø:
-          MYSQL_ROOT_PASSWORD: endremeg
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: endremeg
-        restart: unless-stopped
+   tenester:
+     app:
+       bilete: castopod/castopod:latest
+       container_namn: "castopod-app"
+       lagringsvolum:
+         - castopod-media:/var/www/castopod/public/media
+       miljø:
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: endremeg
+         CP_BASEURL: "https://castopod.domene.no"
+         CP_ANALYTICS_SALT: endremeg
+         CP_CACHE_HANDLER: redis
+         CP_REDIS_HOST: redis
+         CP_REDIS_PASSWORD: endremeg
+       nettverk:
+         - castopod-app
+         - castopod-db
+       portar:
+         - 8000:8000
+       restart: unless-stopped
 
-      redis:
-        bilete: redis:7.0-alpine
-        container_namn: "castopod-redis"
-        kommando: --requirepass changeme
-        lagringsvolum:
-          - castopod-cache:/data
-        nettverk:
-          - castopod-app
+     mariadb:
+       bilete: mariadb:10.5
+       container_namn: "castopod-mariadb"
+       nettverk:
+         - castopod-db
+       lagringsvolum:
+         - castopod-db:/var/lib/mysql
+       miljø:
+         MYSQL_ROOT_PASSWORD: endremeg
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: endremeg
+       restart: unless-stopped
 
-    lagringsvolum:
-      castopod-media:
-      castopod-db:
-      castopod-cache:
+     redis:
+       bilete: redis:7.0-alpine
+       container_namn: "castopod-redis"
+       kommando: --requirepass changeme
+       lagringsvolum:
+         - castopod-cache:/data
+       nettverk:
+         - castopod-app
 
-    nettverk:
-      castopod-app:
-      castopod-db:
-    ```
+   lagringsvolum:
+     castopod-media:
+     castopod-db:
+     castopod-cache:
 
-    Du må tilpassa nokre av variablane til din bruk (td. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` og `CP_ANALYTICS_SALT`).
+   nettverk:
+     castopod-app:
+     castopod-db:
+   ```
 
-3.  Set opp ein revers-mellomlagertenar for TLS (SSL/HTTPS)
+   Du må tilpassa nokre av variablane til din bruk (td. `CP_BASEURL`,
+   `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` og `CP_ANALYTICS_SALT`).
 
-    Du treng TLS for at ActivityPub skal verka. Dette kan du lett handtera med
-    ein revers-mellomtenar, til dømes [Caddy](https://caddyserver.com/):
+3. Set opp ein revers-mellomlagertenar for TLS (SSL/HTTPS)
 
-    ```
-    #castopod
-    castopod.eksempel.com {
-        reverse_proxy localhost:8000
-    }
-    ```
+   TLS is mandatory for ActivityPub to work. This job can easily be handled by
+   a reverse proxy, for example with [Caddy](https://caddyserver.com/):
 
-4.  Køyr `docker-compose up -d`, vent på at han skal starta og gå til
-    `https://castopod.eksempel.com/cp-install` for å gjera ferdig
-    Castopod-oppsettet!
+   ```
+   #castopod
+   castopod.eksempel.com {
+       reverse_proxy localhost:8000
+   }
+   ```
 
-5.  Då er du klar og kan starta å podkasta! 🎙️🚀
+4. Køyr `docker-compose up -d`, vent på at han skal starta og gå til
+   `https://castopod.eksempel.com/cp-install` for å gjera ferdig
+   Castopod-oppsettet!
+
+5. You're all set, start podcasting! 🎙️🚀
 
 ## Systemvariablar
 
@@ -125,7 +126,7 @@ Redis-database for å handtera mellomlagring.
   | **`CP_DATABASE_PREFIX`**              | ?streng                    | `"cp_"`          |
   | **`CP_CACHE_HANDLER`**                | [`"file"` eller `"redis"`] | `"file"`         |
   | **`CP_REDIS_HOST`**                   | ?streng                    | `"localhost"`    |
-  | **`CP_REDIS_PASSORD`**                | ?streng                    | `tom`            |
+  | **`CP_REDIS_PASSORD`**                | ?streng                    | `null`           |
   | **`CP_REDIS_PORT`**                   | ?tal                       | `6379`           |
   | **`CP_REDIS_DATABASE`**               | ?tal                       | `0`              |
   | **`CP_EMAIL_SMTP_HOST`**              | ?streng                    | `udefinert`      |

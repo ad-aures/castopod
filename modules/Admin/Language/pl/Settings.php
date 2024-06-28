@@ -48,7 +48,7 @@ return [
         'accent_section_subtitle' => 'Wybierz kolor, aby określić wygląd i styl wszystkich stron publicznych.',
         'pine' => 'Sosna',
         'crimson' => 'Karmazynowy',
-        'amber' => 'bursztynowy',
+        'amber' => 'Bursztyn',
         'lake' => 'Jezioro',
         'jacaranda' => 'Jacaranda',
         'onyx' => 'Onyks',

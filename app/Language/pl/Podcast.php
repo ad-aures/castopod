@@ -16,7 +16,7 @@ return [
         'Sezon {seasonNumber} odcinki ({episodeCount})',
     'no_episode' => 'Nie znaleziono odcinków!',
     'follow' => 'Obserwuj',
-    'followTitle' => 'Obserwuj {actorDisplayName} na fediverse!',
+    'followTitle' => 'Obserwuj {actorDisplayName} na fediwersum!',
     'followers' => '{numberOfFollowers, plural,
         one {# polubienie}
         few {# polubienia}
@@ -27,7 +27,7 @@ return [
         few {# osoby}
         other {# osób}
     }',
-    'links' => 'Links',
+    'links' => 'Linki',
     'activity' => 'Wpisy',
     'episodes' => 'Odcinki',
     'episodes_title' => 'Odcinki {podcastTitle}',
@@ -56,5 +56,5 @@ return [
         other {# osób}
     }',
     'persons_list' => 'Osoby',
-    'castopod_website' => 'Castopod (website)',
+    'castopod_website' => 'Castopod (strona)',
 ];

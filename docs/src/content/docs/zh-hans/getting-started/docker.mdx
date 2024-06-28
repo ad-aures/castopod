@@ -12,7 +12,8 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
   的 Nginx 配置
 
 此外，Castopod 需要一个与 MySQL 兼容的数据库。 Redis 数据库 可以添加为缓存处理
-器。
+器。 A Redis database
+can be added as a cache handler.
 
 ## 目前支持的标签
 
@@ -23,87 +24,89 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
 ## 用法示例：
 
-1.  安装 [Docker](https://docs.docker.com/get-docker/) 和
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  创建 `docker-compose.yml` 文件，并添加以下内容：
+1. 安装 [Docker](https://docs.docker.com/get-docker/) 和
+   [docker-compose](https://docs.docker.com/compose/install/)
 
-    ```yml
-    version: "3.7"
+2. 创建 `docker-compose.yml` 文件，并添加以下内容：
 
-    services:
-      app:
-        image: castopod/castopod:latest
-        container_name: "castopod-app"
-        volumes:
-          - castopod-media:/var/www/castopod/public/media
-        environment:
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod.example.com"
-          CP_ANALYTICS_SALT: changeme
-          CP_CACHE_HANDLER: redis
-          CP_REDIS_HOST: redis
-          CP_REDIS_PASSWORD: changeme
-        networks:
-          - castopod-app
-          - castopod-db
-        ports:
-          - 8000:8000
-        restart: unless-stopped
+   ```yml
+   version: "3.7"
 
-      mariadb:
-        image: mariadb:10.5
-        container_name: "castopod-mariadb"
-        networks:
-          - castopod-db
-        volumes:
-          - castopod-db:/var/lib/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: changeme
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-        restart: unless-stopped
+   services:
+     app:
+       image: castopod/castopod:latest
+       container_name: "castopod-app"
+       volumes:
+         - castopod-media:/var/www/castopod/public/media
+       environment:
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+         CP_BASEURL: "https://castopod.example.com"
+         CP_ANALYTICS_SALT: changeme
+         CP_CACHE_HANDLER: redis
+         CP_REDIS_HOST: redis
+         CP_REDIS_PASSWORD: changeme
+       networks:
+         - castopod-app
+         - castopod-db
+       ports:
+         - 8000:8000
+       restart: unless-stopped
 
-      redis:
-        image: redis:7.0-alpine
-        container_name: "castopod-redis"
-        command: --requirepass changeme
-        volumes:
-          - castopod-cache:/data
-        networks:
-          - castopod-app
+     mariadb:
+       image: mariadb:10.5
+       container_name: "castopod-mariadb"
+       networks:
+         - castopod-db
+       volumes:
+         - castopod-db:/var/lib/mysql
+       environment:
+         MYSQL_ROOT_PASSWORD: changeme
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+       restart: unless-stopped
 
-    volumes:
-      castopod-media:
-      castopod-db:
-      castopod-cache:
+     redis:
+       image: redis:7.0-alpine
+       container_name: "castopod-redis"
+       command: --requirepass changeme
+       volumes:
+         - castopod-cache:/data
+       networks:
+         - castopod-app
 
-    networks:
-      castopod-app:
-      castopod-db:
-    ```
+   volumes:
+     castopod-media:
+     castopod-db:
+     castopod-cache:
 
-    你还需要调整一些变量。 （例如：`CP_BASEURL`， `MYSQL_ROOT_PASSWORD`，
-    `MYSQL_PASSSWORD` 和 `CP_ANALYTICS_SALT`）
+   networks:
+     castopod-app:
+     castopod-db:
+   ```
 
-3.  设置 TLS 反向代理 (SSL/HTTPS)
+   你还需要调整一些变量。 （例如：`CP_BASEURL`， `MYSQL_ROOT_PASSWORD`，
+   `MYSQL_PASSSWORD` 和 `CP_ANALYTICS_SALT`）
 
-    TLS 是 ActivePub 工作的强制性要求。 此操作可用通过反向代理轻松解决，例如使用
-    [Caddy](https://caddyserver.com/) 处理：
+3. 设置 TLS 反向代理 (SSL/HTTPS)
 
-    ```
-    #castopod
-    castopod.example.com {
-        reverse_proxy localhost:8000
-    }
-    ```
+   TLS 是 ActivePub 工作的强制性要求。 此操作可用通过反向代理轻松解决，例如使用
+   [Caddy](https://caddyserver.com/) 处理： This job can easily be handled by
+   a reverse proxy, for example with [Caddy](https://caddyserver.com/):
 
-4.  运行命令 `docker-compose up -d`， 等待初始化后跳转到
-    `https://castopod.example.com/cp-install` 来完成 Castopod 的设置！
+   ```
+   #castopod
+   castopod.example.com {
+       reverse_proxy localhost:8000
+   }
+   ```
 
-5.  一切准备就绪，开始博客吧！ 🎙️🚀
+4. 运行命令 `docker-compose up -d`， 等待初始化后跳转到
+   `https://castopod.example.com/cp-install` 来完成 Castopod 的设置！
+
+5. You're all set, start podcasting! 🎙️🚀
 
 ## 环境变量
 

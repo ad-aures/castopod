@@ -64,30 +64,30 @@ return [
         'createSuccess' => 'Aflevering is succesvol aangemaakt!',
         'editSuccess' => 'Aflevering is succesvol bijgewerkt!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Deze aflevering is nog niet gepubliceerd!}
+            scheduled {Deze aflevering is successvol gepland!}
+            with_podcast {Deze aflevering zal op hetzelfde moment als de podcast worden gepubliceerd.}
+            other {Deze aflevering is nog niet gepubliceerd.}
         }',
         'publishCancelSuccess' => 'Aflevering publicatie is geannuleerd!',
         'unpublishBeforeDeleteTip' => 'Je moet de publicatie van de aflevering ongedaan maken voordat je deze verwijdert.',
         'scheduleDateError' => 'Geplande datum moet worden ingesteld!',
         'deletePublishedEpisodeError' => 'Je moet de publicatie van de aflevering ongedaan maken voordat je deze verwijdert.',
         'deleteSuccess' => 'Aflevering succesvol verwijderd!',
-        'deleteError' => 'Failed to delete episode {type, select,
+        'deleteError' => 'Kan de aflevering niet verwijderen {type, select,
             transcript {transcript}
-            chapters {chapters}
+            chapters {hoofdstukken}
             image {cover}
             audio {audio}
             other {media}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
+        'deleteFileError' => 'Mislukt om te verwijderen {type, select,
             transcript {transcript}
-            chapters {chapters}
+            chapters {hoofdstukken}
             image {cover}
             audio {audio}
             other {media}
-        } file {file_key}. You may manually remove it from your disk.',
+        } bestand {file_key}. Je kunt het handmatig verwijderen van je schijf.',
         'sameSlugError' => 'Er bestaat al een aflevering met de gekozen slug.',
     ],
     'form' => [
@@ -111,9 +111,9 @@ return [
             'full' => 'Vol',
             'full_hint' => 'Volledige inhoud (aflevering)',
             'trailer' => 'Trailer',
-            'trailer_hint' => 'Short, promotional piece of content that represents a preview of the current show',
+            'trailer_hint' => 'Korte, promotionele inhoud die een voorbeeld van de huidige show vertegenwoordigt',
             'bonus' => 'Bonus',
-            'bonus_hint' => 'Extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show',
+            'bonus_hint' => 'Extra inhoud voor de show (bijvoorbeeld achter de scène-info of interviews met de deelnemers) of cross-promotionele inhoud voor een andere show',
         ],
         'premium_title' => 'Premium',
         'premium' => 'Aflevering mag alleen toegankelijk zijn voor premium abonnees',
@@ -121,39 +121,39 @@ return [
             'label' => 'Ouderlijk advies',
             'hint' => 'Bevat de aflevering de expliciete inhoud?',
             'undefined' => 'niet gedefineerd',
-            'clean' => 'Clean',
+            'clean' => 'Fatsoenlijk',
             'explicit' => 'Expliciet',
         ],
         'show_notes_section_title' => 'Toon notities',
         'show_notes_section_subtitle' =>
-            'Up to 4000 characters, be clear and concise. Show notes help potential listeners in finding the episode.',
+            'Maximaal 4000 tekens, wees duidelijk en beknopt. Notities helpen potentiële luisteraars om de aflevering te vinden.',
         'description' => 'Omschrijving',
-        'description_footer' => 'Description footer',
+        'description_footer' => 'Omschrijving voettekst',
         'description_footer_hint' =>
-            'This text is added at the end of each episode description, it is a good place to input your social links for example.',
+            'Deze tekst wordt aan het einde van elke aflevering beschrijving toegevoegd, het is een goede plek om bijvoorbeeld je sociale links te plaatsen.',
         'additional_files_section_title' => 'Extra bestanden',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
+            'Deze bestanden kunnen door andere platforms worden gebruikt om uw publiek een betere ervaring te bieden. Zie de {podcastNamespaceLink} voor meer informatie.',
         'location_section_title' => 'Locatie',
-        'location_section_subtitle' => 'What place is this episode about?',
-        'location_name' => 'Location name or address',
+        'location_section_subtitle' => 'Over welke plaats gaat deze aflevering?',
+        'location_name' => 'Locatienaam of adres',
         'location_name_hint' => 'Dit kan een echte of fictieve locatie zijn',
         'transcript' => 'Transcript (ondertiteling / gesloten ondertitels)',
-        'transcript_hint' => 'Only .srt or .vtt are allowed.',
+        'transcript_hint' => 'Alleen .srt of .vtt zijn toegestaan.',
         'transcript_download' => 'Transcriptie downloaden',
-        'transcript_file' => 'Transcript file (.srt or .vtt)',
-        'transcript_remote_url' => 'Remote url for transcript',
-        'transcript_file_delete' => 'Delete transcript file',
+        'transcript_file' => 'Transcript-bestand (.srt of .vtt)',
+        'transcript_remote_url' => 'Externe URL voor transcript',
+        'transcript_file_delete' => 'Verwijder transcript-bestand',
         'chapters' => 'Hoofdstukken',
-        'chapters_hint' => 'File must be in JSON Chapters format.',
+        'chapters_hint' => 'Bestand moet in JSON Hoofdstuk indeling zijn.',
         'chapters_download' => 'Hoofdstukken downloaden',
-        'chapters_file' => 'Chapters file',
-        'chapters_remote_url' => 'Remote url for chapters file',
-        'chapters_file_delete' => 'Delete chapters file',
+        'chapters_file' => 'Hoofdstukken bestand',
+        'chapters_remote_url' => 'Externe URL voor hoofdstukken bestand',
+        'chapters_file_delete' => 'Verwijder hoofdstukken bestand',
         'advanced_section_title' => 'Geavanceerde parameters',
         'advanced_section_subtitle' =>
-            'If you need RSS tags that Castopod does not handle, set them here.',
-        'custom_rss' => 'Custom RSS tags for the episode',
+            'Als je RSS tags nodig hebt die Castopod niet afhandelt, stel ze hier in.',
+        'custom_rss' => 'Aangepaste RSS labels voor de aflevering',
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
         'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>

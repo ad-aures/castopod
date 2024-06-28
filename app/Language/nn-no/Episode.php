@@ -24,7 +24,7 @@ return [
     'comments' => 'Kommentarar',
     'activity' => 'Aktivitet',
     'chapters' => 'Kapittel',
-    'transcript' => 'Transcript',
+    'transcript' => 'Avskrift',
     'description' => 'Skildring av episoden',
     'number_of_comments' => '{numberOfComments, plural,
         one {# kommentar}
@@ -45,6 +45,6 @@ return [
         'publish_edit' => 'Rediger publiseringa',
     ],
     'no_chapters' => 'Det finst ingen kapittel for denne episoden.',
-    'download_transcript' => 'Download transcript ({extension})',
-    'no_transcript' => 'No transcript available for this episode.',
+    'download_transcript' => 'Last ned underteksten ({extension})',
+    'no_transcript' => 'Det finst inga teksting for denne episoden.',
 ];

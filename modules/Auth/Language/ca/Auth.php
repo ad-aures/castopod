@@ -83,6 +83,7 @@ return [
             'manage-comments' => 'Pot crear/eliminar comentaris d\'episodi del pòdcast #{id}.',
         ],
     ],
+
     // missing keys
     'code' => 'El teu codi de 6 dígits',
 

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'podcast_is_premium' => 'Podcast zawiera odcinki premium',
-    'episode_is_premium' => 'Odcinek jest dostępny tylko dla subskrybentów premium',
+    'episode_is_premium' => 'Ten odcinek premium jest dostępny tylko dla subskrybentów',
     'unlock_episode' => 'Ten odcinek jest tylko dla subskrybentów premium. Kliknij, aby go odblokować!',
     'banner_unlock' => 'Ten podcast zawiera odcinki premium, dostępne tylko dla subskrybentów premium.',
     'banner_lock' => 'Podcast został odblokowany, ciesz się odcinkami premium!',
@@ -21,7 +21,7 @@ return [
         'title' => 'Zawartość premium',
         'subtitle' => 'Ten podcast zawiera zablokowane odcinki premium! Czy masz klucz do ich odblokowania?',
         'token' => 'Wprowadź swój klucz',
-        'token_hint' => 'Jeśli subskrybujesz {podcastTitle} możesz skopiować klucz wysłany do Ciebie pocztą elektroniczną i wkleić go tutaj.',
+        'token_hint' => 'Jeśli subskrybujesz {podcastTitle}, możesz skopiować klucz wysłany do Ciebie mailem i wkleić go tutaj.',
         'submit' => 'Odblokuj wszystkie odcinki!',
         'call_to_action' => 'Odblokuj wszystkie odcinki {podcastTitle}:',
         'subscribe_cta' => 'Subskrybuj teraz!',

@@ -38,16 +38,16 @@ return [
             one {# episode}
             other {# episodes}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => '初回は{0, date, medium} に投稿されました。',
     ],
-    'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'sponsor' => 'スポンサー',
+    'funding_links' => '{podcastTitle} のリンクを探す',
+    'find_on' => '{podcastTitle} を検索',
+    'listen_on' => '視聴中',
     'persons' => '{personsCount, plural,
         one {# person}
         other {# persons}
     }',
-    'persons_list' => 'Persons',
-    'castopod_website' => 'Castopod (website)',
+    'persons_list' => '人数',
+    'castopod_website' => 'Castopod (公式ページ)',
 ];

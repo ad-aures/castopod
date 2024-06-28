@@ -8,15 +8,6 @@ Castopod a été pensé pour être facile à installer. Que vous utilisiez un
 hébergement dédié ou mutualisé, vous pouvez l'installer sur la plupart des
 serveurs web compatibles avec PHP-MySQL.
 
-<Aside>
-
-Nous avons publié des images officielles Docker pour Castopod!
-
-Si vous préférez utiliser Docker, vous pouvez sauter cette partie et aller
-directement à la [documentation Docker](./docker.md) pour Castopod.
-
-</Aside>
-
 ## Prérequis
 
 - PHP v8.1 ou supérieure
@@ -124,6 +115,7 @@ le fichier `.env` manuellement en vous appuyant sur le fichier `.env.example`.
 
 1. Créez un fichier `.env` à la racine du paquet basé sur le fichier
    `.env.example`.
+
 2. Initialisez la base de données en exécutant :
 
    ```sh
@@ -201,7 +193,7 @@ media.s3.region="your_s3_region"
 
 #### Options de configuration S3
 
-| Nom de la variable      | Type    | Par défaut  |
+| Variable name           | Type    | Default     |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |

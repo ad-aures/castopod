@@ -20,7 +20,7 @@ return [
     'form' => [
         'title' => 'Nowa zajawka',
         'soundbite_title' => 'Tytuł zajawki',
-        'start_time' => 'Rozpocznij w',
+        'start_time' => 'Rozpocznij od',
         'duration' => 'Długość',
         'submit' => 'Stwórz zajawkę',
     ],

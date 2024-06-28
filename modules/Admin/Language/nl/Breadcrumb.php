@@ -41,7 +41,7 @@ return [
     'platforms' => 'platformen',
     'social' => 'sociale netwerken',
     'funding' => 'financiering',
-    'monetization-other' => 'other monetization',
+    'monetization-other' => 'andere inkomsten',
     'analytics' => 'statistieken',
     'locations' => 'locaties',
     'webpages' => 'webpagina\'s',

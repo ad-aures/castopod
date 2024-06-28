@@ -9,9 +9,9 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Wróć do początku',
+    'back_to_home' => 'Wróć do strony głównej',
     'map' => [
         'title' => 'Mapa',
-        'description' => 'Odkryj odcinki podcastów w witrynie {siteName} umieszczone na mapie! Podróżuj po mapie i słuchaj odcinków, które opowiadają o konkretnych lokalizacjach.',
+        'description' => 'Odkryj odcinki podcastów w witrynie {siteName}, które są umieszczone na mapie! Podróżuj po mapie i słuchaj odcinków, które opowiadają o konkretnych lokalizacjach.',
     ],
 ];

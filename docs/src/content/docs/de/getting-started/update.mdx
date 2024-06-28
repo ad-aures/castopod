@@ -1,56 +1,58 @@
 ---
-title: Kako da ažurirate Castopod?
+title: How to update Castopod?
 ---
 
 import { Aside } from "@astrojs/starlight/components";
 
-Nakon instalacije Castopod-a, možete poželeti da ažurirate svoju instancu na
-najnoviju verziju kako bi ste uživali u najnovijim opcijama ✨, sređenim
-bagovima 🐛 i unapređenim performansama ⚡.
+After installing Castopod, you may want to update your instance to the latest
+version in order to enjoy the latest features ✨, bug fixes 🐛 and performance
+improvements ⚡.
 
-## Uputstva za ažuriranje
+## Update instructions
 
-0. ⚠️ Pre bilo kog ažuriranja, toplo preporučujemo da napravite rezervnu kopiju
-   svojih Castopod datoteka i baze podataka.
+0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
+   database.
 
    - cf.
      [Da li treba da napravim rezervnu kopiju pre ažuriranja?](#should-i-make-a-backup-before-updating)
 
-1. Idite na
-   [stranicu izdanja](https://code.castopod.org/adaures/castopod/-/releases) i
-   proverite da li je vaša instanca ažurirana sa najnovijom verzijom Castopod-a
+1. Go to the
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
+   see if your instance is up to date with the latest Castopod version
 
    - cf.
      [Gde mogu da pronađem moju verziju Castopod-a?](#where-can-i-find-my-castopod-version)
 
-2. Skinite najnoviji paket izdanja koji se zove `Castopod Package`, možete
-   odabrati `zip` ili `tar.gz` tip arhive
+2. Download the latest release package named `Castopod Package`, you may choose
+   between the `zip` or `tar.gz` archives
 
    - ⚠️ Uverite se da ste preuzeli Castopod paket a **NE** izvorni kod
-   - Imajte na umu da takođe možete preuzeti najnoviji paket sa
+   - Note that you can also download the latest package from
      [castopod.org](https://castopod.org/)
 
 3. Na vašem serveru:
 
-   - Uklonite sve datoteke sem `.env` i `public/media`
-   - Kopirajte nove datoteke iz preuzetog paketa na vaš server
+   - Remove all files except `.env` and `public/media`
+   - Copy the new files from the downloaded package into your server
 
      <Aside>
 
      Možda ćete morati da resetujete dozvole za datoteke kao tokom procesa
-     instalacije. Proverite [Bezbednosne interese](./security.md).
+     instalacije.
+     Proverite [Bezbednosne interese](./security.md).
 
      </Aside>
 
-4. Ažurirajte svoju šemu baze podataka iz vaše `Castopod Admin` > `About`
-   stranice ili tako što ćete pokrenuti:
+4. Update your database schema from your `Castopod Admin` > `About` page or by
+   running:
 
    ```bash
    php spark castopod:database-update
    ```
 
 5. Očistite keš iz `Castopod Admin` > `Settings` > `general` > `Housekeeping`
-6. ✨ Uživajte u svežoj instanci, završili ste!
+
+6. ✨ Enjoy your fresh instance, you're all done!
 
 <Aside>
 
@@ -62,11 +64,11 @@ Izdanja mogu doći sa dodatnim uputstvima za ažuriranje (pogledajte
 
 </Aside>
 
-## Potpuno automatsko ažuriranje
+## Fully Automated updates
 
 > Stiže uskoro... 👀
 
-## Često postavljana pitanja (česta pitanja)
+## Frequently asked questions (FAQ)
 
 ### Gde mogu da pronađem svoju verziju Castopod-a?
 
@@ -75,32 +77,32 @@ donjem levom uglu.
 
 Alternativno, verziju možete pronaći u `app > Config > Constants.php` datoteci.
 
-### Nisam ažurirao/la svoju instancu veoma dugo… Šta treba da uradim?
+### I haven't updated my instance in a long time… What should I do?
 
 Nema problema! Samo preuzmite poslednju verziju na način opisan iznad. Samo,
 kada idete kroz uputstva izdanja (4), izvodite ih jedno za drugim, od
 najstarijih do najnovijih.
 
-> Možda ćete želeti da napravite rezervnu kopiju instance u zavisnosti od toga
-> koliko dugo niste ažurirali Castopod.
+> You may want to backup your instance depending on how long you haven't updated
+> Castopod.
 
-Na primer, ako koristite verziju `v1.0.0-alpha.42` i želite da ažurirate na
-verziju `v1.0.0-beta.1`:
+For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
+`v1.0.0-beta.1`:
 
-0. (toplo preporučujemo) Napravite kopiju važih datoteka i baze podataka.
+0. (highly recommended) Make a backup of your files and database.
 
-1. Preuzmite najnovije izdanje, preišite svoje datoteke čuvajući `.env` i
+1. Download the latest release, overwrite your files whilst keeping `.env` and
    `public/media`.
 
 2. Prođite kroz uputstva za ažuriranje svakog izdanja po redu (od najstarijeg do
    najnovijeg) počevši sa `v1.0.0-alpha.43`, `v1.0.0-alpha.44`,
    `v1.0.0-alpha.45`, …, `v1.0.0-beta.1`.
 
-3. ✨ Uživajte u svežoj instanci, završili ste!
+3. ✨ Enjoy your fresh instance, you're all done!
 
-### Da li treba da napravim kopiju pre ažuriranja?
+### Should I make a backup before updating?
 
-Savetujemo vam da to uradite, tako da ne izgubite sve ako nešto krene po zlu!
+We advise you do, so you don't lose everything if anything goes wrong!
 
-Uopštenije, savetujemo vam da redovno pravite rezervne kopije vaših Castopod
-datoteka i baze podataka kako biste sprečili da sve izgubite…
+More generally, we advise you make regular backups of your Castopod files and
+database to prevent you from losing it all…

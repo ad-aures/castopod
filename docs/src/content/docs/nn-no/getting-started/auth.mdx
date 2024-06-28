@@ -2,29 +2,28 @@
 title: Godkjenning & Autorisasjon
 ---
 
-Castopod tek seg av godkjenning og autorisasjon med `codeigniter/shield` saman
-med nokre eigne reglar. Roller og løyve er definerte på to nivå:
+Denne teksten blir sett inn i ein \<podcast:txt purpose="verify">-knagg. Roller og tilgangar blir laga på to nivå:
 
 1. [for heile nettstaden](#1-instance-wide-roles-and-permissions)
 2. [for kvar podkast](#2-per-podcast-roles-and-permissions)
 
-## 1. Roller og løyve for heile nettstaden
+## 1. Roller og tilgangar på heile nettstaden
 
 ### Roller på nettstaden
 
-{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-ROLES-LIST:START - Ikkje slett eller endre denne delen _/}
 
-| role        | description                      | permissions                                                                                |
+| rolle       | skildring                        | tilgangar                                                                                  |
 | ----------- | -------------------------------- | ------------------------------------------------------------------------------------------ |
 | Superstyrar | Har full kontroll over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | Leiar       | Styrer innhaldet på Castopod.    | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
 | Podkastar   | Vanlege Castopod-brukarar.       | admin.access                                                                               |
 
-{/* AUTH-INSTANCE-ROLES-LIST:END */}
+{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
 
 ### Løyve på nettstaden
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission              | description                                                            |
 | ----------------------- | ---------------------------------------------------------------------- |
@@ -38,13 +37,13 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 | podcasts.import         | Kan importera podkastar.                                               |
 | fediverse.manage-blocks | Kan blokkera folk og domene på allheimen frå å samhandla med Castopod. |
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
 
-## 2. Roller og løyve pr. podkast
+## 2. Per podcast roles and permissions
 
 ### Roller pr. podkast
 
-{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role          | description                                                        | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +52,11 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 | Skapar        | Styrer innhald for podkasten #\{id\}, men kan ikkje publisera dei. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Gjest         | Vanleg bidragsytar til podkasten #\{id\}.                          | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/* AUTH-PODCAST-ROLES-LIST:END */}
+{/_ AUTH-PODCAST-ROLES-LIST:END _/}
 
 ### Løyve pr. podkast
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission                   | description                                                                |
 | ---------------------------- | -------------------------------------------------------------------------- |
@@ -81,4 +80,4 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 | episodes.manage-publications | Kan publisera og avpublisera episodar og innlegg for podkasten #\{id\}.    |
 | episodes.manage-comments     | Kan skriva og sletta kommentarar til episodane av podkasten #\{id\}.       |
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}

@@ -23,7 +23,7 @@ return [
     'comments' => 'コメント',
     'activity' => 'アクティビティ',
     'chapters' => '章',
-    'transcript' => 'Transcript',
+    'transcript' => '文字起こし',
     'description' => 'エピソードの詳細',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
@@ -43,7 +43,7 @@ return [
         'publish' => '公開する',
         'publish_edit' => '出版物を編集',
     ],
-    'no_chapters' => 'No chapters are available for this episode.',
-    'download_transcript' => 'Download transcript ({extension})',
-    'no_transcript' => 'No transcript available for this episode.',
+    'no_chapters' => 'このエピソードにはチャプターがありません。',
+    'download_transcript' => '文字起こしをダウンロード ({extension})',
+    'no_transcript' => 'このエピソードには文字起こしがありません。',
 ];

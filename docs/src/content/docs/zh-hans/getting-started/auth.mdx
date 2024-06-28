@@ -3,7 +3,7 @@ title: 验证 & 授权
 ---
 
 Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规则。 角色和权限
-在两个级别上定义：
+在两个级别上定义： Roles and permissions are defined at two levels:
 
 1. [实例范围](#1-instance-wide-roles-and-permissions)
 2. [每个播客](#2-per-podcast-roles-and-permissions)
@@ -12,19 +12,19 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 
 ### 实例角色
 
-{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role       | description                  | permissions                                                                                |
 | ---------- | ---------------------------- | ------------------------------------------------------------------------------------------ |
 | 超级管理员 | 拥有对 Castopod 的完全控制。 | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | 管理       | 管理 Castopod 的内容。       | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| 播客       | Castopod 的普通用户。        | admin.access                                                                               |
+| Podcaster  | Castopod 的普通用户。        | admin.access                                                                               |
 
-{/* AUTH-INSTANCE-ROLES-LIST:END */}
+{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
 
 ### 实例权限
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission              | description                                 |
 | ----------------------- | ------------------------------------------- |
@@ -38,13 +38,13 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 | podcasts.import         | 可以导入播客。                              |
 | fediverse.manage-blocks | 可以阻止联邦宇宙参与者/域与 Castopod 交互。 |
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
 
 ## 2. 每个播客角色与权限
 
 ### 每个播客角色
 
-{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role   | description                           | permissions                                                                                                                                                                                                                                                                                 |
 | ------ | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +53,11 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 | 作者   | 管理播客 #\{id\} 的内容，但不能发布。 | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | 访客   | 播客 #\{id\} 的普通贡献者。           | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/* AUTH-PODCAST-ROLES-LIST:END */}
+{/_ AUTH-PODCAST-ROLES-LIST:END _/}
 
 ### 每个播客权限
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission                   | description                                           |
 | ---------------------------- | ----------------------------------------------------- |
@@ -81,4 +81,4 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 | episodes.manage-publications | 可以发布/取消发布播客 #\{id\} 的剧集和帖子。          |
 | episodes.manage-comments     | 可以创建/删除播客 #\{id\} 的剧集评论。                |
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}

@@ -8,15 +8,6 @@ Castopod foi pensado para ser fácil de instalar. Seja usando hospedagem dedicad
 ou compartilhada, você pode instalá-lo na maioria dos servidores web compatíveis
 com PHP-MySQL.
 
-<Aside>
-
-Nós lançamos imagens Docker oficiais para Castopod!
-
-Se você prefere usar o Docker, você pode pular isso e ir direto para a
-[documentação docker](./docker.md) de Castopod.
-
-</Aside>
-
 ## Requisitos
 
 - PHP v8.1 or higher
@@ -120,6 +111,7 @@ based on the `.env.example` file.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -155,9 +147,9 @@ email.SMTPPass="your_smtp_password"
 
 #### Configurar opções de e-mail
 
-| Nome da variável | Tipo                 | Padrão       |
+| Variable name    | Type                 | Default      |
 | ---------------- | -------------------- | ------------ |
-| **`fromEmail`**  | string               | `indefinido` |
+| **`fromEmail`**  | string               | `undefined`  |
 | **`fromName`**   | string               | `"Castopod"` |
 | **`SMTPHost`**   | string               | `undefined`  |
 | **`SMTPUser`**   | string               | `undefined`  |

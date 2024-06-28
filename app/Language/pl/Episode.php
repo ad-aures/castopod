@@ -14,7 +14,7 @@ return [
     'number' => 'Odcinek {episodeNumber}',
     'number_abbr' => 'Odc. {episodeNumber}',
     'season_episode' => 'Sezon {seasonNumber} odcinek {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}:O{episodeNumber}',
+    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
         one {# osoba}
         few {# osoby}
@@ -24,8 +24,8 @@ return [
     'back_to_episodes' => 'Wróć do odcinków {podcast}',
     'comments' => 'Komentarze',
     'activity' => 'Aktywność',
-    'chapters' => 'Chapters',
-    'transcript' => 'Transcript',
+    'chapters' => 'Rozdziały',
+    'transcript' => 'Transkrypcja',
     'description' => 'Opis odcinka',
     'number_of_comments' => '{numberOfComments, plural,
         one {# komentarz}
@@ -33,7 +33,7 @@ return [
         other {# komentarzy}
     }',
     'all_podcast_episodes' => 'Wszystkie odcinki podcastu',
-    'back_to_podcast' => 'Wróć do podkastu',
+    'back_to_podcast' => 'Wróć do podcastu',
     'preview' => [
         'title' => 'Podgląd',
         'not_published' => 'Nieopublikowany',
@@ -46,7 +46,7 @@ return [
         'publish' => 'Opublikuj',
         'publish_edit' => 'Edytuj publikację',
     ],
-    'no_chapters' => 'No chapters are available for this episode.',
-    'download_transcript' => 'Download transcript ({extension})',
-    'no_transcript' => 'No transcript available for this episode.',
+    'no_chapters' => 'Brak dostępnych rozdziałów dla tego odcinka.',
+    'download_transcript' => 'Pobierz transkrypcję ({extension})',
+    'no_transcript' => 'Brak transkrypcji dla tego odcinka.',
 ];

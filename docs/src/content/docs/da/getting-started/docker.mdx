@@ -12,8 +12,8 @@ izrade:
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server):
   Nginx konfiguracija za Castopod
 
-Pored toga, Castopod zahteva MySQL kompatibilnu bazu podataka. Redis baza
-podataka može se dodati kao obrađivač keša.
+Additionally, Castopod requires a MySQL-compatible database. A Redis database
+can be added as a cache handler.
 
 ## Podržani tagovi
 
@@ -24,86 +24,87 @@ podataka može se dodati kao obrađivač keša.
 
 ## Primer upotrebe
 
-1.  Instalirajte [docker](https://docs.docker.com/get-docker/) i
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  Napravite `docker-compose.yml` datoteku sa sledećim:
+1. Instalirajte [docker](https://docs.docker.com/get-docker/) i
+   [docker-compose](https://docs.docker.com/compose/install/)
 
-    ```yml
-    version: "3.7"
+2. Napravite `docker-compose.yml` datoteku sa sledećim:
 
-    services:
-      app:
-        image: castopod/castopod:latest
-        container_name: "castopod-app"
-        volumes:
-          - castopod-media:/var/www/castopod/public/media
-        environment:
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod.example.com"
-          CP_ANALYTICS_SALT: changeme
-          CP_CACHE_HANDLER: redis
-          CP_REDIS_HOST: redis
-        networks:
-          - castopod-app
-          - castopod-db
-        ports:
-          - 8000:8000
-        restart: unless-stopped
+   ```yml
+   version: "3.7"
 
-      mariadb:
-        image: mariadb:10.5
-        container_name: "castopod-mariadb"
-        networks:
-          - castopod-db
-        volumes:
-          - castopod-db:/var/lib/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: changeme
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-        restart: unless-stopped
+   services:
+     app:
+       image: castopod/castopod:latest
+       container_name: "castopod-app"
+       volumes:
+         - castopod-media:/var/www/castopod/public/media
+       environment:
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+         CP_BASEURL: "https://castopod.example.com"
+         CP_ANALYTICS_SALT: changeme
+         CP_CACHE_HANDLER: redis
+         CP_REDIS_HOST: redis
+       networks:
+         - castopod-app
+         - castopod-db
+       ports:
+         - 8000:8000
+       restart: unless-stopped
 
-      redis:
-        image: redis:7.0-alpine
-        container_name: "castopod-redis"
-        volumes:
-          - castopod-cache:/data
-        networks:
-          - castopod-app
+     mariadb:
+       image: mariadb:10.5
+       container_name: "castopod-mariadb"
+       networks:
+         - castopod-db
+       volumes:
+         - castopod-db:/var/lib/mysql
+       environment:
+         MYSQL_ROOT_PASSWORD: changeme
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+       restart: unless-stopped
 
-    volumes:
-      castopod-media:
-      castopod-db:
-      castopod-cache:
+     redis:
+       image: redis:7.0-alpine
+       container_name: "castopod-redis"
+       volumes:
+         - castopod-cache:/data
+       networks:
+         - castopod-app
 
-    networks:
-      castopod-app:
-      castopod-db:
-    ```
+   volumes:
+     castopod-media:
+     castopod-db:
+     castopod-cache:
 
-    Morate prilagoditi neke varijable svojim potrebama (npr. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+   networks:
+     castopod-app:
+     castopod-db:
+   ```
 
-3.  Podesite obrnuti proksi za TLS (SSL/HTTPS)
+   Morate prilagoditi neke varijable svojim potrebama (npr. `CP_BASEURL`,
+   `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
 
-    TLS je obavezan da bu ActivityPub radio. Ovaj posao se lako može obaviti
-    obrnutim proksijem, na primer sa [Caddy-ijem](https://caddyserver.com/):
+3. Podesite obrnuti proksi za TLS (SSL/HTTPS)
 
-    ```
-    #castopod
-    castopod.example.com {
-        reverse_proxy localhost:8000
-    }
-    ```
+   TLS is mandatory for ActivityPub to work. This job can easily be handled by
+   a reverse proxy, for example with [Caddy](https://caddyserver.com/):
 
-4.  Pokrenite `docker-compose up -d`, sačekajte da se pokrene i idite na
-    `https://castopod.example.com/cp-install` da biste završili instalaciju
-    Castopod-a!
+   ```
+   #castopod
+   castopod.example.com {
+       reverse_proxy localhost:8000
+   }
+   ```
 
-5.  Sve je spremno, započnite sa podkastingom! 🎙️🚀
+4. Pokrenite `docker-compose up -d`, sačekajte da se pokrene i idite na
+   `https://castopod.example.com/cp-install` da biste završili instalaciju
+   Castopod-a!
+
+5. You're all set, start podcasting! 🎙️🚀
 
 ## Promenljive okruženja
 

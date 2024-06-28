@@ -24,7 +24,7 @@ return [
     'comments' => 'Kommentare',
     'activity' => 'Aktivitäten',
     'chapters' => 'Kapitel',
-    'transcript' => 'Transcript',
+    'transcript' => 'Protokoll',
     'description' => 'Beschreibung der Episode',
     'number_of_comments' => '{numberOfComments, plural,
         one {# Kommentar}
@@ -45,6 +45,6 @@ return [
         'publish_edit' => 'Veröffentlichung bearbeiten',
     ],
     'no_chapters' => 'Für diese Episode sind keine Kapitel verfügbar.',
-    'download_transcript' => 'Download transcript ({extension})',
-    'no_transcript' => 'No transcript available for this episode.',
+    'download_transcript' => 'Protokoll herunterladen ({extension})',
+    'no_transcript' => 'Für diese Episode ist kein Protokoll verfügbar.',
 ];

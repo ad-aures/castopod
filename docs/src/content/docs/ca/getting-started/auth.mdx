@@ -12,7 +12,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 ### Instance roles
 
-{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role                | description                          | permissions                                                                                |
 | ------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
@@ -20,11 +20,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | Administrador       | Administra el contingut de Castopod. | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
 | Podcaster           | Usos generals de Castopod.           | admin.access                                                                               |
 
-{/* AUTH-INSTANCE-ROLES-LIST:END */}
+{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
 
 ### Instance permissions
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission              | description                                                          |
 | ----------------------- | -------------------------------------------------------------------- |
@@ -38,13 +38,13 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | podcasts.import         | Pot importar pòdcasts.                                               |
 | fediverse.manage-blocks | Pot evitar que actors/dominis del fedivers interactuen amb Castopod. |
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
 
 ## 2. Per podcast roles and permissions
 
 ### Per podcast roles
 
-{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role          | description                                                          | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +53,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | Autor         | Administra el contingut del podcast #\{id\} però no el pot publicar. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Convidat      | Col·laborador general del podcast #\{id\}.                           | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/* AUTH-PODCAST-ROLES-LIST:END */}
+{/_ AUTH-PODCAST-ROLES-LIST:END _/}
 
 ### Per podcast permissions
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission                   | description                                                                                                            |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -81,4 +81,4 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | episodes.manage-publications | Pot publicar/anul·lar la publicació d'episodis i publicacions del pòdcast #\{id\}.                                     |
 | episodes.manage-comments     | Pot crear/eliminar comentaris d'episodi del pòdcast #\{id\}.                                                           |
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}

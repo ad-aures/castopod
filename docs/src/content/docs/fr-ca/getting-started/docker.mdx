@@ -33,9 +33,9 @@ can be added as a cache handler.
    version: "3.7"
 
    services:
-     app:
+     castopod:
        image: castopod/castopod:latest
-       container_name: "castopod-app"
+       container_name: "castopod"
        volumes:
          - castopod-media:/var/www/castopod/public/media
        environment:
@@ -48,14 +48,14 @@ can be added as a cache handler.
          CP_REDIS_HOST: redis
          CP_REDIS_PASSWORD: changeme
        networks:
-         - castopod-app
+         - castopod
          - castopod-db
        ports:
          - 8000:8000
        restart: unless-stopped
 
      mariadb:
-       image: mariadb:10.5
+       image: mariadb:11.2
        container_name: "castopod-mariadb"
        networks:
          - castopod-db
@@ -69,13 +69,13 @@ can be added as a cache handler.
        restart: unless-stopped
 
      redis:
-       image: redis:7.0-alpine
+       image: redis:7.2-alpine
        container_name: "castopod-redis"
        command: --requirepass changeme
        volumes:
          - castopod-cache:/data
        networks:
-         - castopod-app
+         - castopod
 
    volumes:
      castopod-media:
@@ -83,7 +83,7 @@ can be added as a cache handler.
      castopod-cache:
 
    networks:
-     castopod-app:
+     castopod:
      castopod-db:
    ```
 
@@ -98,7 +98,7 @@ can be added as a cache handler.
    ```
    #castopod
    castopod.example.com {
-       reverse_proxy localhost:8000
+   	reverse_proxy localhost:8000
    }
    ```
 

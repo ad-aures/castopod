@@ -8,15 +8,6 @@ Castopod ist für eine einfache Installation konzipiert. Ob dediziertes oder
 Shared-Hosting, du kannst es auf den meisten PHP-MySQL-kompatiblen Webservern
 installieren.
 
-<Aside>
-
-Wir haben offizielle Docker Images für Castopod veröffentlicht!
-
-Wenn du Docker bevorzugst, kannst du die manuelle Anleitung überspringen und
-direkt zur [Docker-Dokumentation](./docker.md) für Castopod gehen.
-
-</Aside>
-
 ## Voraussetzungen
 
 - PHP v8.1 oder höher
@@ -122,6 +113,7 @@ erstellen und bearbeiten basierend auf der `.env.example` Datei.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -136,7 +128,7 @@ erstellen und bearbeiten basierend auf der `.env.example` Datei.
 
 4. Head on to your admin gateway to start podcasting!
 
-### Email/SMTP Setup
+### E-Mail-Konfigurationsoptionen
 
 E-Mail-Konfiguration ist erforderlich, damit einige Funktionen ordnungsgemäß
 funktionieren (zB. das Abrufen Ihres vergessenen Passworts, das Senden von
@@ -155,7 +147,7 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### E-Mail-Konfigurationsoptionen
+#### Email/SMTP Setup
 
 | Variablennamen   | Typ                  | Voreinstellung |
 | ---------------- | -------------------- | -------------- |
@@ -170,7 +162,8 @@ email.SMTPPass="your_smtp_password"
 ### Media storage
 
 Standardmäßig werden Dateien im Ordner `public/media` über das Dateisystem
-gespeichert. Wenn Sie den Ordner `media` an einen anderen Ort verlegen müssen,
+gespeichert.
+Wenn Sie den Ordner `media` an einen anderen Ort verlegen müssen,
 können Sie es in Ihrer `.env` Datei angeben wie unten gezeigt:
 
 ```ini
@@ -180,8 +173,7 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-In diesem Beispiel werden die Dateien im Ordner /mnt/storage/media gespeichert.
-Stellen Sie sicher, dass Sie auch Ihre Webserver-Konfiguration aktualisieren, um
+In diesem Beispiel werden die Dateien im Ordner /mnt/storage/media gespeichert. Stellen Sie sicher, dass Sie auch Ihre Webserver-Konfiguration aktualisieren, um
 diese Änderung wiederzugeben.
 
 ### S3

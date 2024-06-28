@@ -7,16 +7,7 @@ import { Aside } from "@astrojs/starlight/components";
 Castopod was thought-out to be easy to install. Whether using dedicated or
 shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-<Aside>
-
-We've released official Docker images for Castopod!
-
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
-
-</Aside>
-
-## Vereisten
+## Requirements
 
 - PHP v8.1 or higher
 - MySQL version 5.7 or higher or MariaDB version 10.2 or higher
@@ -104,7 +95,7 @@ want to generate Video Clips. The following extensions must be installed:
 1. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
-3. Begin met podcasting!
+3. Start podcasting!
 
 <Aside>
 
@@ -117,6 +108,7 @@ based on the `.env.example` file.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -148,19 +140,19 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### E-mail configuratieopties
+#### Email config options
 
-| De naam van de variabele | Soort                | Standaard          |
-| ------------------------ | -------------------- | ------------------ |
-| **`fromEmail`**          | string               | `niet gedefineerd` |
-| **`fromName`**           | string               | `"Castopod"`       |
-| **`SMTPHost`**           | tekenreeks           | `niet gedefineerd` |
-| **`SMTPUser`**           | tekenreeks           | `niet gedefineerd` |
-| **`SMTPPass`**           | tekenreeks           | `niet gedefineerd` |
-| **`SMTPPort`**           | nummer               | `25`               |
-| **`SMTPCrypto`**         | [`"tls"` or `"ssl"`] | `"tls"`            |
+| Variable name    | Type                 | Default      |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
-### Mediaopslag
+### Media storage
 
 By default, files are saved to the `public/media` folder using the file system.
 If you need to relocate the `media` folder to a different location, you can
@@ -193,16 +185,16 @@ media.s3.region="your_s3_region"
 
 #### S3 config options
 
-| Variable name           | Type       | Default            |
-| ----------------------- | ---------- | ------------------ |
-| **`endpoint`**          | string     | `undefined`        |
-| **`key`**               | string     | `undefined`        |
-| **`secret`**            | tekenreeks | `niet gedefineerd` |
-| **`region`**            | tekenreeks | `niet gedefineerd` |
-| **`bucket`**            | tekenreeks | `castopod`         |
-| **`protocol`**          | nummer     | `niet gedefineerd` |
-| **`pathStyleEndpoint`** | boolean    | `onwaar`           |
-| **`keyPrefix`**         | tekenreeks | `niet gedefineerd` |
+| Variable name           | Type    | Default     |
+| ----------------------- | ------- | ----------- |
+| **`endpoint`**          | string  | `undefined` |
+| **`key`**               | string  | `undefined` |
+| **`secret`**            | string  | `undefined` |
+| **`region`**            | string  | `undefined` |
+| **`bucket`**            | string  | `castopod`  |
+| **`protocol`**          | number  | `undefined` |
+| **`pathStyleEndpoint`** | boolean | `false`     |
+| **`keyPrefix`**         | string  | `undefined` |
 
 ## Community packages
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'O CastoPod',
+    'title' => 'O Castopod',
     'host_name' => 'Nazwa hosta',
     'version' => 'Wersja Castopod',
     'php_version' => 'Wersja PHP',

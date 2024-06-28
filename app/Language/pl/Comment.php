@@ -31,5 +31,5 @@ return [
     'view_replies' => 'Zobacz odpowiedzi ({numberOfReplies})',
     'block_actor' => 'Zablokuj użytkownika @{actorUsername}',
     'block_domain' => 'Zablokuj domenę @{actorDomain}',
-    'delete' => 'usuń komentarz',
+    'delete' => 'Usuń komentarz',
 ];

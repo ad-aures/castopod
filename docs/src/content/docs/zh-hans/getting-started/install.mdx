@@ -4,17 +4,8 @@ title: 如何安装 Castopod ？
 
 import { Aside } from "@astrojs/starlight/components";
 
-Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服务器上安装 Castopod，
-无论是专用还是 共享主机。
-
-<Aside>
-
-我们已经发布 Castopod 的官方 Docker 镜像！
-
-如果你更喜欢使用 Docker，则可以跳过此步骤，直接前往 Castopod 的
-[Docker 文档](./docker.md)。
-
-</Aside>
+Castopod was thought-out to be easy to install. Whether using dedicated or
+shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
 ## 要求
 
@@ -44,15 +35,9 @@ PHP version 8.1 or higher is required, with the following extensions installed:
 
 > 我们建议使用 [MariaDB](https://mariadb.org)。
 
-<Aside>
-
-Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。 例如，MySQL 5.6 已
-经不受支持，因为它于 2021 年 2 月 5 日已停止更新。
-
-</Aside>
-
 你需要填写服务器主机名、数据库名称、用户名和密码才能完成安装过程。 如果没有这
-些，请与你的服务器管理员联系。
+些，请与你的服务器管理员联系。 If you do not have these, please contact your
+server administrator.
 
 #### 权限
 
@@ -62,7 +47,7 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 ### （可选）FFmpeg v4.1.8 或更高版本，用于视频素材
 
 如果你需要视频素材，则需要 [FFFmpeg](https://www.ffmpeg.org/) 4.1.8 或更高版本。
-必须安装以下扩展：
+必须安装以下扩展： The following extensions must be installed:
 
 - **FreeType 2** 来自库
   [gd](https://www.php.net/manual/en/image.installation.php)
@@ -75,7 +60,7 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 
 ## 安装说明
 
-### 准备环境
+### Pre-requisites
 
 0. 需要一台已经实现 [环境要求](#requirements)的 Web 服务器
 1. 为 Castopod 创建一个 MySQL 数据库，其中用户具有访问和修改权限（有关详细信息，
@@ -107,7 +92,7 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 
 <Aside>
 
-安装脚本将会在根目录中创建一个 `.env` 文件并写入数据。 如果你不能执行安装向导，
+The install script writes a `.env` file in the package root. 安装脚本将会在根目录中创建一个 `.env` 文件并写入数据。 如果你不能执行安装向导，
 那么可以基于 `.env.example` 文件手动创建和编辑 `.env` 文件。
 
 </Aside>
@@ -115,6 +100,7 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -160,6 +146,7 @@ email.SMTPPass="你的邮件密码"
 
 ### 媒体存储
 
+By default, files are saved to the `public/media` folder using the file system.
 默认情况下，文件使用文件系统保存到 `公共/媒体` 文件夹中。 如果您需要将 `media`
 文件夹重新定位到其他位置，您可以在您的 `.env` 文件中指定它，如下所示：
 
@@ -170,8 +157,8 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-在此示例中，文件将保存到 /mnt/storage/media 文件夹。 请确保同时更新您的 Web 服务
-器配置以应用此更改。
+In this example, the files will be saved to the /mnt/storage/media folder. Make
+sure to also update your web server configuration to reflect this change.
 
 ### S3
 
@@ -207,7 +194,8 @@ media.s3.region="your_s3_region"
 ### 使用 YunoHost 安装
 
 [YunoHost](https://yunohost.org/) 是一个基于 Debian GNU/Linux 的发行版，由免费和
-开源软件包组成。 它可以为你解决自托管的困难。
+开源软件包组成。 它可以为你解决自托管的困难。 It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 

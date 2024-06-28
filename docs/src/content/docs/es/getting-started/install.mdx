@@ -8,15 +8,6 @@ Castopod está pensado para ser fácil de instalar. Ya sea usando un alojamiento
 dedicado o compartido, puedes instalarlo en la mayoría de servidores web
 compatibles con PHP-MySQL.
 
-<Aside>
-
-¡Hemos publicado imágenes oficiales de Docker para Castopod!
-
-Si prefieres usar Docker, puedes saltarte esto e ir directamente a la
-[documentación sobre docker](./docker.md) para Castopod.
-
-</Aside>
-
 ## Requisitos
 
 - PHP v8.1 or higher
@@ -120,6 +111,7 @@ manually based on the `.env.example` file.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -134,7 +126,7 @@ manually based on the `.env.example` file.
 
 4. Head on to your admin gateway to start podcasting!
 
-### Configuración de Correo Electrónico/SMTP
+### Email/SMTP setup
 
 La configuración del correo electrónico es necesaria para que algunas
 características funcionen correctamente (por ejemplo, recuperar su contraseña
@@ -152,17 +144,17 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### Opciones de configuración de email
+#### Configuración de Correo Electrónico/SMTP
 
-| Nombre de la variable | Tipo                 | Predeterminado |
-| --------------------- | -------------------- | -------------- |
-| **`fromEmail`**       | string               | `undefined`    |
-| **`fromName`**        | string               | `"Castopod"`   |
-| **`SMTPHost`**        | string               | `undefined`    |
-| **`SMTPUser`**        | string               | `undefined`    |
-| **`SMTPPass`**        | string               | `undefined`    |
-| **`SMTPPort`**        | number               | `25`           |
-| **`SMTPCrypto`**      | [`"tls"` or `"ssl"`] | `"tls"`        |
+| Nombre de variable | Type                 | Default      |
+| ------------------ | -------------------- | ------------ |
+| **`fromEmail`**    | string               | `undefined`  |
+| **`fromName`**     | string               | `"Castopod"` |
+| **`SMTPHost`**     | string               | `undefined`  |
+| **`SMTPUser`**     | string               | `undefined`  |
+| **`SMTPPass`**     | string               | `undefined`  |
+| **`SMTPPort`**     | number               | `25`         |
+| **`SMTPCrypto`**   | [`"tls"` or `"ssl"`] | `"tls"`      |
 
 ### Media storage
 
@@ -197,7 +189,7 @@ media.s3.region="your_s3_region"
 
 #### S3 config options
 
-| Nombre de variable      | Type    | Default     |
+| Nombre de la variable   | Type    | Default     |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |

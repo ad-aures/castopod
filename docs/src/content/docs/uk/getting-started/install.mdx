@@ -4,150 +4,135 @@ title: Kako Instalirati Castopod?
 
 import { Aside } from "@astrojs/starlight/components";
 
-Zamišljeno je da Castopod bude jednostavan za instalaciju. Bilo da se koristi
-namenski ili deljeni hosting, možete ga instalirati na većinu PHP-MySQL
-kompatibilnih veb servera.
+Castopod was thought-out to be easy to install. Whether using dedicated or
+shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-<Aside>
+## Requirements
 
-Objavili smo zvanične Docker slike za Castopod!
+- PHP v8.1 or higher
+- MySQL version 5.7 or higher or MariaDB version 10.2 or higher
+- HTTPS support
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
-Ako više volite da koristite Docker, možete ovo preskočiti i preći direktno na
-[docker dokumentaciju](./docker.md) za Castopod.
+### PHP v8.1 or higher
 
-</Aside>
-
-## Uslovi
-
-- PHP v8.1 ili novija verzija
-- MySQL verzija 5.7 ili novija ili MariaDB verzija 10.2 ili novija
-- HTTPS podrška
-- [ntp-sinhronizovani sat](https://viki.debian.org/NTP) za potvrdu dolaznih
-  zahteva federacije
-
-### PHP v8.1 ili kasnija verzija
-
-Potrebna je PHP verzija 8.1 ili novija, sa instaliranim sledećim ekstenzijama:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) sa **JPEG**,
-  **PNG** i **WEBP** bibliotekama.
+- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
+  **PNG** and **WEBP** libraries.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Pored toga, uverite se da su sledeće ekstenzije omogućene u vašem PHP-u:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (podrazumevano omogućeno - ne isključujte ga)
-- xml (podrazumevano omogućeno - ne isključujte ga)
+- json (enabled by default - don't turn it off)
+- xml (enabled by default - don't turn it off)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### MySQL kompatibilne baze podataka
+### MySQL compatible database
 
-> Preporučujemo korišćenje [MariaDB](https://mariadb.org).
+> We recommend using [MariaDB](https://mariadb.org).
 
-<Aside>
+You will need the server hostname, database name, username and password to
+complete the installation process. If you do not have these, please contact your
+server administrator.
 
-Castopod radi samo sa podržanim MySQL 5.7 ili novijim kompatibilnim bazama
-podataka. Kvari se na MySQL v5.6 na primer, jer je njen životni vek istekao 5.
-februara 2021.
+#### Privileges
 
-</Aside>
+User must have at least these privileges on the database for Castopod to work:
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
+`REFERENCES`, `CREATE VIEW`.
 
-Trebaće vam ime servera, ime baze podataka, korisničko ime i lozinka za završite
-proces instalacije. Ako ih nemate, obratite se svom administratoru servera.
+### (Optional) FFmpeg v4.1.8 or higher for Video Clips
 
-#### Privilegije
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
+want to generate Video Clips. The following extensions must be installed:
 
-Korisnik mora imati najmanje ove privilegije u bazi podataka da bi Castopod
-radio: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`,
-`UPDATE`, `REFERENCES`, `CREATE VIEW`.
-
-### (Opciono) FFmpeg v4.1.8 ili kasnija verzija za video isečke
-
-[FFmpeg](https://www.ffmpeg.org/) verzija 4.1.8 ili kasnija je neophodna ukoliko
-želite da pravite video isečke. Sledeće ekstenzije moraju biti instalirane:
-
-- **FreeType 2** biblioteka za
+- **FreeType 2** library for
   [gd](https://www.php.net/manual/en/image.installation.php).
 
-### (Opciono) Ostale preporuke
+### (Optional) Other recommendations
 
-- Redis za bolje performanse keša.
-- CDN za keširanje statičnih datoteka i bolje performanse.
-- e-mail gateway za izgubljene lozinke.
+- Redis for better cache performances.
+- CDN for static files caching and better performances.
+- e-mail gateway for lost passwords.
 
-## Uputstva za instalaciju
+## Privilegije
 
-### Preduslovi
+### Pre-requisites
 
-0. Nabavite veb server sa instaliranim [preduslovima](#requirements)
-1. Napravite MySQL bazu podataka za Castopod sa korisnikom koji ima pristup i
-   privilegije da modifikuje (za više informacija, pogledajte
-   [MySQL kompatibilna baza podataka](#mysql-compatible-database)).
-2. Aktivirajte HTTPS na vašem domenu sa _SSL sertifikatom_.
-3. Preuzmite i otpakujte najnoviji [Castopod Paket](https://castopod.org/) na
-   veb server ako to već niste uradili.
-   - ⚠️ Podesite root dokument veb servera na `public/` poddirektorijum u okviru
-     `castopod` direktorijuma.
-4. Dodajte **cron zadatke** na vašem veb serveru za različite zadatke u pozadini
-   (zamenite staze u skladu sa tim):
+0. Get a Web Server with [requirements](#requirements) installed
+1. Create a MySQL database for Castopod with a user having access and
+   modification privileges (for more info, see
+   [MySQL compatible database](#mysql-compatible-database)).
+2. Activate HTTPS on your domain with an _SSL certificate_.
+3. Download and unzip the latest [Castopod Package](https://castopod.org/) onto
+   the web server if you haven’t already.
+   - ⚠️ Set the web server document root to the `public/` sub-folder within the
+     `castopod` folder.
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
    ```bash
       * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   **Pažnja** - ukoliko ne dodate ovaj cron zadatak, sledeće opcije Castopod-a
-   neće raditi:
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   - Uvoz podkasta iz postojeće RSS veze
-   - Objava društvenih aktivnosti vašim pratiocima u Fediverzumu
-   - Objava epizoda u otvorenim hub-ovima uz pomoć
-     [WebSub-a](https://en.wikipedia.org/wiki/WebSub)
-   - Pravljenje video isečaka -
-     [zahteva FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
-### (preporučeno) Čarobnjak za instalaciju
+### (recommended) Install Wizard
 
-1. Pokrenite Castopod-ovu instalacionu skriptu tako što ćete otići na stranicu
-   čarobnjaka za instalaciju (`https://your_domain_name.com/cp-install`) u važem
-   omiljenom pretraživaču.
-2. Pratite uputstva na ekranu.
-3. Počnite sa podkastingom!
+1. **FreeType 2** biblioteka za
+   [gd](https://www.php.net/manual/en/image.installation.php).
+2. Follow the instructions on your screen.
+3. Start podcasting!
 
 <Aside>
 
-Instalaciona skripta upisuje `.env` datoteku u root paketa. Ukoliko ne možete da
-prođete kroz čarobnjaka za instalaciju, možete sami napraviti i urediti `.env`
-datoteku ručno po uzoru na `.env.example` datoteku.
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can create and edit the `.env` file manually
+based on the `.env.example` file.
 
 </Aside>
 
-### Korišćenje CLI
+### Preduslovi
 
-1. Napravite `.env` datoteku u root-u paketa, po uzoru na `.env.example`
-   datoteku.
-2. Inicirajte bazu podataka koristeći:
+1. Nabavite veb server sa instaliranim [preduslovima](#requirements)
+
+2. Napravite MySQL bazu podataka za Castopod sa korisnikom koji ima pristup i
+   privilegije da modifikuje (za više informacija, pogledajte
+   [MySQL kompatibilna baza podataka](#mysql-compatible-database)).
 
    ```sh
    php spark install:init-database
    ```
 
-3. Napravite super administratora koristeći:
+3. Aktivirajte HTTPS na vašem domenu sa _SSL sertifikatom_.
 
    ```sh
    php spark install:create-superadmin
    ```
 
-4. Idite na vaš administratorski pristup i krenite sa podkastingom!
+4. Preuzmite i otpakujte najnoviji [Castopod Paket](https://castopod.org/) na
+   veb server ako to već niste uradili.
 
-### Podešavanja Elektronske pošte/SMTP-a
+### (preporučeno) Čarobnjak za instalaciju
 
-Podešavanja elektronske pošte su potrebna kako bi neke opcije radile kako treba
-(npr. povratak izgubljene lozinke, slanje uputstava premijum pretplatnicima, …)
+Email configuration is required for some features to work properly (eg.
+retrieving your forgotten password, sending instructions to premium subscribers,
+…)
 
-Možete dodati konfiguraciju elektronske pošte u vašu `.env` datoteku instance na
-sledeći način:
+You may add your email configuration in your instance's `.env` like so:
 
 ```ini
 # […]
@@ -158,24 +143,23 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### Opcije konfigurisanja elektronske pošte
+#### Email config options
 
-| Naziv promenljive | Vrsta                 | Podrazumevano  |
-| ----------------- | --------------------- | -------------- |
-| **`fromEmail`**   | string                | `nedefinisano` |
-| **`fromName`**    | string                | `"Castopod"`   |
-| **`SMTPHost`**    | string                | `nedefinisano` |
-| **`SMTPUser`**    | string                | `nedefinisano` |
-| **`SMTPPass`**    | string                | `nedefinisano` |
-| **`SMTPPort`**    | number                | `25`           |
-| **`SMTPCrypto`**  | [`"tls"` ili `"ssl"`] | `"tls"`        |
+| Variable name    | Type                 | Default      |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
-### Multimedijalno skladište
+### Media storage
 
-Podrazumevano, datoteke se čuvaju u `public/media` direktorijumu koristeći
-sistem datoteka. Ukoliko želite da prebacite `media` direktorijum na drugo
-mesto, možete to odrediti u svojoj `.env` datoteci na način koji je prikazan
-ispod:
+By default, files are saved to the `public/media` folder using the file system.
+If you need to relocate the `media` folder to a different location, you can
+specify it in your `.env` file as shown below:
 
 ```ini
 # […]
@@ -184,14 +168,13 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-U ovom primeru, datoteke će biti sačuvane u /mnt/storage/media direktorijumu.
-Obavezno ažurirajte konfiguraciju svog veb servera kako biste odrazili ovu
-promenu.
+In this example, the files will be saved to the /mnt/storage/media folder. Make
+sure to also update your web server configuration to reflect this change.
 
 ### S3
 
-Ako više volite da čuvate svoje medijske datoteke na S3 kompatibilnom skladištu,
-možete da ga navedete u svojoj `.env` datoteci:
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
 
 ```ini
 # […]
@@ -203,29 +186,29 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### Opcije konfigurisanja S3 skladišta
+#### Multimedijalno skladište
 
-| Naziv promenljive       | Vrsta   | Podrazumevano  |
-| ----------------------- | ------- | -------------- |
-| **`endpoint`**          | string  | `nedefinisano` |
-| **`key`**               | string  | `nedefinisano` |
-| **`secret`**            | string  | `nedefinisano` |
-| **`region`**            | string  | `nedefinisano` |
-| **`bucket`**            | string  | `castopod`     |
-| **`protocol`**          | number  | `nedefinisano` |
-| **`pathStyleEndpoint`** | boolean | `false`        |
-| **`keyPrefix`**         | string  | `nedefinisano` |
+| Variable name           | Type    | Default     |
+| ----------------------- | ------- | ----------- |
+| **`endpoint`**          | string  | `undefined` |
+| **`key`**               | string  | `undefined` |
+| **`secret`**            | string  | `undefined` |
+| **`region`**            | string  | `undefined` |
+| **`bucket`**            | string  | `castopod`  |
+| **`protocol`**          | number  | `undefined` |
+| **`pathStyleEndpoint`** | boolean | `false`     |
+| **`keyPrefix`**         | string  | `undefined` |
 
-## Paketi iz zajednice
+## Community packages
 
-Ukoliko ne želite da sami instalirate Castopod ručno, moežete iskoristiti jedan
-od paketa koji je napravila i o kome brine zajednica otvorenog koda.
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
-### Instalirajte sa YunoHost-om
+### Install with YunoHost
 
-[YunoHost](https://yunohost.org/) je je distribucija zasnovana na Debian
-GNU/Linux-u sačinjena od besplatnih softverskih paketa otvorenog koda. Ona
-upravlja teškoćama samo-hostovanje za vas.
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 
@@ -236,7 +219,7 @@ upravlja teškoćama samo-hostovanje za vas.
 >
   <img
     src="https://install-app.yunohost.org/install-with-yunohost.svg"
-    alt="Instalirajte Castopod sa YunoHost-om"
+    alt="Install Castopod with YunoHost"
     class="align-middle"
   />
 </a>
