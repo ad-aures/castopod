@@ -7,10 +7,11 @@ import type { Props } from '@astrojs/starlight/props';
     <Select
 		icon="starlight"
 		label="version"
-		value="develop"
+		value="main"
 		options={[
-			{ label: 'develop', selected: import.meta.env.BASE_URL === '/develop', value: '/develop' },
-			{ label: 'next', selected: import.meta.env.BASE_URL === '/next', value: '/next' },
+			{ label: 'latest', selected: import.meta.env.BASE_URL === '/main', value: 'main' },
+			{ label: 'develop', selected: import.meta.env.BASE_URL === '/develop', value: 'develop' },
+			{ label: 'next', selected: import.meta.env.BASE_URL === '/next', value: 'next' },
 		]}
 		width="7em"
 	/>
