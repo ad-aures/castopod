@@ -1,20 +1,11 @@
 ---
-title: Penaos staliañ Castopod?
+title: How to install Castopod?
 ---
 
 import { Aside } from "@astrojs/starlight/components";
 
 Castopod was thought-out to be easy to install. Whether using dedicated or
 shared hosting, you can install it on most PHP-MySQL compatible web servers.
-
-<Aside>
-
-We've released official Docker images for Castopod!
-
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
-
-</Aside>
 
 ## Requirements
 
@@ -49,7 +40,7 @@ You will need the server hostname, database name, username and password to
 complete the installation process. If you do not have these, please contact your
 server administrator.
 
-#### Brientoù
+#### Privileges
 
 User must have at least these privileges on the database for Castopod to work:
 `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
@@ -104,7 +95,7 @@ want to generate Video Clips. The following extensions must be installed:
 1. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
-3. Kregiñ da bodkastiñ!
+3. Start podcasting!
 
 <Aside>
 
@@ -117,6 +108,7 @@ based on the `.env.example` file.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -131,7 +123,7 @@ based on the `.env.example` file.
 
 4. Head on to your admin gateway to start podcasting!
 
-### Arventenniñ ar posteloù/SMTP
+### Email/SMTP setup
 
 Email configuration is required for some features to work properly (eg.
 retrieving your forgotten password, sending instructions to premium subscribers,
@@ -150,7 +142,7 @@ email.SMTPPass="your_smtp_password"
 
 #### Email config options
 
-| Anv ar varienne  | Doare                | Dre ziouer   |
+| Variable name    | Type                 | Default      |
 | ---------------- | -------------------- | ------------ |
 | **`fromEmail`**  | string               | `undefined`  |
 | **`fromName`**   | string               | `"Castopod"` |
@@ -191,9 +183,9 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### Arventennoù S3
+#### S3 config options
 
-| Anv ar varienn          | Doare   | Dre ziouer  |
+| Variable name           | Type    | Default     |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |
@@ -209,7 +201,7 @@ media.s3.region="your_s3_region"
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
 
-### Staliañ dre YunoHost
+### Install with YunoHost
 
 [YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
 made up of free and open-source software packages. It manages the hardships of

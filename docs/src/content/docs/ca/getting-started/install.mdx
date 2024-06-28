@@ -4,86 +4,75 @@ title: Com instal·lar Castopod?
 
 import { Aside } from "@astrojs/starlight/components";
 
-Castopod va ser pensat per ser fàcil d'instal·lar. Ja sigui utilitzant un
-allotjament dedicat o un compartit, podeu instal·lar-lo a la majoria de
-servidors web compatibles amb PHP-MySQL.
+Castopod was thought-out to be easy to install. Whether using dedicated or
+shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-<Aside>
+## Requirements
 
-Hem publicat imatges oficials de Docker per a Castopod!
-
-Si preferiu utilitzar Docker, podeu ometre això i anar directament a la
-[documentació de Docker](./docker.md) per a Castopod.
-
-</Aside>
-
-## Requisits
-
-- PHP v8.3 or higher
-- MySQL versió 5.7 o superior o MariaDB versió 10.2 o superior
-- Support d'HTTPS
+- PHP v8.1 or higher
+- MySQL version 5.7 or higher or MariaDB version 10.2 or higher
+- HTTPS support
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.3 or higher
+### PHP v8.1 or higher
 
-PHP version 8.3 or higher is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) amb les llibreries
-  **JPEG**, **PNG** i **WEBP**.
+- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
+  **PNG** and **WEBP** libraries.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-A més, assegureu-vos que les extensions següents estiguin habilitades al vostre
-PHP:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (activat per defecte; no el desactiveu)
-- xml (activat per defecte; no el desactiveu)
+- json (enabled by default - don't turn it off)
+- xml (enabled by default - don't turn it off)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### Base de dades compatible amb MySQL
+### MySQL compatible database
 
-> Us recomanem que utilitzeu [MariaDB](https://mariadb.org).
+> We recommend using [MariaDB](https://mariadb.org).
 
-Necessitareu el nom d'amfitrió del servidor (hostname), el nom de la base de
-dades, el nom d'usuari i la contrasenya per completar el procés d'instal·lació.
-Si no els teniu, poseu-vos en contacte amb l'administrador del vostre servidor.
+You will need the server hostname, database name, username and password to
+complete the installation process. If you do not have these, please contact your
+server administrator.
 
-#### Privilegis
+#### Privileges
 
 User must have at least these privileges on the database for Castopod to work:
 `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
 `REFERENCES`, `CREATE VIEW`.
 
-### (Opcional) FFmpeg v4.1.8 o superior per fer videoclips
+### (Optional) FFmpeg v4.1.8 or higher for Video Clips
 
-Si voleu generar videoclips, cal [FFmpeg](https://www.ffmpeg.org/) versió 4.1.8
-o superior. Cal instal·lar les següents extensions:
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
+want to generate Video Clips. The following extensions must be installed:
 
-- La llibreria **FreeType 2** per
+- **FreeType 2** library for
   [gd](https://www.php.net/manual/en/image.installation.php).
 
-### (Opcional) Altres recomanacions
+### (Optional) Other recommendations
 
-- Redis per a un millor rendiment de la memòria cau.
-- CDN per a la memòria cau de fitxers estàtics i millors rendiments.
-- Passarel·la de correu electrònic per a contrasenyes perdudes.
+- Redis for better cache performances.
+- CDN for static files caching and better performances.
+- e-mail gateway for lost passwords.
 
-## Instruccions d'instal·lació
+## Install instructions
 
-### Pre-requisits
+### Pre-requisites
 
-0. Obteniu un servidor web amb els [requisits](#requirements) instal·lats
-1. Creeu una base de dades MySQL per a Castopod amb un usuari amb privilegis
-   d'accés i modificació (per a més informació, vegeu
-   [base de dades compatible MySQL](#mysql-compatible-database)).
-2. Activeu HTTPS al vostre domini amb un _certificat SSL_.
-3. Baixeu i descomprimiu el darrer [paquet Castopod](https://castopod.org/) al
-   servidor web si encara no ho heu fet.
-   - ⚠️ Establiu l'arrel del document del servidor web a la subcarpeta
-     `castopod/public/`.
+0. Get a Web Server with [requirements](#requirements) installed
+1. Create a MySQL database for Castopod with a user having access and
+   modification privileges (for more info, see
+   [MySQL compatible database](#mysql-compatible-database)).
+2. Activate HTTPS on your domain with an _SSL certificate_.
+3. Download and unzip the latest [Castopod Package](https://castopod.org/) onto
+   the web server if you haven’t already.
+   - ⚠️ Set the web server document root to the `public/` sub-folder within the
+     `castopod` folder.
 4. Add **cron tasks** on your web server for various background processes
    (replace the paths accordingly):
 
@@ -101,25 +90,25 @@ o superior. Cal instal·lar les següents extensions:
    - Generating video clips -
      [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
-### (recomanat) Assistent d'instal·lació
+### (recommended) Install Wizard
 
-1. Executeu l'script d'instal·lació de Castopod anant a la pàgina web de
-   l'assistent d'instal·lació (`https://exemple.com/cp-install`) al vostre
-   navegador web preferit.
-2. Seguiu les instruccions a la vostra pantalla.
-3. Comenceu a fer podcasts!
+1. Run the Castopod install script by going to the install wizard page
+   (`https://your_domain_name.com/cp-install`) in your favorite web browser.
+2. Follow the instructions on your screen.
+3. Start podcasting!
 
 <Aside>
 
-L'script d'instal·lació escriu un fitxer `.env` a l'arrel del paquet. If you
-cannot go through the install wizard, you can create and edit the `.env` file
-manually based on the `.env.example` file.
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can create and edit the `.env` file manually
+based on the `.env.example` file.
 
 </Aside>
 
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -207,7 +196,7 @@ media.s3.region="your_s3_region"
 | **`pathStyleEndpoint`** | boolean | `false`     |
 | **`keyPrefix`**         | string  | `undefined` |
 
-## Paquets de la comunitat
+## Community packages
 
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
@@ -227,7 +216,7 @@ self-hosting for you.
 >
   <img
     src="https://install-app.yunohost.org/install-with-yunohost.svg"
-    alt="Instal·lar Castopod amb YunoHost"
+    alt="Install Castopod with YunoHost"
     class="align-middle"
   />
 </a>
@@ -248,7 +237,7 @@ self-hosting for you.
     <path fill="none" d="M0 0h24v24H0z" />
     <path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 6.84 9.49c.5.09.69-.21.69-.48l-.02-1.86c-2.51.46-3.16-.61-3.36-1.18-.11-.28-.6-1.17-1.02-1.4-.35-.2-.85-.66-.02-.67.79-.01 1.35.72 1.54 1.02.9 1.52 2.34 1.1 2.91.83a2.1 2.1 0 0 1 .64-1.34c-2.22-.25-4.55-1.11-4.55-4.94A3.9 3.9 0 0 1 6.68 8.8a3.6 3.6 0 0 1 .1-2.65s.83-.27 2.75 1.02a9.28 9.28 0 0 1 2.5-.34c.85 0 1.7.12 2.5.34 1.9-1.3 2.75-1.02 2.75-1.02.54 1.37.2 2.4.1 2.65.63.7 1.02 1.58 1.02 2.68 0 3.84-2.34 4.7-4.56 4.94.36.31.67.91.67 1.85l-.01 2.75c0 .26.19.58.69.48A10.02 10.02 0 0 0 22 12 10 10 0 0 0 12 2z" />
   </svg>
-  Repositori a Github
+  Github Repo
 </a>
 
 </div>

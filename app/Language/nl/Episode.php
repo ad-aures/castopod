@@ -24,7 +24,7 @@ return [
     'comments' => 'Reacties',
     'activity' => 'Activiteiten',
     'chapters' => 'Hoofdstukken',
-    'transcript' => 'Transcript',
+    'transcript' => 'Transcriptie',
     'description' => 'Omschrijving aflevering',
     'number_of_comments' => '{numberOfComments, plural,
         one {# reactie}
@@ -45,6 +45,6 @@ return [
         'publish_edit' => 'Publicatie bewerken',
     ],
     'no_chapters' => 'Voor deze aflevering zijn geen hoofdstukken beschikbaar.',
-    'download_transcript' => 'Download transcript ({extension})',
-    'no_transcript' => 'No transcript available for this episode.',
+    'download_transcript' => 'Transcriptie downloaden ({extension})',
+    'no_transcript' => 'Geen transcript beschikbaar voor deze aflevering.',
 ];

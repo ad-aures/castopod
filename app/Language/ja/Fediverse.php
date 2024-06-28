@@ -10,28 +10,28 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'あなたのユーザー ID',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle_hint' => 'フォームに「@username@domain」の形式で入力してください',
     'follow' => [
         'label' => 'フォロー',
         'title' => '{actorDisplayName} をフォロー',
-        'subtitle' => 'You are going to follow:',
+        'subtitle' => 'フォロー中:',
         'accountNotFound' => 'アカウントが見つかりませんでした',
         'remoteFollowNotAllowed' => 'このアカウントサーバーはリモートフォローを許可しておりません',
         'submit' => 'フォローする',
     ],
     'favourite' => [
         'title' => "お気に入りの {actorDisplayName}の投稿",
-        'subtitle' => 'You are going to favourite:',
+        'subtitle' => 'お気に入りに登録中:',
         'submit' => 'お気に入り登録する',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
+        'title' => "{actorDisplayName} の投稿を共有する",
+        'subtitle' => '共有中:',
         'submit' => '共有する',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
+        'title' => "{actorDisplayName} の投稿に返信する",
+        'subtitle' => '返信中:',
         'submit' => '返信する',
     ],
 ];

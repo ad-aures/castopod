@@ -24,94 +24,95 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
 ## Exemple d'utilisation
 
-1.  Installez [docker](https://docs.docker.com/get-docker/) et
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  Créez un fichier `docker-compose.yml` avec les éléments suivants :
+1. Installez [docker](https://docs.docker.com/get-docker/) et
+   [docker-compose](https://docs.docker.com/compose/install/)
 
-    ```yml
-    version: "3.7"
+2. Créez un fichier `docker-compose.yml` avec les éléments suivants :
 
-    services:
-      app:
-        image: castopod/castopod:latest
-        container_name: "castopod-app"
-        volumes:
-          - castopod-media:/var/www/castopod/public/media
-        environment:
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod.example.com"
-          CP_ANALYTICS_SALT: changeme
-          CP_CACHE_HANDLER: redis
-          CP_REDIS_HOST: redis
-          CP_REDIS_PASSWORD: changeme
-        networks:
-          - castopod-app
-          - castopod-db
-        ports:
-          - 8000:8000
-        restart: unless-stopped
+   ```yml
+   version: "3.7"
 
-      mariadb:
-        image: mariadb:10.5
-        container_name: "castopod-mariadb"
-        networks:
-          - castopod-db
-        volumes:
-          - castopod-db:/var/lib/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: changeme
-          MYSQL_DATABASE: castopod
-          MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-        restart: unless-stopped
+   services:
+     app:
+       image: castopod/castopod:latest
+       container_name: "castopod-app"
+       volumes:
+         - castopod-media:/var/www/castopod/public/media
+       environment:
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+         CP_BASEURL: "https://castopod.example.com"
+         CP_ANALYTICS_SALT: changeme
+         CP_CACHE_HANDLER: redis
+         CP_REDIS_HOST: redis
+         CP_REDIS_PASSWORD: changeme
+       networks:
+         - castopod-app
+         - castopod-db
+       ports:
+         - 8000:8000
+       restart: unless-stopped
 
-      redis:
-        image: redis:7.0-alpine
-        container_name: "castopod-redis"
-        command: --requirepass changeme
-        volumes:
-          - castopod-cache:/data
-        networks:
-          - castopod-app
+     mariadb:
+       image: mariadb:10.5
+       container_name: "castopod-mariadb"
+       networks:
+         - castopod-db
+       volumes:
+         - castopod-db:/var/lib/mysql
+       environment:
+         MYSQL_ROOT_PASSWORD: changeme
+         MYSQL_DATABASE: castopod
+         MYSQL_USER: castopod
+         MYSQL_PASSWORD: changeme
+       restart: unless-stopped
 
-    volumes:
-      castopod-media:
-      castopod-db:
-      castopod-cache:
+     redis:
+       image: redis:7.0-alpine
+       container_name: "castopod-redis"
+       command: --requirepass changeme
+       volumes:
+         - castopod-cache:/data
+       networks:
+         - castopod-app
 
-    networks:
-      castopod-app:
-      castopod-db:
-    ```
+   volumes:
+     castopod-media:
+     castopod-db:
+     castopod-cache:
 
-    Vous devez adapter certaines variables à vos besoins (p. ex. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` et `CP_ANALYTICS_SALT`).
+   networks:
+     castopod-app:
+     castopod-db:
+   ```
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS)
+   Vous devez adapter certaines variables à vos besoins (p. ex. `CP_BASEURL`,
+   `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` et `CP_ANALYTICS_SALT`).
 
-    TLS is mandatory for ActivityPub to work. This job can easily be handled by
-    a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+3. Setup a reverse proxy for TLS (SSL/HTTPS)
 
-    ```
-    #castopod
-    castopod.example.com {
-        reverse_proxy localhost:8000
-    }
-    ```
+   TLS is mandatory for ActivityPub to work. This job can easily be handled by
+   a reverse proxy, for example with [Caddy](https://caddyserver.com/):
 
-4.  Exécutez `docker-compose up -d`, attendez qu'il s'initialise sur
-    `https://castopod.example.com/cp-install` pour terminer la configuration de
-    Castopod !
+   ```
+   #castopod
+   castopod.example.com {
+       reverse_proxy localhost:8000
+   }
+   ```
 
-5.  Vous êtes prêt, commencez à podcaster! 🎙️🚀
+4. Exécutez `docker-compose up -d`, attendez qu'il s'initialise sur
+   `https://castopod.example.com/cp-install` pour terminer la configuration de
+   Castopod !
+
+5. Vous êtes prêt, commencez à podcaster! 🎙️🚀
 
 ## Environment Variables
 
 - **castopod/castopod** and **castopod/app**
 
-  | Nom de la variable                    | Type (`default`)        | Par défaut       |
+  | Variable name                         | Type (`default`)        | Par défaut       |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |

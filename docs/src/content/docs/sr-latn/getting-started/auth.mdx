@@ -2,17 +2,17 @@
 title: Verifikacija i Odobravanje
 ---
 
-Castopod upravlja verifikacijom i odobravanjem koristeći `codeigniter/shield` u
-paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
+Castopod handles authentication and authorization using `codeigniter/shield`
+coupled with custom rules. Roles and permissions are defined at two levels:
 
 1. [po nalogu](#1-instance-wide-roles-and-permissions)
 2. [po podkastu](#2-per-podcast-roles-and-permissions)
 
-## 1. Uloge i dozvole po nalogu
+## 1. Instance wide roles and permissions
 
 ### Uloge po nalogu
 
-{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role                | description                             | permissions                                                                                |
 | ------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -20,11 +20,11 @@ paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
 | Menadžer            | Upravlja sadržajem na Castopod-u.       | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
 | Podkaster           | Opšti korisnici Castopod-a.             | admin.access                                                                               |
 
-{/* AUTH-INSTANCE-ROLES-LIST:END */}
+{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
 
 ### Dozvole po nalogu
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission              | description                                                    |
 | ----------------------- | -------------------------------------------------------------- |
@@ -38,13 +38,13 @@ paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
 | podcasts.import         | Može uvesti nove podkaste.                                     |
 | fediverse.manage-blocks | Može blokirati interakciju Castopoda i fedivers naloga/domena. |
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
 
-## 2. Uloge i dozvole po podkastu
+## 2. Per podcast roles and permissions
 
 ### Uloge po podkastu
 
-{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role          | description                                                   | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +53,11 @@ paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
 | Autor         | Upravlja sadržajem podkasta #\{id\} ali ne može da ga objavi. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Gost          | Saradnik na podkastu #\{id\}.                                 | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/* AUTH-PODCAST-ROLES-LIST:END */}
+{/_ AUTH-PODCAST-ROLES-LIST:END _/}
 
 ### Dozvole po podkastu
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission                   | description                                                                              |
 | ---------------------------- | ---------------------------------------------------------------------------------------- |
@@ -81,4 +81,4 @@ paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
 | episodes.manage-publications | Može da objavi/poništi objavljivanje epizoda i postova podkasta #\{id\}.                 |
 | episodes.manage-comments     | Može dodati/obrisati komentar na epizodi podkasta #\{id\}.                               |
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}

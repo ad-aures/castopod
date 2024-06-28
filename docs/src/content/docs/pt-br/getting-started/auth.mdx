@@ -12,7 +12,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 ### Instance roles
 
-{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role                | description                           | permissions                                                                                |
 | ------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -20,11 +20,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | Gerente             | Gerencia o conteúdo de Castopod.      | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
 | Podcaster           | Usuários gerais do Castopod.          | admin.access                                                                               |
 
-{/* AUTH-INSTANCE-ROLES-LIST:END */}
+{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
 
 ### Instance permissions
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission              | description                                                      |
 | ----------------------- | ---------------------------------------------------------------- |
@@ -38,26 +38,26 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | podcasts.import         | Pode importar podcasts.                                          |
 | fediverse.manage-blocks | Pode bloquear ator/domínios distintos de interagir com Castopod. |
 
-{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
+{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
 
 ## 2. Per podcast roles and permissions
 
 ### Per podcast roles
 
-{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
 
 | role          | description                                                      | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Administrador | Tem controle completo do podcast #\{id\}.                        | \*                                                                                                                                                                                                                                                                                          |
 | Editor        | Gerencia o conteúdo e as publicações do podcast #\{id\}.         | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
 | Autor         | Gerencia o conteúdo do podcast #\{id\} mas não pode publicá-los. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
-| Convidado     | Contribuidor geral do podcast #\{id\}.                           | view, episodes.view                                                                                                                                                                                                                                                                         |
+| Guest         | Contribuidor geral do podcast #\{id\}.                           | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/* AUTH-PODCAST-ROLES-LIST:END */}
+{/_ AUTH-PODCAST-ROLES-LIST:END _/}
 
 ### Per podcast permissions
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
 
 | permission                   | description                                                                                   |
 | ---------------------------- | --------------------------------------------------------------------------------------------- |
@@ -81,4 +81,4 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | episodes.manage-publications | Pode publicar/remover a publicação de episódios e postagens de podcast #\{id\}.               |
 | episodes.manage-comments     | Pode criar/remover comentários de episódio do podcast #\{id\}.                                |
 
-{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}
+{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}

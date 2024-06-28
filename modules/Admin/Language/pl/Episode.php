@@ -21,9 +21,9 @@ return [
         other {# komentarzy}
     }',
     'all_podcast_episodes' => 'Wszystkie odcinki podcastu',
-    'back_to_podcast' => 'Wróć do podkastu',
+    'back_to_podcast' => 'Wróć do podcastu',
     'edit' => 'Edytuj',
-    'preview' => 'Preview',
+    'preview' => 'Podgląd',
     'publish' => 'Publikuj',
     'publish_edit' => 'Edytuj publikację',
     'publish_date_edit' => 'Edytuj datę publikacji',
@@ -32,7 +32,7 @@ return [
     'publish_edit_error' => 'Odcinek jest już opublikowany.',
     'publish_cancel_error' => 'Odcinek jest już opublikowany.',
     'publish_date_edit_error' => 'Odcinek nie został jeszcze opublikowany, nie możesz edytować daty jego publikacji.',
-    'publish_date_edit_future_error' => 'Data publikacji odcinka może być ustawiona tylko na przeszłą datę! Jeśli chcesz ją ponownie zaplanować, należy najpierw ją odpublikować.',
+    'publish_date_edit_future_error' => 'Data publikacji odcinka może być ustawiona tylko na przeszłą datę! Jeśli chcesz ją ponownie zaplanować, należy najpierw cofnąć publikację.',
     'publish_date_edit_success' => 'Data publikacji odcinka została pomyślnie zaktualizowana!',
     'unpublish_error' => 'Odcinek nie jest opublikowany.',
     'delete' => 'Usuń',
@@ -58,7 +58,7 @@ return [
     }',
         'episode' => 'Odcinek',
         'visibility' => 'Widoczność',
-        'downloads' => 'Downloads',
+        'downloads' => 'Pobrane',
         'comments' => 'Komentarze',
         'actions' => 'Działania',
     ],
@@ -83,13 +83,13 @@ return [
             audio {audio}
             other {mediów}
         } odcinka.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
+        'deleteFileError' => 'Nie można było skasować pliku {type, select,
+            transcript {transkryptu}
+            chapters {rozdziałów}
+            image {okładki}
             audio {audio}
-            other {media}
-        } file {file_key}. You may manually remove it from your disk.',
+            other {medium}
+        } {file_key}. Możesz chcieć zrobić to ręcznie.',
         'sameSlugError' => 'Odcinek z wybranym slugiem już istnieje.',
     ],
     'form' => [
@@ -113,22 +113,22 @@ return [
             'full' => 'Pełny',
             'full_hint' => 'Pełna zawartość (odcinek)',
             'trailer' => 'Zwiastun',
-            'trailer_hint' => 'Krótka, promocyjna treść przedstawiająca podgląd bieżącego programu',
+            'trailer_hint' => 'Krótka, promocyjna treść przedstawiająca bieżący program',
             'bonus' => 'Bonus',
             'bonus_hint' => 'Dodatkowa treść do programu (np. informacje zza kulis lub wywiady z obsadą) albo treści promujące inne programy',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Odcinek musi być dostępny wyłącznie dla subskrybentów premium',
+        'premium' => 'Odcinek dostępny wyłącznie dla subskrybentów premium',
         'parental_advisory' => [
             'label' => 'Kontrola rodzicielska',
             'hint' => 'Czy odcinek zawiera treści dla dorosłych?',
-            'undefined' => 'nieokreślona',
+            'undefined' => 'niezdefiniowano',
             'clean' => 'Czysta',
             'explicit' => 'Dla dorosłych',
         ],
         'show_notes_section_title' => 'Notatki programu',
         'show_notes_section_subtitle' =>
-            'Do 4000 znaków, bądź jasny i zwięźly. Notatki programu pomagają potencjalnym słuchaczom w znalezieniu odcinka.',
+            'Do 4000 znaków, pisz krótko i zwięźle. Notatki programu pomagają potencjalnym słuchaczom w znalezieniu odcinka.',
         'description' => 'Opis',
         'description_footer' => 'Stopka opisu',
         'description_footer_hint' =>
@@ -141,9 +141,9 @@ return [
         'location_name' => 'Nazwa lub adres lokalizacji',
         'location_name_hint' => 'Może to być prawdziwa lub fikcyjna lokalizacja',
         'transcript' => 'Transkrypcja (napisy / podpisy kodowane)',
-        'transcript_hint' => 'Only .srt or .vtt are allowed.',
+        'transcript_hint' => 'Wspierane są tylko .srt lub .vtt.',
         'transcript_download' => 'Pobierz transkrypcję',
-        'transcript_file' => 'Transcript file (.srt or .vtt)',
+        'transcript_file' => 'Plik transkrypcji (.srt lub .vtt)',
         'transcript_remote_url' => 'Zdalny adres URL dla transkrypcji',
         'transcript_file_delete' => 'Usuń plik transkrypcji',
         'chapters' => 'Rozdziały',
@@ -159,31 +159,31 @@ return [
         'custom_rss_hint' => 'Zostaną wstawione w tagu ❬item❭.',
         'block' => 'Odcinek powinien być ukryty w publicznych katalogach',
         'block_hint' =>
-            'Pokazywanie lub ukrywanie odcinka: przełączanie tej funkcji zapobiega pojawieniu się odcinka w podcastach Apple\'a, Google Podcasts, a także aplikacje innych firm, które pobierają z tych katalogów. (Nie sugerowane)',
+            'Pokazywanie lub ukrywanie odcinka: przełączanie tej funkcji zapobiega pojawieniu się odcinka w Apple Podcasts, Google Podcasts, a także aplikacjach innych firm, które pobierają z tych katalogów. (Niegwarantowane)',
         'submit_create' => 'Stwórz odcinek',
         'submit_edit' => 'Zapisz odcinek',
     ],
     'publish_form' => [
-        'back_to_episode_dashboard' => 'Wróć do pulpitu odcinka',
+        'back_to_episode_dashboard' => 'Wróć do panelu odcinka',
         'post' => 'Twój wpis ogłoszeniowy',
         'post_hint' =>
-            "Napisz wiadomość, aby ogłosić publikację swojego odcinka. Wiadomość zostanie wyemitowana do wszystkich Twoich obserwujących w fediverse i pojawi się na stronie głównej Twojego podcastu.",
+            "Napisz wiadomość, aby ogłosić publikację swojego odcinka. Wiadomość zostanie wyemitowana do wszystkich Twoich obserwujących w fediwersum i pojawi się na stronie głównej Twojego podcastu.",
         'message_placeholder' => 'Napisz swoją wiadomość…',
         'publication_date' => 'Data publikacji',
         'publication_method' => [
             'now' => 'Teraz',
             'schedule' => 'Zaplanuj',
-            'with_podcast' => 'Opublikuj obok podcastu',
+            'with_podcast' => 'Opublikuj razem z podcastem',
         ],
         'scheduled_publication_date' => 'Planowana data publikacji',
         'scheduled_publication_date_clear' => 'Wyczyść datę publikacji',
         'scheduled_publication_date_hint' =>
-            'Możesz zaplanować wydanie odcinka ustawiając przyszłą datę publikacji. To pole musi być sformatowane jako YYYY-MM-DD HH:mm',
+            'Możesz zaplanować wydanie odcinka, ustawiając przyszłą datę publikacji. To pole musi być sformatowane jako YYYY-MM-DD HH:mm',
         'submit' => 'Opublikuj',
         'submit_edit' => 'Edytuj publikację',
         'cancel_publication' => 'Anuluj publikację',
         'message_warning' => 'Nie napisałeś wiadomości do swojego wpisu ogłoszeniowego!',
-        'message_warning_hint' => 'Posiadanie wiadomości zwiększa zaangażowanie społeczne, co skutkuje lepszą widocznością Twojego odcinka.',
+        'message_warning_hint' => 'Napisanie wiadomości zwiększa zaangażowanie społeczne, co skutkuje lepszą widocznością Twojego odcinka.',
         'message_warning_submit' => 'Opublikuj mimo to',
     ],
     'publish_date_edit_form' => [
@@ -199,7 +199,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Usunięcie odcinka spowoduje usunięcie wszystkich plików multimedialnych, komentarzy, klipów wideo i powiązanych z nimi dźwięków.",
+            "Usunięcie odcinka spowoduje usunięcie wszystkich plików multimedialnych, komentarzy, klipów wideo i powiązanych z nimi zajawek.",
         'understand' => 'Rozumiem, chcę usunąć odcinek',
         'submit' => 'Usuń',
     ],
@@ -215,13 +215,13 @@ return [
         'light-transparent' => 'Jasny przezroczysty',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
+        'draft_mode' => 'tryb szkicu',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Ten odcinek jeszcze nie został opublikowany.}
+            scheduled {Ten odcinek zostanie opublikowany {publication_date}.}
+            with_podcast {Ten odcinek zostanie opublikowany w tym samym momencie, co podcast.}
+            other {Ten odcinek jeszcze nie został opublikowany.}
         }',
-        'preview' => 'Preview',
+        'preview' => 'Podgląd',
     ],
 ];

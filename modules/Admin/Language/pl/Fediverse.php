@@ -12,7 +12,7 @@ return [
     'messages' => [
         'actorNotFound' => 'Nie udało się znaleźć użytkownika!',
         'blockActorSuccess' => '{actor} został zablokowany!',
-        'unblockActorSuccess' => 'Actor został odblokowany!',
+        'unblockActorSuccess' => 'Aktor został odblokowany!',
         'blockDomainSuccess' => '{domain} została zablokowana!',
         'unblockDomainSuccess' => '{domain} została odblokowana!',
     ],
@@ -20,7 +20,7 @@ return [
     'blocked_domains' => 'Zablokowane domeny',
     'block_lists_form' => [
         'handle' => 'Uchwyt konta',
-        'handle_hint' => 'Wpisz @nazwęużytkownika@domenę konta.',
+        'handle_hint' => 'Wpisz @nazwaużytkownika@domena konta.',
         'domain' => 'Nazwa domeny',
         'submit' => 'Zablokuj!',
     ],

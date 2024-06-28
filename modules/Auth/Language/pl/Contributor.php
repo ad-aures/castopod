@@ -37,11 +37,11 @@ return [
     ],
     'messages' => [
         'editSuccess' => 'Pomyślnie zmieniono rolę!',
-        'editOwnerError' => "Nie możesz usunąć właściciela podcastu!",
+        'editOwnerError' => "Nie możesz edytować właściciela podcastu!",
         'removeOwnerError' => "Nie możesz usunąć właściciela podcastu!",
         'removeSuccess' =>
             'Pomyślnie usunąłeś/aś {username} z {podcastTitle}',
         'alreadyAddedError' =>
-            "Kontrybutor, którego próbujesz dodać został już dodany!",
+            "Kontrybutor, którego próbujesz dodać, został już dodany!",
     ],
 ];

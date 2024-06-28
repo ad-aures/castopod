@@ -7,15 +7,6 @@ import { Aside } from "@astrojs/starlight/components";
 Castopod was thought-out to be easy to install. Whether using dedicated or
 shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-<Aside>
-
-We've released official Docker images for Castopod!
-
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
-
-</Aside>
-
 ## Requirements
 
 - PHP v8.3 or higher
@@ -44,14 +35,6 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 ### MySQL compatible database
 
 > We recommend using [MariaDB](https://mariadb.org).
-
-<Aside type="caution">
-
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
-
-</Aside>
 
 You will need the server hostname, database name, username and password to
 complete the installation process. If you do not have these, please contact your
@@ -125,6 +108,7 @@ based on the `.env.example` file.
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh

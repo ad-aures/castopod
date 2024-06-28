@@ -10,28 +10,28 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'Twój uchwyt',
-    'your_handle_hint' => 'Wpisz @nazwęużytkownika@domenę, z których chcesz działać.',
+    'your_handle_hint' => 'Wpisz @nazważytkownika@domena, z której chcesz działać.',
     'follow' => [
         'label' => 'Obserwuj',
         'title' => 'Obserwuj {actorDisplayName}',
         'subtitle' => 'Zamierzasz obserwować:',
         'accountNotFound' => 'Nie można znaleźć konta.',
-        'remoteFollowNotAllowed' => 'Wygląda na to, że serwer kont nie pozwala na śledzenie zdalnie…',
+        'remoteFollowNotAllowed' => 'Wygląda na to, że serwer kont nie pozwala na zdalne śledzenie…',
         'submit' => 'Przejdź do obserwowania',
     ],
     'favourite' => [
         'title' => "Dodaj do ulubionych wpis {actorDisplayName}",
         'subtitle' => 'Zamierzasz dodać do ulubionych:',
-        'submit' => 'Przejdź do dodania do ulubionych',
+        'submit' => 'Dodaj do ulubionych',
     ],
     'reblog' => [
         'title' => "Udostępnij wpis {actorDisplayName}",
         'subtitle' => 'Zamierzasz udostępnić:',
-        'submit' => 'Przejdź do udostępnienia',
+        'submit' => 'Udostępnij',
     ],
     'reply' => [
-        'title' => "Odpowiedź do wpisu {actorDisplayName}",
+        'title' => "Odpowiedz do wpisu {actorDisplayName}",
         'subtitle' => 'Zamierzasz odpisać na:',
-        'submit' => 'Przejdź do odpowiedzi',
+        'submit' => 'Odpowiedz',
     ],
 ];

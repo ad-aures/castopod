@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 return [
     'go_to_page' => 'Wyświetl stronę odcinka',
-    'dashboard' => 'Pulpit odcinka',
+    'dashboard' => 'Panel odcinka',
     'episode-view' => 'Początek',
     'episode-edit' => 'Edytuj odcinek',
     'episode-persons-manage' => 'Zarządzaj osobami',
-    'embed-add' => 'Odtwarzacz do zagnieżdżenia',
+    'embed-add' => 'Odtwarzacz do osadzania',
     'clips' => 'Klipy',
     'video-clips-list' => 'Klipy wideo',
     'video-clips-create' => 'Nowy klip wideo',

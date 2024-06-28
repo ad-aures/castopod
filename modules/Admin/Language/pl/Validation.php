@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'min_dims' =>
-        '{field} nie jest obrazem, albo nie jest wystarczająco szeroki lub wysoki.',
+        '{field} nie jest obrazem albo nie jest wystarczająco szeroki lub wysoki.',
     'is_image_ratio' =>
-        '{field} nie jest obrazem, albo nie ma właściwych proporcji.',
-    'is_json' => '{field} contains invalid JSON.',
+        '{field} nie jest obrazem albo nie ma właściwych proporcji.',
+    'is_json' => '{field} zawiera nieprawidłowy JSON.',
 ];

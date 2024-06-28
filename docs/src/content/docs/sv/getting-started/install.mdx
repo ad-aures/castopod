@@ -4,93 +4,75 @@ title: Hur man installerar Castopod?
 
 import { Aside } from "@astrojs/starlight/components";
 
-Castopod var tänkt att vara lätt att installera. Oavsett om du använder
-dedikerade eller delade webbhotell kan du installera det på de flesta
-PHP-MySQL-kompatibla webbservrar.
+Castopod was thought-out to be easy to install. Whether using dedicated or
+shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-<Aside>
+## Requirements
 
-Vi har släppt officiella Docker-bilder för Castopod!
-
-Om du föredrar att använda Docker, kan du hoppa över detta och gå direkt till
-[dockerdokumentationen](./docker.md) för Castopod.
-
-</Aside>
-
-## Krav
-
-- PHP v8.3 or higher
-- MySQL version 5.7 eller högre eller MariaDB version 10.2 eller högre
-- Stöd för HTTPS
+- PHP v8.1 or higher
+- MySQL version 5.7 or higher or MariaDB version 10.2 or higher
+- HTTPS support
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.3 or higher
+### PHP v8.1 or higher
 
-PHP version 8.3 or higher is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) med **JPEG**,
-  **PNG** och **WEBP** bibliotek.
+- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
+  **PNG** and **WEBP** libraries.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Se dessutom till att följande tillägg är aktiverade i din PHP:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
-- json (aktiverad som standard - stäng inte av)
-- xml (aktiverat som standard - stäng inte av)
+- json (enabled by default - don't turn it off)
+- xml (enabled by default - don't turn it off)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### MySQL kompatibel databas
+### MySQL compatible database
 
-> Vi rekommenderar att du använder [MariaDB](https://mariadb.org).
+> We recommend using [MariaDB](https://mariadb.org).
 
-<Aside>
+You will need the server hostname, database name, username and password to
+complete the installation process. If you do not have these, please contact your
+server administrator.
 
-Castopod fungerar endast med stödda MySQL 5.7 eller högre kompatibla databaser.
-Den kommer att bryta med den tidigare MySQL v5.6 till exempel eftersom dess slut
-var den 5 februari 2021.
+#### Privileges
 
-</Aside>
+User must have at least these privileges on the database for Castopod to work:
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
+`REFERENCES`, `CREATE VIEW`.
 
-Du behöver serverns värdnamn, databasnamn, användarnamn och lösenord för att
-slutföra installationen. Om du inte har dessa kontaktar du din
-serveradministratör.
+### (Optional) FFmpeg v4.1.8 or higher for Video Clips
 
-#### Privilegier
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
+want to generate Video Clips. The following extensions must be installed:
 
-Användare måste ha minst dessa rättigheter i databasen för att Castopod ska
-fungera: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`,
-`UPDATE`, `REFERENCES`, `CREATE VIEW`.
-
-### (Valfritt) FFmpeg v4.1.8 eller högre för videoklipp
-
-[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 eller högre krävs om du vill
-generera videoklipp. Följande tillägg måste installeras:
-
-- **FreeType 2** bibliotek för
+- **FreeType 2** library for
   [gd](https://www.php.net/manual/en/image.installation.php).
 
-### (Valfritt) Andra rekommendationer
+### (Optional) Other recommendations
 
-- Redis för bättre cache-prestanda.
-- CDN för statiska filer caching och bättre prestanda.
-- e-post gateway för förlorade lösenord.
+- Redis for better cache performances.
+- CDN for static files caching and better performances.
+- e-mail gateway for lost passwords.
 
-## Installationsanvisningar
+## Privilegier
 
-### Förutsättningar
+### Pre-requisites
 
-0. Skaffa en webbserver med [krav](#requirements) installerat
-1. Skapa en MySQL-databas för Castopod med en användare som har åtkomst till och
-   modifieringsrättigheter (för mer info, se
-   [MySQL-kompatibel databas](#mysql-compatible-database)).
-2. Aktivera HTTPS på din domän med ett _SSL-certifikat_.
-3. Ladda ner och packa upp det senaste [Castopod Package](https://castopod.org/)
-   på webbservern om du inte redan har det.
-   - ⚠️ Sätt webbserverdokumentroten till `public/` undermappen i mappen
-     `castopod`.
+0. Get a Web Server with [requirements](#requirements) installed
+1. Create a MySQL database for Castopod with a user having access and
+   modification privileges (for more info, see
+   [MySQL compatible database](#mysql-compatible-database)).
+2. Activate HTTPS on your domain with an _SSL certificate_.
+3. Download and unzip the latest [Castopod Package](https://castopod.org/) onto
+   the web server if you haven’t already.
+   - ⚠️ Set the web server document root to the `public/` sub-folder within the
+     `castopod` folder.
 4. Add **cron tasks** on your web server for various background processes
    (replace the paths accordingly):
 
@@ -108,24 +90,25 @@ generera videoklipp. Följande tillägg måste installeras:
    - Generating video clips -
      [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
-### (rekommenderas) Installationsguide
+### (recommended) Install Wizard
 
-1. Kör Castopod install script genom att gå till installationsguiden sidan
-   (`https://your_domain_name.com/cp-install`) i din favorit webbläsare.
-2. Följ instruktionerna på din enhet.
-3. Börja podcasting!
+1. **FreeType 2** bibliotek för
+   [gd](https://www.php.net/manual/en/image.installation.php).
+2. Follow the instructions on your screen.
+3. Start podcasting!
 
 <Aside>
 
-Installationsskriptet skriver en `.env` -fil i paketroten. Om du inte kan gå via
-installationsguiden kan du skapa och redigera `. nv` filen manuellt baserat på
-`.env.example` filen.
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can create and edit the `.env` file manually
+based on the `.env.example` file.
 
 </Aside>
 
 ### Using CLI
 
 1. Create a `.env` file in the package root based on the `.env.example` file.
+
 2. Initialize the database using:
 
    ```sh
@@ -142,11 +125,11 @@ installationsguiden kan du skapa och redigera `. nv` filen manuellt baserat på
 
 ### Email/SMTP setup
 
-E-postkonfiguration krävs för att vissa funktioner ska fungera korrekt (t.ex.
-att hämta ditt glömda lösenord, skicka instruktioner till premiumprenumeranter,
+Email configuration is required for some features to work properly (eg.
+retrieving your forgotten password, sending instructions to premium subscribers,
 …)
 
-Du kan lägga till din e-postkonfiguration i din instans `.env` som så:
+You may add your email configuration in your instance's `.env` like so:
 
 ```ini
 # […]
@@ -157,17 +140,17 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### Alternativ för e-postkonfiguration
+#### Email config options
 
-| Variabelt namn   | Typ                     | Standard      |
-| ---------------- | ----------------------- | ------------- |
-| **`fromEmail`**  | sträng                  | `odefinierad` |
-| **`fromName`**   | sträng                  | `"Castopod"`  |
-| **`SMTPHost`**   | sträng                  | `odefinierad` |
-| **`SMTPUser`**   | sträng                  | `odefinierad` |
-| **`SMTPPass`**   | sträng                  | `odefinierad` |
-| **`SMTPPort`**   | nummer                  | `25`          |
-| **`SMTPCrypto`** | [`"tls"` eller `"ssl"`] | `"tls"`       |
+| Variable name    | Type                 | Default      |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
 ### Media storage
 
@@ -213,7 +196,7 @@ media.s3.region="your_s3_region"
 | **`pathStyleEndpoint`** | boolean | `false`     |
 | **`keyPrefix`**         | string  | `undefined` |
 
-## Gemenskapspaket
+## Community packages
 
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
@@ -233,7 +216,7 @@ self-hosting for you.
 >
   <img
     src="https://install-app.yunohost.org/install-with-yunohost.svg"
-    alt="Installera Castopod med YunoHost"
+    alt="Install Castopod with YunoHost"
     class="align-middle"
   />
 </a>

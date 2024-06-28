@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Pulpit administratora',
+    'home' => 'Panel administratora',
     'welcome_message' => 'Witamy w panelu administracyjnym!',
     'podcasts' => [
         'title' => 'Podcasty',
