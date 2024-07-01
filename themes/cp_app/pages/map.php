@@ -45,7 +45,9 @@
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2 text-sm focus:ring-accent"><?= icon(
                 'arrow-left-line',
-                'mr-2',
+                [
+                    'class' => 'mr-2',
+                ],
             ) . lang('Page.back_to_home') ?></a>
             <Heading tagName="h1" size="large"><?= lang('Page.map.title') ?></Heading>
         </div>
