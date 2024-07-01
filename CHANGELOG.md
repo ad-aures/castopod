@@ -1,3 +1,11 @@
+## [1.12.1](https://code.castopod.org/adaures/castopod/compare/v1.12.0...v1.12.1) (2024-07-01)
+
+### Bug Fixes
+
+- set correct icons parameters in map and funding links views
+  ([b129813](https://code.castopod.org/adaures/castopod/commit/b129813ea5d38436563639b51ec9ed2882644228)),
+  closes [#500](https://code.castopod.org/adaures/castopod/issues/500)
+
 # [1.12.0](https://code.castopod.org/adaures/castopod/compare/v1.11.0...v1.12.0) (6/28/2024)
 
 ### Bug Fixes
