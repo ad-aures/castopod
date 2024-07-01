@@ -71,8 +71,8 @@ experience the problem? What would you expect to be the outcome? All these
 details will help people to fix any potential bugs.
 
 > [!NOTE]  
-> [Issue templates](https://docs.gitlab.com/ee/user/project/description_templates.html#using-the-templates)
-> have been created for this project. You may use them to help you follow those
+> [Issue templates](https://docs.gitlab.com/ee/user/project/description_templates.html#using-the-templates) have
+> been created for this project. You may use them to help you follow those
 > guidelines.
 
 ## Feature requests

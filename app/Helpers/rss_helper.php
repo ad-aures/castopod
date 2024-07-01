@@ -537,8 +537,7 @@ if (! function_exists('array_to_rss')) {
                 );
                 if (array_key_exists('attributes', $childArrayNode)) {
                     foreach (
-                        $childArrayNode['attributes']
-                        as $attributeKey => $attributeValue
+                        $childArrayNode['attributes'] as $attributeKey => $attributeValue
                     ) {
                         $childXmlNode->addAttribute($attributeKey, $attributeValue);
                     }

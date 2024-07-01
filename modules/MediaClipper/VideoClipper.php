@@ -223,7 +223,6 @@ class VideoClipper
 
     public function getCmd(): string
     {
-        // @phpstan-ignore
         $filters = [
             "[0:a]aformat=channel_layouts=mono,showwaves=s={$this->dimensions['soundwaves']['width']}x{$this->dimensions['soundwaves']['height']}:mode=cline:rate=10:colors=white,format=rgb24[waves]",
             "[waves]scale={$this->dimensions['width']}:{$this->dimensions['height']}:flags=neighbor[resizedwaves]",

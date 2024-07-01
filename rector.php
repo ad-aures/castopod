@@ -9,7 +9,6 @@ use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
-use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
@@ -56,7 +55,5 @@ return RectorConfig::configure()
         RemoveUnreachableStatementRector::class => [
             __DIR__ . '/modules/Install/Controllers/InstallController.php',
         ],
-
-        ChangeAndIfToEarlyReturnRector::class => [__DIR__ . '/modules/Install/Controllers/InstallController.php'],
     ])
     ->withPHPStanConfigs([__DIR__ . '/phpstan.neon', 'vendor/codeigniter/phpstan-codeigniter/extension.neon']);

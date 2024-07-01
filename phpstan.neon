@@ -1,7 +1,6 @@
 parameters:
     tmpDir: build/phpstan
     level: 6
-    checkGenericClassInNonGenericObjectType: false
     paths:
         - app
         - modules
@@ -48,3 +47,4 @@ parameters:
             - Modules\PremiumPodcasts\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
+        - identifier: missingType.generics

@@ -69,8 +69,7 @@ class PlatformController extends BaseController
 
         $platformsData = [];
         foreach (
-            $this->request->getPost('platforms')
-            as $platformSlug => $podcastPlatform
+            $this->request->getPost('platforms') as $platformSlug => $podcastPlatform
         ) {
             $podcastPlatformUrl = trim((string) $podcastPlatform['url']);
             if ($podcastPlatformUrl === '') {
