@@ -45,19 +45,19 @@
             'cell'   => function ($subscription) {
                 return esc($subscription->email);
             },
-        ],
+                ],
         [
             'header' => lang('Subscription.list.expiration_date'),
             'cell'   => function ($subscription) {
                 return $subscription->expires_at ? local_date($subscription->expires_at) : lang('Subscription.list.unlimited');
             },
-        ],
+                ],
         [
             'header' => lang('Subscription.list.downloads'),
             'cell'   => function ($subscription) {
                 return $subscription->downloads_last_3_months;
             },
-        ],
+                ],
         [
             'header' => lang('Subscription.list.status'),
             'cell'   => function ($subscription) {
@@ -69,7 +69,7 @@
 
                 return '<x-Pill variant="' . $statusMapping[$subscription->status] . '" class="lowercase">' . lang('Subscription.status.' . $subscription->status) . '</x-Pill>';
             },
-        ],
+                ],
         [
             'header' => lang('Common.actions'),
             'cell'   => function ($subscription, $podcast) {
@@ -121,7 +121,7 @@
                     '</button>' .
                     '<x-DropdownMenu id="more-dropdown-' . $subscription->id . '-menu" labelledby="more-dropdown-' . $subscription->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
             },
-        ],
+                ],
     ],
     $podcast->subscriptions,
     '',
