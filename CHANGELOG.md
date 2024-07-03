@@ -1,3 +1,10 @@
+## [1.12.2](https://code.castopod.org/adaures/castopod/compare/v1.12.1...v1.12.2) (2024-07-03)
+
+### Bug Fixes
+
+- broken icon call in frontend default pages template
+  ([d8d2eb9](https://code.castopod.org/adaures/castopod/commit/d8d2eb92b741ecfc956b416db481f8c2dee84864))
+
 ## [1.12.1](https://code.castopod.org/adaures/castopod/compare/v1.12.0...v1.12.1) (2024-07-01)
 
 ### Bug Fixes
