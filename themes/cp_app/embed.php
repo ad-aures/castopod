@@ -40,7 +40,6 @@
                 id="castopod-vm-player"
                 theme="<?= str_starts_with($theme, 'dark') ? 'dark' : 'light' ?>"
                 language="<?= service('request')->getLocale() ?>"
-                icons="castopod-icons"
                 class="w-full mt-auto"
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight)); --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
             >
@@ -55,7 +54,7 @@
                 <source src="<?= $source ?>" type="<?= $episode->audio->file_mimetype ?>" />
             </vm-audio>
             <vm-ui>
-                <vm-icon-library name="castopod-icons"></vm-icon-library>
+                <vm-icon-library></vm-icon-library>
                 <vm-controls full-width>
                     <vm-playback-control></vm-playback-control>
                     <vm-volume-control></vm-volume-control>
