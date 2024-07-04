@@ -1,3 +1,10 @@
+## [1.12.3](https://code.castopod.org/adaures/castopod/compare/v1.12.2...v1.12.3) (2024-07-04)
+
+### Bug Fixes
+
+- **audio-player:** set player icons to default instead of missing Castopod's
+  ([c89d298](https://code.castopod.org/adaures/castopod/commit/c89d29867e122fe7d4d5563f0ab1e9993e2ece16))
+
 ## [1.12.2](https://code.castopod.org/adaures/castopod/compare/v1.12.1...v1.12.2) (2024-07-03)
 
 ### Bug Fixes
