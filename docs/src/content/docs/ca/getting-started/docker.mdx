@@ -88,13 +88,12 @@ can be added as a cache handler.
    ```
 
    Heu d'adaptar algunes variables a les vostres necessitats (per exemple,
-   `CP_BASEURL`, `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` i
-   `CP_ANALYTICS_SALT`).
+   `CP_BASEURL`, `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` i `CP_ANALYTICS_SALT`).
 
 3. Configureu un `reverse proxy` per a TLS (SSL/HTTPS)
 
-   TLS is mandatory for ActivityPub to work. This job can easily be handled by
-   a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+   TLS is mandatory for ActivityPub to work. This job can easily be handled by a
+   reverse proxy, for example with [Caddy](https://caddyserver.com/):
 
    ```
    #castopod

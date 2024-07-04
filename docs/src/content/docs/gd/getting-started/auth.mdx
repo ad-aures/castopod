@@ -12,24 +12,25 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 ### Instance roles
 
-{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
 
-| role            | description                             | permissions                                                                                |
-| --------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Sàr-rianaire    | Smachd gu lèir air Castopod.            | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manaidsear      | Stiùireadh susbaint Chastopod.          | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Pod-chraoladair | Luchd-cleachdaidh coitcheann Chastopod. | admin.access                                                                               |
+| role            | description                             | permissions                                                                                            |
+| --------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Sàr-rianaire    | Smachd gu lèir air Castopod.            | admin.\*, plugins.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Manaidsear      | Stiùireadh susbaint Chastopod.          | podcasts.create, podcasts.import, persons.manage, pages.manage                                         |
+| Pod-chraoladair | Luchd-cleachdaidh coitcheann Chastopod. | admin.access                                                                                           |
 
-{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
+{/* AUTH-INSTANCE-ROLES-LIST:END */}
 
 ### Instance permissions
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission              | description                                                                                   |
 | ----------------------- | --------------------------------------------------------------------------------------------- |
 | admin.access            | ’S urrainn dhaibh raon rianachd Chastopod inntrigeadh.                                        |
 | admin.settings          | ’S urrainn dhaibh roghainnean Chastopod inntrigeadh.                                          |
+| plugins.manage          | Auth.instance_permissions.plugins.manage                                                      |
 | users.manage            | ’S urrainn dhaibh luchdc-leachdaidh Chastopod a stiùireadh.                                   |
 | persons.manage          | ’S urrainn dhaibh daoine a stiùireadh.                                                        |
 | pages.manage            | ’S urrainn dhaibh duilleagan a stiùireadh.                                                    |
@@ -38,13 +39,13 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | podcasts.import         | ’S urrainn dhaibh pod-chraolaidhean ion-phortadh.                                             |
 | fediverse.manage-blocks | ’S urrainn dhaibh actairean/àrainnean a cho-shaoghail a bhacadh o eadar-ghabhail le Castopod. |
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
 
 ## 2. Per podcast roles and permissions
 
 ### Per podcast roles
 
-{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
 
 | role      | description                                                                      | permissions                                                                                                                                                                                                                                                                                 |
 | --------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +54,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | Ùghdar    | A’ stiùireadh susbaint a’ phod-chraolaidh #\{id\} ach gun chomas foillseachaidh. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Aoigh     | Neach-cuideachaidh a’ phod-chraolaidh #\{id\}.                                   | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/_ AUTH-PODCAST-ROLES-LIST:END _/}
+{/* AUTH-PODCAST-ROLES-LIST:END */}
 
 ### Per podcast permissions
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission                   | description                                                                                                                  |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -81,4 +82,4 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | episodes.manage-publications | ’S urrainn dhaibh eapasodan is postaichean a’ phod-chraolaidh #\{id\} fhoillseachadh/neo-fhoillseachadh.                     |
 | episodes.manage-comments     | ’S urrainn dhaibh beachdan air eapasod a’ phod-chraolaidh #\{id\} a chruthachadh/a thoirt air falbh.                         |
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}

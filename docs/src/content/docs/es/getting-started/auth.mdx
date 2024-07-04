@@ -13,24 +13,25 @@ niveles:
 
 ### Roles de instancia
 
-{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
 
-| role                | description                            | permissions                                                                                |
-| ------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super administrador | Tiene control completo sobre Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Administrador       | Administrar contenido de Castopod.     | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster           | Usuarios generales de Castopod.        | admin.access                                                                               |
+| role                | description                            | permissions                                                                                            |
+| ------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Super administrador | Tiene control completo sobre Castopod. | admin.\*, plugins.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Administrador       | Administrar contenido de Castopod.     | podcasts.create, podcasts.import, persons.manage, pages.manage                                         |
+| Podcaster           | Usuarios generales de Castopod.        | admin.access                                                                                           |
 
-{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
+{/* AUTH-INSTANCE-ROLES-LIST:END */}
 
 ### Permisos de instancia
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission              | description                                                                    |
 | ----------------------- | ------------------------------------------------------------------------------ |
 | admin.access            | Puedes acceder al área de administración de Castopod.                          |
 | admin.settings          | Puede acceder a la configuración de Castopod.                                  |
+| plugins.manage          | Auth.instance_permissions.plugins.manage                                       |
 | users.manage            | Puede administrar usuarios de Castopod.                                        |
 | persons.manage          | Puede administrar personas.                                                    |
 | pages.manage            | Puede administrar páginas.                                                     |
@@ -39,13 +40,13 @@ niveles:
 | podcasts.import         | Puede importar podcasts.                                                       |
 | fediverse.manage-blocks | Puedes bloquear la interacción de actores/dominios del fediverso con Castopod. |
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
 
 ## 2. Permisos y roles por podcast
 
 ### Roles por podcast
 
-{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
 
 | role          | description                                                         | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,11 +55,11 @@ niveles:
 | Autor         | Gestiona el contenido del podcast #\{id\} pero no puede publicarlo. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Invitado      | Colaborador general del podcast #\{id\}.                            | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/_ AUTH-PODCAST-ROLES-LIST:END _/}
+{/* AUTH-PODCAST-ROLES-LIST:END */}
 
 ### Permisos por podcast
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission                   | description                                                                                                     |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -82,4 +83,4 @@ niveles:
 | episodes.manage-publications | Puede publicar/despublicar episodios y publicaciones del podcast #\{id\}.                                       |
 | episodes.manage-comments     | Puede crear/eliminar los comentarios de episodio del podcast #\{id\}.                                           |
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}

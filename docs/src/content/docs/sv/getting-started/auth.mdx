@@ -12,24 +12,25 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 ### Instance roles
 
-{/_ AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section */}
 
-| role                | description                             | permissions                                                                                |
-| ------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super administratör | Har fullständig kontroll över Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Hanterare           | Hanterar Castopods innehåll.            | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster           | Generella användare av Castopod.        | admin.access                                                                               |
+| role                | description                             | permissions                                                                                            |
+| ------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Super administratör | Har fullständig kontroll över Castopod. | admin.\*, plugins.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Hanterare           | Hanterar Castopods innehåll.            | podcasts.create, podcasts.import, persons.manage, pages.manage                                         |
+| Podcaster           | Generella användare av Castopod.        | admin.access                                                                                           |
 
-{/_ AUTH-INSTANCE-ROLES-LIST:END _/}
+{/* AUTH-INSTANCE-ROLES-LIST:END */}
 
 ### Instance permissions
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission              | description                                                                   |
 | ----------------------- | ----------------------------------------------------------------------------- |
 | admin.access            | Kan komma åt Castopod admin-området.                                          |
 | admin.settings          | Kan komma åt Castopod-inställningarna.                                        |
+| plugins.manage          | Auth.instance_permissions.plugins.manage                                      |
 | users.manage            | Kan hantera Castopod-användare.                                               |
 | persons.manage          | Kan hantera personer.                                                         |
 | pages.manage            | Kan hantera sidor.                                                            |
@@ -38,13 +39,13 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | podcasts.import         | Kan importera podcasts.                                                       |
 | fediverse.manage-blocks | Kan blockera fediverse skådespelare/domäner från att interagera med Castopod. |
 
-{/_ AUTH-INSTANCE-PERMISSIONS-LIST:END _/}
+{/* AUTH-INSTANCE-PERMISSIONS-LIST:END */}
 
 ## 2. Per podcast roles and permissions
 
 ### Per podcast roles
 
-{/_ AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section */}
 
 | role       | description                                                     | permissions                                                                                                                                                                                                                                                                                 |
 | ---------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -53,11 +54,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | Författare | Hanterar innehåll i podcast #\{id\} men kan inte publicera dem. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
 | Gäst       | Generell bidragsgivare till podcasten #\{id\}.                  | view, episodes.view                                                                                                                                                                                                                                                                         |
 
-{/_ AUTH-PODCAST-ROLES-LIST:END _/}
+{/* AUTH-PODCAST-ROLES-LIST:END */}
 
 ### Per podcast permissions
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section */}
 
 | permission                   | description                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------------- |
@@ -81,4 +82,4 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | episodes.manage-publications | Kan publicera/avpublicera avsnitt och inlägg i podcast #\{id\}.                    |
 | episodes.manage-comments     | Kan skapa/ta bort avsnitt kommentarer från podcasten #\{id\}.                      |
 
-{/_ AUTH-PODCAST-PERMISSIONS-LIST:END _/}
+{/* AUTH-PODCAST-PERMISSIONS-LIST:END */}

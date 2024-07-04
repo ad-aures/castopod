@@ -24,7 +24,7 @@ defined('CP_VERSION') || define('CP_VERSION', '2.0.0-next.1');
  | classes should use.
  |
  | NOTE: changing this will require manually modifying the
- | existing namespaces of App\* namespaced-classes.
+ | existing namespaces of App* namespaced-classes.
  */
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
 
