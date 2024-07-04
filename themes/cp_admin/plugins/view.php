@@ -116,17 +116,32 @@
             </ul>
         <?php endif; ?>
     </aside>
+    <pf-tabs class="w-full max-w-3xl border rounded-t-lg rounded-b-lg xl:-mt-8 xl:rounded-t-none bg-elevated border-subtle" style="--pf-c-tabs__item--m-current__link--after--BorderColor:#009486">
+        <pf-tab slot="tab"><?= icon('article-line', [
+            'slot' => 'icon',
+        ]) ?>README.md</pf-tab>
     <?php if($plugin->getReadmeHTML()): ?>
-        <section class="w-full max-w-3xl p-4 prose border rounded-t-lg rounded-b-lg xl:rounded-t-none xl:-mt-12 md:p-6 xl:p-12 prose-headings:font-display bg-elevated border-subtle">
+        <pf-tab-panel class="p-4 prose md:p-6 xl:p-12 prose-headings:font-display">
             <?= $plugin->getReadmeHTML() ?>
-        </section>
+        </pf-tab-panel>
     <?php else: ?>
-        <section class="flex flex-col items-center justify-center w-full max-w-3xl p-4 border rounded-t-lg rounded-b-lg xl:rounded-t-none xl:-mt-12 md:p-6 xl:p-12 bg-elevated border-subtle min-h-96">
-            <?= icon('article-line', [
-                'class' => 'text-gray-300 text-6xl',
-            ]) ?>
-            <p class="mt-2 font-semibold text-skin-muted"><?= lang('Plugins.noReadme') ?></p>
-        </section>
+        <pf-tab-panel class="p-4 md:p-6 xl:p-12">
+            <div class="flex flex-col items-center justify-center min-h-96">
+                <?= icon('article-line', [
+                    'class' => 'text-gray-300 text-6xl',
+                ]) ?>
+                <p class="mt-2 font-semibold text-skin-muted"><?= lang('Plugins.noReadme') ?></p>
+            </div>
+        </pf-tab-panel>
     <?php endif; ?>
+    <?php if($plugin->getLicenseHTML()): ?>
+        <pf-tab slot="tab"><?= icon('scales-3-fill', [
+            'slot' => 'icon',
+        ]) ?>LICENSE.md</pf-tab>
+        <pf-tab-panel class="p-4 prose md:p-6 xl:p-12 prose-headings:font-display">
+            <?= $plugin->getLicenseHTML() ?>
+        </pf-tab-panel>
+    <?php endif; ?>
+    </pf-tabs>
 </div>
 <?= $this->endSection() ?>

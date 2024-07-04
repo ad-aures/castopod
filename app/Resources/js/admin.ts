@@ -22,6 +22,7 @@ import ValidateFileSize from "./modules/ValidateFileSize";
 import "./modules/video-clip-previewer";
 import VideoClipBuilder from "./modules/VideoClipBuilder";
 import "./modules/xml-editor";
+import "@patternfly/elements/pf-tabs/pf-tabs.js";
 
 Dropdown();
 Tooltip();

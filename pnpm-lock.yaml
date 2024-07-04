@@ -43,6 +43,9 @@ importers:
       "@github/relative-time-element":
         specifier: ^4.4.2
         version: 4.4.2
+      "@patternfly/elements":
+        specifier: ^3.0.2
+        version: 3.0.2
       "@tailwindcss/nesting":
         specifier: 0.0.0-insiders.565cd3e
         version: 0.0.0-insiders.565cd3e(postcss@8.4.39)
@@ -2125,6 +2128,12 @@ packages:
         integrity: sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==,
       }
 
+  "@lit/context@1.1.2":
+    resolution:
+      {
+        integrity: sha512-S0nw2C6Tkm7fVX5TGYqeROGD+Z9Coa2iFpW+ysYBDH3YvCqOY3wVQvSgwbaliLJkjTnSEYCBe9qFqKV8WUFpVw==,
+      }
+
   "@lit/reactive-element@2.0.4":
     resolution:
       {
@@ -2231,6 +2240,24 @@ packages:
     resolution:
       {
         integrity: sha512-Y73oOAzRBAUzR/iRAbGULzpNkX8vaxKCqEtg6K74Ff3w9f5apFnWtE/2nade7dMWWW3bS5Kkd6DJS4HF04xreg==,
+      }
+
+  "@patternfly/elements@3.0.2":
+    resolution:
+      {
+        integrity: sha512-YsmDu0XP7YyWdwIKXQIvtI81JfQ9+R3QszKQyFlEuhiS1ufA86f7L/1toQvOhZgmEBfAitnJBejndYi5s13EGw==,
+      }
+
+  "@patternfly/icons@1.0.3":
+    resolution:
+      {
+        integrity: sha512-8BARaCFBUZU2/TxuOQb8R2/VIpxGMnFwdw5ddT1AMnR2KSifdo+d05SgZtVmFkOIAOA0oCo/YKRgSORDA47wig==,
+      }
+
+  "@patternfly/pfe-core@3.0.0":
+    resolution:
+      {
+        integrity: sha512-zxJ2dksvTsurQ74EHlNWv03P1HH/ZO+axX0XPyjDdkOWpbyL4UDK6x5VXDRRtiZ3CrRs7VX3RbBfB5EQ1gBZ5A==,
       }
 
   "@pkgjs/parseargs@0.11.0":
@@ -10781,6 +10808,10 @@ snapshots:
 
   "@lit-labs/ssr-dom-shim@1.2.0": {}
 
+  "@lit/context@1.1.2":
+    dependencies:
+      "@lit/reactive-element": 2.0.4
+
   "@lit/reactive-element@2.0.4":
     dependencies:
       "@lit-labs/ssr-dom-shim": 1.2.0
@@ -10854,6 +10885,22 @@ snapshots:
   "@octokit/types@13.4.1":
     dependencies:
       "@octokit/openapi-types": 22.1.0
+
+  "@patternfly/elements@3.0.2":
+    dependencies:
+      "@lit/context": 1.1.2
+      "@patternfly/icons": 1.0.3
+      "@patternfly/pfe-core": 3.0.0
+      lit: 3.1.4
+      tslib: 2.6.2
+
+  "@patternfly/icons@1.0.3": {}
+
+  "@patternfly/pfe-core@3.0.0":
+    dependencies:
+      "@floating-ui/dom": 1.6.7
+      "@lit/context": 1.1.2
+      lit: 3.1.4
 
   "@pkgjs/parseargs@0.11.0":
     optional: true

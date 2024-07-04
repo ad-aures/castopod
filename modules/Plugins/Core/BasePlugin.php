@@ -39,6 +39,8 @@ abstract class BasePlugin implements PluginInterface
 
     protected ?string $readmeHTML;
 
+    protected ?string $licenseHTML;
+
     public function __construct(
         protected string $vendor,
         protected string $package,
@@ -56,7 +58,9 @@ abstract class BasePlugin implements PluginInterface
 
         $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
 
-        $this->readmeHTML = $this->loadReadme($directory . '/README.md');
+        $this->readmeHTML = $this->loadMarkdownAsHTML($directory . '/README.md');
+
+        $this->licenseHTML = $this->loadMarkdownAsHTML($directory . '/LICENSE.md');
     }
 
     /**
@@ -270,6 +274,11 @@ abstract class BasePlugin implements PluginInterface
         return $this->manifest->license ?? 'UNLICENSED';
     }
 
+    final public function getLicenseHTML(): ?string
+    {
+        return $this->licenseHTML;
+    }
+
     /**
      * @param PluginStatus::ACTIVE|PluginStatus::INACTIVE $value
      */
@@ -313,7 +322,7 @@ abstract class BasePlugin implements PluginInterface
         );
     }
 
-    private function loadReadme(string $path): ?string
+    private function loadMarkdownAsHTML(string $path): ?string
     {
         // TODO: cache readme
         $readmeMD = @file_get_contents($path);
