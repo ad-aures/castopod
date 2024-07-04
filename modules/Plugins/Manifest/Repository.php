@@ -8,7 +8,7 @@ use CodeIgniter\HTTP\URI;
 
 /**
  * @property string $type
- * @property ?URI $url
+ * @property URI $url
  * @property ?string $directory
  */
 class Repository extends ManifestObject
