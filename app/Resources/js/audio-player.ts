@@ -62,7 +62,6 @@ const player = html`<div
     id="castopod-vm-player"
     theme="light"
     language="en"
-    icons="castopod-icons"
     class="flex-1"
     style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
   >
@@ -70,7 +69,7 @@ const player = html`<div
       <source src="" type="" />
     </vm-audio>
     <vm-ui>
-      <vm-icon-library name="castopod-icons"></vm-icon-library>
+      <vm-icon-library></vm-icon-library>
       <vm-controls full-width>
         <vm-playback-control></vm-playback-control>
         <vm-volume-control></vm-volume-control>
@@ -85,14 +84,6 @@ const player = html`<div
 </div>`;
 
 render(player, document.body);
-
-// Register Castopod's icons library
-const library: HTMLVmIconLibraryElement | null = document.querySelector(
-  'vm-icon-library[name="castopod-icons"]'
-);
-if (library) {
-  library.resolver = (iconName) => `/assets/icons/${iconName}.svg`;
-}
 
 // Vime elements for audio player
 customElements.define("vm-player", VmPlayer);

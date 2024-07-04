@@ -352,7 +352,6 @@ if (! function_exists('audio_player')) {
                 id="castopod-vm-player"
                 theme="light"
                 language="{$language}"
-                icons="castopod-icons"
                 class="{$class} relative z-0"
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
             >
@@ -360,7 +359,7 @@ if (! function_exists('audio_player')) {
                     <source src="{$source}" type="{$mediaType}" />
                 </vm-audio>
                 <vm-ui>
-                    <vm-icon-library name="castopod-icons"></vm-icon-library>
+                    <vm-icon-library></vm-icon-library>
                     <vm-controls full-width>
                         <vm-playback-control></vm-playback-control>
                         <vm-volume-control></vm-volume-control>

@@ -36,14 +36,6 @@ import "@vime/core/themes/default.css";
 import "@vime/core/themes/light.css";
 import "./modules/play-episode-button";
 
-// Register Castopod's icons library
-const library: HTMLVmIconLibraryElement | null = document.querySelector(
-  'vm-icon-library[name="castopod-icons"]'
-);
-if (library) {
-  library.resolver = (iconName) => `/assets/icons/${iconName}.svg`;
-}
-
 // Vime elements for audio player
 customElements.define("vm-player", VmPlayer);
 customElements.define("vm-file", VmFile);
