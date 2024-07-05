@@ -22,3 +22,23 @@ sudo chown -R root:root /path/to/castopod
 sudo chown -R www-data:www-data /path/to/castopod/writable
 sudo chown -R www-data:www-data /path/to/castopod/public/media
 ```
+
+## Third-party Plugins
+
+Since v2's [Plugins Architecture](../../plugins), Castopod can be extended with
+all sorts of cool features. Anyone can choose to create their own plugins and
+even share them with the community.
+
+👉 Plugins are a way to inject code in parts of Castopod through
+[Hooks](../../plugins/hooks).
+
+Now, if you create your own plugin and install it in your own Castopod, that
+means you control both the code that gets injected and the environment: all is
+good!
+
+But as for **third-party plugins**, you must treat them as a **potential
+security risk _by default_**:
+
+1. Make sure you **trust the source before installing any third-party plugin**
+2. **Review the plugin's code** yourself if you can or
+   [ask developers from the community for help](https://castopod.org/chat)
