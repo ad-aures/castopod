@@ -14,6 +14,11 @@ use Modules\Plugins\Core\PluginStatus;
     <?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
         <?php // @icon('alert-fill')?>
         <x-Pill variant="warning" icon="alert-fill" class="lowercase" size="small"><?= lang('Plugins.invalid') ?></x-Pill>
+    <?php elseif($plugin->getStatus() === PluginStatus::INCOMPATIBLE): ?>
+        <?php // @icon('alert-fill')?>
+        <x-Pill variant="danger" icon="alert-fill" class="lowercase" size="small" hint="<?= lang('Plugins.incompatible_hint', [
+            'minCastopodVersion' => $plugin->getMinCastopodVersion(),
+        ]) ?>"><?= lang('Plugins.incompatible') ?></x-Pill>
     <?php endif; ?>
     </div>
     <img class="rounded-full min-w-16 max-w-16 aspect-square" src="<?= $plugin->getIconSrc() ?>">

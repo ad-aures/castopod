@@ -29,6 +29,8 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'invalid' => 'Invalid',
+    'incompatible' => 'Incompatible',
+    'incompatible_hint' => 'Plugin requires Castopod v{minCastopodVersion} minimum.',
     'uninstall' => 'Uninstall',
     'keywords' => [
         'podcasting20' => 'Podcasting 2.0',

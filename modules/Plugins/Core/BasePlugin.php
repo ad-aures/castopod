@@ -54,7 +54,16 @@ abstract class BasePlugin implements PluginInterface
         $this->manifest = new Manifest($this->key);
         $this->manifest->loadFromFile($manifestPath);
 
-        $this->status = get_plugin_setting($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
+        // check compatibility with Castopod version
+        if ($this->manifest->minCastopodVersion !== null && version_compare(
+            CP_VERSION,
+            $this->manifest->minCastopodVersion,
+            '<'
+        )) {
+            $this->status = PluginStatus::INCOMPATIBLE;
+        } else {
+            $this->status = get_plugin_setting($this->key, 'active') ? PluginStatus::ACTIVE : PluginStatus::INACTIVE;
+        }
 
         $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
 
@@ -212,6 +221,11 @@ abstract class BasePlugin implements PluginInterface
         }
 
         return $settings->{$type};
+    }
+
+    final public function getMinCastopodVersion(): string
+    {
+        return $this->manifest->minCastopodVersion ?? '';
     }
 
     /**

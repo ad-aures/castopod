@@ -19,8 +19,6 @@ use Modules\Plugins\Config\Plugins as PluginsConfig;
  */
 class Plugins
 {
-    public const API_VERSION = '1.0';
-
     /**
      * @var list<string>
      */
