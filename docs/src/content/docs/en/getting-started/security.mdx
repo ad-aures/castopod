@@ -2,6 +2,8 @@
 title: Security concerns
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 Castopod is built on top of [CodeIgniter4](https://codeigniter.com/), a PHP
 framework that encourages
 [good security practices](https://codeigniter.com/user_guide/concepts/security.html).
@@ -24,6 +26,12 @@ sudo chown -R www-data:www-data /path/to/castopod/public/media
 ```
 
 ## Third-party Plugins
+
+<Aside type="caution" title="Disclaimer">
+  Installing untrusted third-party plugins on Castopod carries inherent security
+  risks, such as unauthorized access to sensitive user data, data breaches, data
+  tampering, and injecting malicious code.
+</Aside>
 
 Since v2's [Plugins Architecture](../../plugins), Castopod can be extended with
 all sorts of cool features. Anyone can choose to create their own plugins and
