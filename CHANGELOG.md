@@ -1,3 +1,25 @@
+# [2.0.0-next.2](https://code.castopod.org/adaures/castopod/compare/v2.0.0-next.1...v2.0.0-next.2) (2024-07-08)
+
+### Bug Fixes
+
+- **audio-player:** set player icons to default instead of missing Castopod's
+  ([0ba0a25](https://code.castopod.org/adaures/castopod/commit/0ba0a25b11bd67aeeb47a8179b72152dfd4a36da))
+- broken icon call in frontend default pages template
+  ([3228362](https://code.castopod.org/adaures/castopod/commit/322836254e86be7878e21438177ee8f73f03a2fa))
+- **manifest:** set repository url as required in docstring typings
+  ([a8c81b3](https://code.castopod.org/adaures/castopod/commit/a8c81b3fa19a28dbd608027c231dcac31eafb38f))
+- set correct icons parameters in map and funding links views
+  ([5d35524](https://code.castopod.org/adaures/castopod/commit/5d355248753be24e3cf324144ff076f2fc23be88)),
+  closes [#500](https://code.castopod.org/adaures/castopod/issues/500)
+
+### Features
+
+- **plugins:** add `minCastopodVersion` to denote incompatibility with previous
+  Castopod versions
+  ([fc9ea75](https://code.castopod.org/adaures/castopod/commit/fc9ea7597e454e5c7c7af043d29af7bbe119e342))
+- **plugins:** load and display LICENSE.md file if found in plugin's directory
+  ([fee7905](https://code.castopod.org/adaures/castopod/commit/fee7905935a9adf963b4485b437fe4d972c14b5f))
+
 # [2.0.0-next.1](https://code.castopod.org/adaures/castopod/compare/v1.11.0...v2.0.0-next.1) (6/19/2024)
 
 ### Bug Fixes
