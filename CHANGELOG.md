@@ -1,3 +1,11 @@
+## [1.12.5](https://code.castopod.org/adaures/castopod/compare/v1.12.4...v1.12.5) (2024-07-30)
+
+### Bug Fixes
+
+- **rss:** add subscription id to cache name to prevent premium feeds from
+  overlapping
+  ([5310d86](https://code.castopod.org/adaures/castopod/commit/5310d8648af6d43b9090f8d9f8066f7b3a8f0aa7))
+
 ## [1.12.4](https://code.castopod.org/adaures/castopod/compare/v1.12.3...v1.12.4) (2024-07-30)
 
 ### Bug Fixes
