@@ -1,3 +1,12 @@
+## [1.12.4](https://code.castopod.org/adaures/castopod/compare/v1.12.3...v1.12.4) (2024-07-30)
+
+### Bug Fixes
+
+- **icons:** set correct names for lock and lock-unlock icons in premium banner
+  ([94deaab](https://code.castopod.org/adaures/castopod/commit/94deaab3cd0912ff1a585bee174a096a84c68384))
+- **premium-podcasts:** update query to validate subscription
+  ([0e6d294](https://code.castopod.org/adaures/castopod/commit/0e6d2945f215453abbe7d9f90afd012d2507846b))
+
 ## [1.12.3](https://code.castopod.org/adaures/castopod/compare/v1.12.2...v1.12.3) (2024-07-04)
 
 ### Bug Fixes
