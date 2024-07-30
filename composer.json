@@ -9,42 +9,42 @@
     "php": "^8.3",
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
-    "aws/aws-sdk-php": "^3.315.2",
+    "aws/aws-sdk-php": "^3.316.9",
     "chrisjean/php-ico": "^1.0.4",
     "cocur/slugify": "^v4.5.1",
-    "codeigniter4/framework": "v4.5.3",
+    "codeigniter4/framework": "v4.5.4",
     "codeigniter4/settings": "v2.2.0",
     "codeigniter4/shield": "v1.1.0",
     "codeigniter4/tasks": "dev-develop",
     "geoip2/geoip2": "v3.0.0",
     "james-heinrich/getid3": "^2.0.0-beta6",
-    "league/commonmark": "^2.4.2",
+    "league/commonmark": "^2.5.1",
     "league/html-to-markdown": "5.1.1",
     "melbahja/seo": "^v2.1.1",
     "michalsn/codeigniter4-uuid": "v1.1.0",
     "mpratt/embera": "^2.0.40",
     "opawg/user-agents-v2-php": "dev-main",
     "phpseclib/phpseclib": "~2.0.47",
-    "vlucas/phpdotenv": "v5.6.0",
+    "vlucas/phpdotenv": "v5.6.1",
     "whichbrowser/parser": "^v2.1.8",
     "yassinedoghri/codeigniter-icons": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
-    "captainhook/captainhook": "^5.23.1",
+    "captainhook/captainhook": "^5.23.3",
     "codeigniter/phpstan-codeigniter": "v1.4.3",
     "mikey179/vfsstream": "^v1.6.11",
     "phpstan/extension-installer": "^1.4.1",
-    "phpstan/phpstan": "^1.11.6",
-    "phpunit/phpunit": "^10.5.24",
-    "rector/rector": "^1.2.0",
-    "symplify/coding-standard": "^12.1.6",
-    "symplify/easy-coding-standard": "^12.3.0"
+    "phpstan/phpstan": "^1.11.8",
+    "phpunit/phpunit": "^10.5.29",
+    "rector/rector": "^1.2.2",
+    "symplify/coding-standard": "^12.2.1",
+    "symplify/easy-coding-standard": "^12.3.3"
   },
   "autoload": {
     "psr-4": {
       "App\\": "app/",
-      "Config\\": "app/Config"
+      "Config\\": "app/Config/"
     },
     "exclude-from-classmap": [
       "**/Database/Migrations/**"
