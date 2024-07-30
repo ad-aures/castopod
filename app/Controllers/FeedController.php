@@ -66,7 +66,7 @@ class FeedController extends Controller
                 "podcast#{$podcast->id}",
                 'feed',
                 $service ? $serviceSlug : null,
-                $subscription instanceof Subscription ? 'unlocked' : null,
+                $subscription instanceof Subscription ? "subscription#{$subscription->id}" : null,
             ]),
         );
 
