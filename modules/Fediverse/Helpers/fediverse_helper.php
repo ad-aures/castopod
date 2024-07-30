@@ -405,7 +405,7 @@ if (! function_exists('linkify')) {
                 ),
                 'handle' => preg_replace_callback(
                     '~(?<!\w)@(?<username>\w++)(?:@(?<domain>(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]))?~',
-                    static function (array $match) use (&$links) {
+                    static function (array $match) use (&$links): string {
                         // check if host is set and look for actor in database
                         if (isset($match['host'])) {
                             if (
