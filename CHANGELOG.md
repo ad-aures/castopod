@@ -1,3 +1,12 @@
+## [1.12.6](https://code.castopod.org/adaures/castopod/compare/v1.12.5...v1.12.6) (2024-08-09)
+
+### Bug Fixes
+
+- **docker-image:** clear cache to account for new assets and data structure
+  changes
+  ([e41245d](https://code.castopod.org/adaures/castopod/commit/e41245d2e758bce2a404749398bef89998638561)),
+  closes [#510](https://code.castopod.org/adaures/castopod/issues/510)
+
 ## [1.12.5](https://code.castopod.org/adaures/castopod/compare/v1.12.4...v1.12.5) (2024-07-30)
 
 ### Bug Fixes
