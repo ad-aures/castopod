@@ -197,7 +197,7 @@ class EpisodeModel extends UuidModel
 
     public function getEpisodeByPreviewId(string $previewId): ?Episode
     {
-        $cacheName = "podcast_episode#preview-{$previewId}";
+        $cacheName = "podcast_episode-preview#{$previewId}";
         if (! ($found = cache($cacheName))) {
             $builder = $this->where([
                 'preview_id' => $this->uuid->fromString($previewId)
@@ -441,7 +441,7 @@ class EpisodeModel extends UuidModel
         cache()
             ->deleteMatching("podcast-{$episode->podcast->handle}*");
         cache()
-            ->delete("podcast_episode#{$episode->id}");
+            ->deleteMatching('podcast_episode*');
         cache()
             ->deleteMatching("page_podcast#{$episode->podcast_id}*");
         cache()
