@@ -44,8 +44,7 @@
     label="<?= esc(lang('Episode.form.title')) ?>"
     hint="<?= esc(lang('Episode.form.title_hint')) ?>"
     value="<?= esc($episode->title) ?>"
-    required="true"
-    data-slugify="title" />
+    required="true" />
 
 <div>
     <Forms.Label for="slug"><?= lang('Episode.form.permalink') ?></Forms.Label>
