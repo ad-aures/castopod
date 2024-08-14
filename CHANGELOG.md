@@ -1,3 +1,14 @@
+## [1.12.7](https://code.castopod.org/adaures/castopod/compare/v1.12.6...v1.12.7) (2024-08-14)
+
+### Bug Fixes
+
+- **episode:** do not change slug when editing episode title
+  ([89bf73b](https://code.castopod.org/adaures/castopod/commit/89bf73b869c28c2fcffa3dcbc3660fac3b6bf988)),
+  closes [#513](https://code.castopod.org/adaures/castopod/issues/513)
+- **preview:** delete episode preview cache after editing episode
+  ([6a2cdd0](https://code.castopod.org/adaures/castopod/commit/6a2cdd066ee13efc6489901bbdcbcc5fea35cd71)),
+  closes [#514](https://code.castopod.org/adaures/castopod/issues/514)
+
 ## [1.12.6](https://code.castopod.org/adaures/castopod/compare/v1.12.5...v1.12.6) (2024-08-09)
 
 ### Bug Fixes
