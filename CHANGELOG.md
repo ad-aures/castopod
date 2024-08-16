@@ -1,3 +1,10 @@
+## [1.12.8](https://code.castopod.org/adaures/castopod/compare/v1.12.7...v1.12.8) (2024-08-16)
+
+### Bug Fixes
+
+- **podcast-model:** always query podcast from database when clearing cache
+  ([995ca5b](https://code.castopod.org/adaures/castopod/commit/995ca5b197f8f917102a108dd07d1f81e99cc8e6))
+
 ## [1.12.7](https://code.castopod.org/adaures/castopod/compare/v1.12.6...v1.12.7) (2024-08-14)
 
 ### Bug Fixes
