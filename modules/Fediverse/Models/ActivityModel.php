@@ -123,11 +123,12 @@ class ActivityModel extends UuidModel
     /**
      * @return Activity[]
      */
-    public function getScheduledActivities(): array
+    public function getScheduledActivities(int $limit = 10): array
     {
         return $this->where('`scheduled_at` <= UTC_TIMESTAMP()', null, false)
             ->where('status', 'queued')
             ->orderBy('scheduled_at', 'ASC')
+            ->limit($limit)
             ->findAll();
     }
 
