@@ -1,3 +1,12 @@
+## [1.12.9](https://code.castopod.org/adaures/castopod/compare/v1.12.8...v1.12.9) (2024-08-16)
+
+### Bug Fixes
+
+- **fediverse:** add "processing" and "failed" statuses to better manage
+  broadcast load
+  ([cf9e072](https://code.castopod.org/adaures/castopod/commit/cf9e0724fcdb8d0194676880cc3b088b221f5a38)),
+  closes [#511](https://code.castopod.org/adaures/castopod/issues/511)
+
 ## [1.12.8](https://code.castopod.org/adaures/castopod/compare/v1.12.7...v1.12.8) (2024-08-16)
 
 ### Bug Fixes
