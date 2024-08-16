@@ -131,6 +131,7 @@ if (! function_exists('send_activity_to_followers')) {
      */
     function send_activity_to_followers(Actor $actor, string $activityPayload): void
     {
+        // TODO: send activities in parallel with https://www.php.net/manual/en/function.curl-multi-init.php
         foreach ($actor->followers as $follower) {
             send_activity_to_actor($actor, $follower, $activityPayload);
         }
