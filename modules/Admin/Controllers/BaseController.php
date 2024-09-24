@@ -27,9 +27,6 @@ abstract class BaseController extends Controller
      */
     protected $request;
 
-    /**
-     * Constructor.
-     */
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

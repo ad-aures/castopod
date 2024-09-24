@@ -34,9 +34,6 @@ class InstallController extends Controller
      */
     protected $helpers = ['form', 'components', 'svg', 'misc', 'setting'];
 
-    /**
-     * Constructor.
-     */
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

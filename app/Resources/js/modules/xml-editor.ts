@@ -37,7 +37,7 @@ export class XMLEditor extends LitElement {
         editorContents = prettifyXML(this._textarea[0].value, {
           indentation: "  ",
         });
-      } catch (e) {
+      } catch {
         // xml doesn't have a root node
         editorContents = prettifyXML(
           "<root>" + this._textarea[0].value + "</root>",
