@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Config;
 
 /**
- * Mimes
- *
  * This file contains an array of mime types.  It is used by the Upload class to help identify allowed file types.
  *
  * When more than one variation for an extension exist (like jpg, jpeg, etc) the most common one should be first in the

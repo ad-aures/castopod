@@ -23,7 +23,7 @@
         "conditions": []
       },
       {
-        "action": "composer analyse",
+        "action": "composer phpstan",
         "options": [],
         "conditions": []
       },

@@ -11,7 +11,6 @@ use Kint\Renderer\Rich\ValuePluginInterface;
 
 /**
  * --------------------------------------------------------------------------
- * Kint
  * --------------------------------------------------------------------------
  *
  * We use Kint's `RichRenderer` and `CLIRenderer`. This area contains options

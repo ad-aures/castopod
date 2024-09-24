@@ -76,8 +76,6 @@ class MediaModel extends Model
     protected $beforeDelete = ['clearCache'];
 
     /**
-     * Model constructor.
-     *
      * @param ConnectionInterface|null $db         DB Connection
      * @param ValidationInterface|null $validation Validation
      */

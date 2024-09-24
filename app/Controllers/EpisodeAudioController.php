@@ -51,9 +51,6 @@ class EpisodeAudioController extends Controller
 
     protected Analytics $analyticsConfig;
 
-    /**
-     * Constructor.
-     */
     #[Override]
     public function initController(
         RequestInterface $request,
