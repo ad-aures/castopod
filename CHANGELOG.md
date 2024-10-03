@@ -1,3 +1,10 @@
+## [1.12.10](https://code.castopod.org/adaures/castopod/compare/v1.12.9...v1.12.10) (2024-10-03)
+
+### Bug Fixes
+
+- set user as www-data when running cron jobs in docker's supervisord config
+  ([be3b6db](https://code.castopod.org/adaures/castopod/commit/be3b6db207204e14c9ad5d4d84384b15e0dbfa84))
+
 ## [1.12.9](https://code.castopod.org/adaures/castopod/compare/v1.12.8...v1.12.9) (2024-08-16)
 
 ### Bug Fixes
