@@ -192,9 +192,9 @@ class App extends BaseConfig
      *         '192.168.5.0/24' => 'X-Real-IP',
      *     ]
      *
-     * @var array<string, string>
+     * @var array<string, string>|string
      */
-    public array $proxyIPs = [];
+    public $proxyIPs = [];
 
     /**
      * --------------------------------------------------------------------------
@@ -249,4 +249,36 @@ class App extends BaseConfig
     public ?int $bandwidthLimit = null;
 
     public ?string $legalNoticeURL = null;
+
+    /**
+     * AuthToken Config Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (is_string($this->proxyIPs)) {
+            $array = json_decode($this->proxyIPs, true);
+            if (is_array($array)) {
+                $this->proxyIPs = $array;
+            }
+        }
+    }
+
+    /**
+     * Override parent initEnvValue() to allow for direct setting to array properties values from ENV
+     *
+     * In order to set array properties via ENV vars we need to set the property to a string value first.
+     *
+     * @param mixed $property
+     */
+    protected function initEnvValue(&$property, string $name, string $prefix, string $shortPrefix): void
+    {
+        // if attempting to set property from ENV, first set to empty string
+        if ($name === 'proxyIPs' && $this->getEnvValue($name, $prefix, $shortPrefix) !== null) {
+            $property = '';
+        }
+
+        parent::initEnvValue($property, $name, $prefix, $shortPrefix);
+    }
 }
