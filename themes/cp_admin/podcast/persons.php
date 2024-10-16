@@ -26,7 +26,7 @@
     <x-Forms.Field
         as="SelectMulti"
         id="persons"
-        name="persons[]"
+        name="persons"
         label="<?= esc(lang('Person.podcast_form.persons')) ?>"
         hint="<?= esc(lang('Person.podcast_form.persons_hint')) ?>"
         options="<?= esc(json_encode($personOptions)) ?>"
@@ -36,7 +36,7 @@
     <x-Forms.Field
         as="SelectMulti"
         id="roles"
-        name="roles[]"
+        name="roles"
         label="<?= esc(lang('Person.podcast_form.roles')) ?>"
         hint="<?= esc(lang('Person.podcast_form.roles_hint')) ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"

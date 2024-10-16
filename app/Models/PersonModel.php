@@ -146,7 +146,10 @@ class PersonModel extends Model
                     ->orderBy('`full_name`', 'ASC')
                     ->findAll(),
                 static function (array $result, $person): array {
-                    $result[$person->id] = $person->full_name;
+                    $result[] = [
+                        'value' => $person->id,
+                        'label' => $person->full_name,
+                    ];
                     return $result;
                 },
                 [],
@@ -174,9 +177,11 @@ class PersonModel extends Model
         if (! ($options = cache($cacheName))) {
             foreach ($personsTaxonomy as $group_key => $group) {
                 foreach ($group['roles'] as $role_key => $role) {
-                    $options[
-                        "{$group_key},{$role_key}"
-                    ] = "{$group['label']}  ›  {$role['label']}";
+                    $options[] = [
+                        'value' => "{$group_key},
+{$role_key}",
+                        'label' => "{$group['label']}  ›  {$role['label']}",
+                    ];
                 }
             }
 

@@ -19,7 +19,7 @@ class DatetimePicker extends FormComponent
             'name'       => $this->name,
             'class'      => 'rounded-l-lg border-0 border-rounded-r-none flex-1 focus:ring-0',
             'data-input' => '',
-        ], old($this->name, $this->value));
+        ], old($this->name, (string) $this->value));
 
         $clearLabel = lang(
             'Episode.publish_form.scheduled_publication_date_clear',

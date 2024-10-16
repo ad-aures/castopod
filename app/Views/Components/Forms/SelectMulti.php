@@ -17,7 +17,7 @@ class SelectMulti extends FormComponent
     ];
 
     /**
-     * @var array<string, string>
+     * @var array<array<string, string>>
      */
     protected array $options = [];
 
@@ -39,12 +39,13 @@ class SelectMulti extends FormComponent
             'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText'),
             'data-max-item-text'   => lang('Common.forms.multiSelect.maxItemText'),
         ];
+
         $this->attributes = [...$defaultAttributes, ...$this->attributes];
 
         $options = '';
         $selected = $this->value ?? $this->defaultValue;
         foreach ($this->options as $option) {
-            $options .= '<option value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option ' . (array_key_exists('hint', $option) ? 'data-label-description="' . $option['hint'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
         $this->attributes['name'] = $this->name . '[]';

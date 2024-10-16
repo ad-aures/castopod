@@ -13,7 +13,7 @@ class Option extends ManifestObject
 {
     protected const VALIDATION_RULES = [
         'label' => 'required|string',
-        'value' => 'required|alpha_dash',
+        'value' => 'required|alpha_numeric_punct',
         'hint'  => 'permit_empty|string',
     ];
 

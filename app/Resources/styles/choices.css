@@ -250,6 +250,8 @@
   }
 
   .choices__list--dropdown .choices__item {
+    @apply break-normal;
+
     position: relative;
     padding: 10px;
     font-size: 14px;
@@ -351,6 +353,10 @@
 
   .choices__placeholder {
     opacity: 0.5;
+  }
+
+  .choices__description {
+    @apply text-xs block text-skin-muted break-normal;
   }
 }
 
