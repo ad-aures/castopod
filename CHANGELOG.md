@@ -1,3 +1,10 @@
+## [1.12.11](https://code.castopod.org/adaures/castopod/compare/v1.12.10...v1.12.11) (2024-10-16)
+
+### Bug Fixes
+
+- allow passing json to app.proxyIPs config to set it
+  ([7d1460b](https://code.castopod.org/adaures/castopod/commit/7d1460b8e08beb447389c604995efd931c84fd72))
+
 ## [1.12.10](https://code.castopod.org/adaures/castopod/compare/v1.12.9...v1.12.10) (2024-10-03)
 
 ### Bug Fixes
