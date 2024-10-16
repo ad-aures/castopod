@@ -130,7 +130,7 @@
     
     <x-Forms.Field
         as="SelectMulti"
-        name="other_categories[]"
+        name="other_categories"
         label="<?= esc(lang('Podcast.form.other_categories')) ?>"
         data-max-item-count="2"
         value="<?= esc(json_encode($podcast->other_categories_ids)) ?>"

@@ -5,6 +5,7 @@
 var tabLinks = [];
 var contentDivs = [];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function init() {
   // Grab the tab links and content divs from the page
   var tabListItems = document.getElementById("tabs").childNodes;
@@ -85,6 +86,7 @@ function getHash(url) {
 
 //--------------------------------------------------------------------
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function toggle(elem) {
   elem = document.getElementById(elem);
 
