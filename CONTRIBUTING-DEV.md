@@ -5,7 +5,7 @@
 Castopod is a web app based on the `php` framework
 [CodeIgniter 4](https://codeigniter.com).
 
-We use [Docker](https://www.docker.com/) quickly setup a dev environment. A
+We use [Docker](https://www.docker.com/) to quickly setup a dev environment. A
 `docker-compose.yml` and `Dockerfile` are included in the project's root folder
 to help you kickstart your contribution.
 
@@ -16,9 +16,9 @@ to help you kickstart your contribution.
 
 ### 1. Pre-requisites
 
-0. Install [docker](https://docs.docker.com/get-docker).
+0. Install [Docker](https://docs.docker.com/get-docker).
 
-1. Clone Castopod project by running:
+1. Clone the Castopod repository by running:
 
    ```bash
    git clone https://code.castopod.org/adaures/castopod.git
@@ -79,7 +79,7 @@ to help you kickstart your contribution.
    > [CodeIgniter4 User Guide](https://codeigniter.com/user_guide/index.html)
    > for more info.
 
-3. (for docker desktop) Add the repository you've cloned to docker desktop's
+3. (for Docker desktop) Add the repository you've cloned to Docker desktop's
    `Settings` > `Resources` > `File Sharing`
 
 ### 2. (recommended) Develop inside the app container with VSCode
@@ -96,7 +96,7 @@ required services will be loaded automagically! 🪄
    > The VSCode window will reload inside the dev container. Expect several
    > minutes during first load as it is building all necessary services.
 
-   **Note**: The dev container will start by running Castopod's php server.
+   **Note**: The dev container will start by running Castopod's PHP server.
    During development, you will have to start [Vite](https://vitejs.dev)'s dev
    server for compiling the typescript code and styles:
 
@@ -105,7 +105,7 @@ required services will be loaded automagically! 🪄
    pnpm run dev
    ```
 
-   If there is any issue with the php server not running, you can restart them
+   If there is any issue with the PHP server not running, you can restart them
    using the following commands:
 
    ```bash
@@ -159,9 +159,9 @@ To see your changes, go to:
 
 You do not wish to use the VSCode devcontainer? No problem!
 
-1. Start docker containers manually:
+1. Start the Docker containers manually:
 
-   Go to project's root folder and run:
+   Go to the project's root folder and run:
 
    ```bash
    # starts all services declared in docker-compose.yml file
@@ -225,14 +225,14 @@ You do not wish to use the VSCode devcontainer? No problem!
    > For more info, check out the
    > [Composer documentation](https://getcomposer.org/doc/).
 
-2. Install javascript dependencies with [pnpm](https://pnpm.io/)
+2. Install JavaScript dependencies with [pnpm](https://pnpm.io/)
 
    ```bash
    pnpm install
    ```
 
    > [!NOTE]  
-   > The javascript dependencies aren't included in the repository. Pnpm will
+   > The JavaScript dependencies aren't included in the repository. Pnpm will
    > check the `package.json` and `pnpm-lock.yaml` files to download the
    > packages with the right versions. The dependencies will live under the
    > `node_module` folder. For more info, check out the
@@ -251,7 +251,7 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    > [!NOTE]  
    > The static assets generated live under the `public/assets` folder, it
-   > includes javascript, styles, images, fonts, icons and svg files.
+   > includes JavaScript, styles, images, fonts, icons and svg files.
 
 ### Initialize and populate database
 
@@ -293,7 +293,7 @@ You do not wish to use the VSCode devcontainer? No problem!
    php spark db:seed DevSuperadminSeeder
    ```
 
-3. (optionnal) Populate the database with test data:
+3. (optional) Populate the database with test data:
 
    - Populate with fake podcast analytics:
 
@@ -315,13 +315,13 @@ You do not wish to use the VSCode devcontainer? No problem!
 docker-compose logs --tail 50 --follow --timestamps app
 ```
 
-- Interact with redis server using included redis-cli command:
+- Interact with the Redis server using included redis-cli command:
 
 ```bash
 docker exec -it castopod_redis redis-cli
 ```
 
-- Monitor the redis container:
+- Monitor the Redis container:
 
 ```bash
 docker-compose logs --tail 50 --follow --timestamps redis
@@ -357,7 +357,7 @@ docker-compose down
 docker-compose build app
 ```
 
-Check [docker](https://docs.docker.com/engine/reference/commandline/docker/) and
+Check [Docker](https://docs.docker.com/engine/reference/commandline/docker/) and
 [docker-compose](https://docs.docker.com/compose/reference/) documentations for
 more insights.
 
@@ -399,7 +399,7 @@ You may use Linux user namespaces to fix this on your machine:
    username:100000:65536
    ```
 
-3. Restart docker:
+3. Restart Docker:
 
    ```bash
    sudo systemctl restart docker

@@ -98,8 +98,8 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 Adhering to the following process is the best way to get your work included in
 the project:
 
-1. [Fork](https://docs.gitlab.com/ee/gitlab-basics/fork-project.html) the
-   project, clone your fork, and configure the remotes:
+1. [Fork](https://docs.gitlab.com/ee/user/project/repository/forking_workflow.html)
+   the project, clone your fork, and configure the remotes:
 
    ```bash
    # Clone your fork of the repo into the current directory
