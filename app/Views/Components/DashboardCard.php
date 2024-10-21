@@ -27,7 +27,7 @@ class DashboardCard extends Component
     #[Override]
     public function render(): string
     {
-        $glyph = icon($this->glyph, [
+        $glyph = (string) icon($this->glyph, [
             'class' => 'flex-shrink-0 bg-base rounded-full w-8 h-8 p-2 text-accent-base',
         ]);
 
