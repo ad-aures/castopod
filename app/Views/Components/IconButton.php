@@ -28,7 +28,7 @@ class IconButton extends Button
             default => 'text-lg',
         };
 
-        $this->slot = icon($this->glyph, [
+        $this->slot = (string) icon($this->glyph, [
             'class' => $glyphSizeClass,
         ]);
     }

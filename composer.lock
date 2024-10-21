@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "156f3cbd51fbb10025391c7786b9201c",
+  "content-hash": "f0131cc2c876c7a8da809f3dad8cc993",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -188,16 +188,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.324.3",
+      "version": "3.324.6",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "018a692622175ad65ebefa3f6645e4e6208a11fe"
+        "reference": "7412a44da62fd607efbaac4084e69d6621f29de1"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/018a692622175ad65ebefa3f6645e4e6208a11fe",
-        "reference": "018a692622175ad65ebefa3f6645e4e6208a11fe",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7412a44da62fd607efbaac4084e69d6621f29de1",
+        "reference": "7412a44da62fd607efbaac4084e69d6621f29de1",
         "shasum": ""
       },
       "require": {
@@ -274,9 +274,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.324.3"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.324.6"
       },
-      "time": "2024-10-15T18:29:08+00:00"
+      "time": "2024-10-18T18:06:33+00:00"
     },
     {
       "name": "brick/math",
@@ -1086,16 +1086,16 @@
     },
     {
       "name": "guzzlehttp/promises",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "source": {
         "type": "git",
         "url": "https://github.com/guzzle/promises.git",
-        "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8"
+        "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
-        "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+        "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+        "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
         "shasum": ""
       },
       "require": {
@@ -1145,7 +1145,7 @@
       "keywords": ["promise"],
       "support": {
         "issues": "https://github.com/guzzle/promises/issues",
-        "source": "https://github.com/guzzle/promises/tree/2.0.3"
+        "source": "https://github.com/guzzle/promises/tree/2.0.4"
       },
       "funding": [
         {
@@ -1161,7 +1161,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-07-18T10:29:17+00:00"
+      "time": "2024-10-17T10:06:22+00:00"
     },
     {
       "name": "guzzlehttp/psr7",
@@ -3244,16 +3244,16 @@
     },
     {
       "name": "yassinedoghri/codeigniter-icons",
-      "version": "v1.0.0",
+      "version": "v1.0.1",
       "source": {
         "type": "git",
         "url": "https://github.com/yassinedoghri/codeigniter-icons.git",
-        "reference": "41e703612578fa44dfa8bd937380d71ab2af56ac"
+        "reference": "3dcb134c862438f087cd515cea4ce1e84a34c5bc"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/yassinedoghri/codeigniter-icons/zipball/41e703612578fa44dfa8bd937380d71ab2af56ac",
-        "reference": "41e703612578fa44dfa8bd937380d71ab2af56ac",
+        "url": "https://api.github.com/repos/yassinedoghri/codeigniter-icons/zipball/3dcb134c862438f087cd515cea4ce1e84a34c5bc",
+        "reference": "3dcb134c862438f087cd515cea4ce1e84a34c5bc",
         "shasum": ""
       },
       "require": {
@@ -3297,9 +3297,9 @@
       ],
       "support": {
         "issues": "https://github.com/yassinedoghri/codeigniter-icons/issues",
-        "source": "https://github.com/yassinedoghri/codeigniter-icons/tree/v1.0.0"
+        "source": "https://github.com/yassinedoghri/codeigniter-icons/tree/v1.0.1"
       },
-      "time": "2024-09-29T17:11:34+00:00"
+      "time": "2024-10-20T16:07:46+00:00"
     },
     {
       "name": "yassinedoghri/php-icons",
@@ -4377,16 +4377,16 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "1.12.6",
+      "version": "1.12.7",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpstan.git",
-        "reference": "dc4d2f145a88ea7141ae698effd64d9df46527ae"
+        "reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc4d2f145a88ea7141ae698effd64d9df46527ae",
-        "reference": "dc4d2f145a88ea7141ae698effd64d9df46527ae",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
+        "reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
         "shasum": ""
       },
       "require": {
@@ -4421,7 +4421,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-10-06T15:03:59+00:00"
+      "time": "2024-10-18T11:12:07+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",
@@ -4713,16 +4713,16 @@
     },
     {
       "name": "phpunit/phpunit",
-      "version": "10.5.36",
+      "version": "10.5.37",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "reference": "aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870"
+        "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
-        "reference": "aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c7cffa0efa2b70c22366523e6d804c9419eb2400",
+        "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400",
         "shasum": ""
       },
       "require": {
@@ -4743,7 +4743,7 @@
         "phpunit/php-timer": "^6.0.0",
         "sebastian/cli-parser": "^2.0.1",
         "sebastian/code-unit": "^2.0.0",
-        "sebastian/comparator": "^5.0.2",
+        "sebastian/comparator": "^5.0.3",
         "sebastian/diff": "^5.1.1",
         "sebastian/environment": "^6.1.0",
         "sebastian/exporter": "^5.1.2",
@@ -4782,7 +4782,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/phpunit/issues",
         "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-        "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.36"
+        "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.37"
       },
       "funding": [
         {
@@ -4798,7 +4798,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-10-08T15:36:51+00:00"
+      "time": "2024-10-19T13:03:41+00:00"
     },
     {
       "name": "psr/container",
@@ -5341,16 +5341,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "1.2.7",
+      "version": "1.2.8",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "5b33bdd871895276e2c18e5410a4a57df9233ee0"
+        "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/5b33bdd871895276e2c18e5410a4a57df9233ee0",
-        "reference": "5b33bdd871895276e2c18e5410a4a57df9233ee0",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/05755bf43617449c08ee8e50fb840c85ad3b1240",
+        "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240",
         "shasum": ""
       },
       "require": {
@@ -5377,7 +5377,7 @@
       "keywords": ["automation", "dev", "migration", "refactoring"],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/1.2.7"
+        "source": "https://github.com/rectorphp/rector/tree/1.2.8"
       },
       "funding": [
         {
@@ -5385,7 +5385,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-10-12T11:12:46+00:00"
+      "time": "2024-10-18T11:54:27+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -5545,16 +5545,16 @@
     },
     {
       "name": "sebastian/comparator",
-      "version": "5.0.2",
+      "version": "5.0.3",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/comparator.git",
-        "reference": "2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53"
+        "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53",
-        "reference": "2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53",
+        "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
+        "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
         "shasum": ""
       },
       "require": {
@@ -5565,7 +5565,7 @@
         "sebastian/exporter": "^5.0"
       },
       "require-dev": {
-        "phpunit/phpunit": "^10.4"
+        "phpunit/phpunit": "^10.5"
       },
       "type": "library",
       "extra": {
@@ -5602,7 +5602,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/comparator/issues",
         "security": "https://github.com/sebastianbergmann/comparator/security/policy",
-        "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.2"
+        "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.3"
       },
       "funding": [
         {
@@ -5610,7 +5610,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-08-12T06:03:08+00:00"
+      "time": "2024-10-18T14:56:07+00:00"
     },
     {
       "name": "sebastian/complexity",
