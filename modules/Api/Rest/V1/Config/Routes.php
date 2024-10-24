@@ -31,6 +31,8 @@ $routes->group(
     ],
     static function ($routes): void {
         $routes->get('/', 'EpisodeController::list');
+        $routes->post('/', 'EpisodeController::attemptCreate');
+        $routes->post('(:num)/publish', 'EpisodeController::attemptPublish/$1');
         $routes->get('(:num)', 'EpisodeController::view/$1');
         $routes->get('(:any)', 'ExceptionController::notFound');
     }
