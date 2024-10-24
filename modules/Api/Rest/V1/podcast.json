@@ -72,6 +72,162 @@
           }
         }
       }
+    },
+    "/api/rest/v1/episodes": {
+      "get": {
+        "summary": "List all episodes",
+        "responses": {
+          "200": {
+            "description": "Object of episodes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episodes"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new episode",
+        "requestBody": {
+          "description": "Episode object that needs to be added",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/EpisodeCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Episode created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/v1/episodes/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The id of the episode to retrieve",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          }
+        }
+      ],
+      "get": {
+        "summary": "Info for a specific episode",
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/v1/episodes/{id}/publish": {
+      "post": {
+        "summary": "Publish an episode",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the episode to publish",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1,
+              "maxLength": 10
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Publish parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EpisodePublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Episode published successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Episode"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -300,6 +456,209 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/Podcast"
+        }
+      },
+      "Episode": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "slug",
+          "podcast_id",
+          "created_by",
+          "updated_by",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "podcast_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description_markdown": {
+            "type": "string"
+          },
+          "description_html": {
+            "type": "string"
+          },
+          "audio_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "cover_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updated_by": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Episodes": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Episode"
+        }
+      },
+      "EpisodeCreateRequest": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "updated_by",
+          "title",
+          "slug",
+          "podcast_id",
+          "audio_file"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the user creating the episode"
+          },
+          "updated_by": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the user updating the episode"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the episode"
+          },
+          "slug": {
+            "type": "string",
+            "description": "URL-friendly slug of the episode"
+          },
+          "podcast_id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the podcast the episode belongs to"
+          },
+          "audio_file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Audio file for the episode"
+          },
+          "cover": {
+            "type": "string",
+            "format": "binary",
+            "description": "Cover image for the episode"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the episode"
+          },
+          "location_name": {
+            "type": "string",
+            "description": "Location associated with the episode"
+          },
+          "parental_advisory": {
+            "type": "string",
+            "enum": ["clean", "explicit"],
+            "description": "Parental advisory rating"
+          },
+          "episode_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Episode number (for serial podcasts)"
+          },
+          "season_number": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Season number (for serial podcasts)"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["full", "trailer", "bonus"],
+            "description": "Type of episode"
+          },
+          "block": {
+            "type": "string",
+            "enum": ["yes", "no"],
+            "description": "Block episode from being published"
+          },
+          "custom_rss": {
+            "type": "string",
+            "description": "Custom RSS content"
+          },
+          "premium": {
+            "type": "string",
+            "enum": ["yes", "no"],
+            "description": "Mark episode as premium content"
+          },
+          "transcript-choice": {
+            "type": "string",
+            "enum": ["upload-file", "remote-url"],
+            "description": "Transcript source choice"
+          },
+          "transcript_file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Transcript file"
+          },
+          "transcript_remote_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Remote URL for transcript"
+          },
+          "chapters-choice": {
+            "type": "string",
+            "enum": ["upload-file", "remote-url"],
+            "description": "Chapters source choice"
+          },
+          "chapters_file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Chapters file"
+          },
+          "chapters_remote_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Remote URL for chapters"
+          }
+        }
+      },
+      "EpisodePublishRequest": {
+        "type": "object",
+        "required": ["publication_method"],
+        "properties": {
+          "publication_method": {
+            "type": "string",
+            "enum": ["now", "schedule", "with_podcast"],
+            "description": "Method of publication"
+          },
+          "scheduled_publication_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Scheduled date and time for publication"
+          },
+          "client_timezone": {
+            "type": "string",
+            "description": "Timezone of the client"
+          }
         }
       },
       "Error": {

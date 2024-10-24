@@ -73,7 +73,11 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             'csrf' => [
-                'except' => ['@[a-zA-Z0-9\_]{1,32}/inbox'],
+                'except' => [
+                    '@[a-zA-Z0-9\_]{1,32}/inbox',
+                    'api/rest/v1/episodes',
+                    'api/rest/v1/episodes/[0-9]+/publish',
+                ],
             ],
             // 'invalidchars',
         ],

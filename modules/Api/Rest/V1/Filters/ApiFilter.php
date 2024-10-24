@@ -27,6 +27,13 @@ class ApiFilter implements FilterInterface
             throw PageNotFoundException::forPageNotFound();
         }
 
+        if ($request->getMethod() === 'POST' && ! $restApiConfig->basicAuth) {
+            /** @var Response $response */
+            $response = service('response');
+            $response->setStatusCode(401);
+            return $response;
+        }
+
         if ($restApiConfig->basicAuth) {
             /** @var Response $response */
             $response = service('response');
