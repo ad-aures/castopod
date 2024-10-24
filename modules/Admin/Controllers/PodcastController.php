@@ -351,6 +351,14 @@ class PodcastController extends BaseController
             $this->request->getPost('other_categories') ?? [],
         );
 
+        // New feed url redirect
+        service('settings')
+            ->set(
+                'Podcast.redirect_to_new_feed',
+                $this->request->getPost('redirect_to_new_feed') === 'yes',
+                'podcast:' . $podcast->id
+            );
+
         $db->transComplete();
 
         return redirect()->route('podcast-edit', [$podcast->id])->with(
