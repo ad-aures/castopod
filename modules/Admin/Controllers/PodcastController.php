@@ -367,6 +367,14 @@ class PodcastController extends BaseController
                 'podcast:' . $this->podcast->id
             );
 
+        // New feed url redirect
+        service('settings')
+            ->set(
+                'Podcast.redirect_to_new_feed',
+                $this->request->getPost('redirect_to_new_feed') === 'yes',
+                'podcast:' . $this->podcast->id
+            );
+
         $db->transComplete();
 
         return redirect()->route('podcast-edit', [$this->podcast->id])->with(

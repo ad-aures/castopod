@@ -143,6 +143,8 @@ return [
         'verify_txt_helper' => 'This text is injected into a <podcast:txt purpose="verify"> tag.',
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
+        'redirect_to_new_feed' => 'Automatically redirect to new feed (301 redirect)',
+        'redirect_to_new_feed_hint' => 'Check this when migrating your Castopod RSS feed to the new feed url set above. To ensure followers receive your most recent episodes from the new feed URL, maintain this redirect and the <itunes:new-feed-url> tag in your new feed for at least four weeks.',
         'old_feed_url' => 'Old feed URL',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',

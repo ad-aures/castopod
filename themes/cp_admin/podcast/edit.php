@@ -262,6 +262,10 @@ label="<?= esc(lang('Podcast.form.new_feed_url')) ?>"
 hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
 value="<?= esc($podcast->new_feed_url) ?>"
 />
+<Forms.Toggler name="redirect_to_new_feed" value="yes" checked="<?= service('settings')
+            ->get('Podcast.redirect_to_new_feed', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.redirect_to_new_feed_hint')) ?>"><?= lang('Podcast.form.redirect_to_new_feed') ?></Forms.Toggler>
+
+<hr class="border-subtle">
 
 <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
     <?= lang('Podcast.form.lock') ?>

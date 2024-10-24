@@ -33,13 +33,24 @@ class FeedController extends Controller
 
     public function index(string $podcastHandle): ResponseInterface
     {
-        helper(['rss', 'premium_podcasts', 'misc']);
-
         $podcast = (new PodcastModel())->where('handle', $podcastHandle)
             ->first();
         if (! $podcast instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
+
+        // 301 redirect to new feed?
+        $redirectToNewFeed = service('settings')
+            ->get('Podcast.redirect_to_new_feed', 'podcast:' . $podcast->id);
+
+        if ($redirectToNewFeed && $podcast->new_feed_url !== null && filter_var(
+            $podcast->new_feed_url,
+            FILTER_VALIDATE_URL
+        ) && $podcast->new_feed_url !== current_url()) {
+            return redirect()->to($podcast->new_feed_url, 301);
+        }
+
+        helper(['rss', 'premium_podcasts', 'misc']);
 
         $service = null;
         try {
