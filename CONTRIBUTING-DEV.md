@@ -102,7 +102,7 @@ required services will be loaded automagically! 🪄
 
    ```bash
    # run Vite dev server
-   pnpm run dev
+   pnpm run dev --host
    ```
 
    If there is any issue with the PHP server not running, you can restart them
