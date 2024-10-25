@@ -1,3 +1,12 @@
+# [1.13.0](https://code.castopod.org/adaures/castopod/compare/v1.12.11...v1.13.0) (2024-10-25)
+
+### Features
+
+- **api:** add Episode create and publish endpoints
+  ([75cf78e](https://code.castopod.org/adaures/castopod/commit/75cf78e972c52528dc38be050dcb1eb1f8e626fa))
+- **rss:** add option for 301 redirect to new feed url
+  ([3a7d26f](https://code.castopod.org/adaures/castopod/commit/3a7d26fdf9bfeffb9247f8efe06d9040ae2fe5ff))
+
 ## [1.12.11](https://code.castopod.org/adaures/castopod/compare/v1.12.10...v1.12.11) (2024-10-16)
 
 ### Bug Fixes
