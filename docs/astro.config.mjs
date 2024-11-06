@@ -181,6 +181,113 @@ export default defineConfig({
                 "nn-no": "Autentisering",
               },
             },
+            {
+              label: "Create your first podcast",
+              link: "/getting-started/create-podcast/",
+              translations: {},
+            },
+            {
+              label: "Create your first episode",
+              link: "/getting-started/create-episode/",
+              translations: {},
+            },
+          ],
+        },
+        {
+          label: "User guide",
+          translations: {},
+          items: [
+            {
+              label: "Introduction",
+              link: "/user-guide/",
+            },
+            {
+              label: "Manage your instance",
+              translations: {},
+              items: [
+                {
+                  label: "Introduction",
+                  link: "/user-guide/instance/",
+                },
+                {
+                  label: "Add a podcast",
+                  link: "/user-guide/instance/add-podcast",
+                  translations: {},
+                },
+                {
+                  label: "Persons",
+                  link: "/user-guide/instance/persons",
+                  translations: {},
+                },
+
+                {
+                  label: "Fediverse",
+                  link: "/user-guide/instance/fediverse",
+                  translations: {},
+                },
+                {
+                  label: "Users",
+                  link: "/user-guide/instance/users",
+                  translations: {},
+                },
+                {
+                  label: "Pages",
+                  link: "/user-guide/instance/pages",
+                  translations: {},
+                },
+                {
+                  label: "Settings",
+                  link: "/user-guide/instance/settings",
+                  translations: {},
+                },
+              ],
+            },
+            {
+              label: "Manage your podcasts",
+              translations: {},
+              items: [
+                {
+                  label: "Introduction",
+                  link: "/user-guide/podcast/",
+                },
+                {
+                  label: "Podcast dashboard",
+                  link: "/user-guide/podcast/dashboard",
+                  translations: {},
+                },
+                {
+                  label: "Episodes",
+                  link: "/user-guide/podcast/episodes",
+                  translations: {},
+                },
+
+                {
+                  label: "Analytics",
+                  link: "/user-guide/podcast/analytics",
+                  translations: {},
+                },
+                {
+                  label: "Broadcasting",
+                  link: "/user-guide/podcast/broadcast",
+                  translations: {},
+                },
+                {
+                  label: "Monetization",
+                  link: "/user-guide/podcast/monetization",
+                  translations: {},
+                },
+                {
+                  label: "Contributors",
+                  link: "/user-guide/podcast/contributors",
+                  translations: {},
+                },
+              ],
+            },
+            {
+              label: "Website overview",
+              link: "/user-guide/website/",
+              translations: {},
+            },
           ],
         },
       ],
