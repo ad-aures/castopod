@@ -26,7 +26,7 @@ class IconButton extends Button
 
         parent::__construct($allAttributes);
 
-        $this->slot = icon($this->glyph, [
+        $this->slot = (string) icon($this->glyph, [
             'class' => $glyphSize[$this->size],
         ]);
     }
