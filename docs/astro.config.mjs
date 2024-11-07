@@ -211,7 +211,7 @@ export default defineConfig({
                 },
                 {
                   label: "Add a podcast",
-                  link: "/user-guide/instance/add-podcast",
+                  link: "/user-guide/instance/podcast",
                   translations: {},
                 },
                 {
@@ -272,11 +272,6 @@ export default defineConfig({
                   translations: {},
                 },
                 {
-                  label: "Monetization",
-                  link: "/user-guide/podcast/monetization",
-                  translations: {},
-                },
-                {
                   label: "Contributors",
                   link: "/user-guide/podcast/contributors",
                   translations: {},
@@ -321,8 +316,7 @@ export default defineConfig({
         },
       ],
       editLink: {
-        baseUrl:
-          "https://code.castopod.org/adaures/castopod/-/edit/develop/docs/",
+        baseUrl: "https://code.castopod.org/adaures/castopod/-/edit/main/docs/",
       },
     }),
     tailwind({
