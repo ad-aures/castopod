@@ -272,7 +272,7 @@ abstract class BasePlugin implements PluginInterface
         $description = lang($key);
 
         if ($description === $key) {
-            return $this->manifest->description;
+            return esc($this->manifest->description);
         }
 
         return $description;

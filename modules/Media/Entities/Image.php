@@ -45,10 +45,14 @@ class Image extends BaseMedia
         foreach ($this->sizes as $name => $size) {
             $extension = array_key_exists('extension', $size) ? $size['extension'] : $this->file_extension;
             $mimetype = array_key_exists('mimetype', $size) ? $size['mimetype'] : $this->file_mimetype;
+            $width = array_key_exists('width', $size) ? $size['width'] : 0;
+            $height = array_key_exists('height', $size) ? $size['height'] : 0;
 
             $this->{$name . '_key'} = change_file_path($this->file_key, '_' . $name, $extension);
             $this->{$name . '_url'} = service('file_manager')->getUrl($this->{$name . '_key'});
             $this->{$name . '_mimetype'} = $mimetype;
+            $this->{$name . '_width'} = $width;
+            $this->{$name . '_height'} = $height;
         }
 
         return true;
