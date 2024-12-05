@@ -1,3 +1,10 @@
+## [1.13.1](https://code.castopod.org/adaures/castopod/compare/v1.13.0...v1.13.1) (2024-12-05)
+
+### Bug Fixes
+
+- **api:** cast integers when creating episode
+  ([7ca501d](https://code.castopod.org/adaures/castopod/commit/7ca501dd6f426a1d50ffb1ea759f1e2cc91c1d13))
+
 # [1.13.0](https://code.castopod.org/adaures/castopod/compare/v1.12.11...v1.13.0) (2024-10-25)
 
 ### Features
