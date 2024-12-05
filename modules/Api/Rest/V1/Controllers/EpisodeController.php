@@ -95,7 +95,7 @@ class EpisodeController extends Controller
             return $this->failValidationErrors(array_values($this->validator->getErrors()));
         }
 
-        $podcastId = $this->request->getPost('podcast_id');
+        $podcastId = (int) $this->request->getPost('podcast_id');
 
         $podcast = (new PodcastModel())->getPodcastById($podcastId);
 
@@ -103,7 +103,7 @@ class EpisodeController extends Controller
             return $this->failNotFound('Podcast not found');
         }
 
-        $createdByUserId = $this->request->getPost('created_by');
+        $createdByUserId = (int) $this->request->getPost('created_by');
 
         $userModel = new UserModel();
         $createdByUser = $userModel->find($createdByUserId);
@@ -112,7 +112,7 @@ class EpisodeController extends Controller
             return $this->failNotFound('User not found');
         }
 
-        $updatedByUserId = $this->request->getPost('updated_by');
+        $updatedByUserId = (int) $this->request->getPost('updated_by');
 
         $updatedByUser = $userModel->find($updatedByUserId);
 
@@ -187,7 +187,7 @@ class EpisodeController extends Controller
         }
 
         $episodeModel = new EpisodeModel();
-        if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
+        if (($newEpisodeId = (int) $episodeModel->insert($newEpisode, true)) === 0) {
             return $this->fail($episodeModel->errors(), 400);
         }
 
@@ -227,7 +227,7 @@ class EpisodeController extends Controller
             return $this->failValidationErrors(array_values($this->validator->getErrors()));
         }
 
-        $createdByUserId = $this->request->getPost('created_by');
+        $createdByUserId = (int) $this->request->getPost('created_by');
 
         $userModel = new UserModel();
         $createdByUser = $userModel->find($createdByUserId);
