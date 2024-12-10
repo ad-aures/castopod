@@ -37,6 +37,7 @@ class Plugins
         'textarea'        => ['string'],
         'toggler'         => ['permit_empty'],
         'url'             => ['valid_url_strict'],
+        'group'           => ['permit_empty', 'is_list'],
     ];
 
     public const FIELDS_CASTS = [

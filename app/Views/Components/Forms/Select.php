@@ -37,7 +37,7 @@ class Select extends FormComponent
         $options = '';
         $selected = $this->value ?? $this->defaultValue;
         foreach ($this->options as $option) {
-            $options .= '<option ' . (array_key_exists('hint', $option) ? 'data-label-description="' . $option['hint'] . '" ' : '') . 'value="' . $option['value'] . '"' . ($option['value'] === $selected ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . ($option['value'] === $selected ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
         $this->attributes['name'] = $this->name;

@@ -22,9 +22,9 @@ class RadioGroup extends FormComponent
      */
     protected array $options = [];
 
-    protected string $helper = '';
-
     protected string $hint = '';
+
+    protected string $helper = '';
 
     #[Override]
     public function render(): string
@@ -34,12 +34,12 @@ class RadioGroup extends FormComponent
         $options = '';
         foreach ($this->options as $option) {
             $options .= (new RadioButton([
-                'value'      => $option['value'],
-                'name'       => $this->name,
-                'slot'       => $option['label'],
-                'hint'       => $option['hint'] ?? '',
-                'isSelected' => var_export($this->value === null ? ($option['value'] === $this->options[array_key_first($this->options)]['value']) : ($this->value === $option['value']), true),
-                'isRequired' => var_export($this->isRequired, true),
+                'value'       => $option['value'],
+                'name'        => $this->name,
+                'slot'        => $option['label'],
+                'description' => $option['description'] ?? '',
+                'isSelected'  => var_export($this->value === null ? ($option['value'] === $this->options[array_key_first($this->options)]['value']) : ($this->value === $option['value']), true),
+                'isRequired'  => var_export($this->isRequired, true),
             ]))->render();
         }
 
@@ -62,7 +62,7 @@ class RadioGroup extends FormComponent
         <fieldset {$this->getStringifiedAttributes()}>
             <legend class="-mb-1 text-sm font-semibold">{$this->label}{$hint}</legend>
             {$helperText}
-            <div class="flex gap-1 mt-1">{$options}</div>
+            <div class="grid grid-cols-radioGroup gap-2 mt-1">{$options}</div>
         </fieldset>
         HTML;
     }

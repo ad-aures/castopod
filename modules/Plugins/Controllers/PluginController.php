@@ -13,37 +13,41 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Modules\Admin\Controllers\BaseController;
+use Modules\Plugins\Core\BasePlugin;
 use Modules\Plugins\Core\Markdown;
 use Modules\Plugins\Core\Plugins;
+use Modules\Plugins\Manifest\Field;
 
 class PluginController extends BaseController
 {
+    protected Plugins $plugins;
+
+    public function __construct()
+    {
+        $this->plugins = service('plugins');
+    }
+
     public function installed(): string
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
-
         $pager = service('pager');
 
         $page = (int) ($this->request->getGet('page') ?? 1);
         $perPage = 10;
-        $total = $plugins->getInstalledCount();
+        $total = $this->plugins->getInstalledCount();
 
         $pager_links = $pager->makeLinks($page, $perPage, $total);
 
         return view('plugins/installed', [
             'total'       => $total,
-            'plugins'     => $plugins->getPlugins($page, $perPage),
+            'plugins'     => $this->plugins->getPlugins($page, $perPage),
             'pager_links' => $pager_links,
         ]);
     }
 
     public function vendor(string $vendor): string
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $vendorPlugins = $plugins->getVendorPlugins($vendor);
+        $vendorPlugins = $this->plugins->getVendorPlugins($vendor);
         replace_breadcrumb_params([
             $vendor => $vendor,
         ]);
@@ -56,12 +60,10 @@ class PluginController extends BaseController
 
     public function view(string $vendor, string $package): string
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -80,12 +82,10 @@ class PluginController extends BaseController
         string $podcastId = null,
         string $episodeId = null
     ): string {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -146,12 +146,10 @@ class PluginController extends BaseController
         string $podcastId = null,
         string $episodeId = null
     ): RedirectResponse {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -170,12 +168,36 @@ class PluginController extends BaseController
         // construct validation rules first
         $rules = [];
         foreach ($plugin->getSettingsFields($type) as $field) {
-            $typeRules = $plugins::FIELDS_VALIDATIONS[$field->type];
+            $typeRules = $this->plugins::FIELDS_VALIDATIONS[$field->type];
             if (! in_array('permit_empty', $typeRules, true)) {
                 $typeRules[] = $field->optional ? 'permit_empty' : 'required';
             }
 
-            $rules[$field->key] = $typeRules;
+            if ($field->multiple) {
+                if ($field->type === 'group') {
+                    foreach ($field->fields as $subField) {
+                        $typeRules = $this->plugins::FIELDS_VALIDATIONS[$subField->type];
+                        if (! in_array('permit_empty', $typeRules, true)) {
+                            $typeRules[] = $subField->optional ? 'permit_empty' : 'required';
+                        }
+
+                        $rules[sprintf('%s.*.%s', $field->key, $subField->key)] = $typeRules;
+                    }
+                } else {
+                    $rules[$field->key . '.*'] = $typeRules;
+                }
+            } elseif ($field->type === 'group') {
+                foreach ($field->fields as $subField) {
+                    $typeRules = $this->plugins::FIELDS_VALIDATIONS[$subField->type];
+                    if (! in_array('permit_empty', $typeRules, true)) {
+                        $typeRules[] = $subField->optional ? 'permit_empty' : 'required';
+                    }
+
+                    $rules[sprintf('%s.%s', $field->key, $subField->key)] = $typeRules;
+                }
+            } else {
+                $rules[$field->key] = $typeRules;
+            }
         }
 
         if (! $this->validate($rules)) {
@@ -188,20 +210,9 @@ class PluginController extends BaseController
         $validatedData = $this->validator->getValidated();
 
         foreach ($plugin->getSettingsFields($type) as $field) {
-            $value = $validatedData[$field->key] ?? null;
-            $fieldValue = $value === '' ? null : match ($plugins::FIELDS_CASTS[$field->type] ?? 'text') {
-                'bool'     => $value === 'yes',
-                'int'      => (int) $value,
-                'uri'      => new URI($value),
-                'datetime' => Time::createFromFormat(
-                    'Y-m-d H:i',
-                    $value,
-                    $this->request->getPost('client_timezone')
-                )->setTimezone(app_timezone()),
-                'markdown' => new Markdown($value),
-                default    => $value,
-            };
-            $plugins->setOption($plugin, $field->key, $fieldValue, $context);
+            $fieldValue = $validatedData[$field->key] ?? null;
+
+            $this->plugins->setOption($plugin, $field->key, $this->castFieldValue($field, $fieldValue), $context);
         }
 
         return redirect()->back()
@@ -212,49 +223,114 @@ class PluginController extends BaseController
 
     public function activate(string $vendor, string $package): RedirectResponse
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $plugins->activate($plugin);
+        $this->plugins->activate($plugin);
 
         return redirect()->back();
     }
 
     public function deactivate(string $vendor, string $package): RedirectResponse
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $plugins->deactivate($plugin);
+        $this->plugins->deactivate($plugin);
 
         return redirect()->back();
     }
 
     public function uninstall(string $vendor, string $package): RedirectResponse
     {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($vendor, $package);
+        $plugin = $this->plugins->getPlugin($vendor, $package);
 
-        if ($plugin === null) {
+        if (! $plugin instanceof BasePlugin) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $plugins->uninstall($plugin);
+        $this->plugins->uninstall($plugin);
 
         return redirect()->back();
+    }
+
+    private function castFieldValue(Field $field, mixed $fieldValue): mixed
+    {
+        if ($fieldValue === '' || $fieldValue === null) {
+            return null;
+        }
+
+        $value = null;
+        if ($field->multiple) {
+            $value = [];
+            foreach ($fieldValue as $key => $val) {
+                if ($val === '') {
+                    continue;
+                }
+
+                if ($field->type === 'group') {
+                    foreach ($val as $subKey => $subVal) {
+                        /** @var Field|false $subField */
+                        $subField = array_column($field->fields, null, 'key')[$subKey] ?? false;
+                        if (! $subField) {
+                            continue;
+                        }
+
+                        $v = $this->castValue($subVal, $subField->type);
+                        if ($v) {
+                            $value[$key][$subKey] = $v;
+                        }
+                    }
+                } else {
+                    $value[$key] = $this->castValue($val, $field->type);
+                }
+            }
+        } elseif ($field->type === 'group') {
+            foreach ($fieldValue as $subKey => $subVal) {
+                /** @var Field|false $subField */
+                $subField = array_column($field->fields, null, 'key')[$subKey] ?? false;
+                if (! $subField) {
+                    continue;
+                }
+
+                $v = $this->castValue($subVal, $subField->type);
+                if ($v) {
+                    $value[$subKey] = $v;
+                }
+            }
+        } else {
+            $value = $this->castValue($fieldValue, $field->type);
+        }
+
+        return $value === [] ? null : $value;
+    }
+
+    private function castValue(mixed $value, string $type): mixed
+    {
+        if ($value === '' || $value === null) {
+            return null;
+        }
+
+        return match ($this->plugins::FIELDS_CASTS[$type] ?? 'text') {
+            'bool'     => $value === 'yes',
+            'int'      => (int) $value,
+            'uri'      => new URI($value),
+            'datetime' => Time::createFromFormat(
+                'Y-m-d H:i',
+                $value,
+                $this->request->getPost('client_timezone')
+            )->setTimezone(app_timezone()),
+            'markdown' => new Markdown($value),
+            default    => $value,
+        };
     }
 }

@@ -17,12 +17,14 @@ class Toggler extends FormComponent
 
     protected string $hint = '';
 
+    protected string $helper = '';
+
     protected bool $isChecked = false;
 
     #[Override]
     public function render(): string
     {
-        $this->mergeClass('relative justify-between inline-flex items-center gap-x-2');
+        $this->mergeClass('relative justify-between inline-flex items-start gap-x-2');
 
         $checkbox = form_checkbox(
             [
@@ -39,9 +41,23 @@ class Toggler extends FormComponent
             'slot'  => $this->hint,
         ]))->render();
 
+        $helperText = '';
+        if ($this->helper !== '') {
+            $helperId = $this->name . 'Help';
+            $helperText = (new Helper([
+                'id'    => $helperId,
+                'slot'  => $this->helper,
+                'class' => '-mt-1',
+            ]))->render();
+            $this->attributes['aria-describedby'] = $helperId;
+        }
+
         return <<<HTML
             <label {$this->getStringifiedAttributes()}>
-                <span>{$this->slot}{$hint}</span>
+                <div class="flex flex-col">
+                    <span>{$this->slot}{$hint}</span>
+                    {$helperText}
+                </div>
                 {$checkbox}
                 <span class="form-switch-slider"></span>
             </label>

@@ -14,7 +14,7 @@ class Helper extends Component
     #[Override]
     public function render(): string
     {
-        $this->mergeClass('text-skin-muted');
+        $this->mergeClass('form-helper');
 
         return <<<HTML
             <small {$this->getStringifiedAttributes()}>{$this->slot}</small>

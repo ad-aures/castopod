@@ -70,14 +70,14 @@
     value="<?= $podcast->type ?>"
     options="<?= esc(json_encode([
         [
-            'label' => lang('Podcast.form.type.episodic'),
-            'value' => 'episodic',
-            'hint'  => lang('Podcast.form.type.episodic_hint'),
+            'label'       => lang('Podcast.form.type.episodic'),
+            'value'       => 'episodic',
+            'description' => lang('Podcast.form.type.episodic_description'),
         ],
         [
-            'label' => lang('Podcast.form.type.serial'),
-            'value' => 'serial',
-            'hint'  => lang('Podcast.form.type.serial_hint'),
+            'label'       => lang('Podcast.form.type.serial'),
+            'value'       => 'serial',
+            'description' => lang('Podcast.form.type.serial_description'),
         ],
     ])) ?>"
     isRequired="true"
@@ -89,19 +89,19 @@
     value="<?= $podcast->medium ?>"
     options="<?= esc(json_encode([
         [
-            'label' => lang('Podcast.form.medium.podcast'),
-            'value' => 'podcast',
-            'hint'  => lang('Podcast.form.medium.podcast_hint'),
+            'label'       => lang('Podcast.form.medium.podcast'),
+            'value'       => 'podcast',
+            'description' => lang('Podcast.form.medium.podcast_description'),
         ],
         [
-            'label' => lang('Podcast.form.medium.music'),
-            'value' => 'music',
-            'hint'  => lang('Podcast.form.medium.music_hint'),
+            'label'       => lang('Podcast.form.medium.music'),
+            'value'       => 'music',
+            'description' => lang('Podcast.form.medium.music_description'),
         ],
         [
-            'label' => lang('Podcast.form.medium.audiobook'),
-            'value' => 'audiobook',
-            'hint'  => lang('Podcast.form.medium.audiobook_hint'),
+            'label'       => lang('Podcast.form.medium.audiobook'),
+            'value'       => 'audiobook',
+            'description' => lang('Podcast.form.medium.audiobook_description'),
         ],
     ])) ?>"
     isRequired="true"

@@ -38,6 +38,10 @@ return [
             'noChoicesText' => 'No choices to choose from',
             'maxItemText' => 'Cannot add more items',
         ],
+        'fieldArray' => [
+            'add' => 'Add',
+            'remove' => 'Remove',
+        ],
         'upload_file' => 'Upload a file',
         'remote_url' => 'Remote URL',
         'save' => 'Save',

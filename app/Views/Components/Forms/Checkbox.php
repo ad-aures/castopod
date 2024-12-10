@@ -17,6 +17,8 @@ class Checkbox extends FormComponent
 
     protected string $hint = '';
 
+    protected string $helper = '';
+
     protected bool $isChecked = false;
 
     #[Override]
@@ -37,10 +39,26 @@ class Checkbox extends FormComponent
             'slot'  => $this->hint,
         ]))->render();
 
-        $this->mergeClass('inline-flex items-center');
+        $this->mergeClass('inline-flex items-start gap-x-2');
+
+        $helperText = '';
+        if ($this->helper !== '') {
+            $helperId = $this->name . 'Help';
+            $helperText = (new Helper([
+                'id'    => $helperId,
+                'slot'  => $this->helper,
+                'class' => '-mt-1',
+            ]))->render();
+            $this->attributes['aria-describedby'] = $helperId;
+        }
 
         return <<<HTML
-            <label {$this->getStringifiedAttributes()}>{$checkboxInput}<span class="ml-2">{$this->slot}{$hint}</span></label>
+            <label {$this->getStringifiedAttributes()}>{$checkboxInput}
+                <div class="flex flex-col">
+                    <span>{$this->slot}{$hint}</span>
+                    {$helperText}
+                </div>
+            </label>
         HTML;
     }
 }

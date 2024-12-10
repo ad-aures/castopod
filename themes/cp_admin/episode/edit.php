@@ -78,19 +78,19 @@
     value="<?= $episode->type ?>"
     options="<?= esc(json_encode([
         [
-            'label' => lang('Episode.form.type.full'),
-            'value' => 'full',
-            'hint'  => lang('Episode.form.type.full_hint'),
+            'label'       => lang('Episode.form.type.full'),
+            'value'       => 'full',
+            'description' => lang('Episode.form.type.full_description'),
         ],
         [
-            'label' => lang('Episode.form.type.trailer'),
-            'value' => 'trailer',
-            'hint'  => lang('Episode.form.type.trailer_hint'),
+            'label'       => lang('Episode.form.type.trailer'),
+            'value'       => 'trailer',
+            'description' => lang('Episode.form.type.trailer_description'),
         ],
         [
-            'label' => lang('Episode.form.type.bonus'),
-            'value' => 'bonus',
-            'hint'  => lang('Episode.form.type.bonus_hint'),
+            'label'       => lang('Episode.form.type.bonus'),
+            'value'       => 'bonus',
+            'description' => lang('Episode.form.type.bonus_description'),
         ],
     ])) ?>"
     isRequired="true"

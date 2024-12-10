@@ -45,7 +45,7 @@ class SelectMulti extends FormComponent
         $options = '';
         $selected = $this->value ?? $this->defaultValue;
         foreach ($this->options as $option) {
-            $options .= '<option ' . (array_key_exists('hint', $option) ? 'data-label-description="' . $option['hint'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
         $this->attributes['name'] = $this->name . '[]';

@@ -1,5 +1,6 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const { transform } = require("typescript");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -122,6 +123,7 @@ module.exports = {
         colorButtons: "repeat(auto-fill, minmax(4rem, 1fr))",
         platforms: "repeat(auto-fill, minmax(18rem, 1fr))",
         plugins: "repeat(auto-fill, minmax(20rem, 1fr))",
+        radioGroup: "repeat(auto-fit, minmax(14rem, 1fr))",
       },
       gridTemplateRows: {
         admin: "40px 1fr",
@@ -161,6 +163,18 @@ module.exports = {
       },
       zIndex: {
         60: 60,
+      },
+      keyframes: {
+        "slight-pulse": {
+          "0%": { transform: "scale(1)" },
+          "60%": { transform: "scale(0.96)" },
+          "75%": { transform: "scale(1.05)" },
+          "95%": { transform: "scale(0.98)" },
+          "100%": { transform: "scale(1)" },
+        },
+      },
+      animation: {
+        "single-pulse": "slight-pulse 300ms linear 1",
       },
     },
   },

@@ -173,6 +173,7 @@
       "properties": {
         "type": {
           "enum": [
+            "group",
             "checkbox",
             "datetime",
             "email",
@@ -206,12 +207,23 @@
             "^[A-Za-z0-9]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/option" }
           },
           "additionalProperties": false
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "fields": {
+          "type": "object",
+          "patternProperties": {
+            "^[A-Za-z]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/field" }
+          },
+          "additionalProperties": false
         }
       },
       "required": ["label"],
       "additionalProperties": false,
       "allOf": [
-        { "$ref": "#/$defs/field-multiple-implies-options-is-required" }
+        { "$ref": "#/$defs/field-multiple-implies-options-is-required" },
+        { "$ref": "#/$defs/field-group-type-implies-fields-is-required" }
       ]
     },
     "option": {
@@ -220,7 +232,7 @@
         "label": {
           "type": "string"
         },
-        "hint": {
+        "description": {
           "type": "string"
         }
       },
@@ -244,6 +256,21 @@
           }
         },
         { "required": ["options"] }
+      ]
+    },
+    "field-group-type-implies-fields-is-required": {
+      "anyOf": [
+        {
+          "not": {
+            "properties": {
+              "type": {
+                "anyOf": [{ "const": "group" }]
+              }
+            },
+            "required": ["type"]
+          }
+        },
+        { "required": ["fields"] }
       ]
     }
   }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-use App\Views\Components\Hint;
 use Override;
 
 class RadioButton extends FormComponent
@@ -17,7 +16,7 @@ class RadioButton extends FormComponent
 
     protected bool $isSelected = false;
 
-    protected string $hint = '';
+    protected string $description = '';
 
     #[Override]
     public function render(): string
@@ -32,21 +31,30 @@ class RadioButton extends FormComponent
             $data['required'] = 'required';
         }
 
+        $this->mergeClass('relative w-full');
+
+        $descriptionText = '';
+        if ($this->description !== '') {
+            $describerId = $this->name . 'Help';
+            $descriptionText = <<<HTML
+                <span id="{$describerId}" class="form-radio-btn-description">{$this->description}</span>
+            HTML;
+            $data['aria-describedby'] = $describerId;
+        }
+
         $radioInput = form_radio(
             $data,
             $this->value,
             old($this->name) ? old($this->name) === $this->value : $this->isSelected,
         );
 
-        $hint = $this->hint === '' ? '' : (new Hint([
-            'class' => 'ml-1 text-base',
-            'slot'  => $this->hint,
-        ]))->render();
-
         return <<<HTML
             <div {$this->getStringifiedAttributes()}">
                 {$radioInput}
-                <label for="{$this->value}">{$this->slot}{$hint}</label>
+                <label for="{$this->value}">
+                    <span>{$this->slot}</span>
+                    {$descriptionText}
+                </label>
             </div>
         HTML;
     }

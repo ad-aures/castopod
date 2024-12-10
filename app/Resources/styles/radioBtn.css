@@ -1,23 +1,33 @@
 @layer components {
   .form-radio-btn {
-    @apply absolute mt-3 ml-3 border-contrast border-3 text-accent-base;
+    @apply absolute right-4 top-4 border-contrast border-3 text-accent-base;
 
     &:focus {
       @apply ring-accent;
     }
 
     &:checked {
-      @apply ring-2 ring-contrast;
-
       & + label {
-        @apply text-accent-contrast bg-accent-base;
+        @apply text-accent-hover bg-base border-accent-base shadow-none;
+      }
+
+      & + label .form-radio-btn-description {
+        @apply text-accent-base;
       }
     }
 
     & + label {
-      @apply inline-flex items-center py-2 pl-8 pr-2 text-sm font-semibold rounded-lg cursor-pointer border-contrast bg-elevated border-3;
+      @apply h-full w-full inline-flex flex-col items-start py-3 px-4 text-sm font-bold rounded-lg cursor-pointer border-contrast bg-elevated border-3 transition-all;
 
-      color: hsl(var(--color-text-muted));
+      box-shadow: 2px 2px 0 hsl(var(--color-border-contrast));
+    }
+
+    & + label span {
+      @apply pr-8;
+    }
+
+    & + label .form-radio-btn-description {
+      @apply font-normal text-xs text-skin-muted text-balance;
     }
   }
 }

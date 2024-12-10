@@ -1,3 +1,13 @@
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .form-helper {
+    @apply text-skin-muted;
+  }
+}
+
 @layer components {
   .post-content {
     & a {
@@ -77,5 +87,14 @@
       #facc15 10px,
       #facc15 20px
     );
+  }
+
+  .divide-fieldset-y > :not([hidden], legend) ~ :not([hidden], legend) {
+    @apply pt-4;
+
+    --tw-divide-y-reverse: 0;
+
+    border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
   }
 }
