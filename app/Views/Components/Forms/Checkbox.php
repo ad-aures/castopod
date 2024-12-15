@@ -9,7 +9,7 @@ use Override;
 
 class Checkbox extends FormComponent
 {
-    protected array $props = ['hint', 'isChecked'];
+    protected array $props = ['hint', 'helper', 'isChecked'];
 
     protected array $casts = [
         'isChecked' => 'boolean',

@@ -132,14 +132,6 @@
     isRequired="true"
     disallowList="header,quote" />
 
-<x-Forms.Field
-    as="MarkdownEditor"
-    name="description_footer"
-    label="<?= esc(lang('Episode.form.description_footer')) ?>"
-    hint="<?= esc(lang('Episode.form.description_footer_hint')) ?>"
-    value="<?= esc($podcast->episode_description_footer_markdown) ?? '' ?>"
-    disallowList="header,quote" />
-
 </x-Forms.Section>
 
 <x-Forms.Section title="<?= lang('Episode.form.premium_title') ?>" >
@@ -279,13 +271,6 @@
     title="<?= lang('Episode.form.advanced_section_title') ?>"
     subtitle="<?= lang('Episode.form.advanced_section_subtitle') ?>"
 >
-<x-Forms.Field 
-    as="XMLEditor"
-    name="custom_rss"
-    label="<?= esc(lang('Episode.form.custom_rss')) ?>"
-    hint="<?= esc(lang('Episode.form.custom_rss_hint')) ?>"
-    content="<?= esc($episode->custom_rss_string) ?>"
-/>
 
 <x-Forms.Toggler id="block" name="block" isChecked="<?= $episode->is_blocked ? 'true' : 'false' ?>" hint="<?= esc(lang('Episode.form.block_hint')) ?>"><?= lang('Episode.form.block') ?></x-Forms.Toggler>
 

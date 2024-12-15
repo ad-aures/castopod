@@ -37,17 +37,4 @@ class Analytics extends BaseConfig
      *    Z&|qECKBrwgaaD>~;U/tXG1U%tSe_oi5Tzy)h>}5NC2npSrjvM0w_Q>cs=0o=H]*
      */
     public string $salt = '';
-
-    /**
-     * --------------------------------------------------------------------------
-     * The Open Podcast Prefix Project Config
-     * --------------------------------------------------------------------------
-     *
-     * @var array<string, string>
-     */
-    public array $OP3 = [
-        'host' => 'https://op3.dev/',
-    ];
-
-    public bool $enableOP3 = false;
 }

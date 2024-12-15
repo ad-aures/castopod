@@ -65,10 +65,6 @@ if (! function_exists('get_podcast_metatags')) {
                 'href' => url_to('podcast-activity', esc($podcast->handle)),
             ]);
 
-        if ($podcast->payment_pointer) {
-            $metatags->meta('monetization', $podcast->payment_pointer);
-        }
-
         return '<link type="application/rss+xml" rel="alternate" title="' . esc(
             $podcast->title
         ) . '" href="' . $podcast->feed_url . '" />' . PHP_EOL . $metatags->__toString() . PHP_EOL . $schema->__toString();
@@ -122,10 +118,6 @@ if (! function_exists('get_episode_metatags')) {
                 'type' => 'application/activity+json',
                 'href' => url_to('episode', $episode->podcast->handle, $episode->slug),
             ]);
-
-        if ($episode->podcast->payment_pointer) {
-            $metatags->meta('monetization', $episode->podcast->payment_pointer);
-        }
 
         return $metatags->__toString() . PHP_EOL . '<link rel="alternate" type="application/json+oembed" href="' . base_url(
             route_to('episode-oembed-json', $episode->podcast->handle, $episode->slug)

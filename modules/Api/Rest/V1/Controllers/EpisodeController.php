@@ -72,7 +72,6 @@ class EpisodeController extends Controller
     {
         $episode->cover_url = $episode->getCover()
 ->file_url;
-        $episode->audio_url = $episode->getAudioUrl();
         $episode->duration = round($episode->audio->duration);
 
         return $episode;

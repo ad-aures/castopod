@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use App\Libraries\SimpleRSSElement;
 use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
@@ -62,12 +61,8 @@ use RuntimeException;
  * @property string|null $publisher
  * @property string $owner_name
  * @property string $owner_email
- * @property bool $is_owner_email_removed_from_feed
  * @property string $type
- * @property string $medium
  * @property string|null $copyright
- * @property string|null $episode_description_footer_markdown
- * @property string|null $episode_description_footer_html
  * @property bool $is_blocked
  * @property bool $is_completed
  * @property bool $is_locked
@@ -77,15 +72,7 @@ use RuntimeException;
  * @property string|null $location_name
  * @property string|null $location_geo
  * @property string|null $location_osm
- * @property string|null $payment_pointer
- * @property array|null $custom_rss
- * @property bool $is_op3_enabled
- * @property string $op3_url
- * @property string $custom_rss_string
  * @property bool $is_published_on_hubs
- * @property string|null $partner_id
- * @property string|null $partner_link_url
- * @property string|null $partner_image_url
  * @property int $created_by
  * @property int $updated_by
  * @property string $publication_status
@@ -166,8 +153,6 @@ class Podcast extends Entity
 
     protected ?Location $location = null;
 
-    protected string $custom_rss_string;
-
     protected ?string $publication_status = null;
 
     /**
@@ -180,44 +165,35 @@ class Podcast extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id'                                  => 'integer',
-        'guid'                                => 'string',
-        'actor_id'                            => 'integer',
-        'handle'                              => 'string',
-        'title'                               => 'string',
-        'description_markdown'                => 'string',
-        'description_html'                    => 'string',
-        'cover_id'                            => 'int',
-        'banner_id'                           => '?int',
-        'language_code'                       => 'string',
-        'category_id'                         => 'integer',
-        'parental_advisory'                   => '?string',
-        'publisher'                           => '?string',
-        'owner_name'                          => 'string',
-        'owner_email'                         => 'string',
-        'is_owner_email_removed_from_feed'    => 'boolean',
-        'type'                                => 'string',
-        'medium'                              => 'string',
-        'copyright'                           => '?string',
-        'episode_description_footer_markdown' => '?string',
-        'episode_description_footer_html'     => '?string',
-        'is_blocked'                          => 'boolean',
-        'is_completed'                        => 'boolean',
-        'is_locked'                           => 'boolean',
-        'is_premium_by_default'               => 'boolean',
-        'imported_feed_url'                   => '?string',
-        'new_feed_url'                        => '?string',
-        'location_name'                       => '?string',
-        'location_geo'                        => '?string',
-        'location_osm'                        => '?string',
-        'payment_pointer'                     => '?string',
-        'custom_rss'                          => '?json-array',
-        'is_published_on_hubs'                => 'boolean',
-        'partner_id'                          => '?string',
-        'partner_link_url'                    => '?string',
-        'partner_image_url'                   => '?string',
-        'created_by'                          => 'integer',
-        'updated_by'                          => 'integer',
+        'id'                    => 'integer',
+        'guid'                  => 'string',
+        'actor_id'              => 'integer',
+        'handle'                => 'string',
+        'title'                 => 'string',
+        'description_markdown'  => 'string',
+        'description_html'      => 'string',
+        'cover_id'              => 'int',
+        'banner_id'             => '?int',
+        'language_code'         => 'string',
+        'category_id'           => 'integer',
+        'parental_advisory'     => '?string',
+        'publisher'             => '?string',
+        'owner_name'            => 'string',
+        'owner_email'           => 'string',
+        'type'                  => 'string',
+        'copyright'             => '?string',
+        'is_blocked'            => 'boolean',
+        'is_completed'          => 'boolean',
+        'is_locked'             => 'boolean',
+        'is_premium_by_default' => 'boolean',
+        'imported_feed_url'     => '?string',
+        'new_feed_url'          => '?string',
+        'location_name'         => '?string',
+        'location_geo'          => '?string',
+        'location_osm'          => '?string',
+        'is_published_on_hubs'  => 'boolean',
+        'created_by'            => 'integer',
+        'updated_by'            => 'integer',
     ];
 
     public function getAtHandle(): string
@@ -454,42 +430,6 @@ class Podcast extends Entity
         return $this;
     }
 
-    public function setEpisodeDescriptionFooterMarkdown(?string $episodeDescriptionFooterMarkdown = null): static
-    {
-        if ($episodeDescriptionFooterMarkdown === null || $episodeDescriptionFooterMarkdown === '') {
-            $this->attributes[
-                'episode_description_footer_markdown'
-            ] = null;
-            $this->attributes[
-                'episode_description_footer_html'
-            ] = null;
-
-            return $this;
-        }
-
-        $config = [
-            'html_input'         => 'escape',
-            'allow_unsafe_links' => false,
-        ];
-
-        $environment = new Environment($config);
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new AutolinkExtension());
-        $environment->addExtension(new SmartPunctExtension());
-        $environment->addExtension(new DisallowedRawHtmlExtension());
-
-        $converter = new MarkdownConverter($environment);
-
-        $this->attributes[
-            'episode_description_footer_markdown'
-        ] = $episodeDescriptionFooterMarkdown;
-        $this->attributes[
-            'episode_description_footer_html'
-        ] = $converter->convert($episodeDescriptionFooterMarkdown);
-
-        return $this;
-    }
-
     public function getDescription(): string
     {
         if ($this->description === null) {
@@ -638,68 +578,9 @@ class Podcast extends Entity
         return $this->location;
     }
 
-    /**
-     * Get custom rss tag as XML String
-     */
-    public function getCustomRssString(): string
-    {
-        if ($this->attributes['custom_rss'] === null) {
-            return '';
-        }
-
-        helper('rss');
-
-        $xmlNode = (new SimpleRSSElement(
-            '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>',
-        ))->addChild('channel');
-        array_to_rss([
-            'elements' => $this->custom_rss,
-        ], $xmlNode);
-
-        return str_replace(['<channel>', '</channel>'], '', (string) $xmlNode->asXML());
-    }
-
-    /**
-     * Saves custom rss tag into json
-     */
-    public function setCustomRssString(string $customRssString): static
-    {
-        if ($customRssString === '') {
-            $this->attributes['custom_rss'] = null;
-            return $this;
-        }
-
-        helper('rss');
-        $customRssArray = rss_to_array(
-            simplexml_load_string(
-                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel>' .
-                    $customRssString .
-                    '</channel></rss>',
-            ),
-        )['elements'][0];
-
-        if (array_key_exists('elements', $customRssArray)) {
-            $this->attributes['custom_rss'] = json_encode($customRssArray['elements']);
-        } else {
-            $this->attributes['custom_rss'] = null;
-        }
-
-        return $this;
-    }
-
     public function getIsPremium(): bool
     {
         // podcast is premium if at least one of its episodes is set as premium
         return (new EpisodeModel())->doesPodcastHavePremiumEpisodes($this->id);
-    }
-
-    public function getIsOp3Enabled(): bool
-    {
-        return service('settings')->get('Analytics.enableOP3', 'podcast:' . $this->id);
-    }
-
-    public function getOp3Url(): string
-    {
-        return 'https://op3.dev/show/' . $this->guid;
     }
 }

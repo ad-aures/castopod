@@ -11,6 +11,12 @@ $episodeNavigation = [
             'embed-add'              => 'episodes.edit',
         ],
     ],
+    'plugins' => [
+        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'items'             => [],
+        'items-labels'      => [],
+        'items-permissions' => [],
+    ],
     'clips' => [
         'icon'              => 'clapperboard-fill', // @icon('clapperboard-fill')
         'items'             => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
@@ -23,12 +29,6 @@ $episodeNavigation = [
         'count'       => $episode->getClipCount(),
         'count-route' => 'video-clips-list',
         'add-cta'     => 'video-clips-create',
-    ],
-    'plugins' => [
-        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
-        'items'             => [],
-        'items-labels'      => [],
-        'items-permissions' => [],
     ],
 ];
 

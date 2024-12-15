@@ -14,7 +14,7 @@ use CodeIgniter\HTTP\URI;
 class Repository extends ManifestObject
 {
     protected const VALIDATION_RULES = [
-        'type'      => 'required|in_list[git]',
+        'type'      => 'permit_empty|in_list[git]',
         'url'       => 'required|valid_url_strict',
         'directory' => 'permit_empty',
     ];
@@ -26,7 +26,7 @@ class Repository extends ManifestObject
         'url' => URI::class,
     ];
 
-    protected string $type;
+    protected string $type = 'git';
 
     protected URI $url;
 

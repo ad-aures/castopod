@@ -14,8 +14,31 @@ use DOMDocument;
 use Override;
 use SimpleXMLElement;
 
-class SimpleRSSElement extends SimpleXMLElement
+class RssFeed extends SimpleXMLElement
 {
+    public const ATOM_NS = 'atom';
+
+    public const ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom';
+
+    public const ITUNES_NS = 'itunes';
+
+    public const ITUNES_NAMESPACE = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+
+    public const PODCAST_NS = 'podcast';
+
+    public const PODCAST_NAMESPACE = 'https://podcastindex.org/namespace/1.0';
+
+    public function __construct(string $contents = '')
+    {
+        parent::__construct(sprintf(
+            "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:atom='%s' xmlns:itunes='%s' xmlns:podcast='%s' xmlns:content='http://purl.org/rss/1.0/modules/content/'>%s</rss>",
+            $this::ATOM_NAMESPACE,
+            $this::ITUNES_NAMESPACE,
+            $this::PODCAST_NAMESPACE,
+            $contents
+        ));
+    }
+
     /**
      * Adds a child with $value inside CDATA
      *
@@ -66,5 +89,38 @@ class SimpleRSSElement extends SimpleXMLElement
         $node->appendChild($no->createTextNode($value));
 
         return $newChild;
+    }
+
+    /**
+     * Add RssFeed code into a RssFeed
+     *
+     * adapted from: https://stackoverflow.com/a/23527002
+     *
+     * @param self|array<self> $nodes
+     */
+    public function appendNodes(self|array $nodes): void
+    {
+        if (! is_array($nodes)) {
+            $nodes = [$nodes];
+        }
+
+        foreach ($nodes as $element) {
+            $namespaces = $element->getNamespaces();
+            $namespace = $namespaces[array_key_first($namespaces)] ?? null;
+
+            if (trim((string) $element) === '') {
+                $simpleRSS = $this->addChild($element->getName(), null, $namespace);
+            } else {
+                $simpleRSS = $this->addChild($element->getName(), (string) $element, $namespace);
+            }
+
+            foreach ($element->children() as $child) {
+                $simpleRSS->appendNodes($child);
+            }
+
+            foreach ($element->attributes() as $name => $value) {
+                $simpleRSS->addAttribute($name, (string) $value);
+            }
+        }
     }
 }

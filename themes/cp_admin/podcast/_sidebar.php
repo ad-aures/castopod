@@ -67,13 +67,11 @@ $podcastNavigation = [
             'subscription-list',
             'subscription-create',
             'platforms-funding',
-            'podcast-monetization-other',
         ],
         'items-permissions' => [
-            'subscription-list'          => 'manage-subscriptions',
-            'subscription-create'        => 'manage-subscriptions',
-            'platforms-funding'          => 'manage-platforms',
-            'podcast-monetization-other' => 'edit',
+            'subscription-list'   => 'manage-subscriptions',
+            'subscription-create' => 'manage-subscriptions',
+            'platforms-funding'   => 'manage-platforms',
         ],
     ],
     'contributors' => [
@@ -135,15 +133,6 @@ foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
                     'class' => 'text-sm opacity-60',
                 ]) ?>
             </a>
-            <?php if ($podcast->is_op3_enabled): ?>
-            <a href="<?= $podcast->op3_url ?>" class="inline-flex items-center text-xs gap-x-1 group hover:underline" data-tooltip="bottom" target="_blank" rel="noopener noreferrer" title="<?= lang('Podcast.form.op3_link') ?>">
-                <?= icon('line-chart-fill', [
-                    'class' => 'text-xl text-white inline-flex items-center justify-center rounded',
-                ]) . 'OP3' . icon('external-link-fill', [
-                    'class' => 'text-sm opacity-60',
-                ]) ?>
-            </a>
-            <?php endif; ?>
         </div>
     </div>
 </div>

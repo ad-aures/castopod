@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Entities\Clip\Soundbite;
-use App\Libraries\SimpleRSSElement;
 use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
@@ -29,14 +28,13 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
-use Modules\Analytics\OP3;
 use Modules\Media\Entities\Audio;
 use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Image;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
+use Override;
 use RuntimeException;
-use SimpleXMLElement;
 
 /**
  * @property int $id
@@ -73,8 +71,6 @@ use SimpleXMLElement;
  * @property string|null $location_name
  * @property string|null $location_geo
  * @property string|null $location_osm
- * @property array|null $custom_rss
- * @property string $custom_rss_string
  * @property bool $is_published_on_hubs
  * @property int $posts_count
  * @property int $comments_count
@@ -94,19 +90,19 @@ use SimpleXMLElement;
  */
 class Episode extends Entity
 {
-    protected Podcast $podcast;
+    public string $link = '';
 
-    protected string $link;
+    public string $audio_url = '';
+
+    public string $audio_web_url = '';
+
+    public string $audio_opengraph_url = '';
+
+    protected Podcast $podcast;
 
     protected ?Audio $audio = null;
 
-    protected string $audio_url;
-
-    protected string $audio_web_url;
-
-    protected string $audio_opengraph_url;
-
-    protected string $embed_url;
+    protected string $embed_url = '';
 
     protected ?Image $cover = null;
 
@@ -139,8 +135,6 @@ class Episode extends Entity
     protected ?array $comments = null;
 
     protected ?Location $location = null;
-
-    protected string $custom_rss_string;
 
     protected ?string $publication_status = null;
 
@@ -176,7 +170,6 @@ class Episode extends Entity
         'location_name'         => '?string',
         'location_geo'          => '?string',
         'location_osm'          => '?string',
-        'custom_rss'            => '?json-array',
         'is_published_on_hubs'  => 'boolean',
         'posts_count'           => 'integer',
         'comments_count'        => 'integer',
@@ -184,6 +177,31 @@ class Episode extends Entity
         'created_by'            => 'integer',
         'updated_by'            => 'integer',
     ];
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    #[Override]
+    public function injectRawData(array $data): static
+    {
+        parent::injectRawData($data);
+
+        $this->link = url_to('episode', esc($this->getPodcast()->handle, 'url'), esc($this->attributes['slug'], 'url'));
+
+        $this->audio_url = url_to(
+            'episode-audio',
+            $this->getPodcast()
+->handle,
+            $this->slug,
+            $this->getAudio()
+->file_extension
+        );
+
+        $this->audio_opengraph_url = $this->audio_url . '?_from=-+Open+Graph+-';
+        $this->audio_web_url = $this->audio_url . '?_from=-+Website+-';
+
+        return $this;
+    }
 
     public function setCover(UploadedFile | File $file = null): self
     {
@@ -342,40 +360,6 @@ class Episode extends Entity
         return $this->chapters;
     }
 
-    public function getAudioUrl(): string
-    {
-        $audioURL = url_to(
-            'episode-audio',
-            $this->getPodcast()
-->handle,
-            $this->slug,
-            $this->getAudio()
-->file_extension
-        );
-
-        // Wrap episode url with OP3 if episode is public and OP3 is enabled on this podcast
-        if (! $this->is_premium && service('settings')->get(
-            'Analytics.enableOP3',
-            'podcast:' . $this->podcast_id
-        )) {
-            $op3 = new OP3(config('Analytics')->OP3);
-
-            return $op3->wrap($audioURL, $this);
-        }
-
-        return $audioURL;
-    }
-
-    public function getAudioWebUrl(): string
-    {
-        return $this->getAudioUrl() . '?_from=-+Website+-';
-    }
-
-    public function getAudioOpengraphUrl(): string
-    {
-        return $this->getAudioUrl() . '?_from=-+Open+Graph+-';
-    }
-
     /**
      * Gets transcript url from transcript file uri if it exists or returns the transcript_remote_url which can be null.
      */
@@ -468,11 +452,6 @@ class Episode extends Entity
         return $this->comments;
     }
 
-    public function getLink(): string
-    {
-        return url_to('episode', esc($this->getPodcast()->handle), esc($this->attributes['slug']));
-    }
-
     public function getEmbedUrl(string $theme = null): string
     {
         return $theme
@@ -482,7 +461,7 @@ class Episode extends Entity
 
     public function setGuid(?string $guid = null): static
     {
-        $this->attributes['guid'] = $guid ?? $this->getLink();
+        $this->attributes['guid'] = $guid ?? $this->link;
 
         return $this;
     }
@@ -511,34 +490,6 @@ class Episode extends Entity
         $this->attributes['description_html'] = $converter->convert($descriptionMarkdown);
 
         return $this;
-    }
-
-    public function getDescriptionHtml(?string $serviceSlug = null): string
-    {
-        $descriptionHtml = '';
-        if (
-            $this->getPodcast()
-                ->partner_id !== null &&
-            $this->getPodcast()
-                ->partner_link_url !== null &&
-            $this->getPodcast()
-                ->partner_image_url !== null
-        ) {
-            $descriptionHtml .= "<div><a href=\"{$this->getPartnerLink(
-                $serviceSlug,
-            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImageUrl(
-                $serviceSlug,
-            )}\" alt=\"Partner image\" /></a></div>";
-        }
-
-        $descriptionHtml .= $this->attributes['description_html'];
-
-        if ($this->getPodcast()->episode_description_footer_html) {
-            $descriptionHtml .= "<footer>{$this->getPodcast()
-->episode_description_footer_html}</footer>";
-        }
-
-        return $descriptionHtml;
     }
 
     public function getDescription(): string
@@ -607,91 +558,6 @@ class Episode extends Entity
         }
 
         return $this->location;
-    }
-
-    /**
-     * Get custom rss tag as XML String
-     */
-    public function getCustomRssString(): string
-    {
-        if ($this->custom_rss === null) {
-            return '';
-        }
-
-        helper('rss');
-
-        $xmlNode = (new SimpleRSSElement(
-            '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>',
-        ))
-            ->addChild('channel')
-            ->addChild('item');
-        array_to_rss([
-            'elements' => $this->custom_rss,
-        ], $xmlNode);
-
-        return str_replace(['<item>', '</item>'], '', (string) $xmlNode->asXML());
-    }
-
-    /**
-     * Saves custom rss tag into json
-     */
-    public function setCustomRssString(?string $customRssString = null): static
-    {
-        if ($customRssString === '') {
-            $this->attributes['custom_rss'] = null;
-            return $this;
-        }
-
-        helper('rss');
-
-        $customXML = simplexml_load_string(
-            '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item>' .
-                $customRssString .
-                '</item></channel></rss>',
-        );
-
-        if (! $customXML instanceof SimpleXMLElement) {
-            // TODO: Failed to parse custom xml, should return error?
-            return $this;
-        }
-
-        $customRssArray = rss_to_array($customXML)['elements'][0]['elements'][0];
-
-        if (array_key_exists('elements', $customRssArray)) {
-            $this->attributes['custom_rss'] = json_encode($customRssArray['elements']);
-        } else {
-            $this->attributes['custom_rss'] = null;
-        }
-
-        return $this;
-    }
-
-    public function getPartnerLink(?string $serviceSlug = null): string
-    {
-        $partnerLink =
-            rtrim((string) $this->getPodcast()->partner_link_url, '/') .
-            '?pid=' .
-            $this->getPodcast()
-                ->partner_id .
-            '&guid=' .
-            urlencode((string) $this->attributes['guid']);
-
-        if ($serviceSlug !== null) {
-            $partnerLink .= '&_from=' . $serviceSlug;
-        }
-
-        return $partnerLink;
-    }
-
-    public function getPartnerImageUrl(string $serviceSlug = null): string
-    {
-        return rtrim((string) $this->getPodcast()->partner_image_url, '/') .
-            '?pid=' .
-            $this->getPodcast()
-                ->partner_id .
-            '&guid=' .
-            urlencode((string) $this->attributes['guid']) .
-            ($serviceSlug !== null ? '&_from=' . $serviceSlug : '');
     }
 
     public function getPreviewLink(): string

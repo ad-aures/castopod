@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Entities\Podcast;
-use App\Libraries\SimpleRSSElement;
+use App\Libraries\RssFeed;
 use Modules\Plugins\Core\BasePlugin;
 
 class AcmeUndeclaredHookPlugin extends BasePlugin
@@ -15,7 +15,7 @@ class AcmeUndeclaredHookPlugin extends BasePlugin
     }
 
     #[Override]
-    public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
+    public function rssAfterChannel(Podcast $podcast, RssFeed $channel): void
     {
         $channel->addChild('foo', 'bar');
     }

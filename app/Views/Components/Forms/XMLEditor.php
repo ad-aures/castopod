@@ -32,7 +32,7 @@ class XMLEditor extends FormComponent
         $textarea = form_textarea($this->attributes, $this->content);
 
         return <<<HTML
-            <xml-editor>{$textarea}</time-ago>
+            <xml-editor>{$textarea}</xml-editor>
         HTML;
     }
 }

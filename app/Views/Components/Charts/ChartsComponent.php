@@ -9,6 +9,8 @@ use ViewComponents\Component;
 
 class ChartsComponent extends Component
 {
+    protected array $props = ['title', 'subtitle', 'dataUrl', 'type'];
+
     protected string $title;
 
     protected string $subtitle = '';

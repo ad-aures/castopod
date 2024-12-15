@@ -6,7 +6,7 @@ namespace Tests\Modules\Plugins;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
-use App\Libraries\SimpleRSSElement;
+use App\Libraries\RssFeed;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use Modules\Plugins\Config\Plugins as PluginsConfig;
@@ -96,7 +96,7 @@ final class PluginsTest extends CIUnitTestCase
         self::$plugins->runHook('rssBeforeChannel', [$podcast]);
         $this->assertEquals('Podcast test', $podcast->title);
 
-        $channel = new SimpleRSSElement('<channel></channel>');
+        $channel = new RssFeed('<channel></channel>');
         $this->assertTrue(empty($channel->foo));
         self::$plugins->runHook('rssAfterChannel', [$podcast, $channel]);
         $this->assertFalse(empty($channel->foo));
@@ -106,7 +106,7 @@ final class PluginsTest extends CIUnitTestCase
         self::$plugins->runHook('rssBeforeItem', [$episode]);
         $this->assertEquals('Episode test', $episode->title);
 
-        $item = new SimpleRSSElement('<item></item>');
+        $item = new RssFeed('<item></item>');
         $this->assertTrue(empty($item->efoo));
         self::$plugins->runHook('rssAfterItem', [$episode, $item]);
         $this->assertFalse(empty($item->efoo));
@@ -133,7 +133,7 @@ final class PluginsTest extends CIUnitTestCase
         self::$plugins->runHook('rssBeforeChannel', [$podcast]);
         $this->assertEquals('', $podcast->title);
 
-        $channel = new SimpleRSSElement('<channel></channel>');
+        $channel = new RssFeed('<channel></channel>');
         $this->assertTrue(empty($channel->foo));
         self::$plugins->runHook('rssAfterChannel', [$podcast, $channel]);
         $this->assertTrue(empty($channel->foo));
@@ -143,7 +143,7 @@ final class PluginsTest extends CIUnitTestCase
         self::$plugins->runHook('rssBeforeItem', [$episode]);
         $this->assertEquals('', $episode->title);
 
-        $item = new SimpleRSSElement('<item></item>');
+        $item = new RssFeed('<item></item>');
         $this->assertTrue(empty($item->efoo));
         self::$plugins->runHook('rssAfterItem', [$episode, $item]);
         $this->assertTrue(empty($item->efoo));
@@ -167,7 +167,7 @@ final class PluginsTest extends CIUnitTestCase
         $this->assertEquals('Podcast test undeclared', $podcast->title);
 
         // rssAfterChannel has not been declared in plugin manifest, should not be running
-        $channel = new SimpleRSSElement('<channel></channel>');
+        $channel = new RssFeed('<channel></channel>');
         $this->assertTrue(empty($channel->foo));
         self::$plugins->runHook('rssAfterChannel', [$podcast, $channel]);
         $this->assertTrue(empty($channel->foo));

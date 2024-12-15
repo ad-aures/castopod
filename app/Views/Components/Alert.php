@@ -9,7 +9,7 @@ use ViewComponents\Component;
 
 class Alert extends Component
 {
-    protected array $props = ['glyph', 'title'];
+    protected array $props = ['glyph', 'title', 'variant'];
 
     protected string $glyph = '';
 

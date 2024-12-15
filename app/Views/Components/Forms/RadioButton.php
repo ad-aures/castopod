@@ -8,7 +8,7 @@ use Override;
 
 class RadioButton extends FormComponent
 {
-    protected array $props = ['isChecked', 'hint'];
+    protected array $props = ['isSelected', 'description'];
 
     protected array $casts = [
         'isSelected' => 'boolean',

@@ -118,6 +118,18 @@ case 'markdown': ?>
         value="<?= $value ?>"
     />
 <?php break;
+case 'rss': ?>
+    <x-Forms.Field
+        as="XMLEditor"
+        class="<?= $class ?>"
+        name="<?= $name ?>"
+        label="<?= $label ?>"
+        hint="<?= $hint ?>"
+        helper="<?= $helper ?>"
+        isRequired="<?= $optional ? 'false' : 'true' ?>"
+        content="<?= htmlspecialchars($value) ?>"
+    />
+<?php break;
 case 'datetime': ?>
     <x-Forms.Field
         as="DatetimePicker"

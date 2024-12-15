@@ -9,18 +9,18 @@ use ViewComponents\Component;
 
 class Pill extends Component
 {
+    protected array $props = ['size', 'variant', 'icon', 'iconClass', 'hint'];
+
     /**
      * @var 'small'|'base'
      */
-    public string $size = 'base';
+    protected string $size = 'base';
 
-    public string $variant = 'default';
+    protected string $variant = 'default';
 
-    public string $icon = '';
+    protected string $icon = '';
 
-    public string $iconClass = '';
-
-    protected array $props = ['size', 'variant', 'icon', 'iconClass', 'hint'];
+    protected string $iconClass = '';
 
     protected string $hint = '';
 

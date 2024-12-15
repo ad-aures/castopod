@@ -104,53 +104,46 @@ class FakeSinglePodcastApiSeeder extends Seeder
     }
 
     /**
-     * @return array{id: int, guid: string, actor_id: int, handle: string, title: string, description_markdown: string, description_html: string, cover_id: int, banner_id: int, language_code: string, category_id: int, parental_advisory: null, owner_name: string, owner_email: string, publisher: string, type: string, copyright: string, episode_description_footer_markdown: null, episode_description_footer_html: null, is_blocked: int, is_completed: int, is_locked: int, imported_feed_url: null, new_feed_url: null, payment_pointer: null, location_name: null, location_geo: null, location_osm: null, custom_rss: null, is_published_on_hubs: int, partner_id: null, partner_link_url: null, partner_image_url: null, created_by: int, updated_by: int, created_at: string, updated_at: string}
+     * @return array{id: int, guid: string, actor_id: int, handle: string, title: string, description_markdown: string, description_html: string, cover_id: int, banner_id: int, language_code: string, category_id: int, parental_advisory: null, owner_name: string, owner_email: string, publisher: string, type: string, copyright: string, is_blocked: int, is_completed: int, is_locked: int, imported_feed_url: null, new_feed_url: null, location_name: null, location_geo: null, location_osm: null, is_published_on_hubs: int, created_by: int, updated_by: int, created_at: string, updated_at: string}
      */
     public static function podcast(): array
     {
         return [
-            'id'                                  => 1,
-            'guid'                                => '0d341200-0234-5de7-99a6-a7d02bea4ce2',
-            'actor_id'                            => 1,
-            'handle'                              => 'Handle',
-            'title'                               => 'Title',
-            'description_markdown'                => 'description',
-            'description_html'                    => '<p>description</p>',
-            'cover_id'                            => 1,
-            'banner_id'                           => 2,
-            'language_code'                       => 'en',
-            'category_id'                         => 1,
-            'parental_advisory'                   => null,
-            'owner_name'                          => 'Owner',
-            'owner_email'                         => 'Owner@gmail.com',
-            'publisher'                           => '',
-            'type'                                => 'episodic',
-            'copyright'                           => '',
-            'episode_description_footer_markdown' => null,
-            'episode_description_footer_html'     => null,
-            'is_blocked'                          => 0,
-            'is_completed'                        => 0,
-            'is_locked'                           => 1,
-            'imported_feed_url'                   => null,
-            'new_feed_url'                        => null,
-            'payment_pointer'                     => null,
-            'location_name'                       => null,
-            'location_geo'                        => null,
-            'location_osm'                        => null,
-            'custom_rss'                          => null,
-            'is_published_on_hubs'                => 0,
-            'partner_id'                          => null,
-            'partner_link_url'                    => null,
-            'partner_image_url'                   => null,
-            'created_by'                          => 1,
-            'updated_by'                          => 1,
-            'created_at'                          => '2022-06-13 8:00:00',
-            'updated_at'                          => '2022-06-13 8:00:00',
+            'id'                   => 1,
+            'guid'                 => '0d341200-0234-5de7-99a6-a7d02bea4ce2',
+            'actor_id'             => 1,
+            'handle'               => 'Handle',
+            'title'                => 'Title',
+            'description_markdown' => 'description',
+            'description_html'     => '<p>description</p>',
+            'cover_id'             => 1,
+            'banner_id'            => 2,
+            'language_code'        => 'en',
+            'category_id'          => 1,
+            'parental_advisory'    => null,
+            'owner_name'           => 'Owner',
+            'owner_email'          => 'Owner@gmail.com',
+            'publisher'            => '',
+            'type'                 => 'episodic',
+            'copyright'            => '',
+            'is_blocked'           => 0,
+            'is_completed'         => 0,
+            'is_locked'            => 1,
+            'imported_feed_url'    => null,
+            'new_feed_url'         => null,
+            'location_name'        => null,
+            'location_geo'         => null,
+            'location_osm'         => null,
+            'is_published_on_hubs' => 0,
+            'created_by'           => 1,
+            'updated_by'           => 1,
+            'created_at'           => '2022-06-13 8:00:00',
+            'updated_at'           => '2022-06-13 8:00:00',
         ];
     }
 
     /**
-     * @return array{id: int, podcast_id: int, guid: string, title: string, slug: string, audio_id: int, description_markdown: string, description_html: string, cover_id: int, transcript_id: null, transcript_remote_url: null, chapters_id: null, chapters_remote_url: null, parental_advisory: null, number: int, season_number: null, type: string, is_blocked: false, location_name: null, location_geo: null, location_osm: null, custom_rss: null, is_published_on_hubs: false, posts_count: int, comments_count: int, is_premium: false, created_by: int, updated_by: int, published_at: null, created_at: string, updated_at: string}
+     * @return array{id:int,podcast_id:int,guid:string,title:string,slug:string,audio_id:int,description_markdown:string,description_html:string,cover_id:int,transcript_id:null,transcript_remote_url:null,chapters_id:null,chapters_remote_url:null,parental_advisory:null,number:int,season_number:null,type:string,is_blocked:false,location_name:null,location_geo:null,location_osm:null,is_published_on_hubs:false,posts_count:int,comments_count:int,is_premium:false,created_by:int,updated_by:int,published_at:null,created_at:string,updated_at:string}
      */
     public static function episode(): array
     {
@@ -176,7 +169,6 @@ class FakeSinglePodcastApiSeeder extends Seeder
             'location_name'         => null,
             'location_geo'          => null,
             'location_osm'          => null,
-            'custom_rss'            => null,
             'is_published_on_hubs'  => false,
             'posts_count'           => 0,
             'comments_count'        => 0,

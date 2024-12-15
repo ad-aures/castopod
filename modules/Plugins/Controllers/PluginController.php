@@ -16,6 +16,7 @@ use Modules\Admin\Controllers\BaseController;
 use Modules\Plugins\Core\BasePlugin;
 use Modules\Plugins\Core\Markdown;
 use Modules\Plugins\Core\Plugins;
+use Modules\Plugins\Core\RSS;
 use Modules\Plugins\Manifest\Field;
 
 class PluginController extends BaseController
@@ -330,6 +331,7 @@ class PluginController extends BaseController
                 $this->request->getPost('client_timezone')
             )->setTimezone(app_timezone()),
             'markdown' => new Markdown($value),
+            'rss'      => new RSS($value),
             default    => $value,
         };
     }

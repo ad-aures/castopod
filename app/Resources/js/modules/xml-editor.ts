@@ -5,7 +5,7 @@ import {
   syntaxHighlighting,
 } from "@codemirror/language";
 import { Compartment, EditorState } from "@codemirror/state";
-import { keymap } from "@codemirror/view";
+import { keymap, ViewUpdate } from "@codemirror/view";
 import { basicSetup, EditorView } from "codemirror";
 import { css, html, LitElement, TemplateResult } from "lit";
 import { customElement, queryAssignedNodes, state } from "lit/decorators.js";
@@ -63,6 +63,12 @@ export class XMLEditor extends LitElement {
         language.of(xml()),
         minHeightEditor,
         syntaxHighlighting(defaultHighlightStyle),
+        EditorView.updateListener.of((viewUpdate: ViewUpdate) => {
+          if (viewUpdate.docChanged) {
+            // Document changed, update textarea value
+            this._textarea[0].value = viewUpdate.state.doc.toString();
+          }
+        }),
       ],
     });
 
@@ -72,20 +78,11 @@ export class XMLEditor extends LitElement {
       parent: this.shadowRoot as ShadowRoot,
     });
 
-    this._textarea[0].hidden = true;
-    if (this._textarea[0].form) {
-      this._textarea[0].form.addEventListener("submit", () => {
-        this._textarea[0].value = this.editorView.state.doc.toString();
-      });
-    }
-  }
-
-  disconnectedCallback(): void {
-    if (this._textarea[0].form) {
-      this._textarea[0].form.removeEventListener("submit", () => {
-        this._textarea[0].value = this.editorView.state.doc.toString();
-      });
-    }
+    // hide textarea
+    this._textarea[0].style.position = "absolute";
+    this._textarea[0].style.opacity = "0";
+    this._textarea[0].style.zIndex = "-9999";
+    this._textarea[0].style.pointerEvents = "none";
   }
 
   static styles = css`

@@ -6,15 +6,15 @@ namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
-use App\Libraries\SimpleRSSElement;
+use App\Libraries\RssFeed;
 use Config\Database;
 use Modules\Plugins\Config\Plugins as PluginsConfig;
 
 /**
  * @method void rssBeforeChannel(Podcast $podcast)
- * @method void rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel)
+ * @method void rssAfterChannel(Podcast $podcast, RssFeed $channel)
  * @method void rssBeforeItem(Episode $episode)
- * @method void rssAfterItem(Episode $episode, SimpleRSSElement $item)
+ * @method void rssAfterItem(Episode $episode, RssFeed $item)
  * @method void siteHead()
  */
 class Plugins
@@ -28,25 +28,27 @@ class Plugins
         'checkbox'        => ['permit_empty'],
         'datetime'        => ['valid_date[Y-m-d H:i]'],
         'email'           => ['valid_email'],
+        'group'           => ['permit_empty', 'is_list'],
         'markdown'        => ['string'],
         'number'          => ['integer'],
         'radio-group'     => ['string'],
+        'rss'             => ['string'],
         'select'          => ['string'],
         'select-multiple' => ['permit_empty', 'is_list'],
         'text'            => ['string'],
         'textarea'        => ['string'],
         'toggler'         => ['permit_empty'],
         'url'             => ['valid_url_strict'],
-        'group'           => ['permit_empty', 'is_list'],
     ];
 
     public const FIELDS_CASTS = [
         'checkbox' => 'bool',
         'datetime' => 'datetime',
+        'markdown' => 'markdown',
         'number'   => 'int',
+        'rss'      => 'rss',
         'toggler'  => 'bool',
         'url'      => 'uri',
-        'markdown' => 'markdown',
     ];
 
     /**

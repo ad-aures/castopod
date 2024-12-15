@@ -6,7 +6,7 @@ namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
-use App\Libraries\SimpleRSSElement;
+use App\Libraries\RssFeed;
 use CodeIgniter\HTTP\URI;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Event\DocumentParsedEvent;
@@ -86,7 +86,7 @@ abstract class BasePlugin implements PluginInterface
     }
 
     #[Override]
-    public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
+    public function rssAfterChannel(Podcast $podcast, RssFeed $channel): void
     {
     }
 
@@ -96,7 +96,7 @@ abstract class BasePlugin implements PluginInterface
     }
 
     #[Override]
-    public function rssAfterItem(Episode $episode, SimpleRSSElement $item): void
+    public function rssAfterItem(Episode $episode, RssFeed $item): void
     {
     }
 

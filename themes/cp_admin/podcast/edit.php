@@ -83,29 +83,6 @@
     isRequired="true"
 />
 
-<x-Forms.RadioGroup
-    label="<?= lang('Podcast.form.medium.label') ?>"
-    name="medium"
-    value="<?= $podcast->medium ?>"
-    options="<?= esc(json_encode([
-        [
-            'label'       => lang('Podcast.form.medium.podcast'),
-            'value'       => 'podcast',
-            'description' => lang('Podcast.form.medium.podcast_description'),
-        ],
-        [
-            'label'       => lang('Podcast.form.medium.music'),
-            'value'       => 'music',
-            'description' => lang('Podcast.form.medium.music_description'),
-        ],
-        [
-            'label'       => lang('Podcast.form.medium.audiobook'),
-            'value'       => 'audiobook',
-            'description' => lang('Podcast.form.medium.audiobook_description'),
-        ],
-    ])) ?>"
-    isRequired="true"
-/>
 </x-Forms.Section>
 
 <x-Forms.Section
@@ -178,9 +155,6 @@
     hint="<?= esc(lang('Podcast.form.owner_email_hint')) ?>"
     isRequired="true" />
 
-<x-Forms.Toggler class="mt-2" name="is_owner_email_removed_from_feed" isChecked="<?= $podcast->is_owner_email_removed_from_feed ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.is_owner_email_removed_from_feed_hint')) ?>">
-    <?= lang('Podcast.form.is_owner_email_removed_from_feed') ?></x-Forms.Toggler>
-
 <x-Forms.Field
     name="publisher"
     label="<?= esc(lang('Podcast.form.publisher')) ?>"
@@ -222,17 +196,6 @@
 </x-Forms.Section>
 
 <x-Forms.Section
-    title="<?= lang('Podcast.form.op3') ?>"
-    subtitle="<?= lang('Podcast.form.op3_hint') ?>">
-
-    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline"><?= icon('link', [
-        'class' => 'text-sm',
-    ]) ?>op3.dev</a>
-    <x-Forms.Toggler name="enable_op3" isChecked="<?= service('settings')
-            ->get('Analytics.enableOP3', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.op3_enable_hint')) ?>"><?= lang('Podcast.form.op3_enable') ?></x-Forms.Toggler>
-</x-Forms.Section>
-
-<x-Forms.Section
     title="<?= lang('Podcast.form.location_section_title') ?>"
     subtitle="<?= lang('Podcast.form.location_section_subtitle') ?>" >
 
@@ -247,23 +210,6 @@
 <x-Forms.Section
     title="<?= lang('Podcast.form.advanced_section_title') ?>"
     subtitle="<?= lang('Podcast.form.advanced_section_subtitle') ?>" >
-
-<x-Forms.Field
-    as="XMLEditor"
-    name="custom_rss"
-    label="<?= esc(lang('Podcast.form.custom_rss')) ?>"
-    hint="<?= esc(lang('Podcast.form.custom_rss_hint')) ?>"
-    content="<?= esc($podcast->custom_rss_string) ?>"
-    rows="8" />
-
-<x-Forms.Field
-    as="Textarea"
-    name="verify_txt"
-    label="<?= esc(lang('Podcast.form.verify_txt')) ?>"
-    hint="<?= esc(lang('Podcast.form.verify_txt_hint')) ?>"
-    helper="<?= esc(lang('Podcast.form.verify_txt_helper')) ?>"
-    value="<?= esc($podcast->verify_txt) ?>"
-    rows="5" />
 
 <x-Forms.Field
 name="new_feed_url"

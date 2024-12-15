@@ -213,18 +213,14 @@ class PodcastController extends BaseController
             'parental_advisory'    => $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
                     : null,
-            'owner_name'                       => $this->request->getPost('owner_name'),
-            'owner_email'                      => $this->request->getPost('owner_email'),
-            'is_owner_email_removed_from_feed' => $this->request->getPost('is_owner_email_removed_from_feed') === 'yes',
-            'publisher'                        => $this->request->getPost('publisher'),
-            'type'                             => $this->request->getPost('type'),
-            'medium'                           => $this->request->getPost('medium'),
-            'copyright'                        => $this->request->getPost('copyright'),
-            'location'                         => $this->request->getPost('location_name') === '' ? null : new Location(
+            'owner_name'  => $this->request->getPost('owner_name'),
+            'owner_email' => $this->request->getPost('owner_email'),
+            'publisher'   => $this->request->getPost('publisher'),
+            'type'        => $this->request->getPost('type'),
+            'copyright'   => $this->request->getPost('copyright'),
+            'location'    => $this->request->getPost('location_name') === '' ? null : new Location(
                 $this->request->getPost('location_name')
             ),
-            'verify_txt'            => $this->request->getPost('verify_txt'),
-            'custom_rss_string'     => $this->request->getPost('custom_rss'),
             'is_blocked'            => $this->request->getPost('block') === 'yes',
             'is_completed'          => $this->request->getPost('complete') === 'yes',
             'is_locked'             => $this->request->getPost('lock') === 'yes',
@@ -252,10 +248,6 @@ class PodcastController extends BaseController
             (int) $newPodcastId,
             $this->request->getPost('other_categories') ?? [],
         );
-
-        // OP3
-        service('settings')
-            ->set('Analytics.enableOP3', $this->request->getPost('enable_op3') === 'yes', 'podcast:' . $newPodcastId);
 
         $db->transComplete();
 
@@ -314,19 +306,11 @@ class PodcastController extends BaseController
         $this->podcast->publisher = $this->request->getPost('publisher');
         $this->podcast->owner_name = $this->request->getPost('owner_name');
         $this->podcast->owner_email = $this->request->getPost('owner_email');
-        $this->podcast->is_owner_email_removed_from_feed = $this->request->getPost(
-            'is_owner_email_removed_from_feed'
-        ) === 'yes';
         $this->podcast->type = $this->request->getPost('type');
-        $this->podcast->medium = $this->request->getPost('medium');
         $this->podcast->copyright = $this->request->getPost('copyright');
         $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
         );
-        $this->podcast->verify_txt = $this->request->getPost('verify_txt') === '' ? null : $this->request->getPost(
-            'verify_txt'
-        );
-        $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
         $this->podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
             'new_feed_url'
         );
@@ -359,64 +343,9 @@ class PodcastController extends BaseController
             $this->request->getPost('other_categories') ?? [],
         );
 
-        // enable/disable OP3?
-        service('settings')
-            ->set(
-                'Analytics.enableOP3',
-                $this->request->getPost('enable_op3') === 'yes',
-                'podcast:' . $this->podcast->id
-            );
-
         $db->transComplete();
 
         return redirect()->route('podcast-edit', [$this->podcast->id])->with(
-            'message',
-            lang('Podcast.messages.editSuccess')
-        );
-    }
-
-    public function monetizationOther(): string
-    {
-        helper('form');
-
-        $data = [
-            'podcast' => $this->podcast,
-        ];
-
-        replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-        ]);
-        return view('podcast/monetization_other', $data);
-    }
-
-    public function monetizationOtherAction(): RedirectResponse
-    {
-        if (
-            ($partnerId = $this->request->getPost('partner_id')) === '' ||
-            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
-            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
-            $partnerId = null;
-            $partnerLinkUrl = null;
-            $partnerImageUrl = null;
-        }
-
-        $this->podcast->payment_pointer = $this->request->getPost(
-            'payment_pointer'
-        ) === '' ? null : $this->request->getPost('payment_pointer');
-
-        $this->podcast->partner_id = $partnerId;
-        $this->podcast->partner_link_url = $partnerLinkUrl;
-        $this->podcast->partner_image_url = $partnerImageUrl;
-
-        $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $podcastModel->errors());
-        }
-
-        return redirect()->route('podcast-monetization-other', [$this->podcast->id])->with(
             'message',
             lang('Podcast.messages.editSuccess')
         );

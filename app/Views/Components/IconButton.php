@@ -6,9 +6,9 @@ namespace App\Views\Components;
 
 class IconButton extends Button
 {
-    public string $glyph;
-
     protected array $props = ['glyph'];
+
+    protected string $glyph;
 
     public function __construct(array $attributes)
     {

@@ -9,7 +9,7 @@ use Override;
 
 class Toggler extends FormComponent
 {
-    protected array $props = ['size', 'hint', 'isChecked'];
+    protected array $props = ['size', 'hint', 'helper', 'isChecked'];
 
     protected array $casts = [
         'isChecked' => 'boolean',

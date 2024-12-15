@@ -76,6 +76,7 @@
               "monetization",
               "podcasting2",
               "privacy",
+              "productivity",
               "seo"
             ]
           }
@@ -173,13 +174,14 @@
       "properties": {
         "type": {
           "enum": [
-            "group",
             "checkbox",
             "datetime",
             "email",
+            "group",
             "markdown",
             "number",
             "radio-group",
+            "rss",
             "select-multiple",
             "select",
             "text",

@@ -15,8 +15,8 @@ class Field extends Component
         'isRequired',
         'isReadonly',
         'as',
-        'helper',
         'hint',
+        'helper',
     ];
 
     protected array $casts = [
@@ -34,9 +34,9 @@ class Field extends Component
 
     protected string $as = 'Input';
 
-    protected string $helper = '';
-
     protected string $hint = '';
+
+    protected string $helper = '';
 
     #[Override]
     public function render(): string

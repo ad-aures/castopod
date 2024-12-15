@@ -190,9 +190,6 @@ class EpisodeController extends BaseController
                 ->with('error', lang('Episode.messages.sameSlugError'));
         }
 
-        $db = db_connect();
-        $db->transStart();
-
         $newEpisode = new Episode([
             'created_by'           => user_id(),
             'updated_by'           => user_id(),
@@ -217,11 +214,10 @@ class EpisodeController extends BaseController
             'season_number' => $this->request->getPost('season_number')
                 ? (int) $this->request->getPost('season_number')
                 : null,
-            'type'              => $this->request->getPost('type'),
-            'is_blocked'        => $this->request->getPost('block') === 'yes',
-            'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'is_premium'        => $this->request->getPost('premium') === 'yes',
-            'published_at'      => null,
+            'type'         => $this->request->getPost('type'),
+            'is_blocked'   => $this->request->getPost('block') === 'yes',
+            'is_premium'   => $this->request->getPost('premium') === 'yes',
+            'published_at' => null,
         ]);
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
@@ -244,31 +240,11 @@ class EpisodeController extends BaseController
 
         $episodeModel = new EpisodeModel();
         if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
-            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
-
-        // update podcast's episode_description_footer_markdown if changed
-        $this->podcast->episode_description_footer_markdown = $this->request->getPost(
-            'description_footer'
-        ) === '' ? null : $this->request->getPost('description_footer');
-
-        if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
-            $podcastModel = new PodcastModel();
-
-            if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
-                $db->transRollback();
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', $podcastModel->errors());
-            }
-        }
-
-        $db->transComplete();
 
         return redirect()->route('episode-view', [$this->podcast->id, $newEpisodeId])->with(
             'message',
@@ -330,7 +306,6 @@ class EpisodeController extends BaseController
         $this->episode->season_number = $this->request->getPost('season_number') ?: null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
-        $this->episode->custom_rss_string = $this->request->getPost('custom_rss');
         $this->episode->is_premium = $this->request->getPost('premium') === 'yes';
 
         $this->episode->updated_by = (int) user_id();
@@ -376,38 +351,13 @@ class EpisodeController extends BaseController
             $this->episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
         }
 
-        $db = db_connect();
-        $db->transStart();
-
         $episodeModel = new EpisodeModel();
-
         if (! $episodeModel->update($this->episode->id, $this->episode)) {
-            $db->transRollback();
-
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
-
-        // update podcast's episode_description_footer_markdown if changed
-        $this->podcast->episode_description_footer_markdown = $this->request->getPost(
-            'description_footer'
-        ) === '' ? null : $this->request->getPost('description_footer');
-
-        if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
-            $podcastModel = new PodcastModel();
-            if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
-                $db->transRollback();
-
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', $podcastModel->errors());
-            }
-        }
-
-        $db->transComplete();
 
         return redirect()->route('episode-edit', [$this->podcast->id, $this->episode->id])->with(
             'message',
