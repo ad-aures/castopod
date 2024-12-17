@@ -56,6 +56,7 @@ class ContributorController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead(lang('Contributor.podcast_contributors'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -69,6 +70,10 @@ class ContributorController extends BaseController
             'contributor' => (new UserModel())->getPodcastContributor($this->contributor->id, $this->podcast->id),
         ];
 
+        $this->setHtmlHead(lang('Contributor.view', [
+            'username'     => esc($this->contributor->username),
+            'podcastTitle' => esc($this->podcast->title),
+        ]));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->contributor->username,
@@ -113,6 +118,7 @@ class ContributorController extends BaseController
             'roleOptions'        => $roleOptions,
         ];
 
+        $this->setHtmlHead(lang('Contributor.add_contributor', [esc($this->podcast->title)]));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -170,6 +176,7 @@ class ContributorController extends BaseController
             'roleOptions'      => $roleOptions,
         ];
 
+        $this->setHtmlHead(lang('Contributor.edit_role', [esc($this->contributor->username)]));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->contributor->username,
@@ -208,6 +215,9 @@ class ContributorController extends BaseController
             'contributor' => $this->contributor,
         ];
 
+        $this->setHtmlHead(lang('Contributor.delete_form.title', [
+            'contributor' => $this->contributor->username,
+        ]));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->contributor->username,

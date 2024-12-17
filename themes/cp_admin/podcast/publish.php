@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Podcast.publish') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Podcast.publish') ?>
 <?= $this->endSection() ?>

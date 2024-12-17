@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Contributor.podcast_contributors') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Contributor.podcast_contributors') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('contributor-add', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Contributor.add') ?></x-Button>
 <?= $this->endSection() ?>
 
@@ -39,8 +35,8 @@
         [
             'header' => lang('Common.actions'),
             'cell'   => function ($contributor, $podcast) {
-                // @icon('pencil-fill')
-                // @icon('delete-bin-fill')
+                // @icon("pencil-fill")
+                // @icon("delete-bin-fill")
                 return '<x-Button uri="' . route_to('contributor-edit', $podcast->id, $contributor->id) . '" variant="secondary" iconLeft="pencil-fill" size="small">' . lang('Contributor.edit') . '</x-Button>' .
                 '<x-Button uri="' . route_to('contributor-remove', $podcast->id, $contributor->id) . '" variant="danger" iconLeft="delete-bin-fill" size="small">' . lang('Contributor.remove') . '</x-Button>';
             },

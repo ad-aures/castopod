@@ -3,39 +3,19 @@
 <html lang="<?= service('request')
     ->getLocale() ?>" class="h-full">
 
-<head>
-    <meta charset="UTF-8"/>
-    <title><?= lang('Page.map.title') . service('settings')->get('App.siteTitleSeparator') . esc(service('settings')->get('App.siteName')) ?></title>
-    <meta name="description" content="<?= lang('Page.map.description', [
+<?= service('html_head')
+    ->title(lang('Page.map.title') . service('settings')->get('App.siteTitleSeparator') . service('settings')->get('App.siteName'))
+    ->description(lang('Page.map.description', [
         'siteName' => esc(service('settings')
             ->get('App.siteName')),
-    ]) ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
-    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
-    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
-    <script>
-    // Check that service workers are supported
-    if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-        });
-    }
-    </script>
-
-    <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
-    <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
-    <?= service('vite')
-        ->asset('js/map.ts', 'js') ?>
-</head>
+    ]))
+    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
+    ->appendRawContent(service('vite')->asset('js/app.ts', 'js'))
+    ->appendRawContent(service('vite')->asset('js/map.ts', 'js'))
+?>
 
 <body class="flex flex-col h-full min-h-screen mx-auto bg-base theme-<?= service('settings')
-        ->get('App.theme') ?>">
+    ->get('App.theme') ?>">
     <?php if (auth()->loggedIn()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
@@ -58,9 +38,9 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-                'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
-                    'class' => 'ml-1 text-lg',
-                ]) . '</a>',
-            ], null, false) ?></small>
+                    'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                        'class' => 'ml-1 text-lg',
+                    ]) . '</a>',
+                ], null, false) ?></small>
     </footer> 
 </body>

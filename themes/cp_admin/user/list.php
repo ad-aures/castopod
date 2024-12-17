@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('User.all_users') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('User.all_users') ?> (<?= count($users) ?>)
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('user-add-fill')?>
+<?php // @icon("user-add-fill")?>
 <x-Button uri="<?= route_to('user-create') ?>" variant="primary" iconLeft="user-add-fill"><?= lang('User.create') ?></x-Button>
 <?= $this->endSection() ?>
 
@@ -37,7 +33,7 @@
                     $role = '<div class="inline-flex items-center"><span class="mr-2" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.instance_groups.owner.title') . '">' . icon('shield-user-fill') . '</span>' . $role . '</div>';
                 }
 
-                // @icon('pencil-fill')
+                // @icon("pencil-fill")
                 return $role . '<x-IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="pencil-fill" variant="info">' . lang('User.edit_role', [
                     'username' => esc($user->username),
                 ]) . '</x-IconButton>';

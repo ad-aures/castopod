@@ -191,10 +191,10 @@ class Episode extends Entity
         $this->audio_url = url_to(
             'episode-audio',
             $this->getPodcast()
-->handle,
+                ->handle,
             $this->slug,
             $this->getAudio()
-->file_extension
+                ->file_extension
         );
 
         $this->audio_opengraph_url = $this->audio_url . '?_from=-+Open+Graph+-';
@@ -219,7 +219,7 @@ class Episode extends Entity
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastCoverSizes,
+                    ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -302,7 +302,7 @@ class Episode extends Entity
             $transcript = new Transcript([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-->language_code,
+                    ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -339,7 +339,7 @@ class Episode extends Entity
             $chapters = new Chapters([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-->language_code,
+                    ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);

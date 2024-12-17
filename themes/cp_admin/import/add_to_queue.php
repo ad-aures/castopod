@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Podcast.import') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Podcast.import') ?>
 <?= $this->endSection() ?>
@@ -15,7 +11,7 @@
 
 <x-Forms.Section
     title="<?= lang('PodcastImport.old_podcast_section_title') ?>">
-<?php // @icon('scales-3-fill')?>
+<?php // @icon("scales-3-fill")?>
 <x-Alert glyph="scales-3-fill" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></x-Alert>
 <x-Forms.Field
     name="imported_feed_url"

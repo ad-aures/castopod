@@ -1,11 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('User.view', [
-    'username' => esc($user->username),
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('User.view', [
     'username' => esc($user->username),

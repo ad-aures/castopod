@@ -1,12 +1,4 @@
-<?php declare(strict_types=1);
-
-?>
-
 <?= $this->extend('_layout') ?>
-
-<?= $this->section('title') ?>
-<?= lang('Podcast.edit') ?>
-<?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('Podcast.edit') ?>
@@ -234,7 +226,7 @@ value="<?= esc($podcast->new_feed_url) ?>"
 </div>
 
 </form>
-<?php // @icon('delete-bin-fill')?>
+<?php // @icon("delete-bin-fill")?>
 <x-Button class="mt-8" variant="danger" uri="<?= route_to('podcast-delete', $podcast->id) ?>" iconLeft="delete-bin-fill"><?= lang('Podcast.delete') ?></x-Button>
 
 <?= $this->endSection() ?>

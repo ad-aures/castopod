@@ -1,12 +1,4 @@
-<?php declare(strict_types=1);
-
-?>
-
 <?= $this->extend('_layout') ?>
-
-<?= $this->section('title') ?>
-<?= lang('Podcast.create') ?>
-<?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('Podcast.create') ?>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\HtmlHead;
 use App\Libraries\RssFeed;
 use Modules\Plugins\Core\BasePlugin;
 
@@ -34,8 +35,8 @@ class AcmeAllHooksPlugin extends BasePlugin
     }
 
     #[Override]
-    public function siteHead(): void
+    public function siteHead(HtmlHead $head): void
     {
-        echo 'hello';
+        $head->tag('title', 'foo');
     }
 }

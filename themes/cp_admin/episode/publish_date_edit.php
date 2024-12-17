@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Episode.publish_date_edit') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Episode.publish_date_edit') ?>
 <?= $this->endSection() ?>

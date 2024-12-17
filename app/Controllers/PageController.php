@@ -49,9 +49,9 @@ class PageController extends BaseController
         );
 
         if (! ($found = cache($cacheName))) {
+            set_page_metatags($this->page);
             $data = [
-                'metatags' => get_page_metatags($this->page),
-                'page'     => $this->page,
+                'page' => $this->page,
             ];
 
             $found = view('pages/page', $data);

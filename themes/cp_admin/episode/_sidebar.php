@@ -2,7 +2,7 @@
 
 $episodeNavigation = [
     'dashboard' => [
-        'icon'              => 'dashboard-fill', // @icon('dashboard-fill')
+        'icon'              => 'dashboard-fill', // @icon("dashboard-fill")
         'items'             => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
         'items-permissions' => [
             'episode-view'           => 'episodes.view',
@@ -12,13 +12,13 @@ $episodeNavigation = [
         ],
     ],
     'plugins' => [
-        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'icon'              => 'puzzle-fill', // @icon("puzzle-fill")
         'items'             => [],
         'items-labels'      => [],
         'items-permissions' => [],
     ],
     'clips' => [
-        'icon'              => 'clapperboard-fill', // @icon('clapperboard-fill')
+        'icon'              => 'clapperboard-fill', // @icon("clapperboard-fill")
         'items'             => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
         'items-permissions' => [
             'video-clips-list'   => 'episodes.manage-clips',

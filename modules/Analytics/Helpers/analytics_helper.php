@@ -286,8 +286,7 @@ if (! function_exists('podcast_hit')) {
                         $parts = explode('-', $range);
                         $downloadedBytes += array_key_exists(1, $parts)
                             ? $fileSize
-                            : (int) $parts[1] -
-                                (array_key_exists(0, $parts) ? 0 : (int) $parts[0]);
+                            : (int) $parts[1] - (int) $parts[0];
                     }
                 }
 

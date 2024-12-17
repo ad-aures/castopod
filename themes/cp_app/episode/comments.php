@@ -16,7 +16,7 @@
                 isRequired="true"
                 placeholder="<?= lang('Comment.form.episode_message_placeholder') ?>"
                 rows="2" />
-            <?php // @icon('send-plane-2-fill')?>
+            <?php // @icon("send-plane-2-fill")?>
             <x-Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane-2-fill"><?= lang('Comment.form.submit') ?></x-Button>
         </div>
     </form>

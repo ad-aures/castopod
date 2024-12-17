@@ -21,10 +21,6 @@ if (! function_exists('get_import_tasks')) {
         $podcastImportsQueue = service('settings')
             ->get('Import.queue') ?? [];
 
-        if (! is_array($podcastImportsQueue)) {
-            return [];
-        }
-
         if ($podcastHandle !== null) {
             $podcastImportsQueue = array_filter(
                 $podcastImportsQueue,
@@ -48,6 +44,6 @@ if (! function_exists('get_import_tasks')) {
             return $a->created_at->isAfter($b->created_at) ? -1 : 1;
         });
 
-        return array_values($podcastImportsQueue);
+        return $podcastImportsQueue;
     }
 }

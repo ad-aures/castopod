@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-use CodeIgniter\Router\RouteCollection;
-
 /**
  * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-/** @var RouteCollection $routes */
+/** @var \CodeIgniter\Router\RouteCollection $routes */
 
 /**
  * Analytics routes file

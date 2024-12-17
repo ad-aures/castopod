@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Page.edit') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Page.edit') ?>
 <?= $this->endSection() ?>

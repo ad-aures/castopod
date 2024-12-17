@@ -6,19 +6,21 @@ namespace App\Views\Components\Forms;
 
 use Override;
 
-class XMLEditor extends FormComponent
+class CodeEditor extends FormComponent
 {
-    protected array $props = ['content'];
+    protected array $props = ['content', 'lang'];
 
     /**
      * @var array<string, string>
      */
     protected array $attributes = [
-        'rows'  => '5',
+        'rows'  => '6',
         'class' => 'textarea',
     ];
 
     protected string $content = '';
+
+    protected string $lang = '';
 
     public function setContent(string $value): void
     {
@@ -32,7 +34,7 @@ class XMLEditor extends FormComponent
         $textarea = form_textarea($this->attributes, $this->content);
 
         return <<<HTML
-            <xml-editor>{$textarea}</xml-editor>
+            <code-editor lang="{$this->lang}">{$textarea}</code-editor>
         HTML;
     }
 }

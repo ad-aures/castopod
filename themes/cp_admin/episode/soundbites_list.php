@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Soundbite.list.title') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Soundbite.list.title') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('soundbites-create', $podcast->id, $episode->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Soundbite.create') ?></x-Button>
 <?= $this->endSection() ?>
 

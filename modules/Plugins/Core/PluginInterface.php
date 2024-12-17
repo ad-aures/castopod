@@ -6,6 +6,7 @@ namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\HtmlHead;
 use App\Libraries\RssFeed;
 
 interface PluginInterface
@@ -18,5 +19,5 @@ interface PluginInterface
 
     public function rssAfterItem(Episode $episode, RssFeed $item): void;
 
-    public function siteHead(): void;
+    public function siteHead(HtmlHead $head): void;
 }

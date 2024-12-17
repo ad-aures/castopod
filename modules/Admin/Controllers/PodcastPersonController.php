@@ -46,6 +46,8 @@ class PodcastPersonController extends BaseController
             'personOptions'   => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
+
+        $this->setHtmlHead(lang('Person.podcast_form.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);

@@ -1,6 +1,3 @@
-<?php declare(strict_types=1);
-
-?>
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('content') ?>
@@ -37,7 +34,7 @@
     hint="<?= esc(lang('Install.form.auth_gateway_hint')) ?>"
     value="<?= config('Auth')->gateway ?>"
     isRequired="true" />
-<?php // @icon('arrow-right-fill')?>
+<?php // @icon("arrow-right-fill")?>
 <x-Button class="self-end" variant="primary" type="submit" iconRight="arrow-right-fill"><?= lang('Install.form.next') ?></x-Button>
 </form>
 

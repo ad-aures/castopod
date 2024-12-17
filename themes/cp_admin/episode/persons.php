@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Person.episode_form.title') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Person.episode_form.title') ?> (<?= count($episode->persons) ?>)
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button variant="primary" uri="<?= route_to('person-create') ?>" iconLeft="add-fill"><?= lang('Person.create') ?></x-Button>
 <?= $this->endSection() ?>
 
@@ -86,7 +82,7 @@
         [
             'header' => lang('Common.actions'),
             'cell'   => function ($person): string {
-                // @icon('delete-bin-fill')
+                // @icon("delete-bin-fill")
                 return '<x-Button uri="' . route_to('episode-person-remove', $person->podcast_id, $person->episode_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin-fill">' . lang('Person.episode_form.remove') . '</x-Button>';
             },
         ],

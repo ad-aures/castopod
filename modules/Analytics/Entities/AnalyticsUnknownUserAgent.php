@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Modules\Analytics\Entities;
 
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\I18n\Time;
 
 /**
  * @property int $id

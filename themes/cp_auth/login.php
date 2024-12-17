@@ -1,10 +1,7 @@
-<?php declare(strict_types=1);
-
-?>
 <?= helper('form') ?>
 <?= $this->extend(config('Auth')->views['layout']) ?>
 
-<?= $this->section('title') ?><?= lang('Auth.login') ?><?= $this->endSection() ?>
+<?= $this->section('pageTitle') ?><?= lang('Auth.login') ?><?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>

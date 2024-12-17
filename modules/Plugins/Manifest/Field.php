@@ -7,7 +7,7 @@ namespace Modules\Plugins\Manifest;
 use Override;
 
 /**
- * @property 'checkbox'|'datetime'|'email'|'group'|'markdown'|'number'|'radio-group'|'rss'|'select-multiple'|'select'|'text'|'textarea'|'toggler'|'url' $type
+ * @property 'checkbox'|'datetime'|'email'|'group'|'html'|'markdown'|'number'|'radio-group'|'rss'|'select-multiple'|'select'|'text'|'textarea'|'toggler'|'url' $type
  * @property string $key
  * @property string $label
  * @property string $hint
@@ -20,7 +20,7 @@ use Override;
 class Field extends ManifestObject
 {
     protected const VALIDATION_RULES = [
-        'type'     => 'permit_empty|in_list[checkbox,datetime,email,group,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
+        'type'     => 'permit_empty|in_list[checkbox,datetime,email,group,html,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
         'key'      => 'required|alpha_dash',
         'label'    => 'required|string',
         'hint'     => 'permit_empty|string',

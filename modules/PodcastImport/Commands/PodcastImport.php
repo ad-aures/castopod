@@ -160,7 +160,7 @@ class PodcastImport extends BaseCommand
 
             $podcastModel = new PodcastModel();
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
-                throw new Exception((string) print_r($podcastModel->errors()));
+                throw new Exception(print_r($podcastModel->errors(), true));
             }
 
             CLI::showProgress(false);
@@ -260,7 +260,7 @@ class PodcastImport extends BaseCommand
         $podcastModel = new PodcastModel();
         if (! ($podcastId = $podcastModel->insert($podcast, true))) {
             $db->transRollback();
-            throw new Exception((string) print_r($podcastModel->errors()));
+            throw new Exception(print_r($podcastModel->errors(), true));
         }
 
         $podcast->id = $podcastId;
@@ -326,7 +326,7 @@ class PodcastImport extends BaseCommand
                 ]);
 
                 if (! $newPersonId = $personModel->insert($newPodcastPerson)) {
-                    throw new Exception((string) print_r($personModel->errors()));
+                    throw new Exception(print_r($personModel->errors(), true));
                 }
             }
 
@@ -353,7 +353,7 @@ class PodcastImport extends BaseCommand
                 $personGroupSlug,
                 $personRoleSlug
             )) {
-                throw new Exception((string) print_r($podcastPersonModel->errors()));
+                throw new Exception(print_r($podcastPersonModel->errors(), true));
             }
         }
 
@@ -498,7 +498,7 @@ class PodcastImport extends BaseCommand
 
             if (! ($episodeId = $episodeModel->insert($episode, true))) {
                 $db->transRollback();
-                throw new Exception((string) print_r($episodeModel->errors()));
+                throw new Exception(print_r($episodeModel->errors(), true));
             }
 
             $this->importEpisodePersons($episodeId, $item->podcast_persons);
@@ -546,7 +546,7 @@ class PodcastImport extends BaseCommand
                 ]);
 
                 if (! ($newPersonId = $personModel->insert($newPerson))) {
-                    throw new Exception((string) print_r($personModel->errors()));
+                    throw new Exception(print_r($personModel->errors(), true));
                 }
             }
 
@@ -574,7 +574,7 @@ class PodcastImport extends BaseCommand
                 $personGroupSlug,
                 $personRoleSlug
             )) {
-                throw new Exception((string) print_r($episodePersonModel->errors()));
+                throw new Exception(print_r($episodePersonModel->errors(), true));
             }
         }
     }

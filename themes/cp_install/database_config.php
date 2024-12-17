@@ -1,6 +1,3 @@
-<?php declare(strict_types=1);
-
-?>
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('content') ?>
@@ -54,7 +51,7 @@
     label="<?= esc(lang('Install.form.db_prefix')) ?>"
     hint="<?= esc(lang('Install.form.db_prefix_hint')) ?>"
     value="<?= config('Database')->default['DBPrefix'] ?>" />
-<?php // @icon('arrow-right-fill')?>
+<?php // @icon("arrow-right-fill")?>
 <x-Button variant="primary" type="submit" class="self-end" iconRight="arrow-right-fill"><?= lang('Install.form.next') ?></x-Button>
 
 </form>

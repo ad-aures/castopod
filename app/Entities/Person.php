@@ -72,7 +72,7 @@ class Person extends Entity
             $avatar = new Image([
                 'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->personAvatarSizes,
+                    ->personAvatarSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);

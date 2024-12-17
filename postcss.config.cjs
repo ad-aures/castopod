@@ -3,7 +3,6 @@
 module.exports = {
   plugins: [
     require("postcss-reporter"),
-    require("tailwindcss/nesting")(require("postcss-nesting")),
     require("tailwindcss"),
     require("postcss-preset-env")({
       stage: 4,

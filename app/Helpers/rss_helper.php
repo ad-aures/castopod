@@ -422,7 +422,7 @@ if (! function_exists('add_category_tag')) {
     /**
      * Adds <itunes:category> and <category> tags to node for a given category
      */
-    function add_category_tag(SimpleXMLElement $node, Category $category): void
+    function add_category_tag(RssFeed $node, Category $category): void
     {
         $itunesCategory = $node->addChild('category', null, RssFeed::ITUNES_NAMESPACE);
         $itunesCategory->addAttribute(
@@ -439,72 +439,5 @@ if (! function_exists('add_category_tag')) {
         }
 
         $node->addChild('category', $category->apple_category);
-    }
-}
-
-if (! function_exists('rss_to_array')) {
-    /**
-     * Converts XML to array
-     *
-     * FIXME: param should be SimpleRSSElement
-     *
-     * @return array<string, mixed>
-     */
-    function rss_to_array(SimpleXMLElement $rssNode): array
-    {
-        $nameSpaces = ['', 'http://www.itunes.com/dtds/podcast-1.0.dtd', 'https://podcastindex.org/namespace/1.0'];
-        $arrayNode = [];
-        $arrayNode['name'] = $rssNode->getName();
-        $arrayNode['namespace'] = $rssNode->getNamespaces(false);
-        foreach ($rssNode->attributes() as $key => $value) {
-            $arrayNode['attributes'][$key] = (string) $value;
-        }
-
-        $textcontent = trim((string) $rssNode);
-        if (strlen($textcontent) > 0) {
-            $arrayNode['content'] = $textcontent;
-        }
-
-        foreach ($nameSpaces as $currentNameSpace) {
-            foreach ($rssNode->children($currentNameSpace) as $childXmlNode) {
-                $arrayNode['elements'][] = rss_to_array($childXmlNode);
-            }
-        }
-
-        return $arrayNode;
-    }
-}
-
-if (! function_exists('array_to_rss')) {
-    /**
-     * Inserts array (converted to XML node) in XML node
-     *
-     * @param array<string, mixed> $arrayNode
-     * @param RssFeed $xmlNode The XML parent node where this arrayNode should be attached
-     */
-    function array_to_rss(array $arrayNode, RssFeed &$xmlNode): RssFeed
-    {
-        if (array_key_exists('elements', $arrayNode)) {
-            foreach ($arrayNode['elements'] as $childArrayNode) {
-                $childXmlNode = $xmlNode->addChild(
-                    $childArrayNode['name'],
-                    $childArrayNode['content'] ?? null,
-                    $childArrayNode['namespace'] === []
-                        ? null
-                        : current($childArrayNode['namespace'])
-                );
-                if (array_key_exists('attributes', $childArrayNode)) {
-                    foreach (
-                        $childArrayNode['attributes'] as $attributeKey => $attributeValue
-                    ) {
-                        $childXmlNode->addAttribute($attributeKey, $attributeValue);
-                    }
-                }
-
-                array_to_rss($childArrayNode, $childXmlNode);
-            }
-        }
-
-        return $xmlNode;
     }
 }

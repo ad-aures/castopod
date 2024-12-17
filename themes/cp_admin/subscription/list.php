@@ -1,15 +1,11 @@
 <?= $this->extend('../cp_admin/_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Subscription.podcast_subscriptions') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Subscription.podcast_subscriptions') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Subscription.add') ?></x-Button>
 <?= $this->endSection() ?>
 

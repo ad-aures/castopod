@@ -127,7 +127,7 @@ class PlatformModel extends Model
     }
 
     /**
-     * @param array<array<string, string|int>> $data
+     * @param array<array<string, bool|int|string|null>> $data
      *
      * @return int|false Number of rows inserted or FALSE on failure
      */

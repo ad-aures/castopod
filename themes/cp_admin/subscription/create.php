@@ -1,9 +1,5 @@
 <?= $this->extend('../cp_admin/_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Subscription.add', [esc($podcast->title)]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Subscription.add', [esc($podcast->title)]) ?>
 <?= $this->endSection() ?>

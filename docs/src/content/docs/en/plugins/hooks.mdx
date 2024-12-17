@@ -37,7 +37,7 @@ RSS feed.
 Here is a good place to add new tags to the generated channel.
 
 ```php
-public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
+public function rssAfterChannel(Podcast $podcast, RssFeed $channel): void
 {
     // …
 }
@@ -65,7 +65,7 @@ feed.
 Here is a good place to add new tags to the generated item.
 
 ```php
-public function rssAfterItem(Epsiode $episode, SimpleRSSElement $item): void
+public function rssAfterItem(Epsiode $episode, RssFeed $item): void
 {
     // …
 }
@@ -75,11 +75,11 @@ public function rssAfterItem(Epsiode $episode, SimpleRSSElement $item): void
 
 This hook is executed in the public pages' `<head>` tag.
 
-This is a good place to add meta tags and third-party scripts to Castopod's
-public pages.
+This is a good place to add meta tags, custom styles, and third-party scripts to
+Castopod's public pages.
 
 ```php
-public function siteHead(): void
+public function siteHead(HtmlHead $head): void
 {
     // …
 }

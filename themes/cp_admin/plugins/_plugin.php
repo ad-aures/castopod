@@ -6,16 +6,16 @@ use Modules\Plugins\Core\PluginStatus;
 <article class="flex flex-col p-4 rounded-xl relative bg-elevated border-3 <?= $plugin->getStatus() === PluginStatus::ACTIVE ? 'border-accent-base' : 'border-subtle' ?>">
     <div class="self-end -mb-6">
     <?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
-        <?php // @icon('check-fill')?>
+        <?php // @icon("check-fill")?>
         <x-Pill variant="success" icon="check-fill" class="lowercase" size="small"><?= lang('Plugins.active') ?></x-Pill>
     <?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
-        <?php // @icon('close-fill')?>
+        <?php // @icon("close-fill")?>
         <x-Pill variant="default" icon="close-fill" class="lowercase" size="small"><?= lang('Plugins.inactive') ?></x-Pill>
     <?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
-        <?php // @icon('alert-fill')?>
+        <?php // @icon("alert-fill")?>
         <x-Pill variant="warning" icon="alert-fill" class="lowercase" size="small"><?= lang('Plugins.invalid') ?></x-Pill>
     <?php elseif($plugin->getStatus() === PluginStatus::INCOMPATIBLE): ?>
-        <?php // @icon('alert-fill')?>
+        <?php // @icon("alert-fill")?>
         <x-Pill variant="danger" icon="alert-fill" class="lowercase" size="small" hint="<?= lang('Plugins.incompatible_hint', [
             'minCastopodVersion' => $plugin->getMinCastopodVersion(),
         ]) ?>"><?= lang('Plugins.incompatible') ?></x-Pill>
@@ -36,11 +36,11 @@ use Modules\Plugins\Core\PluginStatus;
     <footer class="flex items-center justify-between mt-auto">
         <div class="flex gap-x-2">
             <?php if ($plugin->getHomepage()): ?>
-                <?php // @icon('earth-fill')?>
+                <?php // @icon("earth-fill")?>
                 <x-IconButton glyph="earth-fill" uri="<?= $plugin->getHomepage() ?>" isExternal="true"><?= lang('Plugins.website') ?></x-IconButton>    
             <?php endif; ?>
             <?php if ($plugin->getRepository()): ?>
-                <?php // @icon('git-repository-fill')?>
+                <?php // @icon("git-repository-fill")?>
                 <x-IconButton glyph="git-repository-fill" uri="<?= $plugin->getRepository()->url ?>" isExternal="true"><?= lang('Plugins.repository') ?></x-IconButton>    
             <?php endif; ?>
         </div>
@@ -57,7 +57,7 @@ use Modules\Plugins\Core\PluginStatus;
             </form>
         <?php endif; ?>
             <?php if ($plugin->getSettingsFields('general') !== []): ?>
-                <?php // @icon('equalizer-fill')?>
+                <?php // @icon("equalizer-fill")?>
                 <x-IconButton uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>" glyph="equalizer-fill"><?= lang('Plugins.settings') ?></x-IconButton>
             <?php endif; ?>
             <button class="p-2 rounded-full" id="more-dropdown-<?= $plugin->getKey() ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $plugin->getKey() ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>

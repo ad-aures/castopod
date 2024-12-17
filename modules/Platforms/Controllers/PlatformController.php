@@ -55,10 +55,10 @@ class PlatformController extends BaseController
             'platforms'    => (new PlatformModel())->getPlatformsWithData($this->podcast->id, $platformType),
         ];
 
+        $this->setHtmlHead(lang("Platforms.title.{$platformType}"));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-
         return view('podcast/platforms', $data);
     }
 

@@ -26,6 +26,7 @@ class FediverseController extends BaseController
         $blockedActors = model('ActorModel', false)
             ->getBlockedActors();
 
+        $this->setHtmlHead(lang('Fediverse.blocked_actors'));
         return view('fediverse/blocked_actors', [
             'blockedActors' => $blockedActors,
         ]);
@@ -38,6 +39,7 @@ class FediverseController extends BaseController
         $blockedDomains = model('BlockedDomainModel', false)
             ->getBlockedDomains();
 
+        $this->setHtmlHead(lang('Fediverse.blocked_domains'));
         return view('fediverse/blocked_domains', [
             'blockedDomains' => $blockedDomains,
         ]);

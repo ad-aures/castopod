@@ -32,9 +32,9 @@ class HomeController extends BaseController
             return redirect()->route('podcast-activity', [$allPodcasts[0]->handle]);
         }
 
+        set_home_metatags();
         // default behavior: list all podcasts on home page
         $data = [
-            'metatags' => get_home_metatags(),
             'podcasts' => $allPodcasts,
             'sortBy'   => $sortBy,
         ];

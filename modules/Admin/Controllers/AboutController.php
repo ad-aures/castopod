@@ -25,6 +25,7 @@ class AboutController extends BaseController
             'languages'   => implode(', ', config('App')->supportedLocales),
         ];
 
+        $this->setHtmlHead(lang('AboutCastopod.title'));
         return view('settings/about', [
             'info' => $instanceInfo,
         ]);

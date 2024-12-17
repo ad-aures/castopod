@@ -231,7 +231,7 @@ class Podcast extends Entity
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastCoverSizes,
+                    ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -274,7 +274,7 @@ class Podcast extends Entity
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastBannerSizes,
+                    ->podcastBannerSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);

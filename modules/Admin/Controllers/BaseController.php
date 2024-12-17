@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use App\Libraries\HtmlHead;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
@@ -40,5 +41,17 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         Theme::setTheme('admin');
+    }
+
+    protected function setHtmlHead(string $title): void
+    {
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+
+        $head
+            ->title($title . ' | Castopod Admin')
+            ->description(
+                'Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.'
+            );
     }
 }

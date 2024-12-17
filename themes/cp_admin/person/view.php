@@ -1,16 +1,12 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= esc($person->full_name) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= esc($person->full_name) ?>
 
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('pencil-fill')?>
+<?php // @icon("pencil-fill")?>
 <x-Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="pencil-fill"><?= lang('Person.edit') ?></x-Button>
 <?= $this->endSection() ?>
 

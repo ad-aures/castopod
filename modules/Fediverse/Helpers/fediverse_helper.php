@@ -41,7 +41,7 @@ if (! function_exists('split_handle')) {
     /**
      * Splits handle into its parts (username, host and port)
      *
-     * @return array<string, string>|false
+     * @return array{0:string,username:non-empty-string,1:non-empty-string,domain:non-empty-string,2:non-empty-string,port?:non-falsy-string,3?:non-falsy-string}
      */
     function split_handle(string $handle): array | false
     {

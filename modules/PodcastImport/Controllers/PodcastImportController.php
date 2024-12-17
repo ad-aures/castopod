@@ -28,6 +28,7 @@ class PodcastImportController extends BaseController
     {
         helper('podcast_import');
 
+        $this->setHtmlHead(lang('Podcast.all_imports'));
         return view('import/queue', [
             'podcastImportsQueue' => get_import_tasks(),
         ]);
@@ -41,6 +42,7 @@ class PodcastImportController extends BaseController
 
         helper('podcast_import');
 
+        $this->setHtmlHead(lang('Podcast.all_imports'));
         replace_breadcrumb_params([
             0 => $podcast->at_handle,
         ]);
@@ -63,6 +65,7 @@ class PodcastImportController extends BaseController
             'browserLang'     => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
+        $this->setHtmlHead(lang('Podcast.import'));
         return view('import/add_to_queue', $data);
     }
 
@@ -112,6 +115,7 @@ class PodcastImportController extends BaseController
 
         helper('form');
 
+        $this->setHtmlHead(lang('PodcastImport.syncForm.title'));
         replace_breadcrumb_params([
             0 => $podcast->at_handle,
         ]);

@@ -71,7 +71,7 @@ class EpisodeController extends Controller
     protected static function mapEpisode(Episode $episode): Episode
     {
         $episode->cover_url = $episode->getCover()
-->file_url;
+            ->file_url;
         $episode->duration = round($episode->audio->duration);
 
         return $episode;

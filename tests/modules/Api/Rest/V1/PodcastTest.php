@@ -8,6 +8,7 @@ use CodeIgniter\Database\Seeder;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Override;
 use Tests\Support\Database\Seeds\FakeSinglePodcastApiSeeder;
 
 class PodcastTest extends CIUnitTestCase
@@ -45,16 +46,27 @@ class PodcastTest extends CIUnitTestCase
      */
     private array $podcast = [];
 
-    private readonly string $podcastApiUrl;
+    private string $podcastApiUrl = '';
 
-    public function __construct(?string $name = null)
+    #[Override]
+    protected function setUp(): void
     {
-        parent::__construct($name);
+        parent::setUp();
+
         $this->podcast = FakeSinglePodcastApiSeeder::podcast();
         $this->podcast['created_at'] = [];
         $this->podcast['updated_at'] = [];
         $this->podcastApiUrl = config('RestApi')
             ->gateway;
+    }
+
+    #[Override]
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        restore_error_handler();
+        restore_exception_handler();
     }
 
     public function testList(): void

@@ -34,7 +34,7 @@ if (! function_exists('download_file')) {
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['User-Agent: Castopod/' . CP_VERSION]);
 
         // follow redirects up to 20, like Apple Podcasts
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 
         curl_exec($ch);

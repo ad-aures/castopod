@@ -1,12 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Contributor.view', [
-    'username'     => esc($contributor->username),
-    'podcastTitle' => esc($podcast->title),
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Contributor.view', [
     'username'     => esc($contributor->username),

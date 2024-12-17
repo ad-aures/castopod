@@ -6,10 +6,6 @@ $embedHeight = config('Embed')->height;
 
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Episode.embed.title') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Episode.embed.title') ?>
 <?= $this->endSection() ?>
@@ -34,13 +30,13 @@ $embedHeight = config('Embed')->height;
 
 <div class="flex items-center mt-8 gap-x-2">
     <x-Forms.Textarea isReadonly="true" class="w-full max-w-xl" name="iframe" rows="2" value="<?= esc("<iframe width=\"100%\" height=\"{$embedHeight}\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: {$embedHeight}px; overflow: hidden;\" src=\"{$episode->embed_url}\"></iframe>") ?>" />
-    <?php // @icon('file-copy-fill')?>
+    <?php // @icon("file-copy-fill")?>
     <x-IconButton glyph="file-copy-fill" data-type="clipboard-copy" data-clipboard-target="iframe"><?= lang('Episode.embed.clipboard_iframe') ?></x-IconButton>
 </div>
 
 <div class="flex items-center mt-4 gap-x-2">
     <x-Forms.Input isReadonly="true" class="w-full max-w-xl" name="url" value="<?= esc($episode->embed_url) ?>" />
-    <?php // @icon('file-copy-fill')?>
+    <?php // @icon("file-copy-fill")?>
     <x-IconButton glyph="file-copy-fill" data-type="clipboard-copy" data-clipboard-target="url"><?= lang('Episode.embed.clipboard_url') ?></x-IconButton>
 </div>
 

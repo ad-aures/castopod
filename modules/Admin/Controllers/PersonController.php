@@ -42,6 +42,7 @@ class PersonController extends BaseController
                 ->findAll(),
         ];
 
+        $this->setHtmlHead(lang('Person.all_persons'));
         return view('person/list', $data);
     }
 
@@ -51,6 +52,7 @@ class PersonController extends BaseController
             'person' => $this->person,
         ];
 
+        $this->setHtmlHead($this->person->full_name);
         replace_breadcrumb_params([
             0 => $this->person->full_name,
         ]);
@@ -61,6 +63,7 @@ class PersonController extends BaseController
     {
         helper(['form']);
 
+        $this->setHtmlHead(lang('Person.create'));
         return view('person/create');
     }
 
@@ -112,6 +115,7 @@ class PersonController extends BaseController
             'person' => $this->person,
         ];
 
+        $this->setHtmlHead(lang('Person.edit'));
         replace_breadcrumb_params([
             0 => $this->person->full_name,
         ]);

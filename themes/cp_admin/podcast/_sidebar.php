@@ -2,7 +2,7 @@
 
 $podcastNavigation = [
     'dashboard' => [
-        'icon'              => 'dashboard-fill', // @icon('dashboard-fill')
+        'icon'              => 'dashboard-fill', // @icon("dashboard-fill")
         'items'             => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports', 'podcast-imports-sync'],
         'items-permissions' => [
             'podcast-view'           => 'view',
@@ -13,7 +13,7 @@ $podcastNavigation = [
         ],
     ],
     'episodes' => [
-        'icon'              => 'play-circle-fill', // @icon('play-circle-fill')
+        'icon'              => 'play-circle-fill', // @icon("play-circle-fill")
         'items'             => ['episode-list', 'episode-create'],
         'items-permissions' => [
             'episode-list'   => 'episodes.view',
@@ -24,13 +24,13 @@ $podcastNavigation = [
         'count-route' => 'episode-list',
     ],
     'plugins' => [
-        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'icon'              => 'puzzle-fill', // @icon("puzzle-fill")
         'items'             => [],
         'items-labels'      => [],
         'items-permissions' => [],
     ],
     'analytics' => [
-        'icon'  => 'line-chart-fill', // @icon('line-chart-fill')
+        'icon'  => 'line-chart-fill', // @icon("line-chart-fill")
         'items' => [
             'podcast-analytics',
             'podcast-analytics-unique-listeners',
@@ -51,7 +51,7 @@ $podcastNavigation = [
         ],
     ],
     'broadcast' => [
-        'icon'  => 'broadcast-fill', // @icon('broadcast-fill')
+        'icon'  => 'broadcast-fill', // @icon("broadcast-fill")
         'items' => [
             'platforms-podcasting',
             'platforms-social',
@@ -62,7 +62,7 @@ $podcastNavigation = [
         ],
     ],
     'monetization' => [
-        'icon'  => 'money-dollar-circle-fill', // @icon('money-dollar-circle-fill')
+        'icon'  => 'money-dollar-circle-fill', // @icon("money-dollar-circle-fill")
         'items' => [
             'subscription-list',
             'subscription-create',
@@ -75,7 +75,7 @@ $podcastNavigation = [
         ],
     ],
     'contributors' => [
-        'icon'              => 'group-fill', // @icon('group-fill')
+        'icon'              => 'group-fill', // @icon("group-fill")
         'items'             => ['contributor-list', 'contributor-add'],
         'items-permissions' => [
             'contributor-list' => 'manage-contributors',

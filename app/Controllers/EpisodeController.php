@@ -86,10 +86,10 @@ class EpisodeController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
+            set_episode_metatags($this->episode);
             $data = [
-                'metatags' => get_episode_metatags($this->episode),
-                'podcast'  => $this->podcast,
-                'episode'  => $this->episode,
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -135,10 +135,10 @@ class EpisodeController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
+            set_episode_metatags($this->episode);
             $data = [
-                'metatags' => get_episode_metatags($this->episode),
-                'podcast'  => $this->podcast,
-                'episode'  => $this->episode,
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -184,13 +184,13 @@ class EpisodeController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
-            // get chapters from json file
+            set_episode_metatags($this->episode);
             $data = [
-                'metatags' => get_episode_metatags($this->episode),
-                'podcast'  => $this->podcast,
-                'episode'  => $this->episode,
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
             ];
 
+            // get chapters from json file
             if (isset($this->episode->chapters->file_key)) {
                 /** @var FileManagerInterface $fileManager */
                 $fileManager = service('file_manager');
@@ -243,13 +243,13 @@ class EpisodeController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
-            // get transcript from json file
+            set_episode_metatags($this->episode);
             $data = [
-                'metatags' => get_episode_metatags($this->episode),
-                'podcast'  => $this->podcast,
-                'episode'  => $this->episode,
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
             ];
 
+            // get transcript from json file
             if ($this->episode->transcript !== null) {
                 $data['transcript'] = $this->episode->transcript;
 

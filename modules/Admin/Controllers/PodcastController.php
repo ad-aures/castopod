@@ -68,6 +68,7 @@ class PodcastController extends BaseController
             ];
         }
 
+        $this->setHtmlHead(lang('Podcast.all_podcasts'));
         return view('podcast/list', $data);
     }
 
@@ -77,6 +78,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -89,6 +91,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -101,6 +104,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -113,6 +117,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -125,6 +130,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -137,6 +143,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -149,6 +156,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -161,6 +169,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead($this->podcast->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -180,6 +189,7 @@ class PodcastController extends BaseController
             'browserLang'     => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
+        $this->setHtmlHead(lang('Podcast.create'));
         return view('podcast/create', $data);
     }
 
@@ -270,6 +280,7 @@ class PodcastController extends BaseController
             'categoryOptions' => $categoryOptions,
         ];
 
+        $this->setHtmlHead(lang('Podcast.edit'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -410,6 +421,7 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead(lang('Podcast.delete'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -578,10 +590,10 @@ class PodcastController extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        $this->setHtmlHead(lang('Podcast.publish'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-
         return view('podcast/publish', $data);
     }
 
@@ -713,10 +725,10 @@ class PodcastController extends BaseController
                 ->first(),
         ];
 
+        $this->setHtmlHead(lang('Podcast.publish_edit'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-
         return view('podcast/publish_edit', $data);
     }
 

@@ -30,19 +30,19 @@ class Alert extends Component
         $variantData = match ($this->variant) {
             'success' => [
                 'class' => 'text-pine-900 bg-pine-100 border-pine-300',
-                'glyph' => 'check-fill', // @icon('check-fill')
+                'glyph' => 'check-fill', // @icon("check-fill")
             ],
             'danger' => [
                 'class' => 'text-red-900 bg-red-100 border-red-300',
-                'glyph' => 'close-fill', // @icon('close-fill')
+                'glyph' => 'close-fill', // @icon("close-fill")
             ],
             'warning' => [
                 'class' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
-                'glyph' => 'alert-fill', // @icon('alert-fill')
+                'glyph' => 'alert-fill', // @icon("alert-fill")
             ],
             default => [
                 'class' => 'text-blue-900 bg-blue-100 border-blue-300',
-                'glyph' => 'error-warning-fill', // @icon('error-warning-fill')
+                'glyph' => 'error-warning-fill', // @icon("error-warning-fill")
             ],
         };
 

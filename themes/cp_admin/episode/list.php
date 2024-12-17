@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Episode.all_podcast_episodes') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Episode.all_podcast_episodes') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Episode.create') ?></x-Button>
 <?= $this->endSection() ?>
 

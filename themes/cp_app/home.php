@@ -3,35 +3,14 @@
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
-    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
-    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
-    <script>
-    // Check that service workers are supported
-    if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-        });
-    }
-    </script>
-
-    <?= $metatags ?>
-
-    <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
-    <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
-</head>
+<?= service('html_head')
+    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
+    ->appendRawContent(service('vite')->asset('js/app.ts', 'js'))
+?>
 
 
 <body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')
-        ->get('App.theme') ?>">
+    ->get('App.theme') ?>">
     <?php if (auth()->loggedIn()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
@@ -40,10 +19,7 @@
         <h1 class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
                 'home',
-            ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
-            ->get('App.siteName') === 'Castopod' ? 'castopod' .
-    svg('castopod-logo-base', 'h-6 ml-2') : esc(service('settings')
-            ->get('App.siteName')) ?></a>
+            ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')->get('App.siteName') === 'Castopod' ? 'castopod' . svg('castopod-logo-base', 'h-6 ml-2') : esc(service('settings')->get('App.siteName')) ?></a>
         </h1>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
@@ -52,28 +28,30 @@
                 $podcasts,
             ) ?>)</x-Heading>
             <button class="inline-flex items-center px-2 py-1 text-sm font-semibold" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('material-symbols:sort', [
-                'class' => 'mr-1 text-xl opacity-50',
-            ]) . lang('Home.sort_by') ?></button>
-            <x-DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
-                [
-                    'type'  => 'link',
-                    'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
-                    'uri'   => route_to('home') . '?sort=activity',
-                    'class' => $sortBy === 'activity' ? 'font-semibold' : '',
-                ],
-                [
-                    'type'  => 'link',
-                    'title' => ($sortBy === 'created_desc' ? '✓ ' : '') . lang('Home.sort_options.created_desc'),
-                    'uri'   => route_to('home') . '?sort=created_desc',
-                    'class' => $sortBy === 'created_desc' ? 'font-semibold' : '',
-                ],
-                [
-                    'type'  => 'link',
-                    'title' => ($sortBy === 'created_asc' ? '✓ ' : '') . lang('Home.sort_options.created_asc'),
-                    'uri'   => route_to('home') . '?sort=created_asc',
-                    'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
-                ],
-            ])) ?>" />
+                        'class' => 'mr-1 text-xl opacity-50',
+                    ]) . lang('Home.sort_by') ?></button>
+            <x-DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(
+                json_encode([
+                    [
+                        'type'  => 'link',
+                        'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
+                        'uri'   => route_to('home') . '?sort=activity',
+                        'class' => $sortBy === 'activity' ? 'font-semibold' : '',
+                    ],
+                    [
+                        'type'  => 'link',
+                        'title' => ($sortBy === 'created_desc' ? '✓ ' : '') . lang('Home.sort_options.created_desc'),
+                        'uri'   => route_to('home') . '?sort=created_desc',
+                        'class' => $sortBy === 'created_desc' ? 'font-semibold' : '',
+                    ],
+                    [
+                        'type'  => 'link',
+                        'title' => ($sortBy === 'created_asc' ? '✓ ' : '') . lang('Home.sort_options.created_asc'),
+                        'uri'   => route_to('home') . '?sort=created_asc',
+                        'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
+                    ],
+                ])
+            ) ?>" />
         </div>
         <div class="grid gap-4 mt-4 grid-cols-cards">
             <?php if ($podcasts): ?>
@@ -85,8 +63,8 @@
                                 <?php if ($podcast->is_premium): ?>
                                     <div class="absolute top-0 left-0 z-10 inline-flex items-center mt-2 gap-x-2">
                                         <?= icon('exchange-dollar-fill', [
-                                            'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
-                                        ]) ?>
+                                    'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
+                                ]) ?>
                                         <?= explicit_badge($podcast->parental_advisory === 'explicit', 'rounded bg-black/75') ?>
                                     </div>
                                 <?php else: ?>

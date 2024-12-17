@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Subscription.suspend') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Subscription.suspend') ?>
 <?= $this->endSection() ?>
@@ -28,7 +24,7 @@
 
 <div class="flex items-center self-end mt-4 gap-x-2">
     <x-Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></x-Button>
-    <?php // @icon('pause-fill')?>
+    <?php // @icon("pause-fill")?>
     <x-Button type="submit" variant="warning" iconLeft="pause-fill"><?= lang('Subscription.suspend_form.submit') ?></x-Button>
 </div>
 

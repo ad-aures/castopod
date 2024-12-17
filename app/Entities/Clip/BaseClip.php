@@ -36,7 +36,7 @@ use Modules\Media\Models\MediaModel;
  * @property string $type
  * @property int|null $media_id
  * @property Video|Audio|null $media
- * @property array|null $metadata
+ * @property array<mixed>|null $metadata
  * @property string $status
  * @property string $logs
  * @property User $user
@@ -136,7 +136,7 @@ class BaseClip extends Entity
             $media = new Audio([
                 'file_key'      => $fileKey,
                 'language_code' => $this->getPodcast()
-->language_code,
+                    ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);

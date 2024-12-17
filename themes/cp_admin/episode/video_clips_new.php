@@ -1,12 +1,4 @@
-<?php declare(strict_types=1);
-
-?>
-
 <?= $this->extend('_layout') ?>
-
-<?= $this->section('title') ?>
-<?= lang('VideoClip.form.title') ?>
-<?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('VideoClip.form.title') ?>
@@ -71,7 +63,7 @@
             </div>
         </fieldset>
     </x-Forms.Section>
-    <?php // @icon('arrow-right-fill')?>
+    <?php // @icon("arrow-right-fill")?>
     <x-Button variant="primary" type="submit" iconRight="arrow-right-fill" class="self-end"><?= lang('VideoClip.form.submit') ?></x-Button>
 </div>
 </form>

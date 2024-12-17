@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Config;
 
 use App\Libraries\Breadcrumb;
+use App\Libraries\HtmlHead;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
 use CodeIgniter\Config\BaseService;
@@ -65,5 +66,14 @@ class Services extends BaseService
         }
 
         return new Breadcrumb();
+    }
+
+    public static function html_head(bool $getShared = true): HtmlHead
+    {
+        if ($getShared) {
+            return self::getSharedInstance('html_head');
+        }
+
+        return new HtmlHead();
     }
 }

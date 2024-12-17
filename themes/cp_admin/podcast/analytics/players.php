@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= esc($podcast->title) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= esc($podcast->title) ?>
 <?= $this->endSection() ?>

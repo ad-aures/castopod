@@ -34,6 +34,7 @@ class PageController extends BaseController
 
     public function list(): string
     {
+        $this->setHtmlHead(lang('Page.all_pages'));
         $data = [
             'pages' => (new PageModel())->findAll(),
         ];
@@ -43,6 +44,7 @@ class PageController extends BaseController
 
     public function view(): string
     {
+        $this->setHtmlHead($this->page->title);
         return view('page/view', [
             'page' => $this->page,
         ]);
@@ -52,6 +54,7 @@ class PageController extends BaseController
     {
         helper('form');
 
+        $this->setHtmlHead(lang('Page.create'));
         return view('page/create');
     }
 
@@ -83,6 +86,7 @@ class PageController extends BaseController
     {
         helper('form');
 
+        $this->setHtmlHead(lang('Page.edit'));
         replace_breadcrumb_params([
             0 => $this->page->title,
         ]);

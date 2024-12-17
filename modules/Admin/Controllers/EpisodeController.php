@@ -115,6 +115,7 @@ class EpisodeController extends BaseController
             'query'    => $query,
         ];
 
+        $this->setHtmlHead(lang('Episode.all_podcast_episodes'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -128,6 +129,7 @@ class EpisodeController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead($this->episode->title);
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -148,6 +150,8 @@ class EpisodeController extends BaseController
                 $currentSeasonNumber
             ),
         ];
+
+        $this->setHtmlHead(lang('Episode.create'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
@@ -261,6 +265,7 @@ class EpisodeController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead(lang('Episode.edit'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -409,6 +414,7 @@ class EpisodeController extends BaseController
                 'episode' => $this->episode,
             ];
 
+            $this->setHtmlHead(lang('Episode.publish'));
             replace_breadcrumb_params([
                 0 => $this->podcast->at_handle,
                 1 => $this->episode->title,
@@ -521,6 +527,7 @@ class EpisodeController extends BaseController
                     ->first(),
             ];
 
+            $this->setHtmlHead(lang('Episode.publish_edit'));
             replace_breadcrumb_params([
                 0 => $this->podcast->at_handle,
                 1 => $this->episode->title,
@@ -670,11 +677,11 @@ class EpisodeController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead(lang('Episode.publish_date_edit'));
         replace_breadcrumb_params([
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-
         return view('episode/publish_date_edit', $data);
     }
 
@@ -746,6 +753,7 @@ class EpisodeController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead(lang('Episode.unpublish'));
         replace_breadcrumb_params([
             0 => $this->podcast->title,
             1 => $this->episode->title,
@@ -822,6 +830,7 @@ class EpisodeController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead(lang('Episode.delete'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -928,6 +937,7 @@ class EpisodeController extends BaseController
             'themes'  => EpisodeModel::$themes,
         ];
 
+        $this->setHtmlHead(lang('Episode.embed.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,

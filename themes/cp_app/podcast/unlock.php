@@ -58,7 +58,7 @@
                 ]) ?>"
                 isRequired="true"
             />
-            <?php // @icon('lock-unlock-fill')?>
+            <?php // @icon("lock-unlock-fill")?>
             <x-Button type="submit" variant="primary" iconLeft="lock-unlock-fill" class="self-center mt-2"><?= lang('PremiumPodcasts.unlock_form.submit') ?></x-Button>
             <?php if ($subscriptionLink = service('settings')
                 ->get('Subscription.link', 'podcast:' . $podcast->id)): ?>

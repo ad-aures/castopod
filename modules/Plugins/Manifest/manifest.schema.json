@@ -178,6 +178,7 @@
             "datetime",
             "email",
             "group",
+            "html",
             "markdown",
             "number",
             "radio-group",

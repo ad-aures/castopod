@@ -1,12 +1,4 @@
-<?php declare(strict_types=1);
-
-?>
-
 <?= $this->extend('_layout') ?>
-
-<?= $this->section('title') ?>
-<?= lang('Settings.title') ?>
-<?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('Settings.title') ?>
@@ -67,7 +59,7 @@
 <x-Forms.Section
     title="<?= lang('Settings.images.title') ?>"
     subtitle="<?= lang('Settings.images.subtitle') ?>">
-    <?php // @icon('refresh-fill')?>
+    <?php // @icon("refresh-fill")?>
     <x-Button variant="primary" type="submit" iconLeft="refresh-fill"><?= lang('Settings.images.regenerate') ?></x-Button>
 
 </x-Forms.Section>
@@ -84,7 +76,7 @@
     <x-Forms.Toggler name="reset_counts" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></x-Forms.Toggler>
     <x-Forms.Toggler name="rename_episodes_files" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></x-Forms.Toggler>
     <x-Forms.Toggler name="clear_cache" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></x-Forms.Toggler>
-    <?php // @icon('home-gear-fill')?>
+    <?php // @icon("home-gear-fill")?>
     <x-Button variant="primary" type="submit" iconLeft="home-gear-fill"><?= lang('Settings.housekeeping.run') ?></x-Button>
 
 </x-Forms.Section>

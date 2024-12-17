@@ -21,7 +21,7 @@ import Tooltip from "./modules/Tooltip";
 import ValidateFileSize from "./modules/ValidateFileSize";
 import "./modules/video-clip-previewer";
 import VideoClipBuilder from "./modules/VideoClipBuilder";
-import "./modules/xml-editor";
+import "./modules/code-editor";
 import "@patternfly/elements/pf-tabs/pf-tabs.js";
 import FieldArray from "./modules/FieldArray";
 

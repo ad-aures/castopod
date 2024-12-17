@@ -1,11 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Contributor.delete_form.title', [
-    'contributor' => $contributor->username,
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Contributor.delete_form.title', [
     'contributor' => $contributor->username,

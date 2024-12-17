@@ -76,6 +76,7 @@ class SoundbiteController extends BaseController
             'pager'      => $soundbitesBuilder->pager,
         ];
 
+        $this->setHtmlHead(lang('Soundbite.list.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -92,6 +93,7 @@ class SoundbiteController extends BaseController
             'episode' => $this->episode,
         ];
 
+        $this->setHtmlHead(lang('Soundbite.form.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,

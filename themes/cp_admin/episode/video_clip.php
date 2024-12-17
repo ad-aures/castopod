@@ -1,11 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('VideoClip.title', [
-    'videoClipLabel' => esc($videoClip->title),
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('VideoClip.title', [
     'videoClipLabel' => esc($videoClip->title),

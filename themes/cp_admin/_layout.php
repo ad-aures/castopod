@@ -8,25 +8,12 @@ $isEpisodeArea = isset($podcast) && isset($episode);
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="robots" content="noindex">
-
-    <title><?= $this->renderSection('title') ?> | Castopod Admin</title>
-    <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
-    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
-
-    <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
-    <?= service('vite')
-        ->asset('js/admin.ts', 'js') ?>
-    <?= service('vite')
-        ->asset('js/admin-audio-player.ts', 'js') ?>
-</head>
+<?=
+service('html_head')
+    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
+    ->appendRawContent(service('vite')->asset('js/admin.ts', 'js'))
+    ->appendRawContent(service('vite')->asset('js/admin-audio-player.ts', 'js'))
+?>
 
 <body class="relative grid items-start min-h-screen bg-base grid-cols-admin grid-rows-admin">
     <?= $this->include('_partials/_nav_header') ?>
@@ -39,7 +26,7 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                     <div class="flex flex-wrap items-center truncate gap-x-2">
                     <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
-                            <?php // @icon('exchange-dollar-fill')?>
+                            <?php // @icon("exchange-dollar-fill")?>
                             <x-IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar-fill" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></x-IconButton>
                             <x-Heading tagName="h1" size="large" class="max-w-sm truncate"><?= $this->renderSection('pageTitle') ?></x-Heading>
                         </div>

@@ -6,6 +6,7 @@ namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\HtmlHead;
 use App\Libraries\RssFeed;
 use Config\Database;
 use Modules\Plugins\Config\Plugins as PluginsConfig;
@@ -15,7 +16,7 @@ use Modules\Plugins\Config\Plugins as PluginsConfig;
  * @method void rssAfterChannel(Podcast $podcast, RssFeed $channel)
  * @method void rssBeforeItem(Episode $episode)
  * @method void rssAfterItem(Episode $episode, RssFeed $item)
- * @method void siteHead()
+ * @method void siteHead(HtmlHead $head)
  */
 class Plugins
 {
@@ -29,6 +30,7 @@ class Plugins
         'datetime'        => ['valid_date[Y-m-d H:i]'],
         'email'           => ['valid_email'],
         'group'           => ['permit_empty', 'is_list'],
+        'html'            => ['string'],
         'markdown'        => ['string'],
         'number'          => ['integer'],
         'radio-group'     => ['string'],

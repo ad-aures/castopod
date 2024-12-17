@@ -31,10 +31,10 @@ class ActorController extends FediverseActorController
         }
 
         helper(['form', 'components', 'svg']);
+        // @phpstan-ignore-next-line
+        set_follow_metatags($this->actor);
         $data = [
-            // @phpstan-ignore-next-line
-            'metatags' => get_follow_metatags($this->actor),
-            'actor'    => $this->actor,
+            'actor' => $this->actor,
         ];
 
         return view('podcast/follow', $data);

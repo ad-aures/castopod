@@ -81,6 +81,7 @@ class DashboardController extends BaseController
             'onlyPodcastId'  => $onlyPodcastId,
         ];
 
+        $this->setHtmlHead(lang('Dashboard.home'));
         return view('dashboard', $data);
     }
 }

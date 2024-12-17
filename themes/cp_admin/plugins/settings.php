@@ -1,12 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Plugins.settingsTitle', [
-    'pluginTitle' => $plugin->getTitle(),
-    'type'        => $type,
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Plugins.settingsTitle', [
     'pluginTitle' => $plugin->getTitle(),

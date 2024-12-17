@@ -6,6 +6,7 @@ namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\HtmlHead;
 use App\Libraries\RssFeed;
 use CodeIgniter\HTTP\URI;
 use League\CommonMark\Environment\Environment;
@@ -101,7 +102,7 @@ abstract class BasePlugin implements PluginInterface
     }
 
     #[Override]
-    public function siteHead(): void
+    public function siteHead(HtmlHead $head): void
     {
     }
 
@@ -264,7 +265,7 @@ abstract class BasePlugin implements PluginInterface
         return $title;
     }
 
-    final public function getDescription(): ?string
+    final public function getDescription(): string
     {
         $key = sprintf('Plugin.%s.description', $this->key);
 

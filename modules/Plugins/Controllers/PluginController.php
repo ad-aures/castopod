@@ -38,6 +38,7 @@ class PluginController extends BaseController
 
         $pager_links = $pager->makeLinks($page, $perPage, $total);
 
+        $this->setHtmlHead(lang('Plugins.installed'));
         return view('plugins/installed', [
             'total'       => $total,
             'plugins'     => $this->plugins->getPlugins($page, $perPage),
@@ -47,8 +48,9 @@ class PluginController extends BaseController
 
     public function vendor(string $vendor): string
     {
-
         $vendorPlugins = $this->plugins->getVendorPlugins($vendor);
+
+        $this->setHtmlHead(lang('Plugins.installed'));
         replace_breadcrumb_params([
             $vendor => $vendor,
         ]);
@@ -68,6 +70,7 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
+        $this->setHtmlHead($plugin->getTitle());
         replace_breadcrumb_params([
             $vendor  => $vendor,
             $package => $package,
@@ -137,6 +140,10 @@ class PluginController extends BaseController
         $data['fields'] = $fields;
 
         helper('form');
+        $this->setHtmlHead(lang('Plugins.settingsTitle', [
+            'pluginTitle' => $plugin->getTitle(),
+            'type'        => $type,
+        ]));
         replace_breadcrumb_params($breadcrumbReplacements);
         return view('plugins/settings', $data);
     }

@@ -164,10 +164,10 @@ class CreditsController extends BaseController
                 }
             }
 
+            set_page_metatags($page);
             $data = [
-                'metatags' => get_page_metatags($page),
-                'page'     => $page,
-                'credits'  => $credits,
+                'page'    => $page,
+                'credits' => $credits,
             ];
 
             $found = view('pages/credits', $data);

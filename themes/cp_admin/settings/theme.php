@@ -1,12 +1,4 @@
-<?php declare(strict_types=1);
-
-?>
-
 <?= $this->extend('_layout') ?>
-
-<?= $this->section('title') ?>
-<?= lang('Settings.theme.title') ?>
-<?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('Settings.theme.title') ?>

@@ -18,6 +18,7 @@ class MyAccountController extends BaseController
 {
     public function index(): string
     {
+        $this->setHtmlHead(lang('MyAccount.info'));
         return view('my_account/view');
     }
 
@@ -25,6 +26,7 @@ class MyAccountController extends BaseController
     {
         helper('form');
 
+        $this->setHtmlHead(lang('MyAccount.changePassword'));
         return view('my_account/change_password');
     }
 

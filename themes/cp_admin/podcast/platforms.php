@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang("Platforms.title.{$platformType}") ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang("Platforms.title.{$platformType}") ?>
 <?= $this->endSection() ?>

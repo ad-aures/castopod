@@ -6,16 +6,12 @@ use CodeIgniter\I18n\Time;
 ?>
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('VideoClip.list.title') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('VideoClip.list.title') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('VideoClip.create') ?></x-Button>
 <?= $this->endSection() ?>
 
@@ -35,12 +31,12 @@ use CodeIgniter\I18n\Time;
                 ];
 
                 $pillIconMap = [
-                    'queued'   => 'timer-fill', // @icon('timer-fill')
-                    'pending'  => 'pause-fill', // @icon('pause-fill')
-                    'running'  => 'loader-fill', // @icon('loader-fill')
-                    'canceled' => 'forbid-fill', // @icon('forbid-fill')
-                    'failed'   => 'close-fill', // @icon('close-fill')
-                    'passed'   => 'check-fill', // @icon('check-fill')
+                    'queued'   => 'timer-fill', // @icon("timer-fill")
+                    'pending'  => 'pause-fill', // @icon("pause-fill")
+                    'running'  => 'loader-fill', // @icon("loader-fill")
+                    'canceled' => 'forbid-fill', // @icon("forbid-fill")
+                    'failed'   => 'close-fill', // @icon("close-fill")
+                    'passed'   => 'check-fill', // @icon("check-fill")
                 ];
 
                 $pillIconClassMap = [
@@ -97,7 +93,7 @@ use CodeIgniter\I18n\Time;
                 if ($videoClip->media) {
                     helper('misc');
                     $filename = 'clip-' . slugify($videoClip->title) . "-{$videoClip->start_time}-{$videoClip->end_time}";
-                    // @icon('import-fill')
+                    // @icon("import-fill")
                     $downloadButton = '<x-IconButton glyph="import-fill" uri="' . $videoClip->media->file_url . '" download="' . $filename . '">' . lang('VideoClip.download_clip') . '</x-IconButton>';
                 }
 

@@ -78,10 +78,10 @@ class PodcastController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
+            set_podcast_metatags($this->podcast, 'activity');
             $data = [
-                'metatags' => get_podcast_metatags($this->podcast, 'activity'),
-                'podcast'  => $this->podcast,
-                'posts'    => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
+                'podcast' => $this->podcast,
+                'posts'   => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view
@@ -128,10 +128,10 @@ class PodcastController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $stats = (new EpisodeModel())->getPodcastStats($this->podcast->id);
 
+            set_podcast_metatags($this->podcast, 'about');
             $data = [
-                'metatags' => get_podcast_metatags($this->podcast, 'about'),
-                'podcast'  => $this->podcast,
-                'stats'    => $stats,
+                'podcast' => $this->podcast,
+                'stats'   => $stats,
             ];
 
             // // if user is logged in then send to the authenticated activity view
@@ -245,8 +245,8 @@ class PodcastController extends BaseController
                 ];
             }
 
+            set_podcast_metatags($this->podcast, 'episodes');
             $data = [
-                'metatags'    => get_podcast_metatags($this->podcast, 'episodes'),
                 'podcast'     => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,
@@ -315,9 +315,9 @@ class PodcastController extends BaseController
 
     public function links(): string
     {
+        set_podcast_metatags($this->podcast, 'links');
         return view('podcast/links', [
-            'metatags' => get_podcast_metatags($this->podcast, 'links'),
-            'podcast'  => $this->podcast,
+            'podcast' => $this->podcast,
         ]);
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Config;
 
-use App\Views\Decorators\SiteHead;
 use CodeIgniter\Config\View as BaseView;
 use CodeIgniter\View\ViewDecoratorInterface;
 use ViewComponents\Decorator;
@@ -54,5 +53,5 @@ class View extends BaseView
      *
      * @var list<class-string<ViewDecoratorInterface>>
      */
-    public array $decorators = [Decorator::class, SiteHead::class];
+    public array $decorators = [Decorator::class];
 }

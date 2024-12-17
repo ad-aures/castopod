@@ -44,9 +44,9 @@ class PodcastController extends Controller
     {
         $podcast->feed_url = $podcast->getFeedUrl();
         $podcast->actor_display_name = $podcast->getActor()
-->display_name;
+            ->display_name;
         $podcast->cover_url = $podcast->getCover()
-->file_url;
+            ->file_url;
 
         $categories = [$podcast->getCategory(), ...$podcast->getOtherCategories()];
 

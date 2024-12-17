@@ -30,6 +30,7 @@ class SettingsController extends BaseController
     public function index(): string
     {
         helper('form');
+        $this->setHtmlHead(lang('Settings.title'));
         return view('settings/general');
     }
 
@@ -202,6 +203,7 @@ class SettingsController extends BaseController
     public function theme(): string
     {
         helper('form');
+        $this->setHtmlHead(lang('Settings.theme.title'));
         return view('settings/theme');
     }
 

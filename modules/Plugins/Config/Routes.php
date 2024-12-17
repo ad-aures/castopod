@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->group(
     config('Admin')
-->gateway,
+        ->gateway,
     [
         'namespace' => 'Modules\Plugins\Controllers',
     ],

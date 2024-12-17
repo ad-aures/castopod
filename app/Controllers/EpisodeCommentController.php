@@ -96,12 +96,12 @@ class EpisodeCommentController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
+            set_episode_comment_metatags($this->comment);
             $data = [
-                'metatags' => get_episode_comment_metatags($this->comment),
-                'podcast'  => $this->podcast,
-                'actor'    => $this->actor,
-                'episode'  => $this->episode,
-                'comment'  => $this->comment,
+                'podcast' => $this->podcast,
+                'actor'   => $this->actor,
+                'episode' => $this->episode,
+                'comment' => $this->comment,
             ];
 
             // if user is logged in then send to the authenticated activity view

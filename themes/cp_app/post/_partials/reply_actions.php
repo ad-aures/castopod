@@ -58,7 +58,7 @@ if (can_user_interact()): ?>
             <form action="<?= route_to(
                 'post-attempt-block-domain',
                 esc(interact_as_actor()
-                ->username),
+                    ->username),
                 $reply->id,
             ) ?>" method="POST">
                 <?= csrf_field() ?>

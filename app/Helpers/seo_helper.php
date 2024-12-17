@@ -8,19 +8,19 @@ use App\Entities\EpisodeComment;
 use App\Entities\Page;
 use App\Entities\Podcast;
 use App\Entities\Post;
-use Melbahja\Seo\MetaTags;
+use App\Libraries\HtmlHead;
 use Melbahja\Seo\Schema;
 use Melbahja\Seo\Schema\Thing;
 use Modules\Fediverse\Entities\PreviewCard;
 
 /**
- * @copyright  2021 Ad Aures
+ * @copyright  2024 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-if (! function_exists('get_podcast_metatags')) {
-    function get_podcast_metatags(Podcast $podcast, string $page): string
+if (! function_exists('set_podcast_metatags')) {
+    function set_podcast_metatags(Podcast $podcast, string $page): void
     {
         $category = '';
         if ($podcast->category->parent_id !== null) {
@@ -48,10 +48,11 @@ if (! function_exists('get_podcast_metatags')) {
             ])
         );
 
-        $metatags = new MetaTags();
+        /** @var HtmlHead $head */
+        $head = service('html_head');
 
-        $metatags
-            ->title($podcast->title . ' (@' . $podcast->handle . ') • ' . lang('Podcast.' . $page))
+        $head
+            ->title(sprintf('%s (@%s) • %s', $podcast->title, $podcast->handle, lang('Podcast.' . $page)))
             ->description(esc($podcast->description))
             ->image((string) $podcast->cover->og_url)
             ->canonical((string) current_url())
@@ -59,20 +60,18 @@ if (! function_exists('get_podcast_metatags')) {
             ->og('image:height', (string) config('Images')->podcastCoverSizes['og']['height'])
             ->og('locale', $podcast->language_code)
             ->og('site_name', esc(service('settings')->get('App.siteName')))
-            ->push('link', [
+            ->tag('link', null, [
                 'rel'  => 'alternate',
                 'type' => 'application/activity+json',
                 'href' => url_to('podcast-activity', esc($podcast->handle)),
-            ]);
-
-        return '<link type="application/rss+xml" rel="alternate" title="' . esc(
-            $podcast->title
-        ) . '" href="' . $podcast->feed_url . '" />' . PHP_EOL . $metatags->__toString() . PHP_EOL . $schema->__toString();
+            ])->appendRawContent('<link type="application/rss+xml" rel="alternate" title="' . esc(
+                $podcast->title
+            ) . '" href="' . $podcast->feed_url . '" />' . $schema);
     }
 }
 
-if (! function_exists('get_episode_metatags')) {
-    function get_episode_metatags(Episode $episode): string
+if (! function_exists('set_episode_metatags')) {
+    function set_episode_metatags(Episode $episode): void
     {
         $schema = new Schema(
             new Thing('PodcastEpisode', [
@@ -80,7 +79,7 @@ if (! function_exists('get_episode_metatags')) {
                 'name'            => $episode->title,
                 'image'           => $episode->cover->feed_url,
                 'description'     => $episode->description,
-                'datePublished'   => $episode->published_at->format(DATE_ISO8601),
+                'datePublished'   => $episode->published_at->format(DATE_ATOM),
                 'timeRequired'    => iso8601_duration($episode->audio->duration),
                 'duration'        => iso8601_duration($episode->audio->duration),
                 'associatedMedia' => new Thing('MediaObject', [
@@ -93,9 +92,10 @@ if (! function_exists('get_episode_metatags')) {
             ])
         );
 
-        $metatags = new MetaTags();
+        /** @var HtmlHead $head */
+        $head = service('html_head');
 
-        $metatags
+        $head
             ->title($episode->title)
             ->description(esc($episode->description))
             ->image((string) $episode->cover->og_url, 'player')
@@ -106,35 +106,34 @@ if (! function_exists('get_episode_metatags')) {
             ->og('locale', $episode->podcast->language_code)
             ->og('audio', $episode->audio_opengraph_url)
             ->og('audio:type', $episode->audio->file_mimetype)
-            ->meta('article:published_time', $episode->published_at->format(DATE_ISO8601))
-            ->meta('article:modified_time', $episode->updated_at->format(DATE_ISO8601))
+            ->meta('article:published_time', $episode->published_at->format(DATE_ATOM))
+            ->meta('article:modified_time', $episode->updated_at->format(DATE_ATOM))
             ->twitter('audio:partner', $episode->podcast->publisher ?? '')
             ->twitter('audio:artist_name', esc($episode->podcast->owner_name))
             ->twitter('player', $episode->getEmbedUrl('light'))
             ->twitter('player:width', (string) config('Embed')->width)
             ->twitter('player:height', (string) config('Embed')->height)
-            ->push('link', [
+            ->tag('link', null, [
                 'rel'  => 'alternate',
                 'type' => 'application/activity+json',
-                'href' => url_to('episode', $episode->podcast->handle, $episode->slug),
-            ]);
-
-        return $metatags->__toString() . PHP_EOL . '<link rel="alternate" type="application/json+oembed" href="' . base_url(
-            route_to('episode-oembed-json', $episode->podcast->handle, $episode->slug)
-        ) . '" title="' . esc(
-            $episode->title
-        ) . ' oEmbed json" />' . PHP_EOL . '<link rel="alternate" type="text/xml+oembed" href="' . base_url(
-            route_to('episode-oembed-xml', $episode->podcast->handle, $episode->slug)
-        ) . '" title="' . esc($episode->title) . ' oEmbed xml" />' . PHP_EOL . $schema->__toString();
+                'href' => $episode->link,
+            ])
+            ->appendRawContent('<link rel="alternate" type="application/json+oembed" href="' . base_url(
+                route_to('episode-oembed-json', $episode->podcast->handle, $episode->slug)
+            ) . '" title="' . esc(
+                $episode->title
+            ) . ' oEmbed json" />' . '<link rel="alternate" type="text/xml+oembed" href="' . base_url(
+                route_to('episode-oembed-xml', $episode->podcast->handle, $episode->slug)
+            ) . '" title="' . esc($episode->title) . ' oEmbed xml" />' . $schema);
     }
 }
 
-if (! function_exists('get_post_metatags')) {
-    function get_post_metatags(Post $post): string
+if (! function_exists('set_post_metatags')) {
+    function set_post_metatags(Post $post): void
     {
         $socialMediaPosting = new Thing('SocialMediaPosting', [
             '@id'           => url_to('post', esc($post->actor->username), $post->id),
-            'datePublished' => $post->published_at->format(DATE_ISO8601),
+            'datePublished' => $post->published_at->format(DATE_ATOM),
             'author'        => new Thing('Person', [
                 'name' => $post->actor->display_name,
                 'url'  => $post->actor->uri,
@@ -162,8 +161,10 @@ if (! function_exists('get_post_metatags')) {
 
         $schema = new Schema($socialMediaPosting);
 
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+
+        $head
             ->title(lang('Post.title', [
                 'actorDisplayName' => $post->actor->display_name,
             ]))
@@ -171,18 +172,16 @@ if (! function_exists('get_post_metatags')) {
             ->image($post->actor->avatar_image_url)
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')))
-            ->push('link', [
+            ->tag('link', null, [
                 'rel'  => 'alternate',
                 'type' => 'application/activity+json',
                 'href' => url_to('post', esc($post->actor->username), $post->id),
-            ]);
-
-        return $metatags->__toString() . PHP_EOL . $schema->__toString();
+            ])->appendRawContent((string) $schema);
     }
 }
 
-if (! function_exists('get_episode_comment_metatags')) {
-    function get_episode_comment_metatags(EpisodeComment $episodeComment): string
+if (! function_exists('set_episode_comment_metatags')) {
+    function set_episode_comment_metatags(EpisodeComment $episodeComment): void
     {
         $schema = new Schema(new Thing('SocialMediaPosting', [
             '@id' => url_to(
@@ -191,7 +190,7 @@ if (! function_exists('get_episode_comment_metatags')) {
                 $episodeComment->episode->slug,
                 $episodeComment->id
             ),
-            'datePublished' => $episodeComment->created_at->format(DATE_ISO8601),
+            'datePublished' => $episodeComment->created_at->format(DATE_ATOM),
             'author'        => new Thing('Person', [
                 'name' => $episodeComment->actor->display_name,
                 'url'  => $episodeComment->actor->uri,
@@ -200,8 +199,10 @@ if (! function_exists('get_episode_comment_metatags')) {
             'upvoteCount' => $episodeComment->likes_count,
         ]));
 
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+
+        $head
             ->title(lang('Comment.title', [
                 'actorDisplayName' => $episodeComment->actor->display_name,
                 'episodeTitle'     => $episodeComment->episode->title,
@@ -210,7 +211,7 @@ if (! function_exists('get_episode_comment_metatags')) {
             ->image($episodeComment->actor->avatar_image_url)
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')))
-            ->push('link', [
+            ->tag('link', null, [
                 'rel'  => 'alternate',
                 'type' => 'application/activity+json',
                 'href' => url_to(
@@ -219,17 +220,16 @@ if (! function_exists('get_episode_comment_metatags')) {
                     $episodeComment->episode->slug,
                     $episodeComment->id
                 ),
-            ]);
-
-        return $metatags->__toString() . PHP_EOL . $schema->__toString();
+            ])->appendRawContent((string) $schema);
     }
 }
 
-if (! function_exists('get_follow_metatags')) {
-    function get_follow_metatags(Actor $actor): string
+if (! function_exists('set_follow_metatags')) {
+    function set_follow_metatags(Actor $actor): void
     {
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+        $head
             ->title(lang('Podcast.followTitle', [
                 'actorDisplayName' => $actor->display_name,
             ]))
@@ -237,16 +237,15 @@ if (! function_exists('get_follow_metatags')) {
             ->image($actor->avatar_image_url)
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
-
-        return $metatags->__toString();
     }
 }
 
-if (! function_exists('get_remote_actions_metatags')) {
-    function get_remote_actions_metatags(Post $post, string $action): string
+if (! function_exists('set_remote_actions_metatags')) {
+    function set_remote_actions_metatags(Post $post, string $action): void
     {
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+        $head
             ->title(lang('Fediverse.' . $action . '.title', [
                 'actorDisplayName' => $post->actor->display_name,
             ],))
@@ -254,31 +253,30 @@ if (! function_exists('get_remote_actions_metatags')) {
             ->image($post->actor->avatar_image_url)
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
-
-        return $metatags->__toString();
     }
 }
 
-if (! function_exists('get_home_metatags')) {
-    function get_home_metatags(): string
+if (! function_exists('set_home_metatags')) {
+    function set_home_metatags(): void
     {
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+        $head
             ->title(service('settings')->get('App.siteName'))
             ->description(esc(service('settings')->get('App.siteDescription')))
             ->image(get_site_icon_url('512'))
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
 
-        return $metatags->__toString();
     }
 }
 
-if (! function_exists('get_page_metatags')) {
-    function get_page_metatags(Page $page): string
+if (! function_exists('set_page_metatags')) {
+    function set_page_metatags(Page $page): void
     {
-        $metatags = new MetaTags();
-        $metatags
+        /** @var HtmlHead $head */
+        $head = service('html_head');
+        $head
             ->title(
                 $page->title . service('settings')->get('App.siteTitleSeparator') . service(
                     'settings'
@@ -289,7 +287,6 @@ if (! function_exists('get_page_metatags')) {
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
 
-        return $metatags->__toString();
     }
 }
 

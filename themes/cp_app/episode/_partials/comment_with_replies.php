@@ -27,7 +27,7 @@ if ($comment->in_reply_to_id): ?>
                 'actorUsername' => esc($comment->actor->username),
             ]) ?>"
             rows="1" />
-        <?php // @icon('send-plane-2-fill')?>
+        <?php // @icon("send-plane-2-fill")?>
         <x-Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane-2-fill"><?= lang('Comment.form.submit_reply') ?></x-Button>
     </div>
 </form>

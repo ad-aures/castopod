@@ -42,6 +42,7 @@ class UserController extends BaseController
             'users' => (new UserModel())->findAll(),
         ];
 
+        $this->setHtmlHead(lang('User.all_users'));
         return view('user/list', $data);
     }
 
@@ -51,6 +52,9 @@ class UserController extends BaseController
             'user' => $this->user,
         ];
 
+        $this->setHtmlHead(lang('User.view', [
+            'username' => esc($this->user->username),
+        ]));
         replace_breadcrumb_params([
             0 => $this->user->username,
         ]);
@@ -76,6 +80,7 @@ class UserController extends BaseController
             'roleOptions' => $roleOptions,
         ];
 
+        $this->setHtmlHead(lang('User.create'));
         return view('user/create', $data);
     }
 
@@ -182,6 +187,9 @@ class UserController extends BaseController
             'roleOptions' => $roleOptions,
         ];
 
+        $this->setHtmlHead(lang('User.edit_role', [
+            'username' => esc($this->user->username),
+        ]));
         replace_breadcrumb_params([
             0 => $this->user->username,
         ]);
@@ -221,6 +229,9 @@ class UserController extends BaseController
             'user' => $this->user,
         ];
 
+        $this->setHtmlHead(lang('User.delete_form.title', [
+            'user' => $this->user->username,
+        ]));
         replace_breadcrumb_params([
             0 => $this->user->username,
         ]);

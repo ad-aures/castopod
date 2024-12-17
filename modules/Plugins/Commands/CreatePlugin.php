@@ -16,10 +16,10 @@ class CreatePlugin extends BaseCommand
 {
     protected const HOOKS_IMPORTS = [
         'rssBeforeChannel' => ['use App\Entities\Podcast;'],
-        'rssAfterChannel'  => ['use App\Entities\Podcast;', 'use App\Libraries\SimpleRSSElement;'],
+        'rssAfterChannel'  => ['use App\Entities\Podcast;', 'use App\Libraries\RssFeed;'],
         'rssBeforeItem'    => ['use App\Entities\Episode;'],
-        'rssAfterItem'     => ['use App\Entities\Episode;', 'use App\Libraries\SimpleRSSElement;'],
-        'siteHead'         => [],
+        'rssAfterItem'     => ['use App\Entities\Episode;', 'use App\Libraries\RssFeed;'],
+        'siteHead'         => ['use use App\Libraries\HtmlHead'],
     ];
 
     protected const HOOKS_METHODS = [
@@ -27,7 +27,7 @@ class CreatePlugin extends BaseCommand
     {
         // YOUR CODE HERE
     }',
-        'rssAfterChannel' => '    public function rssAfterChannel(Podcast $podcast, SimpleRSSElement $channel): void
+        'rssAfterChannel' => '    public function rssAfterChannel(Podcast $podcast, RssFeed $channel): void
     {
         // YOUR CODE HERE
     }',
@@ -35,11 +35,11 @@ class CreatePlugin extends BaseCommand
     {
         // YOUR CODE HERE
     }',
-        'rssAfterItem' => '    public function rssAfterItem(Episode $episode, SimpleRSSElement $item): void
+        'rssAfterItem' => '    public function rssAfterItem(Episode $episode, RssFeed $item): void
     {
         // YOUR CODE HERE
     }',
-        'siteHead' => '    public function siteHead(): void
+        'siteHead' => '    public function siteHead(HtmlHead $head): void
     {
         // YOUR CODE HERE
     }',

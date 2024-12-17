@@ -106,6 +106,19 @@ case 'textarea': ?>
         value="<?= $value ?>"
     />
 <?php break;
+case 'html': ?>
+    <x-Forms.Field
+        as="CodeEditor"
+        lang="html"
+        class="<?= $class ?>"
+        name="<?= $name ?>"
+        label="<?= $label ?>"
+        hint="<?= $hint ?>"
+        helper="<?= $helper ?>"
+        isRequired="<?= $optional ? 'false' : 'true' ?>"
+        content="<?= htmlspecialchars($value) ?>"
+    />
+<?php break;
 case 'markdown': ?>
     <x-Forms.Field
         as="MarkdownEditor"
@@ -120,7 +133,8 @@ case 'markdown': ?>
 <?php break;
 case 'rss': ?>
     <x-Forms.Field
-        as="XMLEditor"
+        as="CodeEditor"
+        lang="xml"
         class="<?= $class ?>"
         name="<?= $name ?>"
         label="<?= $label ?>"

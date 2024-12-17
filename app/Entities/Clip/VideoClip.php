@@ -16,7 +16,7 @@ use Modules\Media\Models\MediaModel;
 use Override;
 
 /**
- * @property array $theme
+ * @property array{name:string,preview:string} $theme
  * @property string $format
  */
 class VideoClip extends BaseClip
@@ -37,7 +37,7 @@ class VideoClip extends BaseClip
     }
 
     /**
-     * @param array<string, string> $theme
+     * @param array{name:string,preview:string} $theme
      */
     public function setTheme(array $theme): self
     {
@@ -75,7 +75,7 @@ class VideoClip extends BaseClip
         $video = new Video([
             'file_key'      => $fileKey,
             'language_code' => $this->getPodcast()
-->language_code,
+                ->language_code,
             'uploaded_by' => $this->attributes['created_by'],
             'updated_by'  => $this->attributes['created_by'],
         ]);

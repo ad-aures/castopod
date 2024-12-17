@@ -1,17 +1,13 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Podcast.all_podcasts') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Podcast.all_podcasts') ?> (<?= count($podcasts) ?>)
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
 <?php
-// @icon('import-fill')
-// @icon('add-fill')
+// @icon("import-fill")
+// @icon("add-fill")
 ?>
 <x-Button uri="<?= route_to('podcast-imports-add') ?>" variant="secondary" iconLeft="import-fill"><?= lang('Podcast.import') ?></x-Button>
 <x-Button uri="<?= route_to('podcast-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Podcast.create') ?></x-Button>

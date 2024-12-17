@@ -82,6 +82,7 @@ class VideoClipsController extends BaseController
             'pager'      => $videoClipsBuilder->pager,
         ];
 
+        $this->setHtmlHead(lang('VideoClip.list.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -99,6 +100,9 @@ class VideoClipsController extends BaseController
             'videoClip' => $videoClip,
         ];
 
+        $this->setHtmlHead(lang('VideoClip.title', [
+            'videoClipLabel' => esc($videoClip->title),
+        ]));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
             1 => $this->episode->title,
@@ -128,9 +132,10 @@ class VideoClipsController extends BaseController
             'transcript' => $this->episode->transcript instanceof Transcript,
         ];
 
+        $this->setHtmlHead(lang('VideoClip.form.title'));
+
         if (in_array(false, $checks, true)) {
             $data['checks'] = $checks;
-
             return view('episode/video_clips_requirements', $data);
         }
 

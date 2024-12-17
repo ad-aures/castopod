@@ -16,7 +16,7 @@ use GdImage;
 use Override;
 
 /**
- * @property array $sizes
+ * @property array<string, array<string, int|string>> $sizes
  */
 class Image extends BaseMedia
 {

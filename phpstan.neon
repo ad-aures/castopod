@@ -50,3 +50,4 @@ parameters:
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
         - identifier: missingType.generics
+        - identifier: property.readOnlyByPhpDocDefaultValue

@@ -1,9 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Contributor.edit_role', [esc($contributor->username)]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Contributor.edit_role', [esc($contributor->username)]) ?>
 <?= $this->endSection() ?>

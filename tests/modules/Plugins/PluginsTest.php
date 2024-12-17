@@ -6,6 +6,7 @@ namespace Tests\Modules\Plugins;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\HtmlHead;
 use App\Libraries\RssFeed;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
@@ -111,11 +112,21 @@ final class PluginsTest extends CIUnitTestCase
         self::$plugins->runHook('rssAfterItem', [$episode, $item]);
         $this->assertFalse(empty($item->efoo));
 
-        ob_start();
-        self::$plugins->runHook('siteHead', []);
-        $result = ob_get_contents();
-        ob_end_clean(); //Discard output buffer
-        $this->assertEquals('hello', $result);
+        $head = new HtmlHead();
+        self::$plugins->runHook('siteHead', [$head]);
+
+        $this->assertEquals(
+            (string) $head,
+            '<head>    <title >foo</title>    <meta charset="UTF-8"/>    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>    <link rel="icon" type="image/x-icon" href="http://localhost:8080/favicon.ico"/>    <link rel="apple-touch-icon" href="http://localhost:8080/icon-180.png"/>    <link rel="manifest" href="/manifest.webmanifest"/>    <meta name="theme-color" content="#009486"/>    <link rel="stylesheet" type="text/css" href="/themes/colors"/>    <title >foo</title>    <script>
+    // Check that service workers are supported
+    if (\'serviceWorker\' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener(\'load\', () => {
+            navigator.serviceWorker.register(\'/sw.js\');
+        });
+    }
+    </script></head>'
+        );
     }
 
     public function testRunHooksInactive(): void

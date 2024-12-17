@@ -1,11 +1,5 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('User.delete_form.title', [
-    'user' => $user->username,
-]) ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('User.delete_form.title', [
     'user' => $user->username,

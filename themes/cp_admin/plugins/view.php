@@ -4,23 +4,19 @@
 
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= $plugin->getTitle() ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= $plugin->getTitle() ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>
 <?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
-    <?php // @icon('check-fill')?>
+    <?php // @icon("check-fill")?>
     <x-Pill variant="success" icon="check-fill" class="lowercase"><?= lang('Plugins.active') ?></x-Pill>
 <?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
-    <?php // @icon('close-fill')?>
+    <?php // @icon("close-fill")?>
     <x-Pill variant="default" icon="close-fill" class="lowercase"><?= lang('Plugins.inactive') ?></x-Pill>
 <?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
-    <?php // @icon('alert-fill')?>
+    <?php // @icon("alert-fill")?>
     <x-Pill variant="warning" icon="alert-fill" class="lowercase"><?= lang('Plugins.invalid') ?></x-Pill>
 <?php endif; ?>
 <?= $this->endSection() ?>
@@ -31,7 +27,7 @@
         <?= csrf_field() ?>
         <x-Button type="submit" variant="danger"><?= lang('Plugins.deactivate') ?></x-Button>
         <?php if ($plugin->getSettingsFields('general') !== []): ?>
-        <?php // @icon('equalizer-fill')?>
+        <?php // @icon("equalizer-fill")?>
         <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
         <?php endif; ?>
     </form>
@@ -40,7 +36,7 @@
         <?= csrf_field() ?>
         <x-Button type="submit" variant="secondary"><?= lang('Plugins.activate') ?></x-Button>
         <?php if ($plugin->getSettingsFields('general') !== []): ?>
-        <?php // @icon('equalizer-fill')?>
+        <?php // @icon("equalizer-fill")?>
         <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
         <?php endif; ?>
     </form>
@@ -92,13 +88,13 @@
                     <li>
                         <?= $author->name ?>
                         <?php if ($author->email): ?>
-                            <?php // @icon('mail-fill')?>
+                            <?php // @icon("mail-fill")?>
                             <x-IconButton glyph="mail-fill" uri="mailto:<?= $author->email ?>" size="small" isExternal="true"><?= lang('Plugins.author_email', [
                                 'authorName' => $author->name,
                             ]) ?></x-IconButton>
                         <?php endif; ?>
                         <?php if ($author->url): ?>
-                            <?php // @icon('earth-fill')?>
+                            <?php // @icon("earth-fill")?>
                             <x-IconButton glyph="earth-fill" uri="<?= $author->url ?>" size="small" isExternal="true"><?= lang('Plugins.author_homepage', [
                                 'authorName' => $author->name,
                             ]) ?></x-IconButton>

@@ -66,10 +66,10 @@ class NotificationController extends BaseController
             'pager'         => $notifications->pager,
         ];
 
+        $this->setHtmlHead(lang('Notifications.title'));
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-
         return view('podcast/notifications', $data);
     }
 

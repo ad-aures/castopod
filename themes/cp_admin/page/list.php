@@ -1,15 +1,11 @@
 <?= $this->extend('_layout') ?>
 
-<?= $this->section('title') ?>
-<?= lang('Page.all_pages') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('pageTitle') ?>
 <?= lang('Page.all_pages') ?> (<?= count($pages) ?>)
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <x-Button uri="<?= route_to('page-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Page.create') ?></x-Button>
 <?= $this->endSection() ?>
 
