@@ -27,7 +27,7 @@ $routes->group(
                     'as'     => 'plugins-view',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                $routes->get('settings', 'PluginController::settings/$1/$2', [
+                $routes->get('settings', 'PluginController::settingsView/$1/$2', [
                     'as'     => 'plugins-settings-general',
                     'filter' => 'permission:plugins.manage',
                 ]);
@@ -35,7 +35,7 @@ $routes->group(
                     'as'     => 'plugins-settings-general-action',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                $routes->get('(:num)', 'PluginController::settings/$1/$2/$3', [
+                $routes->get('(:num)', 'PluginController::settingsView/$1/$2/$3', [
                     'as'     => 'plugins-settings-podcast',
                     'filter' => 'permission:podcast$3.edit',
                 ]);
@@ -43,7 +43,7 @@ $routes->group(
                     'as'     => 'plugins-settings-podcast-action',
                     'filter' => 'permission:podcast$3.edit',
                 ]);
-                $routes->get('(:num)/(:num)', 'PluginController::settings/$1/$2/$3/$4', [
+                $routes->get('(:num)/(:num)', 'PluginController::settingsView/$1/$2/$3/$4', [
                     'as'     => 'plugins-settings-episode',
                     'filter' => 'permission:podcast$3.episodes.edit',
                 ]);
@@ -59,7 +59,6 @@ $routes->group(
                     'as'     => 'plugins-deactivate',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                // TODO: change to delete
                 $routes->get('uninstall', 'PluginController::uninstall/$1/$2', [
                     'as'     => 'plugins-uninstall',
                     'filter' => 'permission:plugins.manage',

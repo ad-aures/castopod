@@ -25,6 +25,14 @@ class Plugins
      */
     public const HOOKS = ['rssBeforeChannel', 'rssAfterChannel', 'rssBeforeItem', 'rssAfterItem', 'siteHead'];
 
+    public const CACHE_MAP = [
+        'rssBeforeChannel' => ['podcast*feed*'],
+        'rssAfterChannel'  => ['podcast*feed*'],
+        'rssBeforeItem'    => ['podcast*feed*'],
+        'rssAfterItem'     => ['podcast*feed*'],
+        'siteHead'         => ['page*'],
+    ];
+
     public const FIELDS_VALIDATIONS = [
         'checkbox'        => ['permit_empty'],
         'datetime'        => ['valid_date[Y-m-d H:i]'],

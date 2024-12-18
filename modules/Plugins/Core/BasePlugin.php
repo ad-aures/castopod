@@ -121,6 +121,15 @@ abstract class BasePlugin implements PluginInterface
         return get_plugin_setting($this->key, $key, ['episode', $episodeId]);
     }
 
+    final public function clearCache(): void
+    {
+        foreach ($this->getHooks() as $hook) {
+            foreach (Plugins::CACHE_MAP[$hook] ?? [] as $cacheGlob) {
+                cache()->deleteMatching($cacheGlob);
+            }
+        }
+    }
+
     /**
      * @return bool true on success, false on failure
      */

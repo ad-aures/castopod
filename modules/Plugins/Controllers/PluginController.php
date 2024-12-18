@@ -80,7 +80,7 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function settings(
+    public function settingsView(
         string $vendor,
         string $package,
         string $podcastId = null,
@@ -222,6 +222,9 @@ class PluginController extends BaseController
 
             $this->plugins->setOption($plugin, $field->key, $this->castFieldValue($field, $fieldValue), $context);
         }
+
+        // clear cache after setting options
+        $plugin->clearCache();
 
         return redirect()->back()
             ->with('message', lang('Plugins.messages.saveSettingsSuccess', [
