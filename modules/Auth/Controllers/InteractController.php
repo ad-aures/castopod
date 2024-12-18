@@ -12,7 +12,7 @@ use CodeIgniter\HTTP\RedirectResponse;
  */
 class InteractController extends Controller
 {
-    public function attemptInteractAsActor(): RedirectResponse
+    public function interactAsActorAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|numeric',

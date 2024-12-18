@@ -23,18 +23,18 @@ $routes->group(
                 'as'     => 'subscription-list',
                 'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
-            $routes->get('new', 'SubscriptionController::create/$1', [
+            $routes->get('new', 'SubscriptionController::createView/$1', [
                 'as'     => 'subscription-create',
                 'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
             $routes->post(
                 'new',
-                'SubscriptionController::attemptCreate/$1',
+                'SubscriptionController::createAction/$1',
                 [
                     'filter' => 'permission:podcast$1.manage-subscriptions',
                 ],
             );
-            $routes->post('save-link', 'SubscriptionController::attemptLinkSave/$1', [
+            $routes->post('save-link', 'SubscriptionController::linkSaveAction/$1', [
                 'as'     => 'subscription-link-save',
                 'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
@@ -46,7 +46,7 @@ $routes->group(
                 ]);
                 $routes->get(
                     'edit',
-                    'SubscriptionController::edit/$1/$2',
+                    'SubscriptionController::editView/$1/$2',
                     [
                         'as'     => 'subscription-edit',
                         'filter' => 'permission:podcast$1.manage-subscriptions',
@@ -54,7 +54,7 @@ $routes->group(
                 );
                 $routes->post(
                     'edit',
-                    'SubscriptionController::attemptEdit/$1/$2',
+                    'SubscriptionController::editAction/$1/$2',
                     [
                         'as'     => 'subscription-edit',
                         'filter' => 'permission:podcast$1.manage-subscriptions',
@@ -78,7 +78,7 @@ $routes->group(
                 );
                 $routes->post(
                     'suspend',
-                    'SubscriptionController::attemptSuspend/$1/$2',
+                    'SubscriptionController::suspendAction/$1/$2',
                     [
                         'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
@@ -101,7 +101,7 @@ $routes->group(
                 );
                 $routes->post(
                     'delete',
-                    'SubscriptionController::attemptDelete/$1/$2',
+                    'SubscriptionController::deleteAction/$1/$2',
                     [
                         'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
@@ -120,10 +120,10 @@ $routes->group(
         $routes->get('unlock', 'LockController::index/$1', [
             'as' => 'premium-podcast-unlock',
         ]);
-        $routes->post('unlock', 'LockController::attemptUnlock/$1', [
+        $routes->post('unlock', 'LockController::unlockAction/$1', [
             'as' => 'premium-podcast-unlock',
         ]);
-        $routes->get('lock', 'LockController::attemptLock/$1', [
+        $routes->get('lock', 'LockController::lockAction/$1', [
             'as' => 'premium-podcast-lock',
         ]);
     }

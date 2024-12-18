@@ -16,7 +16,6 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -30,13 +29,6 @@ use Psr\Log\LoggerInterface;
 
 class EpisodeAudioController extends Controller
 {
-    /**
-     * Instance of the main Request object.
-     *
-     * @var IncomingRequest
-     */
-    protected $request;
-
     /**
      * An array of helpers to be loaded automatically upon class instantiation. These helpers will be available to all
      * other controllers that extend Analytics.

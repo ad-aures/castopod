@@ -45,7 +45,7 @@ class PlatformController extends BaseController
         return view('podcast/platforms/dashboard');
     }
 
-    public function platforms(string $platformType): string
+    public function list(string $platformType): string
     {
         helper('form');
 
@@ -62,7 +62,7 @@ class PlatformController extends BaseController
         return view('podcast/platforms', $data);
     }
 
-    public function attemptPlatformsUpdate(string $platformType): RedirectResponse
+    public function updateAction(string $platformType): RedirectResponse
     {
         $platformModel = new PlatformModel();
         $validation = Services::validation();
@@ -99,7 +99,7 @@ class PlatformController extends BaseController
             ->with('message', lang('Platforms.messages.updateSuccess'));
     }
 
-    public function removePlatform(string $platformType, string $platformSlug): RedirectResponse
+    public function removeAction(string $platformType, string $platformSlug): RedirectResponse
     {
         (new PlatformModel())->removePlatform($this->podcast->id, $platformType, $platformSlug);
 

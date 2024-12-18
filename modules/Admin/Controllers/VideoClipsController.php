@@ -23,47 +23,38 @@ use Modules\Media\Models\MediaModel;
 
 class VideoClipsController extends BaseController
 {
-    protected Podcast $podcast;
-
-    protected Episode $episode;
-
     public function _remap(string $method, string ...$params): mixed
     {
+        if ($params === []) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        if (count($params) === 1) {
+            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+                throw PageNotFoundException::forPageNotFound();
+            }
+
+            return $this->{$method}($podcast);
+        }
+
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1]) instanceof Episode)
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->podcast = $podcast;
+        unset($params[0]);
+        unset($params[1]);
 
-        if (count($params) > 1) {
-            if (
-                ! ($episode = (new EpisodeModel())
-                    ->where([
-                        'id'         => $params[1],
-                        'podcast_id' => $params[0],
-                    ])
-                    ->first()) instanceof Episode
-            ) {
-                throw PageNotFoundException::forPageNotFound();
-            }
-
-            $this->episode = $episode;
-
-            unset($params[1]);
-            unset($params[0]);
-        }
-
-        return $this->{$method}(...$params);
+        return $this->{$method}($episode, ...$params);
     }
 
-    public function list(): string
+    public function list(Episode $episode): string
     {
         $videoClipsBuilder = (new ClipModel('video'))
             ->where([
-                'podcast_id' => $this->podcast->id,
-                'episode_id' => $this->episode->id,
+                'podcast_id' => $episode->podcast_id,
+                'episode_id' => $episode->id,
                 'type'       => 'video',
             ])
             ->orderBy('created_at', 'desc');
@@ -76,27 +67,27 @@ class VideoClipsController extends BaseController
         }
 
         $data = [
-            'podcast'    => $this->podcast,
-            'episode'    => $this->episode,
+            'podcast'    => $episode->podcast,
+            'episode'    => $episode,
             'videoClips' => $videoClips,
             'pager'      => $videoClipsBuilder->pager,
         ];
 
         $this->setHtmlHead(lang('VideoClip.list.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/video_clips_list', $data);
     }
 
-    public function view(string $videoClipId): string
+    public function view(Episode $episode, string $videoClipId): string
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
         $data = [
-            'podcast'   => $this->podcast,
-            'episode'   => $this->episode,
+            'podcast'   => $episode->podcast,
+            'episode'   => $episode,
             'videoClip' => $videoClip,
         ];
 
@@ -104,23 +95,23 @@ class VideoClipsController extends BaseController
             'videoClipLabel' => esc($videoClip->title),
         ]));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
             2 => $videoClip->title,
         ]);
         return view('episode/video_clip', $data);
     }
 
-    public function create(): string
+    public function createView(Episode $episode): string
     {
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
 
         // First, check that requirements to create a video clip are met
@@ -129,7 +120,7 @@ class VideoClipsController extends BaseController
             'ffmpeg'     => $ffmpeg !== null,
             'gd'         => extension_loaded('gd'),
             'freetype'   => extension_loaded('gd') && gd_info()['FreeType Support'],
-            'transcript' => $this->episode->transcript instanceof Transcript,
+            'transcript' => $episode->transcript instanceof Transcript,
         ];
 
         $this->setHtmlHead(lang('VideoClip.form.title'));
@@ -143,7 +134,7 @@ class VideoClipsController extends BaseController
         return view('episode/video_clips_new', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'title'      => 'required',
@@ -178,8 +169,8 @@ class VideoClipsController extends BaseController
             'format'     => $validData['format'],
             'type'       => 'video',
             'status'     => 'queued',
-            'podcast_id' => $this->podcast->id,
-            'episode_id' => $this->episode->id,
+            'podcast_id' => $episode->podcast_id,
+            'episode_id' => $episode->id,
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
@@ -195,13 +186,13 @@ class VideoClipsController extends BaseController
 
         (new ClipModel())->insert($videoClip);
 
-        return redirect()->route('video-clips-list', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('video-clips-list', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('VideoClip.messages.addToQueueSuccess')
         );
     }
 
-    public function retry(string $videoClipId): RedirectResponse
+    public function retryAction(Episode $episode, string $videoClipId): RedirectResponse
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
@@ -218,7 +209,7 @@ class VideoClipsController extends BaseController
         return redirect()->back();
     }
 
-    public function delete(string $videoClipId): RedirectResponse
+    public function deleteAction(Episode $episode, string $videoClipId): RedirectResponse
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
@@ -228,7 +219,7 @@ class VideoClipsController extends BaseController
 
         if ($videoClip->media === null) {
             // delete Clip directly
-            (new ClipModel())->deleteVideoClip($this->podcast->id, $this->episode->id, $videoClip->id);
+            (new ClipModel())->deleteVideoClip($episode->podcast_id, $episode->id, $videoClip->id);
         } else {
             (new ClipModel())->clearVideoClipCache($videoClip->id);
 

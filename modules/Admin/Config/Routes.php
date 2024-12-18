@@ -29,41 +29,41 @@ $routes->group(
                 'as'     => 'settings-general',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->post('instance', 'SettingsController::attemptInstanceEdit', [
+            $routes->post('instance', 'SettingsController::instanceEditAction', [
                 'as'     => 'settings-instance',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->get('instance-delete-icon', 'SettingsController::deleteIcon', [
+            $routes->get('instance-delete-icon', 'SettingsController::deleteIconAction', [
                 'as'     => 'settings-instance-delete-icon',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->post('instance-images-regenerate', 'SettingsController::regenerateImages', [
+            $routes->post('instance-images-regenerate', 'SettingsController::regenerateImagesAction', [
                 'as'     => 'settings-images-regenerate',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->post('instance-housekeeping-run', 'SettingsController::runHousekeeping', [
+            $routes->post('instance-housekeeping-run', 'SettingsController::housekeepingAction', [
                 'as'     => 'settings-housekeeping-run',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->get('theme', 'SettingsController::theme', [
+            $routes->get('theme', 'SettingsController::themeView', [
                 'as'     => 'settings-theme',
                 'filter' => 'permission:admin.settings',
             ]);
-            $routes->post('theme', 'SettingsController::attemptSetInstanceTheme', [
+            $routes->post('theme', 'SettingsController::themeAction', [
                 'as'     => 'settings-theme',
                 'filter' => 'permission:admin.settings',
             ]);
         });
         $routes->group('persons', static function ($routes): void {
-            $routes->get('/', 'PersonController', [
+            $routes->get('/', 'PersonController::list', [
                 'as'     => 'person-list',
                 'filter' => 'permission:persons.manage',
             ]);
-            $routes->get('new', 'PersonController::create', [
+            $routes->get('new', 'PersonController::createView', [
                 'as'     => 'person-create',
                 'filter' => 'permission:persons.manage',
             ]);
-            $routes->post('new', 'PersonController::attemptCreate', [
+            $routes->post('new', 'PersonController::createAction', [
                 'filter' => 'permission:persons.manage',
             ]);
             $routes->group('(:num)', static function ($routes): void {
@@ -71,14 +71,14 @@ $routes->group(
                     'as'     => 'person-view',
                     'filter' => 'permission:persons.manage',
                 ]);
-                $routes->get('edit', 'PersonController::edit/$1', [
+                $routes->get('edit', 'PersonController::editView/$1', [
                     'as'     => 'person-edit',
                     'filter' => 'permission:persons.manage',
                 ]);
-                $routes->post('edit', 'PersonController::attemptEdit/$1', [
+                $routes->post('edit', 'PersonController::editAction/$1', [
                     'filter' => 'permission:persons.manage',
                 ]);
-                $routes->add('delete', 'PersonController::delete/$1', [
+                $routes->add('delete', 'PersonController::deleteAction/$1', [
                     'as'     => 'person-delete',
                     'filter' => 'permission:persons.manage',
                 ]);
@@ -89,11 +89,11 @@ $routes->group(
             $routes->get('/', 'PodcastController::list', [
                 'as' => 'podcast-list',
             ]);
-            $routes->get('new', 'PodcastController::create', [
+            $routes->get('new', 'PodcastController::createView', [
                 'as'     => 'podcast-create',
                 'filter' => 'permission:podcasts.create',
             ]);
-            $routes->post('new', 'PodcastController::attemptCreate', [
+            $routes->post('new', 'PodcastController::createAction', [
                 'filter' => 'permission:podcasts.create',
             ]);
             // Podcast
@@ -103,16 +103,16 @@ $routes->group(
                     'as'     => 'podcast-view',
                     'filter' => 'permission:podcast$1.view',
                 ]);
-                $routes->get('edit', 'PodcastController::edit/$1', [
+                $routes->get('edit', 'PodcastController::editView/$1', [
                     'as'     => 'podcast-edit',
                     'filter' => 'permission:podcast$1.edit',
                 ]);
-                $routes->post('edit', 'PodcastController::attemptEdit/$1', [
+                $routes->post('edit', 'PodcastController::editAction/$1', [
                     'filter' => 'permission:podcast$1.edit',
                 ]);
                 $routes->get(
                     'publish',
-                    'PodcastController::publish/$1',
+                    'PodcastController::publishView/$1',
                     [
                         'as'     => 'podcast-publish',
                         'filter' => 'permission:podcast$1.manage-publications',
@@ -120,14 +120,14 @@ $routes->group(
                 );
                 $routes->post(
                     'publish',
-                    'PodcastController::attemptPublish/$1',
+                    'PodcastController::publishAction/$1',
                     [
                         'filter' => 'permission:podcast$1.manage-publications',
                     ],
                 );
                 $routes->get(
                     'publish-edit',
-                    'PodcastController::publishEdit/$1',
+                    'PodcastController::publishEditView/$1',
                     [
                         'as'     => 'podcast-publish_edit',
                         'filter' => 'permission:podcast$1.manage-publications',
@@ -135,28 +135,28 @@ $routes->group(
                 );
                 $routes->post(
                     'publish-edit',
-                    'PodcastController::attemptPublishEdit/$1',
+                    'PodcastController::publishEditAction/$1',
                     [
                         'filter' => 'permission:podcast$1.manage-publications',
                     ],
                 );
                 $routes->get(
                     'publish-cancel',
-                    'PodcastController::publishCancel/$1',
+                    'PodcastController::publishCancelAction/$1',
                     [
                         'as'     => 'podcast-publish-cancel',
                         'filter' => 'permission:podcast$1.manage-publications',
                     ],
                 );
-                $routes->get('edit/delete-banner', 'PodcastController::deleteBanner/$1', [
+                $routes->get('edit/delete-banner', 'PodcastController::deleteBannerAction/$1', [
                     'as'     => 'podcast-banner-delete',
                     'filter' => 'permission:podcast$1.edit',
                 ]);
-                $routes->get('delete', 'PodcastController::delete/$1', [
+                $routes->get('delete', 'PodcastController::deleteView/$1', [
                     'as'     => 'podcast-delete',
                     'filter' => 'permission:podcast$1.delete',
                 ]);
-                $routes->post('delete', 'PodcastController::attemptDelete/$1', [
+                $routes->post('delete', 'PodcastController::deleteAction/$1', [
                     'filter' => 'permission:podcast$1.delete',
                 ]);
                 $routes->group('persons', static function ($routes): void {
@@ -166,14 +166,14 @@ $routes->group(
                     ]);
                     $routes->post(
                         '/',
-                        'PodcastPersonController::attemptCreate/$1',
+                        'PodcastPersonController::createAction/$1',
                         [
                             'filter' => 'permission:podcast$1.manage-persons',
                         ],
                     );
                     $routes->get(
                         '(:num)/remove',
-                        'PodcastPersonController::remove/$1/$2',
+                        'PodcastPersonController::deleteAction/$1/$2',
                         [
                             'as'     => 'podcast-person-remove',
                             'filter' => 'permission:podcast$1.manage-persons',
@@ -181,13 +181,13 @@ $routes->group(
                     );
                 });
                 $routes->group('analytics', static function ($routes): void {
-                    $routes->get('/', 'PodcastController::viewAnalytics/$1', [
+                    $routes->get('/', 'PodcastController::analyticsView/$1', [
                         'as'     => 'podcast-analytics',
                         'filter' => 'permission:podcast$1.view',
                     ]);
                     $routes->get(
                         'webpages',
-                        'PodcastController::viewAnalyticsWebpages/$1',
+                        'PodcastController::analyticsWebpagesView/$1',
                         [
                             'as'     => 'podcast-analytics-webpages',
                             'filter' => 'permission:podcast$1.view',
@@ -195,7 +195,7 @@ $routes->group(
                     );
                     $routes->get(
                         'locations',
-                        'PodcastController::viewAnalyticsLocations/$1',
+                        'PodcastController::analyticsLocationsView/$1',
                         [
                             'as'     => 'podcast-analytics-locations',
                             'filter' => 'permission:podcast$1.view',
@@ -203,7 +203,7 @@ $routes->group(
                     );
                     $routes->get(
                         'unique-listeners',
-                        'PodcastController::viewAnalyticsUniqueListeners/$1',
+                        'PodcastController::analyticsUniqueListenersView/$1',
                         [
                             'as'     => 'podcast-analytics-unique-listeners',
                             'filter' => 'permission:podcast$1.view',
@@ -211,7 +211,7 @@ $routes->group(
                     );
                     $routes->get(
                         'listening-time',
-                        'PodcastController::viewAnalyticsListeningTime/$1',
+                        'PodcastController::analyticsListeningTimeView/$1',
                         [
                             'as'     => 'podcast-analytics-listening-time',
                             'filter' => 'permission:podcast$1.view',
@@ -219,7 +219,7 @@ $routes->group(
                     );
                     $routes->get(
                         'time-periods',
-                        'PodcastController::viewAnalyticsTimePeriods/$1',
+                        'PodcastController::analyticsTimePeriodsView/$1',
                         [
                             'as'     => 'podcast-analytics-time-periods',
                             'filter' => 'permission:podcast$1.view',
@@ -227,7 +227,7 @@ $routes->group(
                     );
                     $routes->get(
                         'players',
-                        'PodcastController::viewAnalyticsPlayers/$1',
+                        'PodcastController::analyticsPlayersView/$1',
                         [
                             'as'     => 'podcast-analytics-players',
                             'filter' => 'permission:podcast$1.view',
@@ -240,13 +240,13 @@ $routes->group(
                         'as'     => 'episode-list',
                         'filter' => 'permission:podcast$1.episodes.view',
                     ]);
-                    $routes->get('new', 'EpisodeController::create/$1', [
+                    $routes->get('new', 'EpisodeController::createView/$1', [
                         'as'     => 'episode-create',
                         'filter' => 'permission:podcast$1.episodes.create',
                     ]);
                     $routes->post(
                         'new',
-                        'EpisodeController::attemptCreate/$1',
+                        'EpisodeController::createAction/$1',
                         [
                             'filter' => 'permission:podcast$1.episodes.create',
                         ],
@@ -257,20 +257,20 @@ $routes->group(
                             'as'     => 'episode-view',
                             'filter' => 'permission:podcast$1.episodes.view',
                         ]);
-                        $routes->get('edit', 'EpisodeController::edit/$1/$2', [
+                        $routes->get('edit', 'EpisodeController::editView/$1/$2', [
                             'as'     => 'episode-edit',
                             'filter' => 'permission:podcast$1.episodes.edit',
                         ]);
                         $routes->post(
                             'edit',
-                            'EpisodeController::attemptEdit/$1/$2',
+                            'EpisodeController::editAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.edit',
                             ],
                         );
                         $routes->get(
                             'publish',
-                            'EpisodeController::publish/$1/$2',
+                            'EpisodeController::publishView/$1/$2',
                             [
                                 'as'     => 'episode-publish',
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
@@ -278,14 +278,14 @@ $routes->group(
                         );
                         $routes->post(
                             'publish',
-                            'EpisodeController::attemptPublish/$1/$2',
+                            'EpisodeController::publishAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
                             ],
                         );
                         $routes->get(
                             'publish-edit',
-                            'EpisodeController::publishEdit/$1/$2',
+                            'EpisodeController::publishEditView/$1/$2',
                             [
                                 'as'     => 'episode-publish_edit',
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
@@ -293,14 +293,14 @@ $routes->group(
                         );
                         $routes->post(
                             'publish-edit',
-                            'EpisodeController::attemptPublishEdit/$1/$2',
+                            'EpisodeController::publishEditAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
                             ],
                         );
                         $routes->get(
                             'publish-cancel',
-                            'EpisodeController::publishCancel/$1/$2',
+                            'EpisodeController::publishCancelAction/$1/$2',
                             [
                                 'as'     => 'episode-publish-cancel',
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
@@ -308,7 +308,7 @@ $routes->group(
                         );
                         $routes->get(
                             'publish-date-edit',
-                            'EpisodeController::publishDateEdit/$1/$2',
+                            'EpisodeController::publishDateEditView/$1/$2',
                             [
                                 'as'     => 'episode-publish_date_edit',
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
@@ -316,14 +316,14 @@ $routes->group(
                         );
                         $routes->post(
                             'publish-date-edit',
-                            'EpisodeController::attemptPublishDateEdit/$1/$2',
+                            'EpisodeController::publishDateEditAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
                             ],
                         );
                         $routes->get(
                             'unpublish',
-                            'EpisodeController::unpublish/$1/$2',
+                            'EpisodeController::unpublishView/$1/$2',
                             [
                                 'as'     => 'episode-unpublish',
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
@@ -331,14 +331,14 @@ $routes->group(
                         );
                         $routes->post(
                             'unpublish',
-                            'EpisodeController::attemptUnpublish/$1/$2',
+                            'EpisodeController::unpublishAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.manage-publications',
                             ],
                         );
                         $routes->get(
                             'delete',
-                            'EpisodeController::delete/$1/$2',
+                            'EpisodeController::deleteView/$1/$2',
                             [
                                 'as'     => 'episode-delete',
                                 'filter' => 'permission:podcast$1.episodes.delete',
@@ -346,7 +346,7 @@ $routes->group(
                         );
                         $routes->post(
                             'delete',
-                            'EpisodeController::attemptDelete/$1/$2',
+                            'EpisodeController::deleteAction/$1/$2',
                             [
                                 'filter' => 'permission:podcast$1.episodes.delete',
                             ],
@@ -377,7 +377,7 @@ $routes->group(
                         );
                         $routes->get(
                             'soundbites/new',
-                            'SoundbiteController::create/$1/$2',
+                            'SoundbiteController::createView/$1/$2',
                             [
                                 'as'     => 'soundbites-create',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -385,7 +385,7 @@ $routes->group(
                         );
                         $routes->post(
                             'soundbites/new',
-                            'SoundbiteController::attemptCreate/$1/$2',
+                            'SoundbiteController::createAction/$1/$2',
                             [
                                 'as'     => 'soundbites-create',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -393,7 +393,7 @@ $routes->group(
                         );
                         $routes->get(
                             'soundbites/(:num)/delete',
-                            'SoundbiteController::delete/$1/$2/$3',
+                            'SoundbiteController::deleteAction/$1/$2/$3',
                             [
                                 'as'     => 'soundbites-delete',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -409,7 +409,7 @@ $routes->group(
                         );
                         $routes->get(
                             'video-clips/new',
-                            'VideoClipsController::create/$1/$2',
+                            'VideoClipsController::createView/$1/$2',
                             [
                                 'as'     => 'video-clips-create',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -417,7 +417,7 @@ $routes->group(
                         );
                         $routes->post(
                             'video-clips/new',
-                            'VideoClipsController::attemptCreate/$1/$2',
+                            'VideoClipsController::createAction/$1/$2',
                             [
                                 'as'     => 'video-clips-create',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -433,7 +433,7 @@ $routes->group(
                         );
                         $routes->get(
                             'video-clips/(:num)/retry',
-                            'VideoClipsController::retry/$1/$2/$3',
+                            'VideoClipsController::retryAction/$1/$2/$3',
                             [
                                 'as'     => 'video-clip-retry',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -441,7 +441,7 @@ $routes->group(
                         );
                         $routes->get(
                             'video-clips/(:num)/delete',
-                            'VideoClipsController::delete/$1/$2/$3',
+                            'VideoClipsController::deleteAction/$1/$2/$3',
                             [
                                 'as'     => 'video-clip-delete',
                                 'filter' => 'permission:podcast$1.episodes.manage-clips',
@@ -449,7 +449,7 @@ $routes->group(
                         );
                         $routes->get(
                             'embed',
-                            'EpisodeController::embed/$1/$2',
+                            'EpisodeController::embedView/$1/$2',
                             [
                                 'as'     => 'embed-add',
                                 'filter' => 'permission:podcast$1.episodes.edit',
@@ -462,14 +462,14 @@ $routes->group(
                             ]);
                             $routes->post(
                                 '/',
-                                'EpisodePersonController::attemptCreate/$1/$2',
+                                'EpisodePersonController::createAction/$1/$2',
                                 [
                                     'filter' => 'permission:podcast$1.episodes.manage-persons',
                                 ],
                             );
                             $routes->get(
                                 '(:num)/remove',
-                                'EpisodePersonController::remove/$1/$2/$3',
+                                'EpisodePersonController::deleteAction/$1/$2/$3',
                                 [
                                     'as'     => 'episode-person-remove',
                                     'filter' => 'permission:podcast$1.episodes.manage-persons',
@@ -479,7 +479,7 @@ $routes->group(
                         $routes->group('comments', static function ($routes): void {
                             $routes->post(
                                 'new',
-                                'EpisodeController::attemptCommentCreate/$1/$2',
+                                'EpisodeController::commentCreateAction/$1/$2',
                                 [
                                     'as'     => 'comment-attempt-create',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
@@ -487,7 +487,7 @@ $routes->group(
                             );
                             $routes->post(
                                 '(:uuid)/reply',
-                                'EpisodeController::attemptCommentReply/$1/$2/$3',
+                                'EpisodeController::commentReplyAction/$1/$2/$3',
                                 [
                                     'as'     => 'comment-attempt-reply',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
@@ -495,7 +495,7 @@ $routes->group(
                             );
                             $routes->post(
                                 'delete',
-                                'EpisodeController::attemptCommentDelete/$1/$2',
+                                'EpisodeController::commentDeleteAction/$1/$2',
                                 [
                                     'as'     => 'comment-attempt-delete',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
@@ -510,11 +510,11 @@ $routes->group(
                         'as'     => 'notification-list',
                         'filter' => 'permission:podcast$1.manage-notifications',
                     ]);
-                    $routes->get('(:num)/mark-as-read', 'NotificationController::markAsRead/$1/$2', [
+                    $routes->get('(:num)/mark-as-read', 'NotificationController::markAsReadAction/$1/$2', [
                         'as'     => 'notification-mark-as-read',
                         'filter' => 'permission:podcast$1.manage-notifications',
                     ]);
-                    $routes->get('mark-all-as-read', 'NotificationController::markAllAsRead/$1', [
+                    $routes->get('mark-all-as-read', 'NotificationController::markAllAsReadAction/$1', [
                         'as'     => 'notification-mark-all-as-read',
                         'filter' => 'permission:podcast$1.manage-notifications',
                     ]);
@@ -528,7 +528,7 @@ $routes->group(
             ]);
             $routes->get(
                 'blocked-actors',
-                'FediverseController::blockedActors',
+                'FediverseController::blockedActorsView',
                 [
                     'as'     => 'fediverse-blocked-actors',
                     'filter' => 'permission:fediverse.manage-blocks',
@@ -536,7 +536,7 @@ $routes->group(
             );
             $routes->get(
                 'blocked-domains',
-                'FediverseController::blockedDomains',
+                'FediverseController::blockedDomainsView',
                 [
                     'as'     => 'fediverse-blocked-domains',
                     'filter' => 'permission:fediverse.manage-blocks',
@@ -549,25 +549,25 @@ $routes->group(
                 'as'     => 'page-list',
                 'filter' => 'permission:pages.manage',
             ]);
-            $routes->get('new', 'PageController::create', [
+            $routes->get('new', 'PageController::createView', [
                 'as'     => 'page-create',
                 'filter' => 'permission:pages.manage',
             ]);
-            $routes->post('new', 'PageController::attemptCreate', [
+            $routes->post('new', 'PageController::createAction', [
                 'filter' => 'permission:pages.manage',
             ]);
             $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'PageController::view/$1', [
                     'as' => 'page-view',
                 ]);
-                $routes->get('edit', 'PageController::edit/$1', [
+                $routes->get('edit', 'PageController::editView/$1', [
                     'as'     => 'page-edit',
                     'filter' => 'permission:pages.manage',
                 ]);
-                $routes->post('edit', 'PageController::attemptEdit/$1', [
+                $routes->post('edit', 'PageController::editAction/$1', [
                     'filter' => 'permission:pages.manage',
                 ]);
-                $routes->get('delete', 'PageController::delete/$1', [
+                $routes->get('delete', 'PageController::deleteAction/$1', [
                     'as'     => 'page-delete',
                     'filter' => 'permission:pages.manage',
                 ]);

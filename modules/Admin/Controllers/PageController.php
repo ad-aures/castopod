@@ -17,16 +17,14 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class PageController extends BaseController
 {
-    protected ?Page $page = null;
-
     public function _remap(string $method, string ...$params): mixed
     {
         if ($params === []) {
             return $this->{$method}();
         }
 
-        if (($this->page = (new PageModel())->find($params[0])) instanceof Page) {
-            return $this->{$method}();
+        if (($page = (new PageModel())->find($params[0])) instanceof Page) {
+            return $this->{$method}($page);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -42,15 +40,15 @@ class PageController extends BaseController
         return view('page/list', $data);
     }
 
-    public function view(): string
+    public function view(Page $page): string
     {
-        $this->setHtmlHead($this->page->title);
+        $this->setHtmlHead($page->title);
         return view('page/view', [
-            'page' => $this->page,
+            'page' => $page,
         ]);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper('form');
 
@@ -58,7 +56,7 @@ class PageController extends BaseController
         return view('page/create');
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         $page = new Page([
             'title'            => $this->request->getPost('title'),
@@ -82,40 +80,40 @@ class PageController extends BaseController
             ]));
     }
 
-    public function edit(): string
+    public function editView(Page $page): string
     {
         helper('form');
 
         $this->setHtmlHead(lang('Page.edit'));
         replace_breadcrumb_params([
-            0 => $this->page->title,
+            0 => $page->title,
         ]);
         return view('page/edit', [
-            'page' => $this->page,
+            'page' => $page,
         ]);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(Page $page): RedirectResponse
     {
-        $this->page->title = $this->request->getPost('title');
-        $this->page->slug = $this->request->getPost('slug');
-        $this->page->content_markdown = $this->request->getPost('content');
+        $page->title = $this->request->getPost('title');
+        $page->slug = $this->request->getPost('slug');
+        $page->content_markdown = $this->request->getPost('content');
 
         $pageModel = new PageModel();
 
-        if (! $pageModel->update($this->page->id, $this->page)) {
+        if (! $pageModel->update($page->id, $page)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $pageModel->errors());
         }
 
-        return redirect()->route('page-edit', [$this->page->id])->with('message', lang('Page.messages.editSuccess'));
+        return redirect()->route('page-edit', [$page->id])->with('message', lang('Page.messages.editSuccess'));
     }
 
-    public function delete(): RedirectResponse
+    public function deleteAction(Page $page): RedirectResponse
     {
-        (new PageModel())->delete($this->page->id);
+        (new PageModel())->delete($page->id);
 
         return redirect()->route('page-list');
     }

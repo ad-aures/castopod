@@ -61,7 +61,7 @@ class UserController extends BaseController
         return view('user/view', $data);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper('form');
 
@@ -70,7 +70,10 @@ class UserController extends BaseController
         array_walk(
             $roles,
             static function (array $role, $key) use (&$roleOptions): array {
-                $roleOptions[$key] = $role['title'];
+                $roleOptions[] = [
+                    'value' => $key,
+                    'label' => $role['title'],
+                ];
                 return $roleOptions;
             },
             [],
@@ -88,7 +91,7 @@ class UserController extends BaseController
      * Create the user with the provided username and email. The password is set as a random string and a magic link is
      * sent to the user to allow them setting their password.
      */
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         helper(['text', 'email']);
 
@@ -167,7 +170,7 @@ class UserController extends BaseController
             ]));
     }
 
-    public function edit(): string
+    public function editView(): string
     {
         helper('form');
 
@@ -176,7 +179,10 @@ class UserController extends BaseController
         array_walk(
             $roles,
             static function (array $role, $key) use (&$roleOptions): array {
-                $roleOptions[$key] = $role['title'];
+                $roleOptions[] = [
+                    'value' => $key,
+                    'label' => $role['title'],
+                ];
                 return $roleOptions;
             },
             [],
@@ -196,7 +202,7 @@ class UserController extends BaseController
         return view('user/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(): RedirectResponse
     {
         // The instance owner is a superadmin and the only user that cannot be demoted.
         if ((bool) $this->user->is_owner) {
@@ -221,7 +227,7 @@ class UserController extends BaseController
             ]));
     }
 
-    public function delete(): string
+    public function deleteView(): string
     {
         helper(['form']);
 
@@ -238,7 +244,7 @@ class UserController extends BaseController
         return view('user/delete', $data);
     }
 
-    public function attemptDelete(): RedirectResponse
+    public function deleteAction(): RedirectResponse
     {
         // You cannot delete the instance owner.
         if ((bool) $this->user->is_owner) {

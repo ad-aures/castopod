@@ -11,18 +11,11 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class ColorsController extends Controller
 {
-    /**
-     * Instance of the main response object.
-     *
-     * @var Response
-     */
-    protected $response;
-
-    public function index(): Response
+    public function index(): ResponseInterface
     {
         $cacheName = 'colors.css';
         if (

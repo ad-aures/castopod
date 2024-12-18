@@ -19,7 +19,7 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
@@ -77,10 +77,7 @@ class EpisodeCommentController extends BaseController
 
     public function view(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         $cacheName = implode(
             '_',
@@ -119,7 +116,7 @@ class EpisodeCommentController extends BaseController
         return $cachedView;
     }
 
-    public function commentObject(): Response
+    public function commentObject(): ResponseInterface
     {
         $commentObject = new CommentObject($this->comment);
 
@@ -128,7 +125,7 @@ class EpisodeCommentController extends BaseController
             ->setBody($commentObject->toJSON());
     }
 
-    public function replies(): Response
+    public function replies(): ResponseInterface
     {
         /**
          * get comment replies
@@ -163,7 +160,7 @@ class EpisodeCommentController extends BaseController
             ->setBody($collection->toJSON());
     }
 
-    public function attemptLike(): RedirectResponse
+    public function likeAction(): RedirectResponse
     {
         if (! ($interactAsActor = interact_as_actor()) instanceof Actor) {
             return redirect()->back();
@@ -175,7 +172,7 @@ class EpisodeCommentController extends BaseController
         return redirect()->back();
     }
 
-    public function attemptReply(): RedirectResponse
+    public function replyAction(): RedirectResponse
     {
         if (! ($interactAsActor = interact_as_actor()) instanceof Actor) {
             return redirect()->back();

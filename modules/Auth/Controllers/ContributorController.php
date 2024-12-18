@@ -81,7 +81,7 @@ class ContributorController extends BaseController
         return view('contributor/view', $data);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper('form');
 
@@ -125,7 +125,7 @@ class ContributorController extends BaseController
         return view('contributor/create', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         /** @var User $user */
         $user = (new UserModel())->find((int) $this->request->getPost('user'));
@@ -142,7 +142,7 @@ class ContributorController extends BaseController
         return redirect()->route('contributor-list', [$this->podcast->id]);
     }
 
-    public function edit(): string|RedirectResponse
+    public function editView(): string|RedirectResponse
     {
         helper('form');
 
@@ -184,7 +184,7 @@ class ContributorController extends BaseController
         return view('contributor/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(): RedirectResponse
     {
         // forbid updating a podcast owner
         if ($this->podcast->created_by === $this->contributor->id) {
@@ -206,7 +206,7 @@ class ContributorController extends BaseController
         );
     }
 
-    public function remove(): string
+    public function deleteView(): string
     {
         helper('form');
 
@@ -225,7 +225,7 @@ class ContributorController extends BaseController
         return view('contributor/delete', $data);
     }
 
-    public function attemptRemove(): RedirectResponse
+    public function deleteAction(): RedirectResponse
     {
         if ($this->podcast->created_by === $this->contributor->id) {
             return redirect()

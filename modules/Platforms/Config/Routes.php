@@ -21,7 +21,7 @@ $routes->group(
         $routes->group('podcasts/(:num)/platforms', static function ($routes): void {
             $routes->get(
                 '/',
-                'PlatformController::platforms/$1/podcasting',
+                'PlatformController::list/$1/podcasting',
                 [
                     'as'     => 'platforms-podcasting',
                     'filter' => 'permission:podcast$1.manage-platforms',
@@ -29,7 +29,7 @@ $routes->group(
             );
             $routes->get(
                 'social',
-                'PlatformController::platforms/$1/social',
+                'PlatformController::list/$1/social',
                 [
                     'as'     => 'platforms-social',
                     'filter' => 'permission:podcast$1.manage-platforms',
@@ -37,7 +37,7 @@ $routes->group(
             );
             $routes->get(
                 'funding',
-                'PlatformController::platforms/$1/funding',
+                'PlatformController::list/$1/funding',
                 [
                     'as'     => 'platforms-funding',
                     'filter' => 'permission:podcast$1.manage-platforms',
@@ -45,7 +45,7 @@ $routes->group(
             );
             $routes->post(
                 'save/(:platformType)',
-                'PlatformController::attemptPlatformsUpdate/$1/$2',
+                'PlatformController::updateAction/$1/$2',
                 [
                     'as'     => 'platforms-save',
                     'filter' => 'permission:podcast$1.manage-platforms',
@@ -53,7 +53,7 @@ $routes->group(
             );
             $routes->get(
                 '(:platformType)/(:slug)/podcast-platform-remove',
-                'PlatformController::removePlatform/$1/$2/$3',
+                'PlatformController::removeAction/$1/$2/$3',
                 [
                     'as'     => 'podcast-platform-remove',
                     'filter' => 'permission:podcast$1.manage-platforms',

@@ -75,10 +75,7 @@ class PostController extends FediversePostController
 
     public function view(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         $cacheName = implode(
             '_',
@@ -115,7 +112,7 @@ class PostController extends FediversePostController
     }
 
     #[Override]
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         $rules = [
             'message'     => 'required|max_length[500]',
@@ -167,7 +164,7 @@ class PostController extends FediversePostController
     }
 
     #[Override]
-    public function attemptReply(): RedirectResponse
+    public function replyAction(): RedirectResponse
     {
         $rules = [
             'message' => 'required|max_length[500]',
@@ -207,7 +204,7 @@ class PostController extends FediversePostController
     }
 
     #[Override]
-    public function attemptFavourite(): RedirectResponse
+    public function favouriteAction(): RedirectResponse
     {
         model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->post);
 
@@ -215,14 +212,14 @@ class PostController extends FediversePostController
     }
 
     #[Override]
-    public function attemptReblog(): RedirectResponse
+    public function reblogAction(): RedirectResponse
     {
         (new PostModel())->toggleReblog(interact_as_actor(), $this->post);
 
         return redirect()->back();
     }
 
-    public function attemptAction(): RedirectResponse
+    public function action(): RedirectResponse
     {
         $rules = [
             'action' => 'required|in_list[favourite,reblog,reply]',
@@ -239,9 +236,9 @@ class PostController extends FediversePostController
 
         $action = $validData['action'];
         return match ($action) {
-            'favourite' => $this->attemptFavourite(),
-            'reblog'    => $this->attemptReblog(),
-            'reply'     => $this->attemptReply(),
+            'favourite' => $this->favouriteAction(),
+            'reblog'    => $this->reblogAction(),
+            'reply'     => $this->replyAction(),
             default     => redirect()
                 ->back()
                 ->withInput()
@@ -249,12 +246,9 @@ class PostController extends FediversePostController
         };
     }
 
-    public function remoteAction(string $action): string
+    public function remoteActionView(string $action): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         set_remote_actions_metatags($this->post, $action);
         $data = [

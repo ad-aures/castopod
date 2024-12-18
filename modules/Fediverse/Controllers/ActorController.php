@@ -319,7 +319,7 @@ class ActorController extends Controller
             ->setBody($followersCollection->toJSON());
     }
 
-    public function attemptFollow(): RedirectResponse
+    public function followAction(): RedirectResponse
     {
         $rules = [
             'handle' => 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',

@@ -27,34 +27,34 @@ class PodcastPersonController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             unset($params[0]);
-            return $this->{$method}(...$params);
+            return $this->{$method}($podcast, ...$params);
         }
 
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index(): string
+    public function index(Podcast $podcast): string
     {
         helper('form');
 
         $data = [
-            'podcast'         => $this->podcast,
-            'podcastPersons'  => (new PersonModel())->getPodcastPersons($this->podcast->id),
+            'podcast'         => $podcast,
+            'podcastPersons'  => (new PersonModel())->getPodcastPersons($podcast->id),
             'personOptions'   => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
 
         $this->setHtmlHead(lang('Person.podcast_form.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/persons', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(Podcast $podcast): RedirectResponse
     {
         $rules = [
             'persons' => 'required',
@@ -70,7 +70,7 @@ class PodcastPersonController extends BaseController
         $validData = $this->validator->getValidated();
 
         (new PersonModel())->addPodcastPersons(
-            $this->podcast->id,
+            $podcast->id,
             $validData['persons'],
             $this->request->getPost('roles') ?? [],
         );
@@ -78,9 +78,9 @@ class PodcastPersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove(string $personId): RedirectResponse
+    public function deleteAction(Podcast $podcast, string $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromPodcast($this->podcast->id, (int) $personId);
+        (new PersonModel())->removePersonFromPodcast($podcast->id, (int) $personId);
 
         return redirect()->back();
     }

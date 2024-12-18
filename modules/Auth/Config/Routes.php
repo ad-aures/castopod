@@ -26,7 +26,7 @@ $routes->group(
         ]);
         $routes->post('magic-link-set-password', 'MagicLinkController::setPasswordAction');
 
-        $routes->post('interact-as-actor', 'InteractController::attemptInteractAsActor', [
+        $routes->post('interact-as-actor', 'InteractController::interactAsActorAction', [
             'as' => 'interact-as-actor',
         ]);
 
@@ -36,11 +36,11 @@ $routes->group(
                 'as'     => 'user-list',
                 'filter' => 'permission:users.manage',
             ]);
-            $routes->get('new', 'UserController::create', [
+            $routes->get('new', 'UserController::createView', [
                 'as'     => 'user-create',
                 'filter' => 'permission:users.manage',
             ]);
-            $routes->post('new', 'UserController::attemptCreate', [
+            $routes->post('new', 'UserController::createAction', [
                 'filter' => 'permission:users.manage',
             ]);
             // User
@@ -49,18 +49,18 @@ $routes->group(
                     'as'     => 'user-view',
                     'filter' => 'permission:users.manage',
                 ]);
-                $routes->get('edit', 'UserController::edit/$1', [
+                $routes->get('edit', 'UserController::editView/$1', [
                     'as'     => 'user-edit',
                     'filter' => 'permission:users.manage',
                 ]);
-                $routes->post('edit', 'UserController::attemptEdit/$1', [
+                $routes->post('edit', 'UserController::editAction/$1', [
                     'filter' => 'permission:users.manage',
                 ]);
                 $routes->get('delete', 'UserController::delete/$1', [
                     'as'     => 'user-delete',
                     'filter' => 'permission:users.manage',
                 ]);
-                $routes->post('delete', 'UserController::attemptDelete/$1', [
+                $routes->post('delete', 'UserController::deleteAction/$1', [
                     'as'     => 'user-delete',
                     'filter' => 'permission:users.manage',
                 ]);
@@ -74,7 +74,7 @@ $routes->group(
             $routes->get('change-password', 'MyAccountController::changePassword', [
                 'as' => 'change-password',
             ],);
-            $routes->post('change-password', 'MyAccountController::attemptChange');
+            $routes->post('change-password', 'MyAccountController::changeAction');
         });
 
         // Podcast contributors
@@ -83,13 +83,13 @@ $routes->group(
                 'as'     => 'contributor-list',
                 'filter' => 'permission:podcast$1.manage-contributors',
             ]);
-            $routes->get('add', 'ContributorController::create/$1', [
+            $routes->get('add', 'ContributorController::createView/$1', [
                 'as'     => 'contributor-add',
                 'filter' => 'permission:podcast$1.manage-contributors',
             ]);
             $routes->post(
                 'add',
-                'ContributorController::attemptCreate/$1',
+                'ContributorController::createAction/$1',
                 [
                     'filter' => 'permission:podcast$1.manage-contributors',
                 ],
@@ -102,7 +102,7 @@ $routes->group(
                 ]);
                 $routes->get(
                     'edit',
-                    'ContributorController::edit/$1/$2',
+                    'ContributorController::editView/$1/$2',
                     [
                         'as'     => 'contributor-edit',
                         'filter' => 'permission:podcast$1.manage-contributors',
@@ -110,7 +110,7 @@ $routes->group(
                 );
                 $routes->post(
                     'edit',
-                    'ContributorController::attemptEdit/$1/$2',
+                    'ContributorController::editAction/$1/$2',
                     [
                         'filter' => 'permission:podcast$1.manage-contributors',
                     ],
@@ -125,7 +125,7 @@ $routes->group(
                 );
                 $routes->post(
                     'remove',
-                    'ContributorController::attemptRemove/$1/$2',
+                    'ContributorController::removeAction/$1/$2',
                     [
                         'filter' => 'permission:podcast$1.manage-contributors',
                     ],

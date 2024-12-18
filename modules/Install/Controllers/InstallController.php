@@ -75,7 +75,7 @@ class InstallController extends Controller
                 $dotenv->required(['app.baseURL', 'analytics.salt', 'admin.gateway', 'auth.gateway']);
             } catch (ValidationException) {
                 // form to input instance configuration
-                return $this->instanceConfig();
+                return $this->instanceConfigView();
             }
 
             try {
@@ -87,13 +87,13 @@ class InstallController extends Controller
                     'database.default.DBPrefix',
                 ]);
             } catch (ValidationException) {
-                return $this->databaseConfig();
+                return $this->databaseConfigView();
             }
 
             try {
                 $dotenv->required('cache.handler');
             } catch (ValidationException) {
-                return $this->cacheConfig();
+                return $this->cacheConfigView();
             }
         } else {
             try {
@@ -130,7 +130,7 @@ class InstallController extends Controller
             session()
                 ->setFlashdata('error', lang('Install.messages.databaseConnectError'));
 
-            return $this->databaseConfig();
+            return $this->databaseConfigView();
         }
 
         // migrate if no user has been created
@@ -139,15 +139,15 @@ class InstallController extends Controller
         // Check if all seeds have succeeded
         $this->seed();
 
-        return $this->createSuperAdmin();
+        return $this->createSuperAdminView();
     }
 
-    public function instanceConfig(): string
+    public function instanceConfigView(): string
     {
         return view('instance_config');
     }
 
-    public function attemptInstanceConfig(): RedirectResponse
+    public function instanceConfigAction(): RedirectResponse
     {
         $rules = [
             'hostname'       => 'required|valid_url_strict',
@@ -181,12 +181,12 @@ class InstallController extends Controller
         return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('Install')->gateway));
     }
 
-    public function databaseConfig(): string
+    public function databaseConfigView(): string
     {
         return view('database_config');
     }
 
-    public function attemptDatabaseConfig(): RedirectResponse
+    public function databaseConfigAction(): RedirectResponse
     {
         $rules = [
             'db_hostname' => 'required',
@@ -215,12 +215,12 @@ class InstallController extends Controller
         return redirect()->back();
     }
 
-    public function cacheConfig(): string
+    public function cacheConfigView(): string
     {
         return view('cache_config');
     }
 
-    public function attemptCacheConfig(): RedirectResponse
+    public function cacheConfigAction(): RedirectResponse
     {
         $rules = [
             'cache_handler' => 'required',
@@ -267,7 +267,7 @@ class InstallController extends Controller
     /**
      * Returns the form to create a the first superadmin user for the instance.
      */
-    public function createSuperAdmin(): string
+    public function createSuperAdminView(): string
     {
         return view('create_superadmin');
     }
@@ -277,7 +277,7 @@ class InstallController extends Controller
      *
      * After creation, user is redirected to login page to input its credentials.
      */
-    public function attemptCreateSuperAdmin(): RedirectResponse
+    public function createSuperAdminAction(): RedirectResponse
     {
         // validate user password
         $rules = [

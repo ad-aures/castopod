@@ -19,7 +19,7 @@ class FediverseController extends BaseController
         return redirect()->route('fediverse-blocked-actors');
     }
 
-    public function blockedActors(): string
+    public function blockedActorsView(): string
     {
         helper(['form']);
 
@@ -32,7 +32,7 @@ class FediverseController extends BaseController
         ]);
     }
 
-    public function blockedDomains(): string
+    public function blockedDomainsView(): string
     {
         helper(['form']);
 

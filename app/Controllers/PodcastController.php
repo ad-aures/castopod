@@ -17,7 +17,7 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
@@ -47,7 +47,7 @@ class PodcastController extends BaseController
         return $this->{$method}(...$params);
     }
 
-    public function podcastActor(): Response
+    public function podcastActor(): ResponseInterface
     {
         $podcastActor = new PodcastActor($this->podcast);
 
@@ -58,10 +58,7 @@ class PodcastController extends BaseController
 
     public function activity(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         $cacheName = implode(
             '_',
@@ -106,10 +103,7 @@ class PodcastController extends BaseController
 
     public function about(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         $cacheName = implode(
             '_',
@@ -156,10 +150,7 @@ class PodcastController extends BaseController
 
     public function episodes(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->podcast->id);
-        }
+        $this->registerPodcastWebpageHit($this->podcast->id);
 
         $yearQuery = $this->request->getGet('year');
         $seasonQuery = $this->request->getGet('season');
@@ -274,7 +265,7 @@ class PodcastController extends BaseController
         return $cachedView;
     }
 
-    public function episodeCollection(): Response
+    public function episodeCollection(): ResponseInterface
     {
         if ($this->podcast->type === 'serial') {
             // podcast is serial

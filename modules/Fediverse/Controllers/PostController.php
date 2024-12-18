@@ -112,7 +112,7 @@ class PostController extends Controller
             ->setBody($collection->toJSON());
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -147,7 +147,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function attemptFavourite(): RedirectResponse
+    public function favouriteAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -171,7 +171,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function attemptReblog(): RedirectResponse
+    public function reblogAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -195,7 +195,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function attemptReply(): RedirectResponse
+    public function replyAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -230,7 +230,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function attemptRemoteAction(string $action): RedirectResponse | ResponseInterface
+    public function remoteActionAction(string $action): RedirectResponse | ResponseInterface
     {
         $rules = [
             'handle' => 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
@@ -277,21 +277,21 @@ class PostController extends Controller
         );
     }
 
-    public function attemptBlockActor(): RedirectResponse
+    public function blockActorAction(): RedirectResponse
     {
         model('ActorModel', false)->blockActor($this->post->actor->id);
 
         return redirect()->back();
     }
 
-    public function attemptBlockDomain(): RedirectResponse
+    public function blockDomainAction(): RedirectResponse
     {
         model('BlockedDomainModel', false)->blockDomain($this->post->actor->domain);
 
         return redirect()->back();
     }
 
-    public function attemptDelete(): RedirectResponse
+    public function deleteAction(): RedirectResponse
     {
         model('PostModel', false)->removePost($this->post);
 

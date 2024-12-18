@@ -39,13 +39,13 @@
     isRequired="true"
     data-slugify="title" />
 
-<div>
-    <x-Forms.Label for="slug"><?= lang('Episode.form.permalink') ?></x-Forms.Label>
-    <permalink-edit class="inline-flex items-center w-full text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>" permalink-base="<?= url_to('podcast-episodes', $podcast->handle) ?>">
-        <span slot="domain"><?= '…/' . esc($podcast->at_handle) . '/' ?></span>
-        <x-Forms.Input name="slug" isRequired="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
-    </permalink-edit>
-</div>
+<x-Forms.PermalinkEditor
+    name="slug"
+    label="<?= lang('Episode.form.permalink') ?>"
+    prefix="<?= '…/' . esc($podcast->at_handle) . '/' ?>"
+    data-slugify="slug"
+    permalinkBase="<?= url_to('podcast-episodes', $podcast->handle) ?>"
+    />
 
 <div class="flex flex-col gap-x-2 gap-y-4 md:flex-row">
     <x-Forms.Field

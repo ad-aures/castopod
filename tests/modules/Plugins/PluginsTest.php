@@ -117,7 +117,11 @@ final class PluginsTest extends CIUnitTestCase
 
         $this->assertEquals(
             (string) $head,
-            '<head>    <title >foo</title>    <meta charset="UTF-8"/>    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>    <link rel="icon" type="image/x-icon" href="http://localhost:8080/favicon.ico"/>    <link rel="apple-touch-icon" href="http://localhost:8080/icon-180.png"/>    <link rel="manifest" href="/manifest.webmanifest"/>    <meta name="theme-color" content="#009486"/>    <link rel="stylesheet" type="text/css" href="/themes/colors"/>    <title >foo</title>    <script>
+            '<head>    <title >foo</title>    <meta charset="UTF-8"/>    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>    <link rel="icon" type="image/x-icon" href="' . base_url(
+                'favicon.ico'
+            ) . '"/>    <link rel="apple-touch-icon" href="' . base_url(
+                'icon-180.png'
+            ) . '"/>    <link rel="manifest" href="/manifest.webmanifest"/>    <meta name="theme-color" content="#009486"/>    <link rel="stylesheet" type="text/css" href="/themes/colors"/>    <title >foo</title>    <script>
     // Check that service workers are supported
     if (\'serviceWorker\' in navigator) {
         // Use the window load event to keep the page load performant

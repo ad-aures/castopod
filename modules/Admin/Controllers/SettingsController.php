@@ -34,7 +34,7 @@ class SettingsController extends BaseController
         return view('settings/general');
     }
 
-    public function attemptInstanceEdit(): RedirectResponse
+    public function instanceEditAction(): RedirectResponse
     {
         $rules = [
             'site_icon' => 'is_image[site_icon]|ext_in[site_icon,png,jpeg]|is_image_ratio[site_icon,1,1]|min_dims[image,512,512]|permit_empty',
@@ -119,7 +119,7 @@ class SettingsController extends BaseController
         return redirect('settings-general')->with('message', lang('Settings.instance.editSuccess'));
     }
 
-    public function deleteIcon(): RedirectResponse
+    public function deleteIconAction(): RedirectResponse
     {
         /** @var FileManagerInterface $fileManager */
         $fileManager = service('file_manager');
@@ -133,7 +133,7 @@ class SettingsController extends BaseController
         return redirect('settings-general')->with('message', lang('Settings.instance.deleteIconSuccess'));
     }
 
-    public function regenerateImages(): RedirectResponse
+    public function regenerateImagesAction(): RedirectResponse
     {
         /** @var Podcast[] $allPodcasts */
         $allPodcasts = (new PodcastModel())->findAll();
@@ -168,7 +168,7 @@ class SettingsController extends BaseController
         return redirect('settings-general')->with('message', lang('Settings.images.regenerationSuccess'));
     }
 
-    public function runHousekeeping(): RedirectResponse
+    public function housekeepingAction(): RedirectResponse
     {
         if ($this->request->getPost('reset_counts') === 'yes') {
             // recalculate fediverse counts
@@ -200,14 +200,14 @@ class SettingsController extends BaseController
         return redirect('settings-general')->with('message', lang('Settings.housekeeping.runSuccess'));
     }
 
-    public function theme(): string
+    public function themeView(): string
     {
         helper('form');
         $this->setHtmlHead(lang('Settings.theme.title'));
         return view('settings/theme');
     }
 
-    public function attemptSetInstanceTheme(): RedirectResponse
+    public function themeAction(): RedirectResponse
     {
         $theme = $this->request->getPost('theme');
         service('settings')

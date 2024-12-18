@@ -29,13 +29,7 @@
                         <p class="text-xs text-skin-muted"><?= implode(
                             ', ',
                             array_map(function ($role) {
-                                return lang(
-                                    'PersonsTaxonomy.persons.' .
-                                                                    $role->group .
-                                                                    '.roles.' .
-                                                                    $role->role .
-                                                                    '.label',
-                                );
+                                return lang(sprintf('PersonsTaxonomy.persons.%s.roles.%s.label', $role->group, $role->role));
                             }, $person->roles),
                         ) ?></p>
                     </div>

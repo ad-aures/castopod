@@ -27,70 +27,52 @@ class NotificationController extends BaseController
 
     public function _remap(string $method, string ...$params): mixed
     {
+        if ($params === []) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         if (
             ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->podcast = $podcast;
+        $params[0] = $podcast;
 
         if (count($params) > 1) {
             if (
-                ! ($notification = (new NotificationModel())
-                    ->where([
-                        'id' => $params[1],
-                    ])
-                    ->first()) instanceof Notification
+                ! ($notification = (new NotificationModel())->find($params[1])) instanceof Notification
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
-            $this->notification = $notification;
-
-            unset($params[1]);
-            unset($params[0]);
+            $params[1] = $notification;
         }
 
         return $this->{$method}(...$params);
     }
 
-    public function list(): string
+    public function list(Podcast $podcast): string
     {
-        $notifications = (new NotificationModel())->where('target_actor_id', $this->podcast->actor_id)
+        $notifications = (new NotificationModel())->where('target_actor_id', $podcast->actor_id)
             ->orderBy('created_at', 'desc');
 
         $data = [
-            'podcast'       => $this->podcast,
+            'podcast'       => $podcast,
             'notifications' => $notifications->paginate(10),
             'pager'         => $notifications->pager,
         ];
 
         $this->setHtmlHead(lang('Notifications.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/notifications', $data);
     }
 
-    public function markAsRead(): RedirectResponse
+    public function markAllAsReadAction(Podcast $podcast): RedirectResponse
     {
-        $this->notification->read_at = new Time('now');
-        $notificationModel = new NotificationModel();
-        $notificationModel->update($this->notification->id, $this->notification);
-
-        if ($this->notification->post_id === null) {
-            return redirect()->route('podcast-activity', [esc($this->podcast->handle)]);
-        }
-
-        $post = (new PostModel())->getPostById($this->notification->post_id);
-
-        return redirect()->route('post', [$this->podcast->handle, $post->id]);
-    }
-
-    public function markAllAsRead(): RedirectResponse
-    {
-        $notifications = (new NotificationModel())->where('target_actor_id', $this->podcast->actor_id)
+        $notifications = (new NotificationModel())->where('target_actor_id', $podcast->actor_id)
             ->where('read_at', null)
             ->findAll();
 
@@ -100,5 +82,20 @@ class NotificationController extends BaseController
         }
 
         return redirect()->back();
+    }
+
+    public function markAsReadAction(Podcast $podcast, Notification $notification): RedirectResponse
+    {
+        $notification->read_at = new Time('now');
+        $notificationModel = new NotificationModel();
+        $notificationModel->update($notification->id, $notification);
+
+        if ($notification->post_id === null) {
+            return redirect()->route('podcast-activity', [esc($podcast->handle)]);
+        }
+
+        $post = (new PostModel())->getPostById($notification->post_id);
+
+        return redirect()->route('post', [$podcast->handle, $post->id]);
     }
 }

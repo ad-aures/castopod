@@ -30,7 +30,7 @@ class MyAccountController extends BaseController
         return view('my_account/change_password');
     }
 
-    public function attemptChange(): RedirectResponse
+    public function changeAction(): RedirectResponse
     {
         $rules = [
             'password'     => 'required',

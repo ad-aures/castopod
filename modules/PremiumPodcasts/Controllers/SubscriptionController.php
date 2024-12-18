@@ -66,7 +66,7 @@ class SubscriptionController extends BaseController
         return view('subscription/list', $data);
     }
 
-    public function attemptLinkSave(): RedirectResponse
+    public function linkSaveAction(): RedirectResponse
     {
         $rules = [
             'subscription_link' => 'valid_url_strict|permit_empty',
@@ -118,7 +118,7 @@ class SubscriptionController extends BaseController
         return view('subscription/view', $data);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper('form');
 
@@ -133,7 +133,7 @@ class SubscriptionController extends BaseController
         return view('subscription/create', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         helper('text');
 
@@ -244,7 +244,7 @@ class SubscriptionController extends BaseController
         );
     }
 
-    public function edit(): string
+    public function editView(): string
     {
         helper('form');
 
@@ -261,7 +261,7 @@ class SubscriptionController extends BaseController
         return view('subscription/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(): RedirectResponse
     {
         $expiresAt = null;
         $expirationDate = $this->request->getPost('expiration_date');
@@ -330,7 +330,7 @@ class SubscriptionController extends BaseController
         return view('subscription/suspend', $data);
     }
 
-    public function attemptSuspend(): RedirectResponse
+    public function suspendAction(): RedirectResponse
     {
         $db = db_connect();
         $db->transStart();
@@ -426,7 +426,7 @@ class SubscriptionController extends BaseController
         return view('subscription/delete', $data);
     }
 
-    public function attemptDelete(): RedirectResponse
+    public function deleteAction(): RedirectResponse
     {
         $db = db_connect();
         $db->transStart();

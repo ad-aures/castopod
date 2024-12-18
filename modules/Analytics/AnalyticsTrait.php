@@ -16,6 +16,11 @@ trait AnalyticsTrait
 {
     protected function registerPodcastWebpageHit(int $podcastId): void
     {
+        // Prevent analytics hit when authenticated
+        if (auth()->loggedIn()) {
+            return;
+        }
+
         helper('analytics');
 
         set_user_session_deny_list_ip();

@@ -161,7 +161,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         $routes->get('comments/(:uuid)/replies', 'EpisodeCommentController::replies/$1/$2/$3', [
             'as' => 'episode-comment-replies',
         ]);
-        $routes->post('comments/(:uuid)/like', 'EpisodeCommentController::attemptLike/$1/$2/$3', [
+        $routes->post('comments/(:uuid)/like', 'EpisodeCommentController::likeAction/$1/$2/$3', [
             'as' => 'episode-comment-attempt-like',
         ]);
         $routes->get('oembed.json', 'EpisodeController::oembedJSON/$1/$2', [
@@ -229,7 +229,7 @@ $routes->get('/pages/(:slug)', 'PageController::index/$1', [
  * Overwriting Fediverse routes file
  */
 $routes->group('@(:podcastHandle)', static function ($routes): void {
-    $routes->post('posts/new', 'PostController::attemptCreate/$1', [
+    $routes->post('posts/new', 'PostController::createAction/$1', [
         'as'     => 'post-attempt-create',
         'filter' => 'permission:podcast$1.manage-publications',
     ]);
@@ -266,13 +266,13 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'filter' => 'allow-cors',
         ]);
         // Actions
-        $routes->post('action', 'PostController::attemptAction/$1/$2', [
+        $routes->post('action', 'PostController::actionAction/$1/$2', [
             'as'     => 'post-attempt-action',
             'filter' => 'permission:podcast$1.interact-as',
         ]);
         $routes->post(
             'block-actor',
-            'PostController::attemptBlockActor/$1/$2',
+            'PostController::blockActorAction/$1/$2',
             [
                 'as'     => 'post-attempt-block-actor',
                 'filter' => 'permission:fediverse.manage-blocks',
@@ -280,13 +280,13 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         );
         $routes->post(
             'block-domain',
-            'PostController::attemptBlockDomain/$1/$2',
+            'PostController::blockDomainAction/$1/$2',
             [
                 'as'     => 'post-attempt-block-domain',
                 'filter' => 'permission:fediverse.manage-blocks',
             ],
         );
-        $routes->post('delete', 'PostController::attemptDelete/$1/$2', [
+        $routes->post('delete', 'PostController::deleteAction/$1/$2', [
             'as'     => 'post-attempt-delete',
             'filter' => 'permission:podcast$1.manage-publications',
         ]);

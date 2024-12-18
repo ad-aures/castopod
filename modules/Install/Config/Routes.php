@@ -19,18 +19,18 @@ $routes->group(
         $routes->get('/', 'InstallController', [
             'as' => 'install',
         ]);
-        $routes->post('instance-config', 'InstallController::attemptInstanceConfig', [
+        $routes->post('instance-config', 'InstallController::instanceConfigAction', [
             'as' => 'instance-config',
         ]);
-        $routes->post('database-config', 'InstallController::attemptDatabaseConfig', [
+        $routes->post('database-config', 'InstallController::databaseConfigAction', [
             'as' => 'database-config',
         ]);
-        $routes->post('cache-config', 'InstallController::attemptCacheConfig', [
+        $routes->post('cache-config', 'InstallController::cacheConfigAction', [
             'as' => 'cache-config',
         ]);
         $routes->post(
             'create-superadmin',
-            'InstallController::attemptCreateSuperAdmin',
+            'InstallController::createSuperAdminAction',
             [
                 'as' => 'create-superadmin',
             ],

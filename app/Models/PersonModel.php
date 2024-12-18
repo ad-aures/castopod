@@ -178,9 +178,8 @@ class PersonModel extends Model
             foreach ($personsTaxonomy as $group_key => $group) {
                 foreach ($group['roles'] as $role_key => $role) {
                     $options[] = [
-                        'value' => "{$group_key},
-{$role_key}",
-                        'label' => "{$group['label']}  ›  {$role['label']}",
+                        'value' => sprintf('%s,%s', $group_key, $role_key),
+                        'label' => sprintf('%s › %s', $group['label'], $role['label']),
                     ];
                 }
             }

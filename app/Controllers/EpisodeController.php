@@ -18,7 +18,6 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Embed;
 use Config\Services;
@@ -66,10 +65,7 @@ class EpisodeController extends BaseController
 
     public function index(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->episode->podcast_id);
-        }
+        $this->registerPodcastWebpageHit($this->episode->podcast_id);
 
         $cacheName = implode(
             '_',
@@ -114,10 +110,7 @@ class EpisodeController extends BaseController
 
     public function activity(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->episode->podcast_id);
-        }
+        $this->registerPodcastWebpageHit($this->episode->podcast_id);
 
         $cacheName = implode(
             '_',
@@ -163,10 +156,7 @@ class EpisodeController extends BaseController
 
     public function chapters(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->episode->podcast_id);
-        }
+        $this->registerPodcastWebpageHit($this->episode->podcast_id);
 
         $cacheName = implode(
             '_',
@@ -222,10 +212,7 @@ class EpisodeController extends BaseController
 
     public function transcript(): string
     {
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->episode->podcast_id);
-        }
+        $this->registerPodcastWebpageHit($this->episode->podcast_id);
 
         $cacheName = implode(
             '_',
@@ -288,10 +275,7 @@ class EpisodeController extends BaseController
     {
         header('Content-Security-Policy: frame-ancestors http://*:* https://*:*');
 
-        // Prevent analytics hit when authenticated
-        if (! auth()->loggedIn()) {
-            $this->registerPodcastWebpageHit($this->episode->podcast_id);
-        }
+        $this->registerPodcastWebpageHit($this->episode->podcast_id);
 
         $session = Services::session();
 
@@ -393,7 +377,7 @@ class EpisodeController extends BaseController
         return $this->response->setXML($oembed);
     }
 
-    public function episodeObject(): Response
+    public function episodeObject(): ResponseInterface
     {
         $podcastObject = new PodcastEpisode($this->episode);
 
@@ -402,7 +386,7 @@ class EpisodeController extends BaseController
             ->setBody($podcastObject->toJSON());
     }
 
-    public function comments(): Response
+    public function comments(): ResponseInterface
     {
         /**
          * get comments: aggregated replies from posts referring to the episode

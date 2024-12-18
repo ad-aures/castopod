@@ -58,7 +58,7 @@ class LockController extends BaseController
         return view('podcast/unlock', $data);
     }
 
-    public function attemptUnlock(): RedirectResponse
+    public function unlockAction(): RedirectResponse
     {
         $rules = [
             'token' => 'required',
@@ -91,7 +91,7 @@ class LockController extends BaseController
             ->with('message', lang('PremiumPodcasts.messages.unlockSuccess'));
     }
 
-    public function attemptLock(): RedirectResponse
+    public function lockAction(): RedirectResponse
     {
         $this->premiumPodcasts->lock($this->podcast->handle);
 

@@ -72,6 +72,8 @@ export class PermalinkEdit extends LitElement {
   }
 
   firstUpdated(): void {
+    console.log(this._slugInput);
+
     this.permalinkBase += this.permalinkBase.endsWith("/") ? "" : "/";
 
     // set permalink value
@@ -145,7 +147,7 @@ export class PermalinkEdit extends LitElement {
       border-color: transparent !important;
       padding-left: 0 !important;
       margin-left: -0.25rem !important;
-      font-weight: 600;
+      font-weight: 600 !important;
     }
 
     ::slotted([slot="domain"]) {

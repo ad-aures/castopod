@@ -21,7 +21,7 @@ class BlockController extends Controller
      */
     protected $helpers = ['fediverse'];
 
-    public function attemptBlockActor(): RedirectResponse
+    public function blockActorAction(): RedirectResponse
     {
         $rules = [
             'handle' => 'required|regex_match[/^@?([\w\.\-]+)@([\w\.\-]+)(:[\d]+)?$/]',
@@ -58,7 +58,7 @@ class BlockController extends Controller
             ]));
     }
 
-    public function attemptUnblockActor(): RedirectResponse
+    public function unblockActorAction(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required',
@@ -80,7 +80,7 @@ class BlockController extends Controller
             ->with('message', lang('Fediverse.messages.unblockActorSuccess'));
     }
 
-    public function attemptBlockDomain(): RedirectResponse
+    public function blockDomainAction(): RedirectResponse
     {
         $rules = [
             'domain' => 'required|regex_match[/^[\w\-\.]+[\w]+(:[\d]+)?/]',
@@ -105,7 +105,7 @@ class BlockController extends Controller
             ]));
     }
 
-    public function attemptUnblockDomain(): RedirectResponse
+    public function unblockDomainAction(): RedirectResponse
     {
         $rules = [
             'domain' => 'required',

@@ -18,8 +18,6 @@ use Modules\Media\Models\MediaModel;
 
 class PersonController extends BaseController
 {
-    protected ?Person $person = null;
-
     public function _remap(string $method, string ...$params): mixed
     {
         if ($params === []) {
@@ -27,15 +25,15 @@ class PersonController extends BaseController
         }
 
         if (
-            ($this->person = (new PersonModel())->getPersonById((int) $params[0])) instanceof Person
+            ($person = (new PersonModel())->getPersonById((int) $params[0])) instanceof Person
         ) {
-            return $this->{$method}();
+            return $this->{$method}($person);
         }
 
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index(): string
+    public function list(): string
     {
         $data = [
             'persons' => (new PersonModel())->orderBy('full_name')
@@ -46,20 +44,20 @@ class PersonController extends BaseController
         return view('person/list', $data);
     }
 
-    public function view(): string
+    public function view(Person $person): string
     {
         $data = [
-            'person' => $this->person,
+            'person' => $person,
         ];
 
-        $this->setHtmlHead($this->person->full_name);
+        $this->setHtmlHead($person->full_name);
         replace_breadcrumb_params([
-            0 => $this->person->full_name,
+            0 => $person->full_name,
         ]);
         return view('person/view', $data);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper(['form']);
 
@@ -67,7 +65,7 @@ class PersonController extends BaseController
         return view('person/create');
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         $rules = [
             'avatar' => 'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
@@ -107,22 +105,22 @@ class PersonController extends BaseController
             ->with('message', lang('Person.messages.createSuccess'));
     }
 
-    public function edit(): string
+    public function editView(Person $person): string
     {
         helper('form');
 
         $data = [
-            'person' => $this->person,
+            'person' => $person,
         ];
 
         $this->setHtmlHead(lang('Person.edit'));
         replace_breadcrumb_params([
-            0 => $this->person->full_name,
+            0 => $person->full_name,
         ]);
         return view('person/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(Person $person): RedirectResponse
     {
         $rules = [
             'avatar' => 'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
@@ -135,34 +133,34 @@ class PersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $this->person->updated_by = user_id();
-        $this->person->full_name = $this->request->getPost('full_name');
-        $this->person->unique_name = $this->request->getPost('unique_name');
-        $this->person->information_url = $this->request->getPost('information_url');
-        $this->person->setAvatar($this->request->getFile('avatar'));
+        $person->updated_by = user_id();
+        $person->full_name = $this->request->getPost('full_name');
+        $person->unique_name = $this->request->getPost('unique_name');
+        $person->information_url = $this->request->getPost('information_url');
+        $person->setAvatar($this->request->getFile('avatar'));
 
         $personModel = new PersonModel();
-        if (! $personModel->update($this->person->id, $this->person)) {
+        if (! $personModel->update($person->id, $person)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $personModel->errors());
         }
 
-        return redirect()->route('person-edit', [$this->person->id])->with(
+        return redirect()->route('person-edit', [$person->id])->with(
             'message',
             lang('Person.messages.editSuccess')
         );
     }
 
-    public function delete(): RedirectResponse
+    public function deleteAction(Person $person): RedirectResponse
     {
-        if ($this->person->avatar_id !== null) {
+        if ($person->avatar_id !== null) {
             // delete avatar to prevent collision if recreating person
-            (new MediaModel())->deleteMedia($this->person->avatar);
+            (new MediaModel())->deleteMedia($person->avatar);
         }
 
-        (new PersonModel())->delete($this->person->id);
+        (new PersonModel())->delete($person->id);
 
         return redirect()->route('person-list')
             ->with('message', lang('Person.messages.deleteSuccess'));

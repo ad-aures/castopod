@@ -22,47 +22,38 @@ use Modules\Media\Models\MediaModel;
 
 class SoundbiteController extends BaseController
 {
-    protected Podcast $podcast;
-
-    protected Episode $episode;
-
     public function _remap(string $method, string ...$params): mixed
     {
+        if ($params === []) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        if (count($params) === 1) {
+            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+                throw PageNotFoundException::forPageNotFound();
+            }
+
+            return $this->{$method}($podcast);
+        }
+
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1]) instanceof Episode)
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->podcast = $podcast;
+        unset($params[0]);
+        unset($params[1]);
 
-        if (count($params) > 1) {
-            if (
-                ! ($episode = (new EpisodeModel())
-                    ->where([
-                        'id'         => $params[1],
-                        'podcast_id' => $params[0],
-                    ])
-                    ->first()) instanceof Episode
-            ) {
-                throw PageNotFoundException::forPageNotFound();
-            }
-
-            $this->episode = $episode;
-
-            unset($params[1]);
-            unset($params[0]);
-        }
-
-        return $this->{$method}(...$params);
+        return $this->{$method}($episode, ...$params);
     }
 
-    public function list(): string
+    public function list(Episode $episode): string
     {
         $soundbitesBuilder = (new ClipModel('audio'))
             ->where([
-                'podcast_id' => $this->podcast->id,
-                'episode_id' => $this->episode->id,
+                'podcast_id' => $episode->podcast_id,
+                'episode_id' => $episode->id,
                 'type'       => 'audio',
             ])
             ->orderBy('created_at', 'desc');
@@ -70,38 +61,38 @@ class SoundbiteController extends BaseController
         $soundbites = $soundbitesBuilder->paginate(10);
 
         $data = [
-            'podcast'    => $this->podcast,
-            'episode'    => $this->episode,
+            'podcast'    => $episode->podcast,
+            'episode'    => $episode,
             'soundbites' => $soundbites,
             'pager'      => $soundbitesBuilder->pager,
         ];
 
         $this->setHtmlHead(lang('Soundbite.list.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/soundbites_list', $data);
     }
 
-    public function create(): string
+    public function createView(Episode $episode): string
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         $this->setHtmlHead(lang('Soundbite.form.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/soundbites_new', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'title'      => 'required',
@@ -124,8 +115,8 @@ class SoundbiteController extends BaseController
             'duration'   => (float) $validData['duration'],
             'type'       => 'audio',
             'status'     => '',
-            'podcast_id' => $this->podcast->id,
-            'episode_id' => $this->episode->id,
+            'podcast_id' => $episode->podcast_id,
+            'episode_id' => $episode->id,
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
@@ -138,13 +129,13 @@ class SoundbiteController extends BaseController
                 ->with('errors', $clipModel->errors());
         }
 
-        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('soundbites-list', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Soundbite.messages.createSuccess')
         );
     }
 
-    public function delete(string $soundbiteId): RedirectResponse
+    public function deleteAction(Episode $episode, string $soundbiteId): RedirectResponse
     {
         $soundbite = (new ClipModel())->getSoundbiteById((int) $soundbiteId);
 
@@ -154,9 +145,9 @@ class SoundbiteController extends BaseController
 
         if ($soundbite->media === null) {
             // delete Clip directly
-            (new ClipModel())->deleteSoundbite($this->podcast->id, $this->episode->id, $soundbite->id);
+            (new ClipModel())->deleteSoundbite($episode->podcast_id, $episode->id, $soundbite->id);
         } else {
-            (new ClipModel())->clearSoundbiteCache($this->podcast->id, $this->episode->id, $soundbite->id);
+            (new ClipModel())->clearSoundbiteCache($episode->podcast_id, $episode->id, $soundbite->id);
 
             $mediaModel = new MediaModel();
             // delete the soundbite file, the clip will be deleted on cascade
@@ -168,7 +159,7 @@ class SoundbiteController extends BaseController
             }
         }
 
-        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('soundbites-list', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Soundbite.messages.deleteSuccess')
         );

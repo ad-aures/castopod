@@ -35,36 +35,31 @@ class EpisodeController extends BaseController
 
     public function _remap(string $method, string ...$params): mixed
     {
+        if ($params === []) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        if (count($params) === 1) {
+            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+                throw PageNotFoundException::forPageNotFound();
+            }
+
+            return $this->{$method}($podcast);
+        }
+
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1]) instanceof Episode)
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->podcast = $podcast;
+        unset($params[0]);
+        unset($params[1]);
 
-        if (count($params) > 1) {
-            if (
-                ! ($episode = (new EpisodeModel())
-                    ->where([
-                        'id'         => $params[1],
-                        'podcast_id' => $params[0],
-                    ])
-                    ->first()) instanceof Episode
-            ) {
-                throw PageNotFoundException::forPageNotFound();
-            }
-
-            $this->episode = $episode;
-
-            unset($params[1]);
-            unset($params[0]);
-        }
-
-        return $this->{$method}(...$params);
+        return $this->{$method}($episode, ...$params);
     }
 
-    public function list(): string
+    public function list(Podcast $podcast): string
     {
         /** @var ?string $query */
         $query = $this->request->getGet('q');
@@ -77,7 +72,7 @@ class EpisodeController extends BaseController
                 $episodes = $episodeModel
                     ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                     ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                    ->where('episodes.podcast_id', $this->podcast->id)
+                    ->where('episodes.podcast_id', $podcast->id)
                     ->like('title', $episodeModel->db->escapeLikeString($query))
                     ->orLike('description_markdown', $episodeModel->db->escapeLikeString($query))
                     ->orLike('slug', $episodeModel->db->escapeLikeString($query))
@@ -89,7 +84,7 @@ class EpisodeController extends BaseController
                 $episodes = $episodeModel
                     ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                     ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                    ->where('episodes.podcast_id', $this->podcast->id)
+                    ->where('episodes.podcast_id', $podcast->id)
                     ->where(
                         "MATCH (title, description_markdown, slug, location_name) AGAINST ('{$episodeModel->db->escapeString(
                             $query
@@ -101,7 +96,7 @@ class EpisodeController extends BaseController
             $episodes = $episodeModel
                 ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                 ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                ->where('episodes.podcast_id', $this->podcast->id)
+                ->where('episodes.podcast_id', $podcast->id)
                 ->groupBy('episodes.id')
                 ->orderBy('-`published_at`', '', false)
                 ->orderBy('created_at', 'desc');
@@ -109,7 +104,7 @@ class EpisodeController extends BaseController
 
         helper('form');
         $data = [
-            'podcast'  => $this->podcast,
+            'podcast'  => $podcast,
             'episodes' => $episodes->paginate(10),
             'pager'    => $episodes->pager,
             'query'    => $query,
@@ -117,48 +112,45 @@ class EpisodeController extends BaseController
 
         $this->setHtmlHead(lang('Episode.all_podcast_episodes'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('episode/list', $data);
     }
 
-    public function view(): string
+    public function view(Episode $episode): string
     {
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
-        $this->setHtmlHead($this->episode->title);
+        $this->setHtmlHead($episode->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/view', $data);
     }
 
-    public function create(): string
+    public function createView(Podcast $podcast): string
     {
         helper(['form']);
 
-        $currentSeasonNumber = (new EpisodeModel())->getCurrentSeasonNumber($this->podcast->id);
+        $currentSeasonNumber = (new EpisodeModel())->getCurrentSeasonNumber($podcast->id);
         $data = [
-            'podcast'             => $this->podcast,
+            'podcast'             => $podcast,
             'currentSeasonNumber' => $currentSeasonNumber,
-            'nextEpisodeNumber'   => (new EpisodeModel())->getNextEpisodeNumber(
-                $this->podcast->id,
-                $currentSeasonNumber
-            ),
+            'nextEpisodeNumber'   => (new EpisodeModel())->getNextEpisodeNumber($podcast->id, $currentSeasonNumber),
         ];
 
         $this->setHtmlHead(lang('Episode.create'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('episode/create', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(Podcast $podcast): RedirectResponse
     {
         $rules = [
             'title'           => 'required',
@@ -169,7 +161,7 @@ class EpisodeController extends BaseController
             'chapters_file'   => 'ext_in[chapters_file,json]|is_json[chapters_file]',
         ];
 
-        if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
+        if ($podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
             $rules['episode_number'] = 'required';
         }
 
@@ -185,7 +177,7 @@ class EpisodeController extends BaseController
         if ((new EpisodeModel())
             ->where([
                 'slug'       => $validData['slug'],
-                'podcast_id' => $this->podcast->id,
+                'podcast_id' => $podcast->id,
             ])
             ->first() instanceof Episode) {
             return redirect()
@@ -197,7 +189,7 @@ class EpisodeController extends BaseController
         $newEpisode = new Episode([
             'created_by'           => user_id(),
             'updated_by'           => user_id(),
-            'podcast_id'           => $this->podcast->id,
+            'podcast_id'           => $podcast->id,
             'title'                => $this->request->getPost('title'),
             'slug'                 => $this->request->getPost('slug'),
             'guid'                 => null,
@@ -250,30 +242,30 @@ class EpisodeController extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $newEpisodeId])->with(
+        return redirect()->route('episode-view', [$podcast->id, $newEpisodeId])->with(
             'message',
             lang('Episode.messages.createSuccess')
         );
     }
 
-    public function edit(): string
+    public function editView(Episode $episode): string
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         $this->setHtmlHead(lang('Episode.edit'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'title'           => 'required',
@@ -284,7 +276,7 @@ class EpisodeController extends BaseController
             'chapters_file'   => 'ext_in[chapters_file,json]|is_json[chapters_file]',
         ];
 
-        if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
+        if ($episode->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
             $rules['episode_number'] = 'required';
         }
 
@@ -297,87 +289,87 @@ class EpisodeController extends BaseController
 
         $validData = $this->validator->getValidated();
 
-        $this->episode->title = $this->request->getPost('title');
-        $this->episode->slug = $validData['slug'];
-        $this->episode->description_markdown = $this->request->getPost('description');
-        $this->episode->location = $this->request->getPost('location_name') === '' ? null : new Location(
+        $episode->title = $this->request->getPost('title');
+        $episode->slug = $validData['slug'];
+        $episode->description_markdown = $this->request->getPost('description');
+        $episode->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
         );
-        $this->episode->parental_advisory =
+        $episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
                 : null;
-        $this->episode->number = $this->request->getPost('episode_number') ?: null;
-        $this->episode->season_number = $this->request->getPost('season_number') ?: null;
-        $this->episode->type = $this->request->getPost('type');
-        $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
-        $this->episode->is_premium = $this->request->getPost('premium') === 'yes';
+        $episode->number = $this->request->getPost('episode_number') ?: null;
+        $episode->season_number = $this->request->getPost('season_number') ?: null;
+        $episode->type = $this->request->getPost('type');
+        $episode->is_blocked = $this->request->getPost('block') === 'yes';
+        $episode->is_premium = $this->request->getPost('premium') === 'yes';
 
-        $this->episode->updated_by = (int) user_id();
-        $this->episode->setAudio($this->request->getFile('audio_file'));
-        $this->episode->setCover($this->request->getFile('cover'));
+        $episode->updated_by = (int) user_id();
+        $episode->setAudio($this->request->getFile('audio_file'));
+        $episode->setCover($this->request->getFile('cover'));
 
         // republish on websub hubs upon edit
-        $this->episode->is_published_on_hubs = false;
+        $episode->is_published_on_hubs = false;
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if ($transcriptChoice === 'upload-file') {
             $transcriptFile = $this->request->getFile('transcript_file');
             if ($transcriptFile instanceof UploadedFile && $transcriptFile->isValid()) {
-                $this->episode->setTranscript($transcriptFile);
-                $this->episode->transcript_remote_url = null;
+                $episode->setTranscript($transcriptFile);
+                $episode->transcript_remote_url = null;
             }
         } elseif ($transcriptChoice === 'remote-url') {
             if (
                 ($transcriptRemoteUrl = $this->request->getPost('transcript_remote_url')) &&
-                (($transcriptFile = $this->episode->transcript_id) !== null)
+                (($transcriptFile = $episode->transcript_id) !== null)
             ) {
-                (new MediaModel())->deleteMedia($this->episode->transcript);
+                (new MediaModel())->deleteMedia($episode->transcript);
             }
 
-            $this->episode->transcript_remote_url = $transcriptRemoteUrl === '' ? null : $transcriptRemoteUrl;
+            $episode->transcript_remote_url = $transcriptRemoteUrl === '' ? null : $transcriptRemoteUrl;
         }
 
         $chaptersChoice = $this->request->getPost('chapters-choice');
         if ($chaptersChoice === 'upload-file') {
             $chaptersFile = $this->request->getFile('chapters_file');
             if ($chaptersFile instanceof UploadedFile && $chaptersFile->isValid()) {
-                $this->episode->setChapters($chaptersFile);
-                $this->episode->chapters_remote_url = null;
+                $episode->setChapters($chaptersFile);
+                $episode->chapters_remote_url = null;
             }
         } elseif ($chaptersChoice === 'remote-url') {
             if (
                 ($chaptersRemoteUrl = $this->request->getPost('chapters_remote_url')) &&
-                (($chaptersFile = $this->episode->chapters) instanceof Chapters)
+                (($chaptersFile = $episode->chapters) instanceof Chapters)
             ) {
-                (new MediaModel())->deleteMedia($this->episode->chapters);
+                (new MediaModel())->deleteMedia($episode->chapters);
             }
 
-            $this->episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
+            $episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
         }
 
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        if (! $episodeModel->update($episode->id, $episode)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode-edit', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-edit', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Episode.messages.editSuccess')
         );
     }
 
-    public function transcriptDelete(): RedirectResponse
+    public function transcriptDelete(Episode $episode): RedirectResponse
     {
-        if (! $this->episode->transcript instanceof Transcript) {
+        if (! $episode->transcript instanceof Transcript) {
             return redirect()->back();
         }
 
         $mediaModel = new MediaModel();
-        if (! $mediaModel->deleteMedia($this->episode->transcript)) {
+        if (! $mediaModel->deleteMedia($episode->transcript)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -387,14 +379,14 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function chaptersDelete(): RedirectResponse
+    public function chaptersDelete(Episode $episode): RedirectResponse
     {
-        if (! $this->episode->chapters instanceof Chapters) {
+        if (! $episode->chapters instanceof Chapters) {
             return redirect()->back();
         }
 
         $mediaModel = new MediaModel();
-        if (! $mediaModel->deleteMedia($this->episode->chapters)) {
+        if (! $mediaModel->deleteMedia($episode->chapters)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -404,33 +396,33 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function publish(): string | RedirectResponse
+    public function publishView(Episode $episode): string | RedirectResponse
     {
-        if ($this->episode->publication_status === 'not_published') {
+        if ($episode->publication_status === 'not_published') {
             helper(['form']);
 
             $data = [
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
+                'podcast' => $episode->podcast,
+                'episode' => $episode,
             ];
 
             $this->setHtmlHead(lang('Episode.publish'));
             replace_breadcrumb_params([
-                0 => $this->podcast->at_handle,
-                1 => $this->episode->title,
+                0 => $episode->podcast->at_handle,
+                1 => $episode->title,
             ]);
             return view('episode/publish', $data);
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'error',
             lang('Episode.publish_error')
         );
     }
 
-    public function attemptPublish(): RedirectResponse
+    public function publishAction(Episode $episode): RedirectResponse
     {
-        if ($this->podcast->publication_status === 'published') {
+        if ($episode->podcast->publication_status === 'published') {
             $rules = [
                 'publication_method'         => 'required',
                 'scheduled_publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
@@ -448,18 +440,18 @@ class EpisodeController extends BaseController
         $db->transStart();
 
         $newPost = new Post([
-            'actor_id'   => $this->podcast->actor_id,
-            'episode_id' => $this->episode->id,
+            'actor_id'   => $episode->podcast->actor_id,
+            'episode_id' => $episode->id,
             'message'    => $this->request->getPost('message'),
             'created_by' => user_id(),
         ]);
 
-        if ($this->podcast->publication_status === 'published') {
+        if ($episode->podcast->publication_status === 'published') {
             $publishMethod = $this->request->getPost('publication_method');
             if ($publishMethod === 'schedule') {
                 $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
                 if ($scheduledPublicationDate) {
-                    $this->episode->published_at = Time::createFromFormat(
+                    $episode->published_at = Time::createFromFormat(
                         'Y-m-d H:i',
                         $scheduledPublicationDate,
                         $this->request->getPost('client_timezone'),
@@ -472,16 +464,16 @@ class EpisodeController extends BaseController
                         ->with('error', lang('Episode.messages.scheduleDateError'));
                 }
             } else {
-                $this->episode->published_at = Time::now();
+                $episode->published_at = Time::now();
             }
-        } elseif ($this->podcast->publication_status === 'scheduled') {
+        } elseif ($episode->podcast->publication_status === 'scheduled') {
             // podcast publication date has already been set
-            $this->episode->published_at = $this->podcast->published_at->addSeconds(1);
+            $episode->published_at = $episode->podcast->published_at->addSeconds(1);
         } else {
-            $this->episode->published_at = Time::now();
+            $episode->published_at = Time::now();
         }
 
-        $newPost->published_at = $this->episode->published_at;
+        $newPost->published_at = $episode->published_at;
 
         $postModel = new PostModel();
         if (! $postModel->addPost($newPost)) {
@@ -493,7 +485,7 @@ class EpisodeController extends BaseController
         }
 
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        if (! $episodeModel->update($episode->id, $episode)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -503,47 +495,47 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Episode.messages.publishSuccess', [
-                'publication_status' => $this->episode->publication_status,
+                'publication_status' => $episode->publication_status,
             ])
         );
     }
 
-    public function publishEdit(): string | RedirectResponse
+    public function publishEditView(Episode $episode): string | RedirectResponse
     {
-        if (in_array($this->episode->publication_status, ['scheduled', 'with_podcast'], true)) {
+        if (in_array($episode->publication_status, ['scheduled', 'with_podcast'], true)) {
             helper(['form']);
 
             $data = [
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
+                'podcast' => $episode->podcast,
+                'episode' => $episode,
                 'post'    => (new PostModel())
                     ->where([
-                        'actor_id'   => $this->podcast->actor_id,
-                        'episode_id' => $this->episode->id,
+                        'actor_id'   => $episode->podcast->actor_id,
+                        'episode_id' => $episode->id,
                     ])
                     ->first(),
             ];
 
             $this->setHtmlHead(lang('Episode.publish_edit'));
             replace_breadcrumb_params([
-                0 => $this->podcast->at_handle,
-                1 => $this->episode->title,
+                0 => $episode->podcast->at_handle,
+                1 => $episode->title,
             ]);
             return view('episode/publish_edit', $data);
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'error',
             lang('Episode.publish_edit_error')
         );
     }
 
-    public function attemptPublishEdit(): RedirectResponse
+    public function publishEditAction(Episode $episode): RedirectResponse
     {
-        if ($this->podcast->publication_status === 'published') {
+        if ($episode->podcast->publication_status === 'published') {
             $rules = [
                 'post_id'                    => 'required',
                 'publication_method'         => 'required',
@@ -561,12 +553,12 @@ class EpisodeController extends BaseController
         $db = db_connect();
         $db->transStart();
 
-        if ($this->podcast->publication_status === 'published') {
+        if ($episode->podcast->publication_status === 'published') {
             $publishMethod = $this->request->getPost('publication_method');
             if ($publishMethod === 'schedule') {
                 $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
                 if ($scheduledPublicationDate) {
-                    $this->episode->published_at = Time::createFromFormat(
+                    $episode->published_at = Time::createFromFormat(
                         'Y-m-d H:i',
                         $scheduledPublicationDate,
                         $this->request->getPost('client_timezone'),
@@ -579,20 +571,20 @@ class EpisodeController extends BaseController
                         ->with('error', lang('Episode.messages.scheduleDateError'));
                 }
             } else {
-                $this->episode->published_at = Time::now();
+                $episode->published_at = Time::now();
             }
-        } elseif ($this->podcast->publication_status === 'scheduled') {
+        } elseif ($episode->podcast->publication_status === 'scheduled') {
             // podcast publication date has already been set
-            $this->episode->published_at = $this->podcast->published_at->addSeconds(1);
+            $episode->published_at = $episode->podcast->published_at->addSeconds(1);
         } else {
-            $this->episode->published_at = Time::now();
+            $episode->published_at = Time::now();
         }
 
         $post = (new PostModel())->getPostById($this->request->getPost('post_id'));
 
         if ($post instanceof Post) {
             $post->message = $this->request->getPost('message');
-            $post->published_at = $this->episode->published_at;
+            $post->published_at = $episode->published_at;
 
             $postModel = new PostModel();
             if (! $postModel->editPost($post)) {
@@ -605,7 +597,7 @@ class EpisodeController extends BaseController
         }
 
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        if (! $episodeModel->update($episode->id, $episode)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -615,33 +607,33 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Episode.messages.publishSuccess', [
-                'publication_status' => $this->episode->publication_status,
+                'publication_status' => $episode->publication_status,
             ])
         );
     }
 
-    public function publishCancel(): RedirectResponse
+    public function publishCancelAction(Episode $episode): RedirectResponse
     {
-        if (in_array($this->episode->publication_status, ['scheduled', 'with_podcast'], true)) {
+        if (in_array($episode->publication_status, ['scheduled', 'with_podcast'], true)) {
             $db = db_connect();
             $db->transStart();
 
             $postModel = new PostModel();
             $post = $postModel
                 ->where([
-                    'actor_id'   => $this->podcast->actor_id,
-                    'episode_id' => $this->episode->id,
+                    'actor_id'   => $episode->podcast->actor_id,
+                    'episode_id' => $episode->id,
                 ])
                 ->first();
             $postModel->removePost($post);
 
-            $this->episode->published_at = null;
+            $episode->published_at = null;
 
             $episodeModel = new EpisodeModel();
-            if (! $episodeModel->update($this->episode->id, $this->episode)) {
+            if (! $episodeModel->update($episode->id, $episode)) {
                 $db->transRollback();
                 return redirect()
                     ->back()
@@ -651,20 +643,20 @@ class EpisodeController extends BaseController
 
             $db->transComplete();
 
-            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'message',
                 lang('Episode.messages.publishCancelSuccess')
             );
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id]);
     }
 
-    public function publishDateEdit(): string|RedirectResponse
+    public function publishDateEditView(Episode $episode): string|RedirectResponse
     {
         // only accessible if episode is already published
-        if ($this->episode->publication_status !== 'published') {
-            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        if ($episode->publication_status !== 'published') {
+            return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'error',
                 lang('Episode.publish_date_edit_error')
             );
@@ -673,14 +665,14 @@ class EpisodeController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         $this->setHtmlHead(lang('Episode.publish_date_edit'));
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
-            1 => $this->episode->title,
+            0 => $episode->podcast->title,
+            1 => $episode->title,
         ]);
         return view('episode/publish_date_edit', $data);
     }
@@ -691,7 +683,7 @@ class EpisodeController extends BaseController
      * Prevents setting a future date as it does not make sense to set a future published date to an already published
      * episode. This also prevents any side-effects from occurring.
      */
-    public function attemptPublishDateEdit(): RedirectResponse
+    public function publishDateEditAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'new_publication_date' => 'valid_date[Y-m-d H:i]',
@@ -721,26 +713,26 @@ class EpisodeController extends BaseController
                 ->with('error', lang('Episode.publish_date_edit_future_error'));
         }
 
-        $this->episode->published_at = $newPublicationDate;
+        $episode->published_at = $newPublicationDate;
 
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        if (! $episodeModel->update($episode->id, $episode)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'message',
             lang('Episode.publish_date_edit_success')
         );
     }
 
-    public function unpublish(): string | RedirectResponse
+    public function unpublishView(Episode $episode): string | RedirectResponse
     {
-        if ($this->episode->publication_status !== 'published') {
-            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+        if ($episode->publication_status !== 'published') {
+            return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'error',
                 lang('Episode.unpublish_error')
             );
@@ -749,19 +741,19 @@ class EpisodeController extends BaseController
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         $this->setHtmlHead(lang('Episode.unpublish'));
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
-            1 => $this->episode->title,
+            0 => $episode->podcast->title,
+            1 => $episode->title,
         ]);
         return view('episode/unpublish', $data);
     }
 
-    public function attemptUnpublish(): RedirectResponse
+    public function unpublishAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'understand' => 'required',
@@ -780,7 +772,7 @@ class EpisodeController extends BaseController
 
         $allPostsLinkedToEpisode = (new PostModel())
             ->where([
-                'episode_id'     => $this->episode->id,
+                'episode_id'     => $episode->id,
                 'in_reply_to_id' => null,
                 'reblog_of_id'   => null,
             ])
@@ -791,7 +783,7 @@ class EpisodeController extends BaseController
 
         $allCommentsLinkedToEpisode = (new EpisodeCommentModel())
             ->where([
-                'episode_id'     => $this->episode->id,
+                'episode_id'     => $episode->id,
                 'in_reply_to_id' => null,
             ])
             ->findAll();
@@ -800,10 +792,10 @@ class EpisodeController extends BaseController
         }
 
         // set episode published_at to null to unpublish
-        $this->episode->published_at = null;
+        $episode->published_at = null;
 
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        if (! $episodeModel->update($episode->id, $episode)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -812,33 +804,33 @@ class EpisodeController extends BaseController
         }
 
         // set podcast is_published_on_hubs to false to trigger websub push
-        (new PodcastModel())->update($this->episode->podcast->id, [
+        (new PodcastModel())->update($episode->podcast_id, [
             'is_published_on_hubs' => 0,
         ]);
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('episode-view', [$episode->podcast_id, $episode->id]);
     }
 
-    public function delete(): string
+    public function deleteView(Episode $episode): string
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
         ];
 
         $this->setHtmlHead(lang('Episode.delete'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/delete', $data);
     }
 
-    public function attemptDelete(): RedirectResponse
+    public function deleteAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'understand' => 'required',
@@ -851,7 +843,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        if ($this->episode->published_at instanceof Time) {
+        if ($episode->published_at instanceof Time) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -864,7 +856,7 @@ class EpisodeController extends BaseController
 
         $episodeModel = new EpisodeModel();
 
-        if (! $episodeModel->delete($this->episode->id)) {
+        if (! $episodeModel->delete($episode->id)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -872,11 +864,11 @@ class EpisodeController extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        $episodeMediaList = [$this->episode->transcript, $this->episode->chapters, $this->episode->audio];
+        $episodeMediaList = [$episode->transcript, $episode->chapters, $episode->audio];
 
         //only delete episode cover if different from podcast's
-        if ($this->episode->cover_id !== null) {
-            $episodeMediaList[] = $this->episode->cover;
+        if ($episode->cover_id !== null) {
+            $episodeMediaList[] = $episode->cover;
         }
 
         $mediaModel = new MediaModel();
@@ -916,36 +908,36 @@ class EpisodeController extends BaseController
 
         if ($warnings !== []) {
             return redirect()
-                ->route('episode-list', [$this->podcast->id])
+                ->route('episode-list', [$episode->podcast_id])
                 ->with('message', lang('Episode.messages.deleteSuccess'))
                 ->with('warnings', $warnings);
         }
 
-        return redirect()->route('episode-list', [$this->podcast->id])->with(
+        return redirect()->route('episode-list', [$episode->podcast_id])->with(
             'message',
             lang('Episode.messages.deleteSuccess')
         );
     }
 
-    public function embed(): string
+    public function embedView(Episode $episode): string
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast' => $episode->podcast,
+            'episode' => $episode,
             'themes'  => EpisodeModel::$themes,
         ];
 
         $this->setHtmlHead(lang('Episode.embed.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/embed', $data);
     }
 
-    public function attemptCommentCreate(): RedirectResponse
+    public function commentCreateAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'message' => 'required|max_length[500]',
@@ -962,7 +954,7 @@ class EpisodeController extends BaseController
 
         $newComment = new EpisodeComment([
             'actor_id'   => interact_as_actor_id(),
-            'episode_id' => $this->episode->id,
+            'episode_id' => $episode->id,
             'message'    => $validData['message'],
             'created_at' => new Time('now'),
             'created_by' => user_id(),
@@ -982,7 +974,7 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function attemptCommentReply(string $commentId): RedirectResponse
+    public function commentReplyAction(Episode $episode, string $commentId): RedirectResponse
     {
         $rules = [
             'message' => 'required|max_length[500]',
@@ -999,7 +991,7 @@ class EpisodeController extends BaseController
 
         $newReply = new EpisodeComment([
             'actor_id'       => interact_as_actor_id(),
-            'episode_id'     => $this->episode->id,
+            'episode_id'     => $episode->id,
             'message'        => $validData['message'],
             'in_reply_to_id' => $commentId,
             'created_at'     => new Time('now'),

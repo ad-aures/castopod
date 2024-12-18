@@ -52,7 +52,7 @@ $routes->group('', [
             'as'     => 'followers',
             'filter' => 'fediverse::activity-stream',
         ]);
-        $routes->post('follow', 'ActorController::attemptFollow/$1', [
+        $routes->post('follow', 'ActorController::followAction/$1', [
             'as' => 'attempt-follow',
         ]);
         $routes->get('activities/(:uuid)', 'ActorController::activity/$1/$2', [
@@ -60,7 +60,7 @@ $routes->group('', [
         ]);
     });
     // Post
-    $routes->post('posts/create', 'PostController::attemptCreate/$1', [
+    $routes->post('posts/create', 'PostController::createAction/$1', [
         'as' => 'post-attempt-create',
     ]);
     $routes->get('posts/(:uuid)', 'PostController::index/$1', [
@@ -71,7 +71,7 @@ $routes->group('', [
     ]);
     $routes->post(
         'posts/(:uuid)/remote/(:postAction)',
-        'PostController::attemptRemoteAction/$1/$2/$3',
+        'PostController::remoteActionAction/$1/$2/$3',
         [
             'as' => 'post-attempt-remote-action',
         ],
@@ -79,28 +79,28 @@ $routes->group('', [
     // Blocking actors and domains
     $routes->post(
         'fediverse-block-actor',
-        'BlockController::attemptBlockActor',
+        'BlockController::blockActorAction',
         [
             'as' => 'fediverse-attempt-block-actor',
         ],
     );
     $routes->post(
         'fediverse-block-domain',
-        'BlockController::attemptBlockDomain',
+        'BlockController::blockDomainAction',
         [
             'as' => 'fediverse-attempt-block-domain',
         ],
     );
     $routes->post(
         'fediverse-unblock-actor',
-        'BlockController::attemptUnblockActor',
+        'BlockController::unblockActorAction',
         [
             'as' => 'fediverse-attempt-unblock-actor',
         ],
     );
     $routes->post(
         'fediverse-unblock-domain',
-        'BlockController::attemptUnblockDomain',
+        'BlockController::unblockDomainAction',
         [
             'as' => 'fediverse-attempt-unblock-domain',
         ],

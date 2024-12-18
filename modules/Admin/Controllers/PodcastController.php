@@ -38,8 +38,6 @@ use Modules\Media\Models\MediaModel;
 
 class PodcastController extends BaseController
 {
-    protected Podcast $podcast;
-
     public function _remap(string $method, string ...$params): mixed
     {
         if ($params === []) {
@@ -49,8 +47,7 @@ class PodcastController extends BaseController
         if (
             ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
-            $this->podcast = $podcast;
-            return $this->{$method}();
+            return $this->{$method}($podcast);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -72,111 +69,111 @@ class PodcastController extends BaseController
         return view('podcast/list', $data);
     }
 
-    public function view(): string
+    public function view(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/view', $data);
     }
 
-    public function viewAnalytics(): string
+    public function analyticsView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/index', $data);
     }
 
-    public function viewAnalyticsWebpages(): string
+    public function analyticsWebpagesView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/webpages', $data);
     }
 
-    public function viewAnalyticsLocations(): string
+    public function analyticsLocationsView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/locations', $data);
     }
 
-    public function viewAnalyticsUniqueListeners(): string
+    public function analyticsUniqueListenersView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/unique_listeners', $data);
     }
 
-    public function viewAnalyticsListeningTime(): string
+    public function analyticsListeningTimeView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/listening_time', $data);
     }
 
-    public function viewAnalyticsTimePeriods(): string
+    public function analyticsTimePeriodsView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/time_periods', $data);
     }
 
-    public function viewAnalyticsPlayers(): string
+    public function analyticsPlayersView(Podcast $podcast): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
-        $this->setHtmlHead($this->podcast->title);
+        $this->setHtmlHead($podcast->title);
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/analytics/players', $data);
     }
 
-    public function create(): string
+    public function createView(): string
     {
         helper(['form', 'misc']);
 
@@ -193,7 +190,7 @@ class PodcastController extends BaseController
         return view('podcast/create', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(): RedirectResponse
     {
         $rules = [
             'cover'  => 'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
@@ -267,7 +264,7 @@ class PodcastController extends BaseController
         );
     }
 
-    public function edit(): string
+    public function editView(Podcast $podcast): string
     {
         helper('form');
 
@@ -275,19 +272,19 @@ class PodcastController extends BaseController
         $categoryOptions = (new CategoryModel())->getCategoryOptions();
 
         $data = [
-            'podcast'         => $this->podcast,
+            'podcast'         => $podcast,
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
         ];
 
         $this->setHtmlHead(lang('Podcast.edit'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/edit', $data);
     }
 
-    public function attemptEdit(): RedirectResponse
+    public function editAction(Podcast $podcast): RedirectResponse
     {
         $rules = [
             'cover'  => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
@@ -301,46 +298,46 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $this->podcast->updated_by = (int) user_id();
+        $podcast->updated_by = (int) user_id();
 
-        $this->podcast->title = $this->request->getPost('title');
-        $this->podcast->description_markdown = $this->request->getPost('description');
-        $this->podcast->setCover($this->request->getFile('cover'));
-        $this->podcast->setBanner($this->request->getFile('banner'));
+        $podcast->title = $this->request->getPost('title');
+        $podcast->description_markdown = $this->request->getPost('description');
+        $podcast->setCover($this->request->getFile('cover'));
+        $podcast->setBanner($this->request->getFile('banner'));
 
-        $this->podcast->language_code = $this->request->getPost('language');
-        $this->podcast->category_id = $this->request->getPost('category');
-        $this->podcast->parental_advisory =
+        $podcast->language_code = $this->request->getPost('language');
+        $podcast->category_id = $this->request->getPost('category');
+        $podcast->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
                 : null;
-        $this->podcast->publisher = $this->request->getPost('publisher');
-        $this->podcast->owner_name = $this->request->getPost('owner_name');
-        $this->podcast->owner_email = $this->request->getPost('owner_email');
-        $this->podcast->type = $this->request->getPost('type');
-        $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
+        $podcast->publisher = $this->request->getPost('publisher');
+        $podcast->owner_name = $this->request->getPost('owner_name');
+        $podcast->owner_email = $this->request->getPost('owner_email');
+        $podcast->type = $this->request->getPost('type');
+        $podcast->copyright = $this->request->getPost('copyright');
+        $podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
         );
-        $this->podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
+        $podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
             'new_feed_url'
         );
 
-        $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
-        $this->podcast->is_completed =
+        $podcast->is_blocked = $this->request->getPost('block') === 'yes';
+        $podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
-        $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
-        $this->podcast->is_premium_by_default = $this->request->getPost('premium_by_default') === 'yes';
+        $podcast->is_locked = $this->request->getPost('lock') === 'yes';
+        $podcast->is_premium_by_default = $this->request->getPost('premium_by_default') === 'yes';
 
         // republish on websub hubs upon edit
-        $this->podcast->is_published_on_hubs = false;
+        $podcast->is_published_on_hubs = false;
 
         $db = db_connect();
 
         $db->transStart();
 
         $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+        if (! $podcastModel->update($podcast->id, $podcast)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -350,21 +347,21 @@ class PodcastController extends BaseController
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
-            $this->podcast->id,
+            $podcast->id,
             $this->request->getPost('other_categories') ?? [],
         );
 
         $db->transComplete();
 
-        return redirect()->route('podcast-edit', [$this->podcast->id])->with(
+        return redirect()->route('podcast-edit', [$podcast->id])->with(
             'message',
             lang('Podcast.messages.editSuccess')
         );
     }
 
-    public function deleteBanner(): RedirectResponse
+    public function deleteBannerAction(Podcast $podcast): RedirectResponse
     {
-        if (! $this->podcast->banner instanceof Image) {
+        if (! $podcast->banner instanceof Image) {
             return redirect()->back();
         }
 
@@ -373,7 +370,7 @@ class PodcastController extends BaseController
         $db->transStart();
 
         $mediaModel = new MediaModel();
-        if (! $mediaModel->deleteMedia($this->podcast->banner)) {
+        if (! $mediaModel->deleteMedia($podcast->banner)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -381,11 +378,11 @@ class PodcastController extends BaseController
         }
 
         (new PodcastModel())->clearCache([
-            'id' => $this->podcast->id,
+            'id' => $podcast->id,
         ]);
 
         // remove banner url from actor
-        $actor = (new ActorModel())->getActorById($this->podcast->actor_id);
+        $actor = (new ActorModel())->getActorById($podcast->actor_id);
 
         if ($actor instanceof Actor) {
             $actor->cover_image_url = null;
@@ -399,7 +396,7 @@ class PodcastController extends BaseController
         return redirect()->back();
     }
 
-    public function latestEpisodes(int $limit, int $podcastId): string
+    public function latestEpisodesView(int $limit, int $podcastId): string
     {
         $episodes = (new EpisodeModel())
             ->where('podcast_id', $podcastId)
@@ -413,22 +410,22 @@ class PodcastController extends BaseController
         ]);
     }
 
-    public function delete(): string
+    public function deleteView(Podcast $podcast): string
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
         $this->setHtmlHead(lang('Podcast.delete'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/delete', $data);
     }
 
-    public function attemptDelete(): RedirectResponse
+    public function deleteAction(Podcast $podcast): RedirectResponse
     {
         $rules = [
             'understand' => 'required',
@@ -446,7 +443,7 @@ class PodcastController extends BaseController
         $db->transStart();
 
         //delete podcast episodes
-        $podcastEpisodes = (new EpisodeModel())->where('podcast_id', $this->podcast->id)
+        $podcastEpisodes = (new EpisodeModel())->where('podcast_id', $podcast->id)
             ->findAll();
 
         foreach ($podcastEpisodes as $podcastEpisode) {
@@ -486,7 +483,7 @@ class PodcastController extends BaseController
         //delete podcast
         $podcastModel = new PodcastModel();
 
-        if (! $podcastModel->delete($this->podcast->id)) {
+        if (! $podcastModel->delete($podcast->id)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -498,15 +495,15 @@ class PodcastController extends BaseController
         $podcastMediaList = [
             [
                 'type' => 'cover',
-                'file' => $this->podcast->cover,
+                'file' => $podcast->cover,
             ],
         ];
 
-        if ($this->podcast->banner_id !== null) {
+        if ($podcast->banner_id !== null) {
             $podcastMediaList[] =
             [
                 'type' => 'banner',
-                'file' => $this->podcast->banner,
+                'file' => $podcast->banner,
             ];
         }
 
@@ -527,7 +524,7 @@ class PodcastController extends BaseController
         //delete podcast actor
         $actorModel = new ActorModel();
 
-        if (! $actorModel->delete($this->podcast->actor_id)) {
+        if (! $actorModel->delete($podcast->actor_id)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -549,7 +546,7 @@ class PodcastController extends BaseController
         ];
         foreach ($analyticsModels as $analyticsModel) {
             if (! $analyticsModel->where([
-                'podcast_id' => $this->podcast->id,
+                'podcast_id' => $podcast->id,
             ])->delete()) {
                 $db->transRollback();
                 return redirect()
@@ -565,11 +562,11 @@ class PodcastController extends BaseController
         $fileManager = service('file_manager');
 
         //delete podcast media files and folder
-        $folder = 'podcasts/' . $this->podcast->handle;
+        $folder = 'podcasts/' . $podcast->handle;
         if (! $fileManager->deleteAll($folder)) {
             return redirect()->route('podcast-list')
                 ->with('message', lang('Podcast.messages.deleteSuccess', [
-                    'podcast_handle' => $this->podcast->handle,
+                    'podcast_handle' => $podcast->handle,
                 ]))
                 ->with('warning', lang('Podcast.messages.deletePodcastMediaFolderError', [
                     'folder_path' => $folder,
@@ -578,29 +575,29 @@ class PodcastController extends BaseController
 
         return redirect()->route('podcast-list')
             ->with('message', lang('Podcast.messages.deleteSuccess', [
-                'podcast_handle' => $this->podcast->handle,
+                'podcast_handle' => $podcast->handle,
             ]));
     }
 
-    public function publish(): string | RedirectResponse
+    public function publishView(Podcast $podcast): string | RedirectResponse
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
         ];
 
         $this->setHtmlHead(lang('Podcast.publish'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/publish', $data);
     }
 
-    public function attemptPublish(): RedirectResponse
+    public function publishAction(Podcast $podcast): RedirectResponse
     {
-        if ($this->podcast->publication_status !== 'not_published') {
-            return redirect()->route('podcast-view', [$this->podcast->id])->with(
+        if ($podcast->publication_status !== 'not_published') {
+            return redirect()->route('podcast-view', [$podcast->id])->with(
                 'error',
                 lang('Podcast.messages.publishError')
             );
@@ -627,7 +624,7 @@ class PodcastController extends BaseController
         if ($publishMethod === 'schedule') {
             $scheduledPublicationDate = $validData['scheduled_publication_date'];
             if ($scheduledPublicationDate) {
-                $this->podcast->published_at = Time::createFromFormat(
+                $podcast->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
@@ -640,19 +637,19 @@ class PodcastController extends BaseController
                     ->with('error', lang('Podcast.messages.scheduleDateError'));
             }
         } else {
-            $this->podcast->published_at = Time::now();
+            $podcast->published_at = Time::now();
         }
 
         $message = $this->request->getPost('message');
         // only create post if message is not empty
         if ($message !== '') {
             $newPost = new Post([
-                'actor_id'   => $this->podcast->actor_id,
+                'actor_id'   => $podcast->actor_id,
                 'message'    => $message,
                 'created_by' => user_id(),
             ]);
 
-            $newPost->published_at = $this->podcast->published_at;
+            $newPost->published_at = $podcast->published_at;
 
             $postModel = new PostModel();
             if (! $postModel->addPost($newPost)) {
@@ -665,12 +662,12 @@ class PodcastController extends BaseController
         }
 
         $episodes = (new EpisodeModel())
-            ->where('podcast_id', $this->podcast->id)
+            ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();
 
         foreach ($episodes as $episode) {
-            $episode->published_at = $this->podcast->published_at->addSeconds(1);
+            $episode->published_at = $podcast->published_at->addSeconds(1);
 
             $episodeModel = new EpisodeModel();
             if (! $episodeModel->update($episode->id, $episode)) {
@@ -698,7 +695,7 @@ class PodcastController extends BaseController
         }
 
         $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+        if (! $podcastModel->update($podcast->id, $podcast)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -708,18 +705,18 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-view', [$this->podcast->id]);
+        return redirect()->route('podcast-view', [$podcast->id]);
     }
 
-    public function publishEdit(): string | RedirectResponse
+    public function publishEditView(Podcast $podcast): string | RedirectResponse
     {
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast' => $podcast,
             'post'    => (new PostModel())
                 ->where([
-                    'actor_id'   => $this->podcast->actor_id,
+                    'actor_id'   => $podcast->actor_id,
                     'episode_id' => null,
                 ])
                 ->first(),
@@ -727,15 +724,15 @@ class PodcastController extends BaseController
 
         $this->setHtmlHead(lang('Podcast.publish_edit'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
+            0 => $podcast->at_handle,
         ]);
         return view('podcast/publish_edit', $data);
     }
 
-    public function attemptPublishEdit(): RedirectResponse
+    public function publishEditAction(Podcast $podcast): RedirectResponse
     {
-        if ($this->podcast->publication_status !== 'scheduled') {
-            return redirect()->route('podcast-view', [$this->podcast->id])->with(
+        if ($podcast->publication_status !== 'scheduled') {
+            return redirect()->route('podcast-view', [$podcast->id])->with(
                 'error',
                 lang('Podcast.messages.publishEditError')
             );
@@ -762,7 +759,7 @@ class PodcastController extends BaseController
         if ($publishMethod === 'schedule') {
             $scheduledPublicationDate = $validData['scheduled_publication_date'];
             if ($scheduledPublicationDate) {
-                $this->podcast->published_at = Time::createFromFormat(
+                $podcast->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
@@ -775,12 +772,12 @@ class PodcastController extends BaseController
                     ->with('error', lang('Podcast.messages.scheduleDateError'));
             }
         } else {
-            $this->podcast->published_at = Time::now();
+            $podcast->published_at = Time::now();
         }
 
         $post = (new PostModel())
             ->where([
-                'actor_id'   => $this->podcast->actor_id,
+                'actor_id'   => $podcast->actor_id,
                 'episode_id' => null,
             ])
             ->first();
@@ -791,7 +788,7 @@ class PodcastController extends BaseController
             if ($newPostMessage !== '') {
                 // edit post if post exists and message is not empty
                 $post->message = $newPostMessage;
-                $post->published_at = $this->podcast->published_at;
+                $post->published_at = $podcast->published_at;
 
                 $postModel = new PostModel();
                 if (! $postModel->editPost($post)) {
@@ -806,7 +803,7 @@ class PodcastController extends BaseController
                 $postModel = new PostModel();
                 $post = $postModel
                     ->where([
-                        'actor_id'   => $this->podcast->actor_id,
+                        'actor_id'   => $podcast->actor_id,
                         'episode_id' => null,
                     ])
                     ->first();
@@ -815,12 +812,12 @@ class PodcastController extends BaseController
         } elseif ($newPostMessage !== '') {
             // create post if there is no post and message is not empty
             $newPost = new Post([
-                'actor_id'   => $this->podcast->actor_id,
+                'actor_id'   => $podcast->actor_id,
                 'message'    => $newPostMessage,
                 'created_by' => user_id(),
             ]);
 
-            $newPost->published_at = $this->podcast->published_at;
+            $newPost->published_at = $podcast->published_at;
 
             $postModel = new PostModel();
             if (! $postModel->addPost($newPost)) {
@@ -833,12 +830,12 @@ class PodcastController extends BaseController
         }
 
         $episodes = (new EpisodeModel())
-            ->where('podcast_id', $this->podcast->id)
+            ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();
 
         foreach ($episodes as $episode) {
-            $episode->published_at = $this->podcast->published_at->addSeconds(1);
+            $episode->published_at = $podcast->published_at->addSeconds(1);
 
             $episodeModel = new EpisodeModel();
             if (! $episodeModel->update($episode->id, $episode)) {
@@ -866,7 +863,7 @@ class PodcastController extends BaseController
         }
 
         $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+        if (! $podcastModel->update($podcast->id, $podcast)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -876,13 +873,13 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-view', [$this->podcast->id]);
+        return redirect()->route('podcast-view', [$podcast->id]);
     }
 
-    public function publishCancel(): RedirectResponse
+    public function publishCancelAction(Podcast $podcast): RedirectResponse
     {
-        if ($this->podcast->publication_status !== 'scheduled') {
-            return redirect()->route('podcast-view', [$this->podcast->id]);
+        if ($podcast->publication_status !== 'scheduled') {
+            return redirect()->route('podcast-view', [$podcast->id]);
         }
 
         $db = db_connect();
@@ -891,7 +888,7 @@ class PodcastController extends BaseController
         $postModel = new PostModel();
         $post = $postModel
             ->where([
-                'actor_id'   => $this->podcast->actor_id,
+                'actor_id'   => $podcast->actor_id,
                 'episode_id' => null,
             ])
             ->first();
@@ -900,7 +897,7 @@ class PodcastController extends BaseController
         }
 
         $episodes = (new EpisodeModel())
-            ->where('podcast_id', $this->podcast->id)
+            ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();
 
@@ -922,10 +919,10 @@ class PodcastController extends BaseController
             $postModel->removePost($post);
         }
 
-        $this->podcast->published_at = null;
+        $podcast->published_at = null;
 
         $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+        if (! $podcastModel->update($podcast->id, $podcast)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -935,7 +932,7 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-view', [$this->podcast->id])->with(
+        return redirect()->route('podcast-view', [$podcast->id])->with(
             'message',
             lang('Podcast.messages.publishCancelSuccess')
         );

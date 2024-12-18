@@ -20,54 +20,52 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class EpisodePersonController extends BaseController
 {
-    protected Podcast $podcast;
-
-    protected Episode $episode;
-
     public function _remap(string $method, string ...$params): mixed
     {
-        if (count($params) < 2) {
+        if ($params === []) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) &&
-            ($this->episode = (new EpisodeModel())
-                ->where([
-                    'id'         => $params[1],
-                    'podcast_id' => $params[0],
-                ])
-                ->first())
-        ) {
-            unset($params[1]);
-            unset($params[0]);
+        if (count($params) === 1) {
+            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+                throw PageNotFoundException::forPageNotFound();
+            }
 
-            return $this->{$method}(...$params);
+            return $this->{$method}($podcast);
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        if (
+            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1]) instanceof Episode)
+        ) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        unset($params[0]);
+        unset($params[1]);
+
+        return $this->{$method}($episode, ...$params);
     }
 
-    public function index(): string
+    public function index(Episode $episode): string
     {
         helper('form');
 
         $data = [
-            'episode'         => $this->episode,
-            'podcast'         => $this->podcast,
+            'episode'         => $episode,
+            'podcast'         => $episode->podcast,
             'personOptions'   => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
 
         $this->setHtmlHead(lang('Person.episode_form.title'));
         replace_breadcrumb_params([
-            0 => $this->podcast->at_handle,
-            1 => $this->episode->title,
+            0 => $episode->podcast->at_handle,
+            1 => $episode->title,
         ]);
         return view('episode/persons', $data);
     }
 
-    public function attemptCreate(): RedirectResponse
+    public function createAction(Episode $episode): RedirectResponse
     {
         $rules = [
             'persons' => 'required',
@@ -83,8 +81,8 @@ class EpisodePersonController extends BaseController
         $validData = $this->validator->getValidated();
 
         (new PersonModel())->addEpisodePersons(
-            $this->podcast->id,
-            $this->episode->id,
+            $episode->podcast_id,
+            $episode->id,
             $validData['persons'],
             $this->request->getPost('roles') ?? [],
         );
@@ -92,9 +90,9 @@ class EpisodePersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove(string $personId): RedirectResponse
+    public function deleteAction(Episode $episode, string $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, (int) $personId);
+        (new PersonModel())->removePersonFromEpisode($episode->podcast_id, $episode->id, (int) $personId);
 
         return redirect()->back();
     }
