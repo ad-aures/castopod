@@ -8,23 +8,16 @@ use Override;
 
 class SelectMulti extends FormComponent
 {
-    protected array $props = ['options', 'defaultValue'];
+    protected array $props = ['options'];
 
     protected array $casts = [
-        'value'        => 'array',
-        'options'      => 'array',
-        'defaultValue' => 'array',
+        'options' => 'array',
     ];
 
     /**
      * @var array<array<string, string>>
      */
     protected array $options = [];
-
-    /**
-     * @var list<string>
-     */
-    protected array $defaultValue = [];
 
     #[Override]
     public function render(): string
@@ -43,9 +36,9 @@ class SelectMulti extends FormComponent
         $this->attributes = [...$defaultAttributes, ...$this->attributes];
 
         $options = '';
-        $selected = $this->value ?? $this->defaultValue;
+        $selected = explode(',', $this->getValue()) ?? [];
         foreach ($this->options as $option) {
-            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array((string) $option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
         $this->attributes['name'] = $this->name . '[]';

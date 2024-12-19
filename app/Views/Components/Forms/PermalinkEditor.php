@@ -19,10 +19,10 @@ class PermalinkEditor extends FormComponent
     #[Override]
     public function render(): string
     {
-        $this->mergeClass('flex-1 text-xs border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent');
+        $this->mergeClass('flex-1 text-xs border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent transition');
 
         $this->attributes['slot'] = 'slug-input';
-        $input = form_input($this->attributes, old($this->name, (string) $this->value));
+        $input = form_input($this->attributes, $this->getValue());
 
         $editLabel = lang('Common.edit');
         $copyLabel = lang('Common.copy');

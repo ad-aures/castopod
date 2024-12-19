@@ -12,6 +12,7 @@ abstract class FormComponent extends Component
         'id',
         'name',
         'value',
+        'defaultValue',
         'isRequired',
         'isReadonly',
     ];
@@ -25,10 +26,9 @@ abstract class FormComponent extends Component
 
     protected string $name;
 
-    /**
-     * @var null|string|list<string>
-     */
-    protected null|string|array $value = null;
+    protected string $value = '';
+
+    protected string $defaultValue = '';
 
     protected bool $isRequired = false;
 
@@ -59,5 +59,10 @@ abstract class FormComponent extends Component
         if ($this->isReadonly) {
             $this->attributes['readonly'] = 'readonly';
         }
+    }
+
+    protected function getValue(): string
+    {
+        return old($this->name, $this->value === '' ? $this->defaultValue : $this->value);
     }
 }

@@ -18,20 +18,18 @@ class CodeEditor extends FormComponent
         'class' => 'textarea',
     ];
 
-    protected string $content = '';
-
     protected string $lang = '';
 
-    public function setContent(string $value): void
+    public function setValue(string $value): void
     {
-        $this->content = htmlspecialchars_decode($value);
+        $this->value = htmlspecialchars_decode($value);
     }
 
     #[Override]
     public function render(): string
     {
         $this->attributes['slot'] = 'textarea';
-        $textarea = form_textarea($this->attributes, $this->content);
+        $textarea = form_textarea($this->attributes, $this->getValue());
 
         return <<<HTML
             <code-editor lang="{$this->lang}">{$textarea}</code-editor>

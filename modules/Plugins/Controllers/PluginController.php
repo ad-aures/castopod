@@ -340,9 +340,10 @@ class PluginController extends BaseController
                 $value,
                 $this->request->getPost('client_timezone')
             )->setTimezone(app_timezone()),
-            'markdown' => new Markdown($value),
-            'rss'      => new RSS($value),
-            default    => $value,
+            'markdown'               => new Markdown($value),
+            'rss'                    => new RSS($value),
+            'comma-separated-string' => implode(',', $value),
+            default                  => $value,
         };
     }
 }

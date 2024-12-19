@@ -11,7 +11,7 @@
 
 <x-Alert variant="danger" class="font-semibold"><?= lang('Podcast.delete_form.disclaimer') ?></x-Alert>
 
-<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('Podcast.delete_form.understand') ?></x-Forms.Checkbox>
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true"><?= lang('Podcast.delete_form.understand') ?></x-Forms.Checkbox>
 
 <div class="self-end mt-4">
     <x-Button uri="<?= route_to('podcast-view', $podcast->id) ?>"><?= lang('Common.cancel') ?></x-Button>

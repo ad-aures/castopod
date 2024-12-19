@@ -26,7 +26,7 @@
         label="<?= esc(lang('Person.episode_form.persons')) ?>"
         hint="<?= esc(lang('Person.episode_form.persons_hint')) ?>"
         options="<?= esc(json_encode($personOptions)) ?>"
-        defaultValue="<?= esc(json_encode(old('persons', []))) ?>"
+        defaultValue="<?= implode(',', (old('persons', []))) ?>"
         isRequired="true"
     />
 
@@ -37,7 +37,7 @@
         label="<?= esc(lang('Person.episode_form.roles')) ?>"
         hint="<?= esc(lang('Person.episode_form.roles_hint')) ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"
-        defaultValue="<?= esc(json_encode(old('roles', []))) ?>"
+        defaultValue="<?= implode(',', (old('roles', []))) ?>"
     />
 
     <x-Button variant="primary" type="submit" class="self-end"><?= lang('Person.episode_form.submit_add') ?></x-Button>

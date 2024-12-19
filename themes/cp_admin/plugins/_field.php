@@ -4,7 +4,8 @@
         name="<?= $name ?>"
         hint="<?= $hint ?>"
         helper="<?= $helper ?>"
-        isChecked="<?= $value ? 'true' : 'false' ?>"
+        value="<?= $value ? 'yes' : '' ?>"
+        defaultValue="<?= $defaultValue ?>"
         ><?= $label ?></x-Forms.Checkbox>
 <?php break;
 case 'toggler': ?>
@@ -13,7 +14,8 @@ case 'toggler': ?>
         name="<?= $name ?>"
         hint="<?= $hint ?>"
         helper="<?= $helper ?>"
-        isChecked="<?= $value ? 'true' : 'false' ?>"
+        value="<?= $value ? 'yes' : '' ?>"
+        defaultValue="<?= $defaultValue ?>"
         ><?= $label ?></x-Forms.Toggler>
 <?php break;
 case 'radio-group': ?>
@@ -26,6 +28,7 @@ case 'radio-group': ?>
         options="<?= $options ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'select': ?>
@@ -39,6 +42,7 @@ case 'select': ?>
         options="<?= $options ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'select-multiple': ?>
@@ -51,7 +55,8 @@ case 'select-multiple': ?>
         helper="<?= $helper ?>"
         options="<?= $options ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
-        value="<?= esc(json_encode($value)) ?>"
+        value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'email': ?>
@@ -65,6 +70,7 @@ case 'email': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'url': ?>
@@ -79,6 +85,7 @@ case 'url': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'number': ?>
@@ -92,6 +99,7 @@ case 'number': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'textarea': ?>
@@ -104,6 +112,7 @@ case 'textarea': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'html': ?>
@@ -116,7 +125,8 @@ case 'html': ?>
         hint="<?= $hint ?>"
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
-        content="<?= htmlspecialchars($value) ?>"
+        value="<?= htmlspecialchars($value) ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'markdown': ?>
@@ -129,6 +139,7 @@ case 'markdown': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'rss': ?>
@@ -141,7 +152,8 @@ case 'rss': ?>
         hint="<?= $hint ?>"
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
-        content="<?= htmlspecialchars($value) ?>"
+        value="<?= htmlspecialchars($value) ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 case 'datetime': ?>
@@ -154,6 +166,7 @@ case 'datetime': ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php break;
 default: ?>
@@ -166,5 +179,6 @@ default: ?>
         helper="<?= $helper ?>"
         isRequired="<?= $optional ? 'false' : 'true' ?>"
         value="<?= $value ?>"
+        defaultValue="<?= $defaultValue ?>"
     />
 <?php endswitch; ?>

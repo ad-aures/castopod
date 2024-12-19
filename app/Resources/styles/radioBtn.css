@@ -1,6 +1,6 @@
 @layer components {
   .form-radio-btn {
-    @apply absolute right-4 top-4 border-contrast border-3 text-accent-base;
+    @apply absolute right-4 top-4 border-contrast border-3 text-accent-base transition;
 
     &:focus {
       @apply ring-accent;

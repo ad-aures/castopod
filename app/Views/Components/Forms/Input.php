@@ -15,7 +15,7 @@ class Input extends FormComponent
     #[Override]
     public function render(): string
     {
-        $this->mergeClass('w-full border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent');
+        $this->mergeClass('w-full border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent transition');
 
         if ($this->type === 'file') {
             $this->mergeClass('file:px-3 file:py-2 file:h-[40px] file:font-semibold file:text-skin-muted file:text-sm file:rounded-none file:border-none file:bg-highlight file:cursor-pointer');
@@ -30,8 +30,7 @@ class Input extends FormComponent
         }
 
         $this->attributes['type'] = $this->type;
-        $this->attributes['value'] = $this->value;
 
-        return form_input($this->attributes, old($this->name, (string) $this->value));
+        return form_input($this->attributes, $this->getValue());
     }
 }

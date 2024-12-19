@@ -136,6 +136,21 @@ export class XMLEditor extends LitElement {
       overflow: hidden;
       border: 3px solid hsl(var(--color-border-contrast));
       background-color: hsl(var(--color-background-elevated));
+      transition-property:
+        color,
+        background-color,
+        border-color,
+        text-decoration-color,
+        fill,
+        stroke,
+        opacity,
+        box-shadow,
+        transform,
+        filter,
+        backdrop-filter,
+        -webkit-backdrop-filter;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
     }
     .cm-editor.cm-focused {
       outline: 2px solid transparent;

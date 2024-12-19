@@ -19,14 +19,14 @@ class DatetimePicker extends FormComponent
             'name'       => $this->name,
             'class'      => 'rounded-l-lg border-0 border-rounded-r-none flex-1 focus:ring-0',
             'data-input' => '',
-        ], old($this->name, (string) $this->value));
+        ], $this->getValue());
 
         $clearLabel = lang(
             'Episode.publish_form.scheduled_publication_date_clear',
         );
         $closeIcon = icon('close-fill');
 
-        $this->mergeClass('flex border-3 rounded-lg border-contrast focus-within:ring-accent');
+        $this->mergeClass('flex border-3 rounded-lg border-contrast focus-within:ring-accent transition');
 
         return <<<HTML
             <div {$this->getStringifiedAttributes()}>

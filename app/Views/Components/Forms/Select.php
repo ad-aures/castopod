@@ -8,7 +8,7 @@ use Override;
 
 class Select extends FormComponent
 {
-    protected array $props = ['options', 'defaultValue'];
+    protected array $props = ['options'];
 
     protected array $casts = [
         'options' => 'array',
@@ -18,8 +18,6 @@ class Select extends FormComponent
      * @var array<array<string, string>>
      */
     protected array $options = [];
-
-    protected string $defaultValue = '';
 
     #[Override]
     public function render(): string
@@ -35,7 +33,7 @@ class Select extends FormComponent
         $this->attributes = [...$defaultAttributes, ...$this->attributes];
 
         $options = '';
-        $selected = $this->value ?? $this->defaultValue;
+        $selected = $this->getValue();
         foreach ($this->options as $option) {
             $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . ($option['value'] === $selected ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }

@@ -9,7 +9,7 @@ use Override;
 
 class Checkbox extends FormComponent
 {
-    protected array $props = ['hint', 'helper', 'isChecked'];
+    protected array $props = ['hint', 'helper'];
 
     protected array $casts = [
         'isChecked' => 'boolean',
@@ -19,8 +19,6 @@ class Checkbox extends FormComponent
 
     protected string $helper = '';
 
-    protected bool $isChecked = false;
-
     #[Override]
     public function render(): string
     {
@@ -28,10 +26,10 @@ class Checkbox extends FormComponent
             [
                 'id'    => $this->id,
                 'name'  => $this->name,
-                'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 w-6 h-6',
+                'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 focus:ring-accent w-6 h-6 transition',
             ],
             'yes',
-            old($this->name) ? old($this->name) === 'yes' : $this->isChecked,
+            in_array($this->getValue(), ['yes', 'true', 'on', '1'], true),
         );
 
         $hint = $this->hint === '' ? '' : (new Hint([

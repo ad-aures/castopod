@@ -15,7 +15,7 @@
     'user' => $user->username,
 ]) ?></x-Alert>
 
-<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('User.delete_form.understand', [
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true"><?= lang('User.delete_form.understand', [
     'user' => $user->username,
 ]) ?></x-Forms.Checkbox>
 

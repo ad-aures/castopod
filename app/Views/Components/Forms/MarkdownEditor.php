@@ -23,7 +23,7 @@ class MarkdownEditor extends FormComponent
     #[Override]
     public function render(): string
     {
-        $this->mergeClass('w-full flex flex-col bg-elevated border-3 border-contrast rounded-lg overflow-hidden focus-within:ring-accent');
+        $this->mergeClass('w-full flex flex-col bg-elevated border-3 border-contrast rounded-lg overflow-hidden focus-within:ring-accent transition');
         $wrapperClass = $this->attributes['class'];
 
         $this->attributes['class'] = 'bg-elevated border-none focus:border-none focus:outline-none focus:ring-0 w-full h-full';
@@ -31,7 +31,7 @@ class MarkdownEditor extends FormComponent
 
         $textarea = form_textarea(
             $this->attributes,
-            old($this->name, (string) $this->value)
+            $this->getValue()
         );
         $markdownIcon = (string) icon('markdown-fill', [
             'class' => 'mr-1 text-lg opacity-40',

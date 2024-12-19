@@ -44,7 +44,7 @@ class RadioButton extends FormComponent
 
         $radioInput = form_radio(
             $data,
-            $this->value,
+            $this->getValue(),
             old($this->name) ? old($this->name) === $this->value : $this->isSelected,
         );
 

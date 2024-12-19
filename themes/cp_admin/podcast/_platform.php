@@ -58,7 +58,7 @@
                     name="<?= 'platforms[' . esc($platform->slug) . '][account_id]' ?>"
                     value="<?= esc($platform->account_id) ?>"
                     placeholder="<?= lang("Platforms.description.{$platform->type}") ?>" />
-                <x-Forms.Toggler size="small" class="mt-4 text-sm" id="<?= esc($platform->slug) . '_visible' ?>" name="<?= 'platforms[' . esc($platform->slug) . '][visible]'?>" isChecked="<?= old(esc($platform->slug) . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></x-Forms.Toggler>
+                <x-Forms.Toggler size="small" class="mt-4 text-sm" id="<?= esc($platform->slug) . '_visible' ?>" name="<?= 'platforms[' . esc($platform->slug) . '][visible]'?>" value="<?= $platform->is_visible ? 'yes' : '' ?>"><?= lang('Platforms.visible') ?></x-Forms.Toggler>
         </fieldset>
     </div>
 </article>

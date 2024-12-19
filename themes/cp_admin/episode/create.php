@@ -126,7 +126,7 @@
 </x-Forms.Section>
 
 <x-Forms.Section title="<?= lang('Episode.form.premium_title') ?>">
-    <x-Forms.Toggler class="mt-2" name="premium" isChecked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>">
+    <x-Forms.Toggler class="mt-2" name="premium" defaultValue="<?= $podcast->is_premium_by_default ? 'yes' : '' ?>">
         <?= lang('Episode.form.premium') ?></x-Forms.Toggler>
 </x-Forms.Section>
 
@@ -200,7 +200,7 @@
     subtitle="<?= lang('Episode.form.advanced_section_subtitle') ?>"
 >
 
-<x-Forms.Toggler name="block" isChecked="false" hint="<?= esc(lang('Episode.form.block_hint')) ?>"><?= lang('Episode.form.block') ?></x-Forms.Toggler>
+<x-Forms.Toggler name="block" hint="<?= esc(lang('Episode.form.block_hint')) ?>"><?= lang('Episode.form.block') ?></x-Forms.Toggler>
 
 </x-Forms.Section>
 

@@ -73,9 +73,9 @@
     title="<?= lang('Settings.housekeeping.title') ?>"
     subtitle="<?= lang('Settings.housekeeping.subtitle') ?>" >
 
-    <x-Forms.Toggler name="reset_counts" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></x-Forms.Toggler>
-    <x-Forms.Toggler name="rename_episodes_files" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></x-Forms.Toggler>
-    <x-Forms.Toggler name="clear_cache" size="small" isChecked="false" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></x-Forms.Toggler>
+    <x-Forms.Toggler name="reset_counts" size="small" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></x-Forms.Toggler>
+    <x-Forms.Toggler name="rename_episodes_files" size="small" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></x-Forms.Toggler>
+    <x-Forms.Toggler name="clear_cache" size="small" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></x-Forms.Toggler>
     <?php // @icon("home-gear-fill")?>
     <x-Button variant="primary" type="submit" iconLeft="home-gear-fill"><?= lang('Settings.housekeeping.run') ?></x-Button>
 

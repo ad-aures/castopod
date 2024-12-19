@@ -150,7 +150,7 @@
 </x-Forms.Section>
 
 <x-Forms.Section title="<?= lang('Podcast.form.premium') ?>">
-    <x-Forms.Toggler class="mt-2" name="premium_by_default" isChecked="false" hint="<?= esc(lang('Podcast.form.premium_by_default_hint')) ?>">
+    <x-Forms.Toggler class="mt-2" name="premium_by_default" hint="<?= esc(lang('Podcast.form.premium_by_default_hint')) ?>">
         <?= lang('Podcast.form.premium_by_default') ?></x-Forms.Toggler>
 </x-Forms.Section>
 
@@ -168,13 +168,13 @@
 <x-Forms.Section
     title="<?= lang('Podcast.form.advanced_section_title') ?>" >
 
-<x-Forms.Toggler class="mb-2" name="lock" isChecked="true" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
+<x-Forms.Toggler class="mb-2" name="lock" defaultValue="yes" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
     <?= lang('Podcast.form.lock') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler class="mb-2" name="block" isChecked="false" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
+<x-Forms.Toggler class="mb-2" name="block" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
     <?= lang('Podcast.form.block') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler name="complete" isChecked="false">
+<x-Forms.Toggler name="complete">
     <?= lang('Podcast.form.complete') ?>
 </x-Forms.Toggler>
 

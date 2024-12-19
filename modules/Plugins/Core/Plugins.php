@@ -52,13 +52,14 @@ class Plugins
     ];
 
     public const FIELDS_CASTS = [
-        'checkbox' => 'bool',
-        'datetime' => 'datetime',
-        'markdown' => 'markdown',
-        'number'   => 'int',
-        'rss'      => 'rss',
-        'toggler'  => 'bool',
-        'url'      => 'uri',
+        'checkbox'        => 'bool',
+        'datetime'        => 'datetime',
+        'markdown'        => 'markdown',
+        'number'          => 'int',
+        'rss'             => 'rss',
+        'toggler'         => 'bool',
+        'url'             => 'uri',
+        'select-multiple' => 'comma-separated-string',
     ];
 
     /**

@@ -13,7 +13,7 @@
     'subscriber' => $subscription->email,
 ]) ?></x-Alert>
 
-<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('Subscription.delete_form.understand') ?></x-Forms.Checkbox>
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true"><?= lang('Subscription.delete_form.understand') ?></x-Forms.Checkbox>
 
 <div class="flex items-center self-end mt-4 gap-x-2">
     <x-Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></x-Button>

@@ -55,7 +55,7 @@ use RuntimeException;
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category
- * @property int[] $other_categories_ids
+ * @property string $other_categories_ids
  * @property Category[] $other_categories
  * @property string|null $parental_advisory
  * @property string|null $publisher
@@ -111,10 +111,7 @@ class Podcast extends Entity
      */
     protected ?array $other_categories = null;
 
-    /**
-     * @var string[]|null
-     */
-    protected ?array $other_categories_ids = null;
+    protected string $other_categories_ids = '';
 
     /**
      * @var Episode[]|null
@@ -526,13 +523,10 @@ class Podcast extends Entity
         return $this->other_categories;
     }
 
-    /**
-     * @return int[]|string[]
-     */
-    public function getOtherCategoriesIds(): array
+    public function getOtherCategoriesIds(): string
     {
-        if ($this->other_categories_ids === null) {
-            $this->other_categories_ids = array_column($this->getOtherCategories(), 'id');
+        if ($this->other_categories_ids === '') {
+            $this->other_categories_ids = implode(',', array_column($this->getOtherCategories(), 'id'));
         }
 
         return $this->other_categories_ids;

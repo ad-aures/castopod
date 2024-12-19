@@ -204,6 +204,9 @@
         "optional": {
           "type": "boolean"
         },
+        "defaultValue": {
+          "type": "string"
+        },
         "options": {
           "type": "object",
           "patternProperties": {

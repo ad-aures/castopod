@@ -30,17 +30,18 @@ class RadioGroup extends FormComponent
     public function render(): string
     {
         $this->mergeClass('flex flex-col');
-
         $options = '';
         foreach ($this->options as $option) {
-            $options .= (new RadioButton([
+            $radioButtonData = [
                 'value'       => $option['value'],
                 'name'        => $this->name,
                 'slot'        => $option['label'],
                 'description' => $option['description'] ?? '',
-                'isSelected'  => var_export($this->value === null ? ($option['value'] === $this->options[array_key_first($this->options)]['value']) : ($this->value === $option['value']), true),
+                'isSelected'  => var_export($this->getValue() === '' ? $option['value'] === $this->options[0]['value'] : $option['value'] === $this->getValue(), true),
                 'isRequired'  => var_export($this->isRequired, true),
-            ]))->render();
+            ];
+
+            $options .= (new RadioButton($radioButtonData))->render();
         }
 
         $helperText = '';

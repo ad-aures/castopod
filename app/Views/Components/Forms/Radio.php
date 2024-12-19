@@ -23,9 +23,9 @@ class Radio extends FormComponent
             [
                 'id'    => $this->value,
                 'name'  => $this->name,
-                'class' => 'text-accent-base bg-elevated border-contrast border-3 w-6 h-6',
+                'class' => 'text-accent-base bg-elevated border-contrast border-3 focus:ring-accent w-6 h-6 transition',
             ],
-            $this->value,
+            $this->getValue(),
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );
 

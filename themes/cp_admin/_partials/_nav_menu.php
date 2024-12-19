@@ -4,15 +4,17 @@
             continue;
         }
 
-        $isSectionActive = false;
+        $activeSection = '';
         $activeItem = '';
         foreach ($data['items'] as $item) {
             $href = str_starts_with($item, '/') ? $item : route_to($item, $podcastId ?? null, $episodeId ?? null);
+            // TODO: use glob to show active section when current url starts with item
             if (url_is($href)) {
                 $activeItem = $item;
-                $isSectionActive = true;
+                $activeSection = $section;
             }
         }
+        $isSectionActive = $section === $activeSection;
         ?>
     <details <?= $isSectionActive ? 'open="open"' : '' ?> class="<?= $isSectionActive ? 'bg-navigation-active' : '' ?> [&[open]>summary::after]:rotate-90">
         <summary class="inline-flex items-center w-full h-12 px-4 py-2 font-semibold after:w-5 after:h-5 after:transition-transform after:content-chevronRightIcon after:ml-2 after:opacity-60 after:text-white">
@@ -22,7 +24,7 @@
             ]) ?>
             <?= lang($langKey . '.' . $section) ?>
             <?php if (array_key_exists('count', $data)): ?>
-                <a href="<?= route_to($data['count-route'], $podcastId ?? null, $episodeId ?? null) ?>" class="px-2 ml-2 text-xs font-normal rounded-full <?= $isSectionActive ? 'bg-navigation' : 'bg-navigation-active' ?>"><?= $data['count'] ?></a>
+                <a href="<?= route_to($data['count-route'], $podcastId ?? null, $episodeId ?? null) ?>" class="px-2 ml-2 text-xs font-normal rounded-full <?= $activeSection ? 'bg-navigation' : 'bg-navigation-active' ?>"><?= $data['count'] ?></a>
                 <?php endif; ?>
             </div>
             <?php if(array_key_exists('add-cta', $data)): ?>

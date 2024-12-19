@@ -16,7 +16,7 @@
     'podcastTitle' => $podcast->title,
 ]) ?></x-Alert>
 
-<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('Contributor.delete_form.understand', [
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true"><?= lang('Contributor.delete_form.understand', [
     'contributor'  => $contributor->username,
     'podcastTitle' => $podcast->title,
 ]) ?></x-Forms.Checkbox>

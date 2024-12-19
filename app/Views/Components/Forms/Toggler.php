@@ -9,7 +9,7 @@ use Override;
 
 class Toggler extends FormComponent
 {
-    protected array $props = ['size', 'hint', 'helper', 'isChecked'];
+    protected array $props = ['size', 'hint', 'helper'];
 
     protected array $casts = [
         'isChecked' => 'boolean',
@@ -33,7 +33,7 @@ class Toggler extends FormComponent
                 'class' => 'form-switch',
             ],
             'yes',
-            old($this->name) ? old($this->name) === 'yes' : $this->isChecked
+            in_array($this->getValue(), ['yes', 'true', 'on', '1'], true),
         );
 
         $hint = $this->hint === '' ? '' : (new Hint([

@@ -12,6 +12,7 @@ use Override;
  * @property string $label
  * @property string $hint
  * @property string $helper
+ * @property string $defaultValue
  * @property bool $optional
  * @property Option[] $options
  * @property bool $multiple
@@ -20,15 +21,16 @@ use Override;
 class Field extends ManifestObject
 {
     protected const VALIDATION_RULES = [
-        'type'     => 'permit_empty|in_list[checkbox,datetime,email,group,html,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
-        'key'      => 'required|alpha_dash',
-        'label'    => 'required|string',
-        'hint'     => 'permit_empty|string',
-        'helper'   => 'permit_empty|string',
-        'optional' => 'permit_empty|is_boolean',
-        'options'  => 'permit_empty|is_list',
-        'multiple' => 'permit_empty|is_boolean',
-        'fields'   => 'permit_empty|is_list',
+        'type'         => 'permit_empty|in_list[checkbox,datetime,email,group,html,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
+        'key'          => 'required|alpha_dash',
+        'label'        => 'required|string',
+        'hint'         => 'permit_empty|string',
+        'helper'       => 'permit_empty|string',
+        'defaultValue' => 'permit_empty|string',
+        'optional'     => 'permit_empty|is_boolean',
+        'options'      => 'permit_empty|is_list',
+        'multiple'     => 'permit_empty|is_boolean',
+        'fields'       => 'permit_empty|is_list',
     ];
 
     protected const CASTS = [
@@ -45,6 +47,8 @@ class Field extends ManifestObject
     protected string $hint = '';
 
     protected string $helper = '';
+
+    protected string $defaultValue = '';
 
     protected bool $optional = false;
 

@@ -45,14 +45,14 @@ if ($userPodcasts !== []) {
         $items[] = [
             'type'  => 'link',
             'title' => <<<HTML
-                                <div class="inline-flex items-center flex-1 text-sm align-middle">
-                                    <div class="relative">
-                                        <img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" />
-                                        <span class="absolute top-0 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-background-elevated {$unreadNotificationDotDisplayClass}"></span>
-                                    </div>
-                                    <span class="max-w-xs truncate">{$userPodcastTitle}</span>
-                                </div>
-                            HTML
+                <div class="inline-flex items-center flex-1 text-sm align-middle">
+                    <div class="relative">
+                        <img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" />
+                        <span class="absolute top-0 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-background-elevated {$unreadNotificationDotDisplayClass}"></span>
+                    </div>
+                    <span class="max-w-xs truncate">{$userPodcastTitle}</span>
+                </div>
+            HTML
             ,
             'uri' => route_to('notification-list', $userPodcast->id),
         ];

@@ -26,7 +26,7 @@
         label="<?= esc(lang('Person.podcast_form.persons')) ?>"
         hint="<?= esc(lang('Person.podcast_form.persons_hint')) ?>"
         options="<?= esc(json_encode($personOptions)) ?>"
-        defaultValue="<?= esc(json_encode(old('persons', []))) ?>"
+        defaultValue="<?= implode(',', old('persons', [])) ?>"
         isRequired="true" />
 
     <x-Forms.Field
@@ -36,7 +36,7 @@
         label="<?= esc(lang('Person.podcast_form.roles')) ?>"
         hint="<?= esc(lang('Person.podcast_form.roles_hint')) ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"
-        defaultValue="<?= esc(json_encode(old('roles', []))) ?>"
+        defaultValue="<?= implode(',', old('roles', [])) ?>"
     />
 
     <x-Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></x-Button>

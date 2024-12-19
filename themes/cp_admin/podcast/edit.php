@@ -96,13 +96,13 @@
         value="<?= $podcast->category_id ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>"
         isRequired="true" />
-    
+
     <x-Forms.Field
         as="SelectMulti"
         name="other_categories"
         label="<?= esc(lang('Podcast.form.other_categories')) ?>"
         data-max-item-count="2"
-        value="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
+        value="<?= $podcast->other_categories_ids ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
 
     <x-Forms.RadioGroup
@@ -183,7 +183,7 @@
 </x-Forms.Section>
 
 <x-Forms.Section title="<?= lang('Podcast.form.premium') ?>">
-    <x-Forms.Toggler class="mt-2" name="premium_by_default" isChecked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.premium_by_default_hint')) ?>">
+    <x-Forms.Toggler class="mt-2" name="premium_by_default" value="<?= $podcast->is_premium_by_default ? 'yes' : '' ?>" hint="<?= esc(lang('Podcast.form.premium_by_default_hint')) ?>">
         <?= lang('Podcast.form.premium_by_default') ?></x-Forms.Toggler>
 </x-Forms.Section>
 
@@ -211,13 +211,13 @@ hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
 value="<?= esc($podcast->new_feed_url) ?>"
 />
 
-<x-Forms.Toggler class="mb-2" name="lock" isChecked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
+<x-Forms.Toggler class="mb-2" name="lock" value="<?= $podcast->is_locked ? 'yes' : '' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
     <?= lang('Podcast.form.lock') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler class="mb-2" name="block" isChecked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
+<x-Forms.Toggler class="mb-2" name="block" value="<?= $podcast->is_blocked ? 'yes' : ''  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
     <?= lang('Podcast.form.block') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler name="complete" isChecked="<?= $podcast->is_completed ? 'true' : 'false' ?>">
+<x-Forms.Toggler name="complete" value="<?= $podcast->is_completed ? 'yes' : '' ?>">
     <?= lang('Podcast.form.complete') ?>
 </x-Forms.Toggler>
 
