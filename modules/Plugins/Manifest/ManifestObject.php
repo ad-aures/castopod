@@ -9,12 +9,15 @@ use Exception;
 
 abstract class ManifestObject
 {
-    protected const VALIDATION_RULES = [];
+    /**
+     * @var array<string,string>
+     */
+    public static array $validation_rules = [];
 
     /**
      * @var array<string,string|array{string}>
      */
-    protected const CASTS = [];
+    protected array $casts = [];
 
     /**
      * @var array<string,array<string,string>>
@@ -25,11 +28,28 @@ abstract class ManifestObject
         protected readonly string $pluginKey,
     ) {
         self::$errors[$pluginKey] = [];
+
+        $class = static::class;
+        $validation_rules = [];
+        $casts = [];
+        while ($class = get_parent_class($class)) {
+            $validation_rules = [...$validation_rules, ...get_class_vars($class)['validation_rules']];
+            $casts = [...$casts, ...get_class_vars($class)['casts']];
+        }
+
+        $this::$validation_rules = [...$validation_rules, ...$this::$validation_rules];
+        $this->casts = [...$casts, ...$this->casts];
     }
 
     public function __get(string $name): mixed
     {
         if (property_exists($this, $name)) {
+            // if a get method exists for this property, return that
+            $method = 'get' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $name)));
+            if (method_exists($this, $method)) {
+                return $this->{$method}();
+            }
+
             return $this->{$name};
         }
 
@@ -73,7 +93,7 @@ abstract class ManifestObject
         /** @var Validation $validation */
         $validation = service('validation');
 
-        $validation->setRules($this::VALIDATION_RULES);
+        $validation->setRules($this::$validation_rules);
 
         if (! $validation->run($data)) {
             foreach ($validation->getErrors() as $key => $message) {
@@ -84,23 +104,30 @@ abstract class ManifestObject
         }
 
         foreach ($validation->getValidated() as $key => $value) {
-            if (array_key_exists($key, $this::CASTS)) {
-                $cast = $this::CASTS[$key];
+            $method = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            if (is_callable([$this, $method])) {
+                $this->{$method}($value);
+                continue;
+            }
 
-                if (is_array($cast)) {
-                    if (is_array($value)) {
-                        foreach ($value as $valueKey => $valueElement) {
-                            if (is_subclass_of($cast[0], self::class)) {
-                                $value[$valueKey] = new $cast[0]($this->pluginKey);
-                                $value[$valueKey]->loadData($valueElement);
-                            } else {
-                                $value[$valueKey] = new $cast[0]($valueElement);
-                            }
+            if (array_key_exists($key, $this->casts)) {
+                $cast = $this->casts[$key];
+                if (is_array($cast) && is_array($value)) {
+                    foreach ($value as $valueKey => $valueElement) {
+                        if (is_subclass_of($cast[0], self::class)) {
+                            $manifestClass = $cast[0] === Field::class ? $this->getFieldClass(
+                                $valueElement
+                            ) : $cast[0];
+                            $value[$valueKey] = new $manifestClass($this->pluginKey);
+                            $value[$valueKey]->loadData($valueElement);
+                        } else {
+                            $value[$valueKey] = new $cast[0]($valueElement);
                         }
                     }
                 } elseif (is_subclass_of($cast, self::class)) {
+                    $manifestClass = $cast === Field::class ? $this->getFieldClass($value) : $cast;
                     $valueElement = $value;
-                    $value = new $cast($this->pluginKey);
+                    $value = new $manifestClass($this->pluginKey);
                     $value->loadData($valueElement ?? []);
                 } else {
                     $value = new $cast($value ?? []);
@@ -122,5 +149,18 @@ abstract class ManifestObject
     protected function addError(string $errorKey, string $errorMessage): void
     {
         self::$errors[$this->pluginKey][$errorKey] = $errorMessage;
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function getFieldClass(array $data): string
+    {
+        $fieldType = $data['type'] ?? 'text';
+        return rtrim(Field::class, "\Field") . '\\Fields\\' . str_replace(
+            ' ',
+            '',
+            ucwords(str_replace('-', ' ', $fieldType))
+        );
     }
 }

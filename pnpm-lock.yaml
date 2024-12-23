@@ -29,8 +29,8 @@ importers:
         specifier: ^6.5.0
         version: 6.5.0
       "@codemirror/view":
-        specifier: ^6.35.3
-        version: 6.35.3
+        specifier: ^6.36.1
+        version: 6.36.1
       "@floating-ui/dom":
         specifier: ^1.6.12
         version: 1.6.12
@@ -77,8 +77,8 @@ importers:
         specifier: ^15.0.4
         version: 15.0.4
       wavesurfer.js:
-        specifier: ^7.8.11
-        version: 7.8.11
+        specifier: ^7.8.12
+        version: 7.8.12
       xml-formatter:
         specifier: ^3.6.3
         version: 3.6.3
@@ -112,10 +112,10 @@ importers:
         version: 13.2.3(semantic-release@24.2.0(typescript@5.7.2))
       "@tailwindcss/forms":
         specifier: ^0.5.9
-        version: 0.5.9(tailwindcss@3.4.16)
+        version: 0.5.9(tailwindcss@3.4.17)
       "@tailwindcss/typography":
         specifier: ^0.5.15
-        version: 0.5.15(tailwindcss@3.4.16)
+        version: 0.5.15(tailwindcss@3.4.17)
       "@types/eslint__js":
         specifier: ^8.42.3
         version: 8.42.3
@@ -147,8 +147,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@9.17.0(jiti@2.4.1)))(eslint@9.17.0(jiti@2.4.1))(prettier@3.4.2)
       globals:
-        specifier: ^15.13.0
-        version: 15.13.0
+        specifier: ^15.14.0
+        version: 15.14.0
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -192,8 +192,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       tailwindcss:
-        specifier: ^3.4.16
-        version: 3.4.16
+        specifier: ^3.4.17
+        version: 3.4.17
       typescript:
         specifier: ~5.7.2
         version: 5.7.2
@@ -201,11 +201,11 @@ importers:
         specifier: ^8.18.1
         version: 8.18.1(eslint@9.17.0(jiti@2.4.1))(typescript@5.7.2)
       vite:
-        specifier: ^6.0.3
-        version: 6.0.3(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1)
+        specifier: ^6.0.5
+        version: 6.0.5(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: ^0.21.1
-        version: 0.21.1(vite@6.0.3(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1))(workbox-build@7.3.0)(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.5(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1))(workbox-build@7.3.0)(workbox-window@7.3.0)
       workbox-build:
         specifier: ^7.3.0
         version: 7.3.0
@@ -1083,10 +1083,10 @@ packages:
         integrity: sha512-MwBHVK60IiIHDcoMet78lxt6iw5gJOGSbNbOIVBHWVXIH4/Nq1+GQgLLGgI1KlnN86WDXsPudVaqYHKBIx7Eyw==,
       }
 
-  "@codemirror/view@6.35.3":
+  "@codemirror/view@6.36.1":
     resolution:
       {
-        integrity: sha512-ScY7L8+EGdPl4QtoBiOzE4FELp7JmNUsBvgBcCakXWM2uiv/K89VAzU3BMDscf0DsACLvTKePbd5+cFDTcei6g==,
+        integrity: sha512-miD1nyT4m4uopZaDdO2uXU/LLHliKNYL9kB1C1wJHrunHLm/rpkb5QVSokqgw9hFqEZakrdlb/VGWX8aYZTslQ==,
       }
 
   "@colors/colors@1.5.0":
@@ -4796,10 +4796,10 @@ packages:
       }
     engines: { node: ">=18" }
 
-  globals@15.13.0:
+  globals@15.14.0:
     resolution:
       {
-        integrity: sha512-49TewVEz0UxZjr1WYYsWpPrhyC/B/pA8Bq0fUmet2n+eR7yn0IvNzNaoBwnK6mdkzcN+se7Ez9zUgULTz2QH4g==,
+        integrity: sha512-OkToC372DtlQeje9/zHIo5CT8lRP/FUgEOKBEhU4e0abL7J7CD24fD9ohiLN5hagG/kWCYj4K5oaxxtj2Z0Dig==,
       }
     engines: { node: ">=18" }
 
@@ -8267,10 +8267,10 @@ packages:
       }
     engines: { node: ">=10.0.0" }
 
-  tailwindcss@3.4.16:
+  tailwindcss@3.4.17:
     resolution:
       {
-        integrity: sha512-TI4Cyx7gDiZ6r44ewaJmt0o6BrMCT5aK5e0rmJ/G9Xq3w7CX/5VXl/zIPEJZFUK5VEqwByyhqNPycPlvcK4ZNw==,
+        integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==,
       }
     engines: { node: ">=14.0.0" }
     hasBin: true
@@ -8699,10 +8699,10 @@ packages:
       "@vite-pwa/assets-generator":
         optional: true
 
-  vite@6.0.3:
+  vite@6.0.5:
     resolution:
       {
-        integrity: sha512-Cmuo5P0ENTN6HxLSo6IHsjCLn/81Vgrp81oaiFFMRa8gGDj5xEjIcEpf2ZymZtZR8oU0P2JX5WuUp/rlXcHkAw==,
+        integrity: sha512-akD5IAH/ID5imgue2DYhzsEwCi0/4VKY31uhMLEYJwPP4TiUp8pL5PIK+Wo7H8qT8JY9i+pVfPydcFPYD1EL7g==,
       }
     engines: { node: ^18.0.0 || ^20.0.0 || >=22.0.0 }
     hasBin: true
@@ -8748,10 +8748,10 @@ packages:
         integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==,
       }
 
-  wavesurfer.js@7.8.11:
+  wavesurfer.js@7.8.12:
     resolution:
       {
-        integrity: sha512-bZs7A0vtTVOhuPoDGOXVevAIm+KVYBGwddjL9AeOS7kp/oPcVH9hQWQyR2rBAAfN6s0BKI+EdPEalkNaOmkA6A==,
+        integrity: sha512-Ovyv3ASEXXWmQVh3clpaZufkraRSg2Uv+28Z5zBHL4nB1HgTZ64lcFMUXX7yZlV5WAIN5ST9w3naaYmOdV2+iw==,
       }
 
   wcwidth@1.0.1:
@@ -9014,14 +9014,6 @@ packages:
       {
         integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==,
       }
-
-  yaml@2.6.0:
-    resolution:
-      {
-        integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==,
-      }
-    engines: { node: ">= 14" }
-    hasBin: true
 
   yaml@2.6.1:
     resolution:
@@ -9785,23 +9777,23 @@ snapshots:
       "@babel/helper-string-parser": 7.25.9
       "@babel/helper-validator-identifier": 7.25.9
 
-  "@codemirror/autocomplete@6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)":
+  "@codemirror/autocomplete@6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)":
     dependencies:
       "@codemirror/language": 6.10.7
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
 
   "@codemirror/commands@6.7.1":
     dependencies:
       "@codemirror/language": 6.10.7
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
 
-  "@codemirror/lang-css@6.3.1(@codemirror/view@6.35.3)":
+  "@codemirror/lang-css@6.3.1(@codemirror/view@6.36.1)":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/language": 6.10.7
       "@codemirror/state": 6.5.0
       "@lezer/common": 1.2.3
@@ -9811,39 +9803,39 @@ snapshots:
 
   "@codemirror/lang-html@6.4.9":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)
-      "@codemirror/lang-css": 6.3.1(@codemirror/view@6.35.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/lang-css": 6.3.1(@codemirror/view@6.36.1)
       "@codemirror/lang-javascript": 6.2.2
       "@codemirror/language": 6.10.7
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
       "@lezer/css": 1.1.9
       "@lezer/html": 1.3.10
 
   "@codemirror/lang-javascript@6.2.2":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/language": 6.10.7
       "@codemirror/lint": 6.8.2
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
       "@lezer/javascript": 1.4.21
 
   "@codemirror/lang-xml@6.1.0":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/language": 6.10.7
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
       "@lezer/xml": 1.0.5
 
   "@codemirror/language@6.10.7":
     dependencies:
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
       "@lezer/highlight": 1.2.1
       "@lezer/lr": 1.4.2
@@ -9852,20 +9844,20 @@ snapshots:
   "@codemirror/lint@6.8.2":
     dependencies:
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       crelt: 1.0.6
 
   "@codemirror/search@6.5.7":
     dependencies:
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
       crelt: 1.0.6
 
   "@codemirror/state@6.5.0":
     dependencies:
       "@marijn/find-cluster-break": 1.0.2
 
-  "@codemirror/view@6.35.3":
+  "@codemirror/view@6.36.1":
     dependencies:
       "@codemirror/state": 6.5.0
       style-mod: 4.1.2
@@ -10857,18 +10849,18 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  "@tailwindcss/forms@0.5.9(tailwindcss@3.4.16)":
+  "@tailwindcss/forms@0.5.9(tailwindcss@3.4.17)":
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.16
+      tailwindcss: 3.4.17
 
-  "@tailwindcss/typography@0.5.15(tailwindcss@3.4.16)":
+  "@tailwindcss/typography@0.5.15(tailwindcss@3.4.17)":
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.16
+      tailwindcss: 3.4.17
 
   "@trysound/sax@0.2.0": {}
 
@@ -11342,13 +11334,13 @@ snapshots:
 
   codemirror@6.0.1(@lezer/common@1.2.3):
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.35.3)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/commands": 6.7.1
       "@codemirror/language": 6.10.7
       "@codemirror/lint": 6.8.2
       "@codemirror/search": 6.5.7
       "@codemirror/state": 6.5.0
-      "@codemirror/view": 6.35.3
+      "@codemirror/view": 6.36.1
     transitivePeerDependencies:
       - "@lezer/common"
 
@@ -12165,7 +12157,7 @@ snapshots:
 
   foreground-child@3.3.0:
     dependencies:
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
   form-data-encoder@4.0.2: {}
@@ -12320,7 +12312,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@15.13.0: {}
+  globals@15.14.0: {}
 
   globalthis@1.0.4:
     dependencies:
@@ -13421,7 +13413,7 @@ snapshots:
   postcss-load-config@4.0.2(postcss@8.4.49):
     dependencies:
       lilconfig: 3.1.3
-      yaml: 2.6.0
+      yaml: 2.6.1
     optionalDependencies:
       postcss: 8.4.49
 
@@ -14293,7 +14285,7 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
-  tailwindcss@3.4.16:
+  tailwindcss@3.4.17:
     dependencies:
       "@alloc/quick-lru": 5.2.0
       arg: 5.0.2
@@ -14537,18 +14529,18 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-plugin-pwa@0.21.1(vite@6.0.3(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1))(workbox-build@7.3.0)(workbox-window@7.3.0):
+  vite-plugin-pwa@0.21.1(vite@6.0.5(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1))(workbox-build@7.3.0)(workbox-window@7.3.0):
     dependencies:
       debug: 4.3.7
       pretty-bytes: 6.1.1
       tinyglobby: 0.2.10
-      vite: 6.0.3(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1)
+      vite: 6.0.5(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1)
       workbox-build: 7.3.0
       workbox-window: 7.3.0
     transitivePeerDependencies:
       - supports-color
 
-  vite@6.0.3(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1):
+  vite@6.0.5(@types/node@22.9.0)(jiti@2.4.1)(terser@5.36.0)(yaml@2.6.1):
     dependencies:
       esbuild: 0.24.0
       postcss: 8.4.49
@@ -14562,7 +14554,7 @@ snapshots:
 
   w3c-keyname@2.2.8: {}
 
-  wavesurfer.js@7.8.11: {}
+  wavesurfer.js@7.8.12: {}
 
   wcwidth@1.0.1:
     dependencies:
@@ -14774,8 +14766,6 @@ snapshots:
   y18n@5.0.8: {}
 
   yallist@3.1.1: {}
-
-  yaml@2.6.0: {}
 
   yaml@2.6.1: {}
 

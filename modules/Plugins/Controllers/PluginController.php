@@ -18,6 +18,7 @@ use Modules\Plugins\Core\Markdown;
 use Modules\Plugins\Core\Plugins;
 use Modules\Plugins\Core\RSS;
 use Modules\Plugins\Manifest\Field;
+use Modules\Plugins\Manifest\Fields\Group;
 
 class PluginController extends BaseController
 {
@@ -154,7 +155,6 @@ class PluginController extends BaseController
         string $podcastId = null,
         string $episodeId = null
     ): RedirectResponse {
-
         $plugin = $this->plugins->getPlugin($vendor, $package);
 
         if (! $plugin instanceof BasePlugin) {
@@ -182,29 +182,35 @@ class PluginController extends BaseController
             }
 
             if ($field->multiple) {
-                if ($field->type === 'group') {
+                if ($field instanceof Group) {
                     foreach ($field->fields as $subField) {
                         $typeRules = $this->plugins::FIELDS_VALIDATIONS[$subField->type];
                         if (! in_array('permit_empty', $typeRules, true)) {
                             $typeRules[] = $subField->optional ? 'permit_empty' : 'required';
                         }
 
-                        $rules[sprintf('%s.*.%s', $field->key, $subField->key)] = $typeRules;
+                        $rules[sprintf('%s.*.%s', $field->key, $subField->key)] = [
+                            ...$typeRules,
+                            ...$subField->validationRules,
+                        ];
                     }
                 } else {
-                    $rules[$field->key . '.*'] = $typeRules;
+                    $rules[$field->key . '.*'] = [...$typeRules, ...$field->validationRules];
                 }
-            } elseif ($field->type === 'group') {
+            } elseif ($field instanceof Group) {
                 foreach ($field->fields as $subField) {
                     $typeRules = $this->plugins::FIELDS_VALIDATIONS[$subField->type];
                     if (! in_array('permit_empty', $typeRules, true)) {
                         $typeRules[] = $subField->optional ? 'permit_empty' : 'required';
                     }
 
-                    $rules[sprintf('%s.%s', $field->key, $subField->key)] = $typeRules;
+                    $rules[sprintf('%s.%s', $field->key, $subField->key)] = [
+                        ...$typeRules,
+                        ...$subField->validationRules,
+                    ];
                 }
             } else {
-                $rules[$field->key] = $typeRules;
+                $rules[$field->key] = [...$typeRules, ...$field->validationRules];
             }
         }
 
@@ -288,7 +294,7 @@ class PluginController extends BaseController
                     continue;
                 }
 
-                if ($field->type === 'group') {
+                if ($field instanceof Group) {
                     foreach ($val as $subKey => $subVal) {
                         /** @var Field|false $subField */
                         $subField = array_column($field->fields, null, 'key')[$subKey] ?? false;
@@ -305,7 +311,7 @@ class PluginController extends BaseController
                     $value[$key] = $this->castValue($val, $field->type);
                 }
             }
-        } elseif ($field->type === 'group') {
+        } elseif ($field instanceof Group) {
             foreach ($fieldValue as $subKey => $subVal) {
                 /** @var Field|false $subField */
                 $subField = array_column($field->fields, null, 'key')[$subKey] ?? false;
@@ -340,10 +346,9 @@ class PluginController extends BaseController
                 $value,
                 $this->request->getPost('client_timezone')
             )->setTimezone(app_timezone()),
-            'markdown'               => new Markdown($value),
-            'rss'                    => new RSS($value),
-            'comma-separated-string' => implode(',', $value),
-            default                  => $value,
+            'markdown' => new Markdown($value),
+            'rss'      => new RSS($value),
+            default    => $value,
         };
     }
 }

@@ -8,6 +8,10 @@ use Override;
 
 class Textarea extends FormComponent
 {
+    protected array $attributes = [
+        'rows' => '6',
+    ];
+
     public function setValue(string $value): void
     {
         $this->value = htmlspecialchars_decode($value);

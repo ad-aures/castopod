@@ -11,7 +11,7 @@ namespace Modules\Plugins\Manifest;
  */
 class Option extends ManifestObject
 {
-    protected const VALIDATION_RULES = [
+    public static array $validation_rules = [
         'label'       => 'required|string',
         'value'       => 'required|alpha_numeric_punct',
         'description' => 'permit_empty|string',

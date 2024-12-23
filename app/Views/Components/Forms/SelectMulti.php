@@ -11,7 +11,9 @@ class SelectMulti extends FormComponent
     protected array $props = ['options'];
 
     protected array $casts = [
-        'options' => 'array',
+        'value'        => 'array',
+        'defaultValue' => 'array',
+        'options'      => 'array',
     ];
 
     /**
@@ -36,9 +38,9 @@ class SelectMulti extends FormComponent
         $this->attributes = [...$defaultAttributes, ...$this->attributes];
 
         $options = '';
-        $selected = explode(',', $this->getValue()) ?? [];
+        $selected = $this->getValue();
         foreach ($this->options as $option) {
-            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array((string) $option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option ' . (array_key_exists('description', $option) ? 'data-label-description="' . $option['description'] . '" ' : '') . 'value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
         $this->attributes['name'] = $this->name . '[]';

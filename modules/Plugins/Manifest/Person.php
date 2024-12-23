@@ -15,18 +15,18 @@ use Override;
  */
 class Person extends ManifestObject
 {
-    protected const VALIDATION_RULES = [
+    protected const AUTHOR_STRING_PATTERN = '/^(?<name>[^<>()]*)\s*(<(?<email>.*)>)?\s*(\((?<url>.*)\))?$/';
+
+    public static array $validation_rules = [
         'name'  => 'required',
         'email' => 'permit_empty|valid_email',
         'url'   => 'permit_empty|valid_url_strict',
     ];
 
-    protected const AUTHOR_STRING_PATTERN = '/^(?<name>[^<>()]*)\s*(<(?<email>.*)>)?\s*(\((?<url>.*)\))?$/';
-
     /**
      * @var array<string,array{string}|string>
      */
-    protected const CASTS = [
+    protected array $casts = [
         'url' => URI::class,
     ];
 

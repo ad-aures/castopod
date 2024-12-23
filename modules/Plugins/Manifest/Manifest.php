@@ -23,10 +23,7 @@ use CodeIgniter\HTTP\URI;
  */
 class Manifest extends ManifestObject
 {
-    /**
-     * @var array<string,string>
-     */
-    public const VALIDATION_RULES = [
+    public static array $validation_rules = [
         'name'               => 'required|max_length[128]|regex_match[/^[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9]([_.-]?[a-z0-9]+)*$/]',
         'version'            => 'required|regex_match[/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/]',
         'description'        => 'permit_empty|max_length[256]',
@@ -41,7 +38,7 @@ class Manifest extends ManifestObject
         'repository'         => 'permit_empty|is_list',
     ];
 
-    protected const CASTS = [
+    protected array $casts = [
         'authors'    => [Person::class],
         'homepage'   => URI::class,
         'settings'   => Settings::class,

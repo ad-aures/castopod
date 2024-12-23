@@ -204,32 +204,30 @@
         "optional": {
           "type": "boolean"
         },
-        "defaultValue": {
-          "type": "string"
-        },
-        "options": {
-          "type": "object",
-          "patternProperties": {
-            "^[A-Za-z0-9]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/option" }
-          },
-          "additionalProperties": false
+
+        "validationRules": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
         },
         "multiple": {
           "type": "boolean"
-        },
-        "fields": {
-          "type": "object",
-          "patternProperties": {
-            "^[A-Za-z]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/field" }
-          },
-          "additionalProperties": false
         }
       },
       "required": ["label"],
-      "additionalProperties": false,
+      "unevaluatedProperties": false,
       "allOf": [
         { "$ref": "#/$defs/field-multiple-implies-options-is-required" },
-        { "$ref": "#/$defs/field-group-type-implies-fields-is-required" }
+        { "$ref": "#/$defs/require-fields-for-group-type" },
+        { "$ref": "#/$defs/default-value-based-on-type" }
       ]
     },
     "option": {
@@ -246,37 +244,160 @@
       "additionalProperties": false
     },
     "field-multiple-implies-options-is-required": {
-      "anyOf": [
+      "if": {
+        "properties": {
+          "type": {
+            "enum": ["radio-group", "select", "select-multiple"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "options": {
+            "type": "object",
+            "patternProperties": {
+              "^[A-Za-z0-9]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/option" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["options"]
+      }
+    },
+    "require-fields-for-group-type": {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "group"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fields": {
+            "type": "object",
+            "patternProperties": {
+              "^[A-Za-z]+[\\w\\-\\:\\.]*$": { "$ref": "#/$defs/field" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": ["fields"]
+      }
+    },
+    "default-value-based-on-type": {
+      "allOf": [
         {
-          "not": {
+          "if": {
             "properties": {
               "type": {
-                "anyOf": [
-                  { "const": "radio-group" },
-                  { "const": "select" },
-                  { "const": "select-multiple" }
+                "enum": [
+                  "html",
+                  "markdown",
+                  "radio-group",
+                  "rss",
+                  "select",
+                  "text",
+                  "textarea"
                 ]
               }
-            },
-            "required": ["type"]
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "string" }
+            }
           }
         },
-        { "required": ["options"] }
-      ]
-    },
-    "field-group-type-implies-fields-is-required": {
-      "anyOf": [
         {
-          "not": {
+          "if": {
             "properties": {
               "type": {
-                "anyOf": [{ "const": "group" }]
+                "enum": ["checkbox", "toggler"]
               }
-            },
-            "required": ["type"]
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "boolean" }
+            }
           }
         },
-        { "required": ["fields"] }
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "datetime"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "email"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "string", "format": "email" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "number"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "number" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "select-multiple"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "url"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "defaultValue": { "type": "string", "format": "uri" }
+            }
+          }
+        }
       ]
     }
   }

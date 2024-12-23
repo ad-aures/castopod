@@ -13,7 +13,7 @@ use CodeIgniter\HTTP\URI;
  */
 class Repository extends ManifestObject
 {
-    protected const VALIDATION_RULES = [
+    public static array $validation_rules = [
         'type'      => 'permit_empty|in_list[git]',
         'url'       => 'required|valid_url_strict',
         'directory' => 'permit_empty',
@@ -22,7 +22,7 @@ class Repository extends ManifestObject
     /**
      * @var array<string,array{string}|string>
      */
-    protected const CASTS = [
+    protected array $casts = [
         'url' => URI::class,
     ];
 

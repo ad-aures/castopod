@@ -102,7 +102,7 @@
         name="other_categories"
         label="<?= esc(lang('Podcast.form.other_categories')) ?>"
         data-max-item-count="2"
-        value="<?= $podcast->other_categories_ids ?>"
+        value="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
 
     <x-Forms.RadioGroup

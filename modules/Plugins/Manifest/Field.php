@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Plugins\Manifest;
 
-use Override;
+use RuntimeException;
 
 /**
  * @property 'checkbox'|'datetime'|'email'|'group'|'html'|'markdown'|'number'|'radio-group'|'rss'|'select-multiple'|'select'|'text'|'textarea'|'toggler'|'url' $type
@@ -14,28 +14,20 @@ use Override;
  * @property string $helper
  * @property string $defaultValue
  * @property bool $optional
- * @property Option[] $options
  * @property bool $multiple
- * @property Field[] $fields
+ * @property string[] $validationRules
  */
-class Field extends ManifestObject
+class Field extends ManifestObject implements FieldInterface
 {
-    protected const VALIDATION_RULES = [
-        'type'         => 'permit_empty|in_list[checkbox,datetime,email,group,html,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
-        'key'          => 'required|alpha_dash',
-        'label'        => 'required|string',
-        'hint'         => 'permit_empty|string',
-        'helper'       => 'permit_empty|string',
-        'defaultValue' => 'permit_empty|string',
-        'optional'     => 'permit_empty|is_boolean',
-        'options'      => 'permit_empty|is_list',
-        'multiple'     => 'permit_empty|is_boolean',
-        'fields'       => 'permit_empty|is_list',
-    ];
-
-    protected const CASTS = [
-        'options' => [Option::class],
-        'fields'  => [self::class],
+    public static array $validation_rules = [
+        'type'            => 'permit_empty|in_list[checkbox,datetime,email,group,html,markdown,number,radio-group,rss,select-multiple,select,text,textarea,toggler,url]',
+        'key'             => 'required|alpha_dash',
+        'label'           => 'required|string',
+        'hint'            => 'permit_empty|string',
+        'helper'          => 'permit_empty|string',
+        'validationRules' => 'permit_empty|is_string_or_list',
+        'optional'        => 'permit_empty|is_boolean',
+        'multiple'        => 'permit_empty|is_boolean',
     ];
 
     protected string $type = 'text';
@@ -48,65 +40,83 @@ class Field extends ManifestObject
 
     protected string $helper = '';
 
-    protected string $defaultValue = '';
+    /**
+     * @var string[]
+     */
+    protected array $validationRules = [];
 
     protected bool $optional = false;
 
     protected bool $multiple = false;
 
-    /**
-     * @var Option[]
-     */
-    protected array $options = [];
-
-    #[Override]
-    public function loadData(array $data): void
+    public function getLabel(): string
     {
-        if (array_key_exists('options', $data)) {
-            $newOptions = [];
-            foreach ($data['options'] as $key => $option) {
-                $option['value'] = $key;
-                $newOptions[] = $option;
-            }
+        return $this->getTranslated('label');
+    }
 
-            $data['options'] = $newOptions;
-        }
+    public function getHint(): string
+    {
+        return $this->getTranslated('hint');
+    }
 
-        if (array_key_exists('fields', $data)) {
-            $newFields = [];
-            foreach ($data['fields'] as $key => $field) {
-                $field['key'] = $key;
-                $newFields[] = $field;
-            }
-
-            $data['fields'] = $newFields;
-        }
-
-        parent::loadData($data);
+    public function getHelper(): string
+    {
+        return $this->getTranslated('helper');
     }
 
     /**
-     * @return array{label:string,value:string,description:string}[]
+     * @param string|list<string> $values
      */
-    public function getOptionsArray(string $pluginKey): array
+    public function setValidationRules(string|array $values): void
     {
-        $i18nKey = sprintf('%s.settings.%s.%s.options', $pluginKey, $this->type, $this->key);
-
-        $optionsArray = [];
-        foreach ($this->options as $option) {
-            $optionsArray[] = [
-                'value'       => $option->value,
-                'label'       => $option->getTranslated($i18nKey, 'label'),
-                'description' => $option->getTranslated($i18nKey, 'description'),
-            ];
+        $validationRules = [];
+        if (is_string($values)) {
+            $validationRules = explode('|', $values);
         }
 
-        return $optionsArray;
+        $allowedRules = [
+            'alpha',
+            'alpha_dash',
+            'alpha_numeric',
+            'alpha_numeric_punct',
+            'alpha_numeric_space',
+            'alpha_space',
+            'decimal',
+            'differs',
+            'exact_length',
+            'greater_than',
+            'greater_than_equal_to',
+            'hex',
+            'in_list',
+            'integer',
+            'is_natural',
+            'is_natural_no_zero',
+            'less_than',
+            'less_than_equal_to',
+            'max_length',
+            'min_length',
+            'not_in_list',
+            'regex_match',
+            'valid_base64',
+            'valid_date',
+        ];
+        foreach ($validationRules as $rule) {
+            foreach ($allowedRules as $allowedRule) {
+                if (str_starts_with($rule, $allowedRule)) {
+                    $this->validationRules[] = $rule;
+                }
+            }
+        }
     }
 
-    public function getTranslated(string $pluginKey, string $property): string
+    public function render(string $name, mixed $value, string $class = ''): string
     {
-        $key = sprintf('Plugin.%s.settings.%s.%s.%s', $pluginKey, $this->type, $this->key, $property);
+        throw new RuntimeException('Render function not defined in parent Field class');
+    }
+
+    private function getTranslated(string $property): string
+    {
+        $key = sprintf('Plugin.%s.settings.%s.%s.%s', $this->pluginKey, $this->type, $this->key, $property);
 
         /** @var string $i18nField */
         $i18nField = lang($key);

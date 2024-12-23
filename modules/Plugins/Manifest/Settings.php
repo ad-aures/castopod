@@ -13,7 +13,7 @@ use Override;
  */
 class Settings extends ManifestObject
 {
-    protected const VALIDATION_RULES = [
+    public static array $validation_rules = [
         'general' => 'permit_empty|is_list',
         'podcast' => 'permit_empty|is_list',
         'episode' => 'permit_empty|is_list',
@@ -22,7 +22,7 @@ class Settings extends ManifestObject
     /**
      * @var array<string,array{string}|string>
      */
-    protected const CASTS = [
+    protected array $casts = [
         'general' => [Field::class],
         'podcast' => [Field::class],
         'episode' => [Field::class],

@@ -26,9 +26,15 @@ abstract class FormComponent extends Component
 
     protected string $name;
 
-    protected string $value = '';
+    /**
+     * @var string|string[]|null
+     */
+    protected string|array|null $value = null;
 
-    protected string $defaultValue = '';
+    /**
+     * @var string|string[]
+     */
+    protected string|array $defaultValue = '';
 
     protected bool $isRequired = false;
 
@@ -61,8 +67,16 @@ abstract class FormComponent extends Component
         }
     }
 
-    protected function getValue(): string
+    protected function getValue(): string|array
     {
-        return old($this->name, $this->value === '' ? $this->defaultValue : $this->value);
+        $valueCast = $this->casts['value'] ?? '';
+        if ($valueCast === 'array') {
+            return old($this->name, in_array($this->value, [[], null], true) ? $this->defaultValue : $this->value) ?? [];
+        }
+
+        return old(
+            $this->name,
+            in_array($this->value, ['', null], true) ? $this->defaultValue : $this->value
+        ) ?? '';
     }
 }

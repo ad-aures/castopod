@@ -21,4 +21,9 @@ class OtherRules
     {
         return is_array($str);
     }
+
+    public function is_string_or_list(mixed $str = null): bool
+    {
+        return is_string($str) || is_array($str);
+    }
 }

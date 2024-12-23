@@ -10,12 +10,9 @@ class CodeEditor extends FormComponent
 {
     protected array $props = ['content', 'lang'];
 
-    /**
-     * @var array<string, string>
-     */
     protected array $attributes = [
         'rows'  => '6',
-        'class' => 'textarea',
+        'class' => 'bg-elevated w-full rounded-lg border-3 border-contrast focus:border-contrast focus-within:ring-accent transition',
     ];
 
     protected string $lang = '';

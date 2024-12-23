@@ -71,12 +71,12 @@ class CreatePlugin extends BaseCommand
         $pluginName = CLI::prompt(
             'Plugin name (<vendor>/<name>)',
             'acme/hello-world',
-            Manifest::VALIDATION_RULES['name']
+            Manifest::$validation_rules['name']
         );
         CLI::newLine();
-        $description = CLI::prompt('Description', '', Manifest::VALIDATION_RULES['description']);
+        $description = CLI::prompt('Description', '', Manifest::$validation_rules['description']);
         CLI::newLine();
-        $license = CLI::prompt('License', 'UNLICENSED', Manifest::VALIDATION_RULES['license']);
+        $license = CLI::prompt('License', 'UNLICENSED', Manifest::$validation_rules['license']);
         CLI::newLine();
         $hooks = CLI::promptByMultipleKeys('Which hooks do you want to implement?', Plugins::HOOKS);
 
