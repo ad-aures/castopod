@@ -249,6 +249,9 @@ class PluginController extends BaseController
 
         $this->plugins->activate($plugin);
 
+        // clear cache after activation
+        $plugin->clearCache();
+
         return redirect()->back();
     }
 
@@ -262,6 +265,9 @@ class PluginController extends BaseController
         }
 
         $this->plugins->deactivate($plugin);
+
+        // clear cache after deactivation
+        $plugin->clearCache();
 
         return redirect()->back();
     }
