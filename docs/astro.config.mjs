@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightOpenAPI from "starlight-openapi";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -122,6 +123,16 @@ export default defineConfig({
         gitlab: "https://code.castopod.org/adaures/castopod",
         github: "https://github.com/ad-aures/castopod",
       },
+      plugins: [
+        starlightOpenAPI([
+          {
+            base: "en/api",
+            label: "API reference",
+            schema: "../modules/Api/Rest/V1/schema.yaml",
+            collapsed: true,
+          },
+        ]),
+      ],
       sidebar: [
         {
           label: "Introduction",
@@ -194,6 +205,77 @@ export default defineConfig({
           ],
         },
         {
+          label: "Plugins",
+          badge: {
+            text: "Experimental",
+          },
+          items: [
+            {
+              label: "Introduction",
+              link: "/plugins/",
+            },
+            {
+              label: "Creating a plugin",
+              link: "/plugins/create",
+            },
+            {
+              label: "Reference",
+              items: [
+                {
+                  label: "manifest.json",
+                  link: "/plugins/manifest",
+                },
+                {
+                  label: "hooks",
+                  link: "/plugins/hooks",
+                },
+              ],
+            },
+          ],
+        },
+        // TODO: openapi plugin does not handle i18n, manual sidebar workaround
+        // Add the generated sidebar group to the sidebar.
+        // ...openAPISidebarGroups,
+        {
+          label: "API reference",
+          translations: {},
+          items: [
+            {
+              label: "Overview",
+              link: "/api",
+            },
+            {
+              label: "Operations",
+              items: [
+                {
+                  label: "Get all podcasts",
+                  link: "/api/operations/get-all-podcasts",
+                },
+                {
+                  label: "Get podcast by ID",
+                  link: "/api/operations/get-podcast-by-id",
+                },
+                {
+                  label: "Get all episodes",
+                  link: "/api/operations/get-all-episodes",
+                },
+                {
+                  label: "Add a new episode",
+                  link: "/api/operations/add-episode",
+                },
+                {
+                  label: "Get episode by ID",
+                  link: "/api/operations/get-episode-by-id",
+                },
+                {
+                  label: "Publish an episode",
+                  link: "/api/operations/publish-episode",
+                },
+              ],
+            },
+          ],
+        },
+        {
           label: "User guide",
           translations: {},
           items: [
@@ -204,6 +286,7 @@ export default defineConfig({
             {
               label: "Manage your instance",
               translations: {},
+              collapsed: true,
               items: [
                 {
                   label: "Introduction",
@@ -245,6 +328,7 @@ export default defineConfig({
             {
               label: "Manage your podcasts",
               translations: {},
+              collapsed: true,
               items: [
                 {
                   label: "Introduction",
@@ -282,35 +366,6 @@ export default defineConfig({
               label: "Website overview",
               link: "/user-guide/website/",
               translations: {},
-            },
-          ],
-        },
-        {
-          label: "Plugins",
-          badge: {
-            text: "Experimental",
-          },
-          items: [
-            {
-              label: "Introduction",
-              link: "/plugins/",
-            },
-            {
-              label: "Creating a plugin",
-              link: "/plugins/create",
-            },
-            {
-              label: "Reference",
-              items: [
-                {
-                  label: "manifest.json",
-                  link: "/plugins/manifest",
-                },
-                {
-                  label: "hooks",
-                  link: "/plugins/hooks",
-                },
-              ],
             },
           ],
         },

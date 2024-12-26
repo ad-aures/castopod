@@ -62,7 +62,8 @@
         "stylelint.vscode-stylelint",
         "unifiedjs.vscode-mdx",
         "wayou.vscode-todo-highlight",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "42Crunch.vscode-openapi"
       ]
     }
   }
