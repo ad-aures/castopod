@@ -1,3 +1,10 @@
+## [1.13.2](https://code.castopod.org/adaures/castopod/compare/v1.13.1...v1.13.2) (2024-12-28)
+
+### Bug Fixes
+
+- add downloads_count to episodes table, computed every hour
+  ([5182d5d](https://code.castopod.org/adaures/castopod/commit/5182d5d67aa3c6f7906d4603efcec4b48f048991))
+
 ## [1.13.1](https://code.castopod.org/adaures/castopod/compare/v1.13.0...v1.13.1) (2024-12-05)
 
 ### Bug Fixes
