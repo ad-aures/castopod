@@ -88,6 +88,7 @@ class EpisodeModel extends UuidModel
         'location_geo',
         'location_osm',
         'is_published_on_hubs',
+        'downloads_count',
         'posts_count',
         'comments_count',
         'is_premium',

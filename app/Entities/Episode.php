@@ -72,9 +72,9 @@ use RuntimeException;
  * @property string|null $location_geo
  * @property string|null $location_osm
  * @property bool $is_published_on_hubs
+ * @property int $downloads_count
  * @property int $posts_count
  * @property int $comments_count
- * @property int $downloads
  * @property EpisodeComment[]|null $comments
  * @property bool $is_premium
  * @property int $created_by
@@ -111,8 +111,6 @@ class Episode extends Entity
     protected ?Transcript $transcript = null;
 
     protected ?Chapters $chapters = null;
-
-    protected int $downloads = 0;
 
     /**
      * @var Person[]|null
@@ -171,6 +169,7 @@ class Episode extends Entity
         'location_geo'          => '?string',
         'location_osm'          => '?string',
         'is_published_on_hubs'  => 'boolean',
+        'downloads_count'       => 'integer',
         'posts_count'           => 'integer',
         'comments_count'        => 'integer',
         'is_premium'            => 'boolean',

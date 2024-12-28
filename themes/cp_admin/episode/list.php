@@ -92,7 +92,7 @@ data_table(
         [
             'header' => lang('Episode.list.downloads'),
             'cell'   => function ($episode): string {
-                return downloads_abbr($episode->downloads);
+                return downloads_abbr($episode->downloads_count);
             },
         ],
         [
