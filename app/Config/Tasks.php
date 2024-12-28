@@ -51,5 +51,9 @@ class Tasks extends BaseConfig
         $schedule->command('podcast:import')
             ->everyMinute()
             ->named('podcast-import');
+
+        $schedule->command('episodes:compute-downloads')
+            ->everyHour()
+            ->named('episodes:compute-downloads');
     }
 }

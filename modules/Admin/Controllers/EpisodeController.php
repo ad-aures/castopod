@@ -75,34 +75,25 @@ class EpisodeController extends BaseController
             // Use LIKE operator as a fallback.
             if (strlen($query) < 4) {
                 $episodes = $episodeModel
-                    ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
-                    ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                    ->where('episodes.podcast_id', $this->podcast->id)
+                    ->where('podcast_id', $this->podcast->id)
                     ->like('title', $episodeModel->db->escapeLikeString($query))
                     ->orLike('description_markdown', $episodeModel->db->escapeLikeString($query))
                     ->orLike('slug', $episodeModel->db->escapeLikeString($query))
                     ->orLike('location_name', $episodeModel->db->escapeLikeString($query))
-                    ->groupBy('episodes.id')
                     ->orderBy('-`published_at`', '', false)
                     ->orderBy('created_at', 'desc');
             } else {
                 $episodes = $episodeModel
-                    ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
-                    ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                    ->where('episodes.podcast_id', $this->podcast->id)
+                    ->where('podcast_id', $this->podcast->id)
                     ->where(
                         "MATCH (title, description_markdown, slug, location_name) AGAINST ('{$episodeModel->db->escapeString(
                             $query
                         )}')"
-                    )
-                    ->groupBy('episodes.id');
+                    );
             }
         } else {
             $episodes = $episodeModel
-                ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
-                ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
-                ->where('episodes.podcast_id', $this->podcast->id)
-                ->groupBy('episodes.id')
+                ->where('podcast_id', $this->podcast->id)
                 ->orderBy('-`published_at`', '', false)
                 ->orderBy('created_at', 'desc');
         }
