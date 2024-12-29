@@ -210,12 +210,15 @@ if (! function_exists('podcast_hit')) {
      * Counting podcast episode downloads for analytic purposes ✅ No IP address is ever stored on the server. ✅ Only
      * aggregate data is stored in the database. We follow IAB Podcast Measurement Technical Guidelines Version 2.0:
      * https://iabtechlab.com/standards/podcast-measurement-guidelines/
-     * https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf ✅ 24-hour window ✅
-     * Castopod does not do pre-load ✅ IP deny list https://github.com/client9/ipcat ✅ User-agent Filtering
-     * https://github.com/opawg/user-agents ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents ✅
-     * Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app) ✅ In case of partial content,
-     * adds up all requests to check >1mn was downloaded ✅ Identifying Uniques is done with a combination of IP
-     * Address and User Agent
+     * https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf
+     * ✅ 24-hour window
+     * ✅ Castopod does not do pre-load
+     * ✅ IP deny list https://github.com/client9/ipcat
+     * ✅ User-agent Filtering https://github.com/opawg/user-agents-v2
+     * ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents
+     * ✅ Ignores 2 bytes range "Range: 0-1" (performed by official Apple iOS Podcast app)
+     * ✅ In case of partial content, adds up all requests to check >1mn was downloaded
+     * ✅ Identifying Uniques is done with a combination of IP Address and User Agent
      *
      * @param integer $podcastId The podcast ID
      * @param integer $episodeId The Episode ID

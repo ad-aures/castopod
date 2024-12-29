@@ -2,6 +2,34 @@ openapi: 3.1.0
 info:
   version: 1.0.0
   title: Castopod API
+  description: |-
+    The Castopod API offers you a programmatic way to integrate your Podcasts and
+    Episodes in your apps and help you automate creation and publishing.
+
+    ⚠️ **The API is disabled by default.**
+
+    You may add the following feature flag in your `.env` to activate it:
+
+    ```ini
+    restapi.enabled=true
+    ```
+
+    Operations to add or publish episodes require you to setup basic authentication
+    in your `.env`:
+
+    ```ini
+    restapi.basicAuth=true
+    restapi.basicAuthUsername="YOUR_BASIC_AUTH_USERNAME"
+    restapi.basicAuthPassword="YOUR_BASIC_AUTH_PASSWORD"
+    ```
+
+    With BasicAuth enabled, your requests must include the `Authorization` header
+    with the username and password you have set previously:
+
+    ```
+    "Authorization": "Basic username:password"
+    ```
+
   license:
     name: AGPL v3
     url: https://code.castopod.org/adaures/castopod/-/blob/develop/LICENSE.md
