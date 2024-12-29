@@ -18,7 +18,7 @@ class Input extends FormComponent
         $this->mergeClass('w-full border-contrast rounded-lg focus:border-contrast border-3 focus-within:ring-accent transition');
 
         if ($this->type === 'file') {
-            $this->mergeClass('file:px-3 file:py-2 file:h-[40px] file:font-semibold file:text-skin-muted file:text-sm file:rounded-none file:border-none file:bg-highlight file:cursor-pointer');
+            $this->mergeClass('file:px-3 file:py-2 file:h-[40px] file:font-semibold file:text-accent-hover file:text-sm file:rounded-none file:border-none file:bg-base file:cursor-pointer');
         } else {
             $this->mergeClass('px-3 py-2');
         }

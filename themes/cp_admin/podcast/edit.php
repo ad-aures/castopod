@@ -210,18 +210,19 @@ label="<?= esc(lang('Podcast.form.new_feed_url')) ?>"
 hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
 value="<?= esc($podcast->new_feed_url) ?>"
 />
-<Forms.Toggler name="redirect_to_new_feed" value="yes" checked="<?= service('settings')
-            ->get('Podcast.redirect_to_new_feed', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.redirect_to_new_feed_hint')) ?>"><?= lang('Podcast.form.redirect_to_new_feed') ?></Forms.Toggler>
+<x-Forms.Toggler name="redirect_to_new_feed" value="<?= service('settings')->get('Podcast.redirect_to_new_feed', 'podcast:' . $podcast->id) ? 'yes' : '' ?>" hint="<?= esc(lang('Podcast.form.redirect_to_new_feed_hint')) ?>">
+    <?= lang('Podcast.form.redirect_to_new_feed') ?>
+</x-Forms.Toggler>
 
 <hr class="border-subtle">
 
-<x-Forms.Toggler class="mb-2" name="lock" value="<?= $podcast->is_locked ? 'yes' : '' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
+<x-Forms.Toggler name="lock" value="<?= $podcast->is_locked ? 'yes' : '' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
     <?= lang('Podcast.form.lock') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler class="mb-2" name="block" value="<?= $podcast->is_blocked ? 'yes' : ''  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
+<x-Forms.Toggler class="mt-2" name="block" value="<?= $podcast->is_blocked ? 'yes' : ''  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
     <?= lang('Podcast.form.block') ?>
 </x-Forms.Toggler>
-<x-Forms.Toggler name="complete" value="<?= $podcast->is_completed ? 'yes' : '' ?>">
+<x-Forms.Toggler class="mt-2" name="complete" value="<?= $podcast->is_completed ? 'yes' : '' ?>">
     <?= lang('Podcast.form.complete') ?>
 </x-Forms.Toggler>
 

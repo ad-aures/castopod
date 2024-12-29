@@ -206,7 +206,7 @@ class ContributorController extends BaseController
         );
     }
 
-    public function deleteView(): string
+    public function removeView(): string
     {
         helper('form');
 
@@ -222,10 +222,10 @@ class ContributorController extends BaseController
             0 => $this->podcast->at_handle,
             1 => $this->contributor->username,
         ]);
-        return view('contributor/delete', $data);
+        return view('contributor/remove', $data);
     }
 
-    public function deleteAction(): RedirectResponse
+    public function removeAction(): RedirectResponse
     {
         if ($this->podcast->created_by === $this->contributor->id) {
             return redirect()

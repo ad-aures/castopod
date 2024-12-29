@@ -6,6 +6,10 @@
   .form-helper {
     @apply text-skin-muted;
   }
+
+  select {
+    box-shadow: 2px 2px 0 hsl(var(--color-border-contrast));
+  }
 }
 
 @layer components {

@@ -117,7 +117,7 @@ $routes->group(
                 );
                 $routes->get(
                     'remove',
-                    'ContributorController::remove/$1/$2',
+                    'ContributorController::removeView/$1/$2',
                     [
                         'as'     => 'contributor-remove',
                         'filter' => 'permission:podcast$1.manage-contributors',

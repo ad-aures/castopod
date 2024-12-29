@@ -32,9 +32,9 @@ abstract class FormComponent extends Component
     protected string|array|null $value = null;
 
     /**
-     * @var string|string[]
+     * @var string|string[]|null
      */
-    protected string|array $defaultValue = '';
+    protected string|array|null $defaultValue = null;
 
     protected bool $isRequired = false;
 
