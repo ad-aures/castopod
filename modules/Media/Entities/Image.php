@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
-use Config\Services;
 use GdImage;
 use Override;
 
@@ -140,7 +139,7 @@ class Image extends BaseMedia
         }
 
         // save derived sizes
-        $imageService = Services::image();
+        $imageService = service('image');
 
         foreach ($this->sizes as $name => $size) {
             $tempFilePath = tempnam(WRITEPATH . 'temp', 'img_');

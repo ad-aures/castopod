@@ -19,7 +19,6 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Exceptions\ValidationException as ShieldValidationException;
 use Config\Database;
-use Config\Services;
 use Dotenv\Dotenv;
 use Dotenv\Exception\ValidationException;
 use Modules\Auth\Models\UserModel;
@@ -247,7 +246,7 @@ class InstallController extends Controller
      */
     public function migrate(): void
     {
-        $migrate = Services::migrations();
+        $migrate = service('migrations');
 
         $migrate->setNamespace(null)
             ->latest();

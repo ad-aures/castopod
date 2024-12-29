@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 use AdAures\Ipcat\IpDb;
-use Config\Services;
 use GeoIp2\Database\Reader;
 use Opawg\UserAgentsV2Php\UserAgents;
 use WhichBrowser\Parser;
@@ -55,7 +54,7 @@ if (! function_exists('set_user_session_deny_list_ip')) {
      */
     function set_user_session_deny_list_ip(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         if (! $session->has('denyListIp')) {
             $session->set('denyListIp', IpDb::find(client_ip()) !== null);
@@ -69,7 +68,7 @@ if (! function_exists('set_user_session_location')) {
      */
     function set_user_session_location(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         $location = [
             'countryCode' => 'N/A',
@@ -105,7 +104,7 @@ if (! function_exists('set_user_session_player')) {
      */
     function set_user_session_player(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         if (! $session->has('player')) {
             $playerFound = null;
@@ -148,7 +147,7 @@ if (! function_exists('set_user_session_browser')) {
      */
     function set_user_session_browser(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         if (! $session->has('browser')) {
             $browserName = '- Other -';
@@ -174,7 +173,7 @@ if (! function_exists('set_user_session_referer')) {
      */
     function set_user_session_referer(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         $newreferer = service('superglobals')
             ->server('HTTP_REFERER') ?? '- Direct -';
@@ -195,7 +194,7 @@ if (! function_exists('set_user_session_entry_page')) {
      */
     function set_user_session_entry_page(): void
     {
-        $session = Services::session();
+        $session = service('session');
 
         $entryPage = service('superglobals')
             ->server('REQUEST_URI');
@@ -238,7 +237,7 @@ if (! function_exists('podcast_hit')) {
         string $serviceName,
         ?int $subscriptionId,
     ): void {
-        $session = Services::session();
+        $session = service('session');
 
         $clientIp = client_ip();
 

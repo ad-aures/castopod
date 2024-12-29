@@ -9,7 +9,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Override;
 use RuntimeException;
 
@@ -62,7 +61,7 @@ class PermissionFilter implements FilterInterface
         foreach ($arguments as $permission) {
             // is permission specific to a podcast?
             if (str_contains($permission, '$')) {
-                $router = Services::router();
+                $router = service('router');
                 $routerParams = $router->params();
 
                 if (! preg_match('/\$(\d+)\./', $permission, $match)) {

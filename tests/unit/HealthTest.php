@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
-use Config\Services;
 use Tests\Support\Libraries\ConfigReader;
 
 /**
@@ -19,7 +18,7 @@ final class HealthTest extends CIUnitTestCase
 
     public function testBaseUrlHasBeenSet(): void
     {
-        $validation = Services::validation();
+        $validation = service('validation');
 
         $env = false;
 

@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "f95311413c714e2dcef9364da4348b30",
+  "content-hash": "6b99aa0bcdbc76f94b529ba8c5ff0ee7",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -189,16 +189,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.336.2",
+      "version": "3.336.6",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "954bfdfc048840ca34afe2a2e1cbcff6681989c4"
+        "reference": "0a99dab427f0a1c082775301141aeac3558691ad"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/954bfdfc048840ca34afe2a2e1cbcff6681989c4",
-        "reference": "954bfdfc048840ca34afe2a2e1cbcff6681989c4",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0a99dab427f0a1c082775301141aeac3558691ad",
+        "reference": "0a99dab427f0a1c082775301141aeac3558691ad",
         "shasum": ""
       },
       "require": {
@@ -275,9 +275,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.336.2"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.336.6"
       },
-      "time": "2024-12-20T19:05:10+00:00"
+      "time": "2024-12-28T04:16:13+00:00"
     },
     {
       "name": "brick/math",
@@ -448,16 +448,16 @@
     },
     {
       "name": "codeigniter4/framework",
-      "version": "v4.5.5",
+      "version": "v4.5.6",
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/framework.git",
-        "reference": "2849e7ff36b4c4aa1376d990a9a1e3f0c393b8d0"
+        "reference": "7822476e6c672387b0ca1d64a74040ed28c42d9f"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/2849e7ff36b4c4aa1376d990a9a1e3f0c393b8d0",
-        "reference": "2849e7ff36b4c4aa1376d990a9a1e3f0c393b8d0",
+        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/7822476e6c672387b0ca1d64a74040ed28c42d9f",
+        "reference": "7822476e6c672387b0ca1d64a74040ed28c42d9f",
         "shasum": ""
       },
       "require": {
@@ -514,7 +514,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/codeigniter4/CodeIgniter4"
       },
-      "time": "2024-09-07T08:49:38+00:00"
+      "time": "2024-12-28T18:27:37+00:00"
     },
     {
       "name": "codeigniter4/settings",
@@ -1411,16 +1411,16 @@
     },
     {
       "name": "league/commonmark",
-      "version": "2.6.0",
+      "version": "2.6.1",
       "source": {
         "type": "git",
         "url": "https://github.com/thephpleague/commonmark.git",
-        "reference": "d150f911e0079e90ae3c106734c93137c184f932"
+        "reference": "d990688c91cedfb69753ffc2512727ec646df2ad"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d150f911e0079e90ae3c106734c93137c184f932",
-        "reference": "d150f911e0079e90ae3c106734c93137c184f932",
+        "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d990688c91cedfb69753ffc2512727ec646df2ad",
+        "reference": "d990688c91cedfb69753ffc2512727ec646df2ad",
         "shasum": ""
       },
       "require": {
@@ -1512,7 +1512,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-12-07T15:34:16+00:00"
+      "time": "2024-12-29T14:10:59+00:00"
     },
     {
       "name": "league/config",
@@ -2857,12 +2857,12 @@
       },
       "type": "library",
       "extra": {
+        "thanks": {
+          "url": "https://github.com/symfony/contracts",
+          "name": "symfony/contracts"
+        },
         "branch-alias": {
           "dev-main": "3.5-dev"
-        },
-        "thanks": {
-          "name": "symfony/contracts",
-          "url": "https://github.com/symfony/contracts"
         }
       },
       "autoload": {
@@ -3383,11 +3383,11 @@
       "bin": ["bin/captainhook"],
       "type": "library",
       "extra": {
-        "branch-alias": {
-          "dev-main": "6.0.x-dev"
-        },
         "captainhook": {
           "config": "captainhook.json"
+        },
+        "branch-alias": {
+          "dev-main": "6.0.x-dev"
         }
       },
       "autoload": {
@@ -5282,21 +5282,21 @@
     },
     {
       "name": "rector/rector",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "3f27091368bd935dbbaa8387099792fb20f65f68"
+        "reference": "df5de7b80deced1ea7f719a0b4d02e4aee87dd21"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/3f27091368bd935dbbaa8387099792fb20f65f68",
-        "reference": "3f27091368bd935dbbaa8387099792fb20f65f68",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/df5de7b80deced1ea7f719a0b4d02e4aee87dd21",
+        "reference": "df5de7b80deced1ea7f719a0b4d02e4aee87dd21",
         "shasum": ""
       },
       "require": {
         "php": "^7.4|^8.0",
-        "phpstan/phpstan": "^2.0.1"
+        "phpstan/phpstan": "^2.0.4"
       },
       "conflict": {
         "rector/rector-doctrine": "*",
@@ -5318,7 +5318,7 @@
       "keywords": ["automation", "dev", "migration", "refactoring"],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/2.0.3"
+        "source": "https://github.com/rectorphp/rector/tree/2.0.4"
       },
       "funding": [
         {
@@ -5326,7 +5326,7 @@
           "type": "github"
         }
       ],
-      "time": "2024-12-12T15:22:19+00:00"
+      "time": "2024-12-26T23:06:19+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -6562,12 +6562,12 @@
       },
       "type": "library",
       "extra": {
+        "thanks": {
+          "url": "https://github.com/symfony/contracts",
+          "name": "symfony/contracts"
+        },
         "branch-alias": {
           "dev-main": "3.5-dev"
-        },
-        "thanks": {
-          "name": "symfony/contracts",
-          "url": "https://github.com/symfony/contracts"
         }
       },
       "autoload": {
@@ -7092,12 +7092,12 @@
       },
       "type": "library",
       "extra": {
+        "thanks": {
+          "url": "https://github.com/symfony/contracts",
+          "name": "symfony/contracts"
+        },
         "branch-alias": {
           "dev-main": "3.5-dev"
-        },
-        "thanks": {
-          "name": "symfony/contracts",
-          "url": "https://github.com/symfony/contracts"
         }
       },
       "autoload": {

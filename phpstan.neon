@@ -47,6 +47,7 @@ parameters:
             - Modules\Platforms\Config\Services
             - Modules\Plugins\Config\Services
             - Modules\PremiumPodcasts\Config\Services
+            - Modules\Api\Rest\V1\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
         - identifier: missingType.generics

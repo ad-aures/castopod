@@ -9,7 +9,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
-use Modules\Api\Rest\V1\Config\Services;
 
 class PodcastController extends Controller
 {
@@ -17,7 +16,7 @@ class PodcastController extends Controller
 
     public function __construct()
     {
-        Services::restApiExceptions()->initialize();
+        service('restApiExceptions')->initialize();
     }
 
     public function list(): ResponseInterface

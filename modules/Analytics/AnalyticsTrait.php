@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Modules\Analytics;
 
-use Config\Services;
-
 trait AnalyticsTrait
 {
     protected function registerPodcastWebpageHit(int $podcastId): void
@@ -28,7 +26,7 @@ trait AnalyticsTrait
         set_user_session_referer();
         set_user_session_entry_page();
 
-        $session = Services::session();
+        $session = service('session');
 
         if (! $session->get('denyListIp')) {
             $db = db_connect();

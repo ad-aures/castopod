@@ -14,7 +14,6 @@ use App\Entities\Podcast;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Services;
 use Modules\Admin\Controllers\BaseController;
 use Modules\Platforms\Models\PlatformModel;
 
@@ -65,7 +64,7 @@ class PlatformController extends BaseController
     public function updateAction(string $platformType): RedirectResponse
     {
         $platformModel = new PlatformModel();
-        $validation = Services::validation();
+        $validation = service('validation');
 
         $platformsData = [];
         foreach (

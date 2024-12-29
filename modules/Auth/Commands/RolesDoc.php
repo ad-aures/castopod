@@ -8,7 +8,6 @@ use Closure;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\View\Table;
-use Config\Services;
 use League\HTMLToMarkdown\Converter\TableConverter;
 use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Config\AuthGroups;
@@ -59,8 +58,8 @@ class RolesDoc extends BaseCommand
 
         foreach ($files as $file) {
             $locale = $this->detectLocaleFromPath($file);
-            $language = Services::language();
-            $language->setLocale($locale);
+            service('language')
+                ->setLocale($locale);
 
             $authGroups = new AuthGroups();
 

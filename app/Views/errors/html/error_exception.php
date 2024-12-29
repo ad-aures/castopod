@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use CodeIgniter\CodeIgniter;
 use CodeIgniter\HTTP\Header;
-use Config\Services;
 
 $errorId = uniqid('error', true);
 ?>
@@ -228,7 +227,7 @@ while ($prevException = $last->getPrevious()) {
 
 			<!-- Request -->
 			<div class="content" id="request">
-				<?php $request = Services::request(); ?>
+				<?php $request = service('request'); ?>
 
 				<table>
 					<tbody>
@@ -346,7 +345,7 @@ while ($prevException = $last->getPrevious()) {
 
 			<!-- Response -->
 			<?php
-                $response = Services::response();
+                $response = service('response');
 $response->setStatusCode(http_response_code());
 ?>
 			<div class="content" id="response">

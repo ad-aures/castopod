@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Services;
 
 class AboutController extends BaseController
 {
@@ -43,7 +42,7 @@ class AboutController extends BaseController
 
     public function migrateDatabase(): RedirectResponse
     {
-        $migrate = Services::migrations();
+        $migrate = service('migrations');
 
         $migrate->setNamespace(null)
             ->latest();

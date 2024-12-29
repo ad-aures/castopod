@@ -16,7 +16,6 @@ namespace Modules\Fediverse;
 
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\I18n\Time;
-use Config\Services;
 use Exception;
 use phpseclib\Crypt\RSA;
 
@@ -40,7 +39,7 @@ class HttpSignature
     public function __construct(IncomingRequest $request = null)
     {
         if (! $request instanceof IncomingRequest) {
-            $request = Services::request();
+            $request = service('request');
         }
 
         $this->request = $request;
