@@ -35,7 +35,7 @@ class EpisodePersonController extends BaseController
         }
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1]) instanceof Episode)
+            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
