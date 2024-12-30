@@ -23,8 +23,8 @@ importers:
         specifier: ^6.1.0
         version: 6.1.0
       "@codemirror/language":
-        specifier: ^6.10.7
-        version: 6.10.7
+        specifier: ^6.10.8
+        version: 6.10.8
       "@codemirror/state":
         specifier: ^6.5.0
         version: 6.5.0
@@ -53,8 +53,8 @@ importers:
         specifier: ^5.4.1
         version: 5.4.1
       choices.js:
-        specifier: ^11.0.2
-        version: 11.0.2
+        specifier: ^11.0.3
+        version: 11.0.3
       codemirror:
         specifier: ^6.0.1
         version: 6.0.1(@lezer/common@1.2.3)
@@ -1059,10 +1059,10 @@ packages:
         integrity: sha512-3z0blhicHLfwi2UgkZYRPioSgVTo9PV5GP5ducFH6FaHy0IAJRg+ixj5gTR1gnT/glAIC8xv4w2VL1LoZfs+Jg==,
       }
 
-  "@codemirror/language@6.10.7":
+  "@codemirror/language@6.10.8":
     resolution:
       {
-        integrity: sha512-aOswhVOLYhMNeqykt4P7+ukQSpGL0ynZYaEyFDVHE7fl2xgluU3yuE9MdgYNfw6EmaNidoFMIQ2iTh1ADrnT6A==,
+        integrity: sha512-wcP8XPPhDH2vTqf181U8MbZnW+tDyPYy0UzVOa+oHORjyT+mhhom9vBd7dApJwoDz9Nb/a8kHjJIsuA/t8vNFw==,
       }
 
   "@codemirror/lint@6.8.2":
@@ -3240,10 +3240,10 @@ packages:
         integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==,
       }
 
-  choices.js@11.0.2:
+  choices.js@11.0.3:
     resolution:
       {
-        integrity: sha512-jGmvoZBQwfxGL7qOeadg/iprsK/XQwXvLnN0ZZwQIDtxtPjP5z7vgZCwr/zdrGAVAnC4+uomPD4+Pl/N/6XSqA==,
+        integrity: sha512-sn1oLUEcvjj7vSSIT0QyexmLIeD6PFGSWrUUXKShL2LUtVFXU3OAIY/smNIQg0OKav3yk1rFa+F56hZ/uYC4cg==,
       }
 
   chokidar@3.6.0:
@@ -9793,24 +9793,24 @@ snapshots:
       "@babel/helper-string-parser": 7.25.9
       "@babel/helper-validator-identifier": 7.25.9
 
-  "@codemirror/autocomplete@6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)":
+  "@codemirror/autocomplete@6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)":
     dependencies:
-      "@codemirror/language": 6.10.7
+      "@codemirror/language": 6.10.8
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
 
   "@codemirror/commands@6.7.1":
     dependencies:
-      "@codemirror/language": 6.10.7
+      "@codemirror/language": 6.10.8
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
 
   "@codemirror/lang-css@6.3.1(@codemirror/view@6.36.1)":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
-      "@codemirror/language": 6.10.7
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/language": 6.10.8
       "@codemirror/state": 6.5.0
       "@lezer/common": 1.2.3
       "@lezer/css": 1.1.9
@@ -9819,10 +9819,10 @@ snapshots:
 
   "@codemirror/lang-html@6.4.9":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/lang-css": 6.3.1(@codemirror/view@6.36.1)
       "@codemirror/lang-javascript": 6.2.2
-      "@codemirror/language": 6.10.7
+      "@codemirror/language": 6.10.8
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
@@ -9831,8 +9831,8 @@ snapshots:
 
   "@codemirror/lang-javascript@6.2.2":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
-      "@codemirror/language": 6.10.7
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/language": 6.10.8
       "@codemirror/lint": 6.8.2
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
@@ -9841,14 +9841,14 @@ snapshots:
 
   "@codemirror/lang-xml@6.1.0":
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
-      "@codemirror/language": 6.10.7
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/language": 6.10.8
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
       "@lezer/common": 1.2.3
       "@lezer/xml": 1.0.5
 
-  "@codemirror/language@6.10.7":
+  "@codemirror/language@6.10.8":
     dependencies:
       "@codemirror/state": 6.5.0
       "@codemirror/view": 6.36.1
@@ -11277,7 +11277,7 @@ snapshots:
 
   chardet@0.7.0: {}
 
-  choices.js@11.0.2:
+  choices.js@11.0.3:
     dependencies:
       fuse.js: 7.0.0
 
@@ -11355,9 +11355,9 @@ snapshots:
 
   codemirror@6.0.1(@lezer/common@1.2.3):
     dependencies:
-      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.7)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
+      "@codemirror/autocomplete": 6.18.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.0)(@codemirror/view@6.36.1)(@lezer/common@1.2.3)
       "@codemirror/commands": 6.7.1
-      "@codemirror/language": 6.10.7
+      "@codemirror/language": 6.10.8
       "@codemirror/lint": 6.8.2
       "@codemirror/search": 6.5.7
       "@codemirror/state": 6.5.0
