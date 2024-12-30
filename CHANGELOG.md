@@ -1,3 +1,84 @@
+## [2.0.0-next.3](https://code.castopod.org/adaures/castopod/compare/v2.0.0-next.2...v2.0.0-next.3) (2024-12-30)
+
+### Features
+
+- **api:** add Episode create and publish endpoints
+  ([a90cdfd](https://code.castopod.org/adaures/castopod/commit/a90cdfdcdbde7a8fb520c6815d7b757947aea055))
+- **image:** add image size's width and height
+  ([f50098e](https://code.castopod.org/adaures/castopod/commit/f50098ec8926c8ae40718f5f128b6de7fe721b46))
+- **plugins:** add defaultValue for all field types
+  ([d3a98db](https://code.castopod.org/adaures/castopod/commit/d3a98db6d0112b5f59daddd2708c09dd2e595332))
+- **plugins:** add group field type + multiple option to render field arrays
+  ([11ccd0e](https://code.castopod.org/adaures/castopod/commit/11ccd0ebe71d476d8c0dbfe28edcf01f7f362b83))
+- **plugins:** add html field type + CodeEditor component + rework html head
+  generation
+  ([8cf9c6d](https://code.castopod.org/adaures/castopod/commit/8cf9c6dc833aedcccbc4cdb309b111f84d97d629))
+- **rss:** add option for 301 redirect to new feed url
+  ([8402cc2](https://code.castopod.org/adaures/castopod/commit/8402cc29d2d0c61b014a7e03e5ccce7d3c11782a))
+
+### Bug Fixes
+
+- add downloads_count to episodes table, computed every hour
+  ([f981937](https://code.castopod.org/adaures/castopod/commit/f9819376455c371eb5bd3c84ad938698335a3d67))
+- allow passing json to app.proxyIPs config to set it
+  ([cbf739e](https://code.castopod.org/adaures/castopod/commit/cbf739e95cc0ad6e83a21353b8f4678e68d74f63))
+- **api:** cast integers when creating episode
+  ([775b302](https://code.castopod.org/adaures/castopod/commit/775b302f7c886e30e133c8a8c68764301b6c663b))
+- **docker-image:** clear cache to account for new assets and data structure
+  changes
+  ([63c763f](https://code.castopod.org/adaures/castopod/commit/63c763f941195b3758c4b91acd8c350a5e7bb9c2)),
+  closes [#510](https://code.castopod.org/adaures/castopod/issues/510)
+- edit remap functions to get episode in episode admin controllers
+  ([9f74cca](https://code.castopod.org/adaures/castopod/commit/9f74cca342fedd896977efd2e89d0143959f3c4f))
+- **episode:** do not change slug when editing episode title
+  ([a83afb0](https://code.castopod.org/adaures/castopod/commit/a83afb0004511db80337806577fbc36f8d777116)),
+  closes [#513](https://code.castopod.org/adaures/castopod/issues/513)
+- **fediverse:** add "processing" and "failed" statuses to better manage
+  broadcast load
+  ([1d7583d](https://code.castopod.org/adaures/castopod/commit/1d7583d738219574ae3d45d294dc94e7e406472b)),
+  closes [#511](https://code.castopod.org/adaures/castopod/issues/511)
+- **icons:** set correct names for lock and lock-unlock icons in premium banner
+  ([37ee6d3](https://code.castopod.org/adaures/castopod/commit/37ee6d35b4bb66ce23dc271fb846200d1be0e7f6))
+- **plugins:** clear cache after activating or deactivating plugin
+  ([08c7df2](https://code.castopod.org/adaures/castopod/commit/08c7df2a5d5be340490c78deeef823167eb1b2fc))
+- **plugins:** delete relevant cache when submitting settings
+  ([00bd4c0](https://code.castopod.org/adaures/castopod/commit/00bd4c02ee23b181d74e7731626bfec3b1ff4916))
+- **podcast-model:** always query podcast from database when clearing cache
+  ([d30c49c](https://code.castopod.org/adaures/castopod/commit/d30c49cdff380c15db4f1851631a255a5baffcbe))
+- **premium-podcasts:** update query to validate subscription
+  ([2b1bbf3](https://code.castopod.org/adaures/castopod/commit/2b1bbf34303ead927f433b5c7d5d888ca3799954))
+- **preview:** delete episode preview cache after editing episode
+  ([732d429](https://code.castopod.org/adaures/castopod/commit/732d42923d0d7a66ff1ebd5841458e4205060560)),
+  closes [#514](https://code.castopod.org/adaures/castopod/issues/514)
+- **release:** add conventional-changelog-conventionalcommits for CHANGELOG
+  generation
+  ([6934c8a](https://code.castopod.org/adaures/castopod/commit/6934c8aa8f0b7f9eea7c3f6f4089c56b2391d9a6))
+- **rss:** add subscription id to cache name to prevent premium feeds from
+  overlapping
+  ([74f9325](https://code.castopod.org/adaures/castopod/commit/74f9325946d03a0d4efce57045e41cc9454ff97c))
+- set user as www-data when running cron jobs in docker's supervisord config
+  ([65d74f1](https://code.castopod.org/adaures/castopod/commit/65d74f14e612be3757c9304518eee112705f5ff9))
+- typo in EpisodeController remap function to get episode
+  ([f288a75](https://code.castopod.org/adaures/castopod/commit/f288a750f580ab19b04a170cc76bf8769084e19d))
+- update select and multi-select options to value/label arrays
+  ([63f93f5](https://code.castopod.org/adaures/castopod/commit/63f93f585bec4a11022cc8c75deb34968cba2348))
+
+### Internal
+
+- **plugins:** create Field objects per field type in settings forms + handle
+  rendering in class
+  ([34be5bc](https://code.castopod.org/adaures/castopod/commit/34be5bccabb7531afdcc6ebaf1dd39e4dfbe0677))
+- remove fields from podcast and episode entities to be replaced with plugins
+  ([b869acb](https://code.castopod.org/adaures/castopod/commit/b869acb3a988a3616d883a41c25d9c8409bd5518))
+- rename controller methods for views and actions to be more consistent
+  ([85704bf](https://code.castopod.org/adaures/castopod/commit/85704bfbe03fe5e38ff5e76a0e1cf0e5f1275f57))
+- update CodeIgniter to v4.5.6
+  ([f295e9a](https://code.castopod.org/adaures/castopod/commit/f295e9aa4ca3129df24a22779f7c19bba7fac370))
+- update codigniter-icons to v1.0.1
+  ([fa6967e](https://code.castopod.org/adaures/castopod/commit/fa6967e65cef1705b19cbb205132c4c751507d53))
+- update js dependencies to latest
+  ([70c9797](https://code.castopod.org/adaures/castopod/commit/70c97971fcf5bbeee826578057ae0e3afbbbd8a8))
+
 # [2.0.0-next.2](https://code.castopod.org/adaures/castopod/compare/v2.0.0-next.1...v2.0.0-next.2) (2024-07-08)
 
 ### Bug Fixes
