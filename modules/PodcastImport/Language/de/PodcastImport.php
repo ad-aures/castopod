@@ -60,7 +60,7 @@ return [
         'alreadyRunning' => 'Import Task is already running. You may cancel it before retrying.',
         'retried' => 'Import task has been queued, it will be retried shortly!',
         'deleted' => 'Import task has been successfully deleted!',
-        'importTaskQueued' => 'An new task has been queued, import will start shortly!',
+        'importTaskQueued' => 'A new task has been queued, import will start shortly!',
         'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
     ],
 ];

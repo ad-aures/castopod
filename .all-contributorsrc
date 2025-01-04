@@ -3,17 +3,15 @@
   "projectOwner": "adaures",
   "repoType": "gitlab",
   "repoHost": "https://code.castopod.org",
-  "files": ["README.md", "docs/src/content/docs/en/index.mdx"],
+  "files": ["README.md"],
   "imageSize": 100,
   "commit": false,
-  "contributorsPerLine": 7,
-  "wrapperTemplate": "\n<table class=\"all-contributors-table\">\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n",
   "contributors": [
     {
       "login": "yassinedoghri",
       "name": "Yassine Doghri",
-      "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/3/avatar.png",
-      "profile": "https://github.com/yassinedoghri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11021441?v=4",
+      "profile": "https://yassinedoghri.com",
       "contributions": [
         "code",
         "bug",
@@ -473,18 +471,6 @@
       ]
     },
     {
-      "login": "ghose",
-      "name": "ghose (XoseM)",
-      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/12617257/large/a201650da44fed28890b0e0d8477a663.jpg",
-      "profile": "https://crowdin.com/profile/xosem",
-      "contributions": [
-        {
-          "type": "translation",
-          "url": "https://translate.castopod.org"
-        }
-      ]
-    },
-    {
       "login": "basen1982",
       "name": "Andreas Olsson",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
@@ -545,7 +531,7 @@
       ]
     },
     {
-      "login": "ahmed.sabouni11",
+      "login": "ahmedsabouni",
       "name": "Ahmed Sabouni",
       "avatar_url": "https://avatars.githubusercontent.com/u/74497842?v=4",
       "profile": "https://github.com/ahmedsabouni",
@@ -564,11 +550,25 @@
       "contributions": ["code"]
     },
     {
-      "login": "NeoluxConsulting",
+      "login": "Dwev",
       "name": "Guy Martin",
-      "avatar_url": "https://secure.gravatar.com/avatar/6e745565356330c1e29a85d52bffdaa1?s=80&d=identicon",
-      "profile": "https://code.castopod.org/NeoluxConsulting",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46626050?v=4",
+      "profile": "https://github.com/Dwev",
       "contributions": ["bug", "code"]
+    },
+    {
+      "login": "prcutler",
+      "name": "Paul Cutler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67276?v=4",
+      "profile": "https://github.com/prcutler",
+      "contributions": ["doc", "question", "ideas"]
+    },
+    {
+      "login": "nateritter",
+      "name": "Nate Ritter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/198798?v=4",
+      "profile": "https://github.com/nateritter",
+      "contributions": ["code"]
     }
   ],
   "commitConvention": "none"

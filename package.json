@@ -23,6 +23,8 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "typecheck": "tsc",
+    "all-contributors:add": "all-contributors add",
+    "all-contributors:generate": "all-contributors generate",
     "commit": "cz",
     "release": "semantic-release",
     "prepare": "is-ci || husky"
