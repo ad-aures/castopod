@@ -1,3 +1,11 @@
+## [1.13.3](https://code.castopod.org/adaures/castopod/compare/v1.13.2...v1.13.3) (2025-01-08)
+
+### Bug Fixes
+
+- remove exit function from podcast:import command to allow for
+  episodes:compute-downloads to run
+  ([3359abf](https://code.castopod.org/adaures/castopod/commit/3359abf3fc7d6ddf9db2cacc3e25f7c6d99e33a6))
+
 ## [1.13.2](https://code.castopod.org/adaures/castopod/compare/v1.13.1...v1.13.2) (2024-12-28)
 
 ### Bug Fixes
