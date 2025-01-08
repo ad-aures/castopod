@@ -33,7 +33,7 @@
             <h1 class="font-semibold leading-tight opacity-100 line-clamp-2 hover:opacity-75"><?= esc($episode->title) ?></h1>
         </a>
         <?php if ($episode->is_premium && ! is_unlocked($podcast->handle)): ?>
-            <?php // @icon('lock-fill')?>
+            <?php // @icon("lock-fill")?>
             <Button variant="primary" class="mt-auto mb-2" iconLeft="lock-fill" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></Button>
         <?php else: ?>
         <vm-player

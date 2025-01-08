@@ -8,8 +8,6 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-use Config\Services;
-
 if (! function_exists('render_breadcrumb')) {
     /**
      * Renders the breadcrumb navigation through the Breadcrumb service
@@ -19,7 +17,7 @@ if (! function_exists('render_breadcrumb')) {
      */
     function render_breadcrumb(string $class = null): string
     {
-        $breadcrumb = Services::breadcrumb();
+        $breadcrumb = service('breadcrumb');
         return $breadcrumb->render($class);
     }
 }
@@ -30,7 +28,7 @@ if (! function_exists('replace_breadcrumb_params')) {
      */
     function replace_breadcrumb_params(array $newParams): void
     {
-        $breadcrumb = Services::breadcrumb();
+        $breadcrumb = service('breadcrumb');
         $breadcrumb->replaceParams(esc($newParams));
     }
 }

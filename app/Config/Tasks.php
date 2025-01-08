@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Config;
 
-use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Tasks\Config\Tasks as BaseTasks;
 use CodeIgniter\Tasks\Scheduler;
 
-class Tasks extends BaseConfig
+class Tasks extends BaseTasks
 {
     /**
      * --------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class Tasks extends BaseConfig
      * If true, will log the time it takes for each task to run.
      * Requires the settings table to have been created previously.
      */
-    public bool $logPerformance = false;
+    public bool $logPerformance = true;
 
     /**
      * --------------------------------------------------------------------------

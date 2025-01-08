@@ -28,7 +28,7 @@
     type="password"
     required="true"
     autocomplete="new-password" />
-<?php // @icon('check-fill')?>
+<?php // @icon("check-fill")?>
 <Button variant="primary" type="submit" class="self-end" iconLeft="check-fill"><?= lang('Install.form.submit') ?></Button>
 
 </form>

@@ -170,7 +170,7 @@
         </div>
         <?php if (auth()->loggedIn()): ?>
             <?php if (in_array($episode->publication_status, ['scheduled', 'with_podcast'], true)): ?>
-                <?php // @icon('upload-cloud-fill')?>
+                <?php // @icon("upload-cloud-fill")?>
                 <Button
                     iconLeft="upload-cloud-fill"
                     variant="primary"
@@ -178,7 +178,7 @@
                     class="ml-auto"
                     uri="<?= route_to('episode-publish_edit', $episode->podcast_id, $episode->id) ?>"><?= lang('Episode.preview.publish_edit') ?></Button>
             <?php else: ?>
-                <?php // @icon('upload-cloud-fill')?>
+                <?php // @icon("upload-cloud-fill")?>
                 <Button
                     iconLeft="upload-cloud-fill"
                     variant="secondary"

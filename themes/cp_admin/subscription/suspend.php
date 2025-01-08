@@ -28,7 +28,7 @@
 
 <div class="flex items-center self-end mt-4 gap-x-2">
     <Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></Button>
-    <?php // @icon('pause-fill')?>
+    <?php // @icon("pause-fill")?>
     <Button type="submit" variant="warning" iconLeft="pause-fill"><?= lang('Subscription.suspend_form.submit') ?></Button>
 </div>
 

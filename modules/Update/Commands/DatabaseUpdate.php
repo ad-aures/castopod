@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Update\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
-use Config\Services;
 
 class DatabaseUpdate extends BaseCommand
 {
@@ -26,7 +25,7 @@ class DatabaseUpdate extends BaseCommand
 
     public function run(array $params): void
     {
-        $migrate = Services::migrations();
+        $migrate = service('migrations');
 
         $migrate->setNamespace(null)
             ->latest();

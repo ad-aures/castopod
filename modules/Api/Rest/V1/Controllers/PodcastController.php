@@ -9,7 +9,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
-use Modules\Api\Rest\V1\Config\Services;
 
 class PodcastController extends Controller
 {
@@ -17,7 +16,7 @@ class PodcastController extends Controller
 
     public function __construct()
     {
-        Services::restApiExceptions()->initialize();
+        service('restApiExceptions')->initialize();
     }
 
     public function list(): ResponseInterface
@@ -44,9 +43,9 @@ class PodcastController extends Controller
     {
         $podcast->feed_url = $podcast->getFeedUrl();
         $podcast->actor_display_name = $podcast->getActor()
-->display_name;
+            ->display_name;
         $podcast->cover_url = $podcast->getCover()
-->file_url;
+            ->file_url;
 
         $categories = [$podcast->getCategory(), ...$podcast->getOtherCategories()];
 

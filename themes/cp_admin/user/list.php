@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('user-add-fill')?>
+<?php // @icon("user-add-fill")?>
 <Button uri="<?= route_to('user-create') ?>" variant="primary" iconLeft="user-add-fill"><?= lang('User.create') ?></Button>
 <?= $this->endSection() ?>
 
@@ -37,7 +37,7 @@
                     $role = '<div class="inline-flex items-center"><span class="mr-2 focus:ring-accent" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.instance_groups.owner.title') . '">' . icon('shield-user-fill') . '</span>' . $role . '</div>';
                 }
 
-                // @icon('pencil-fill')
+                // @icon("pencil-fill")
                 return $role . '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="pencil-fill" variant="info">' . lang('User.edit_role', [
                     'username' => esc($user->username),
                 ]) . '</IconButton>';

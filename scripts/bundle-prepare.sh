@@ -6,4 +6,3 @@ composer install --no-dev --prefer-dist --no-ansi --no-interaction --no-progress
 
 # build all production static assets (css, js, images, icons, fonts, etc.)
 pnpm run build
-pnpm run build:static

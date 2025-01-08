@@ -458,7 +458,7 @@ class Platforms
     }
 
     /**
-     * @return null|array{label:string,home_url:string,submit_url:?string}>
+     * @return null|array{label:string,home_url:string,submit_url:?string}
      */
     public function findPlatformBySlug(string $type, string $slug): ?array
     {

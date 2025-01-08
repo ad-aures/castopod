@@ -7,11 +7,11 @@ use Modules\Auth\Models\UserModel;
 
 $navigation = [
     'dashboard' => [
-        'icon'  => 'dashboard-fill', // @icon('dashboard-fill')
+        'icon'  => 'dashboard-fill', // @icon("dashboard-fill")
         'items' => ['admin'],
     ],
     'podcasts' => [
-        'icon'              => 'mic-fill', // @icon('mic-fill')
+        'icon'              => 'mic-fill', // @icon("mic-fill")
         'items'             => ['podcast-list', 'podcast-create', 'all-podcast-imports', 'podcast-imports-add'],
         'items-permissions' => [
             'podcast-create'      => 'podcasts.create',
@@ -22,7 +22,7 @@ $navigation = [
         'count-route' => 'podcast-list',
     ],
     'persons' => [
-        'icon'              => 'folder-user-fill', // @icon('folder-user-fill')
+        'icon'              => 'folder-user-fill', // @icon("folder-user-fill")
         'items'             => ['person-list', 'person-create'],
         'items-permissions' => [
             'person-list'   => 'persons.manage',
@@ -33,7 +33,7 @@ $navigation = [
         'count-route' => 'person-list',
     ],
     'fediverse' => [
-        'icon'              => 'rocket-2-fill', // @icon('rocket-2-fill')
+        'icon'              => 'rocket-2-fill', // @icon("rocket-2-fill")
         'items'             => ['fediverse-blocked-actors', 'fediverse-blocked-domains'],
         'items-permissions' => [
             'fediverse-blocked-actors'  => 'fediverse.manage-blocks',
@@ -41,7 +41,7 @@ $navigation = [
         ],
     ],
     'users' => [
-        'icon'              => 'group-fill', // @icon('group-fill')
+        'icon'              => 'group-fill', // @icon("group-fill")
         'items'             => ['user-list', 'user-create'],
         'items-permissions' => [
             'user-list'   => 'users.manage',
@@ -52,7 +52,7 @@ $navigation = [
         'count-route' => 'user-list',
     ],
     'pages' => [
-        'icon'              => 'pages-fill', // @icon('pages-fill')
+        'icon'              => 'pages-fill', // @icon("pages-fill")
         'items'             => ['page-list', 'page-create'],
         'items-permissions' => [
             'page-list'   => 'pages.manage',
@@ -63,7 +63,7 @@ $navigation = [
         'count-route' => 'page-list',
     ],
     'settings' => [
-        'icon'              => 'settings-3-fill', // @icon('settings-3-fill')
+        'icon'              => 'settings-3-fill', // @icon("settings-3-fill")
         'items'             => ['settings-general', 'settings-theme', 'admin-about'],
         'items-permissions' => [
             'settings-general' => 'admin.settings',

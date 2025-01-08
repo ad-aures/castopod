@@ -60,7 +60,7 @@
                 hint="<?= esc(lang('Fediverse.your_handle_hint')) ?>"
                 required="true"
             />
-            <?php // @icon('send-plane-2-fill')?>
+            <?php // @icon("send-plane-2-fill")?>
             <Button variant="primary" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>

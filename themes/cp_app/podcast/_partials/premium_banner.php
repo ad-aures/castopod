@@ -4,8 +4,8 @@ if ($podcast->is_premium): ?>
     <?php
         $isUnlocked = service('premium_podcasts')
             ->isUnlocked($podcast->handle);
-    // @icon('lock-unlock-fill')
-    // @icon('lock-fill')
+    // @icon("lock-unlock-fill")
+    // @icon("lock-fill")
     $shownIcon = $isUnlocked ? 'lock-unlock-fill' : 'lock-fill';
     $hiddenIcon = $isUnlocked ? 'lock-fill' : 'lock-unlock-fill';
     ?>
@@ -27,7 +27,7 @@ if ($podcast->is_premium): ?>
                     ]) ?>
                     <?= $isUnlocked ? lang('PremiumPodcasts.lock') : lang('PremiumPodcasts.unlock') ?>
                 </Button>
-                <?php // @icon('external-link-fill')?>
+                <?php // @icon("external-link-fill")?>
                 <Button
                     iconLeft="external-link-fill"
                     target="_blank"

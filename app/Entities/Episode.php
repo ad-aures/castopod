@@ -73,7 +73,7 @@ use SimpleXMLElement;
  * @property string|null $location_name
  * @property string|null $location_geo
  * @property string|null $location_osm
- * @property array|null $custom_rss
+ * @property array<string|int,mixed>|null $custom_rss
  * @property string $custom_rss_string
  * @property bool $is_published_on_hubs
  * @property int $downloads_count
@@ -200,7 +200,7 @@ class Episode extends Entity
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastCoverSizes,
+                    ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -283,7 +283,7 @@ class Episode extends Entity
             $transcript = new Transcript([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-->language_code,
+                    ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -320,7 +320,7 @@ class Episode extends Entity
             $chapters = new Chapters([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-->language_code,
+                    ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -346,10 +346,10 @@ class Episode extends Entity
         $audioURL = url_to(
             'episode-audio',
             $this->getPodcast()
-->handle,
+                ->handle,
             $this->slug,
             $this->getAudio()
-->file_extension
+                ->file_extension
         );
 
         // Wrap episode url with OP3 if episode is public and OP3 is enabled on this podcast
@@ -534,7 +534,7 @@ class Episode extends Entity
 
         if ($this->getPodcast()->episode_description_footer_html) {
             $descriptionHtml .= "<footer>{$this->getPodcast()
-->episode_description_footer_html}</footer>";
+                ->episode_description_footer_html}</footer>";
         }
 
         return $descriptionHtml;

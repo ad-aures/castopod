@@ -69,10 +69,9 @@ lint-php:
 lint-js:
   stage: quality
   script:
-    - pnpm run prettier
+    - pnpm run format
     - pnpm run typecheck
     - pnpm run lint
-    - pnpm run lint:css
   dependencies:
     - js-dependencies
 

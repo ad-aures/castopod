@@ -229,8 +229,6 @@ class EpisodeCommentModel extends UuidModel
             $episodeComments . ' UNION ' . $episodePostsReplies . ' ORDER BY created_at ASC'
         );
 
-        // FIXME:?
-        // @phpstan-ignore-next-line
         return $this->convertUuidFieldsToStrings(
             $allEpisodeComments->getCustomResultObject($this->tempReturnType),
             $this->tempReturnType

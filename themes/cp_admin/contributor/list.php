@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <Button uri="<?= route_to('contributor-add', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Contributor.add') ?></Button>
 <?= $this->endSection() ?>
 
@@ -39,8 +39,8 @@
         [
             'header' => lang('Common.actions'),
             'cell'   => function ($contributor, $podcast) {
-                // @icon('pencil-fill')
-                // @icon('delete-bin-fill')
+                // @icon("pencil-fill")
+                // @icon("delete-bin-fill")
                 return '<Button uri="' . route_to('contributor-edit', $podcast->id, $contributor->id) . '" variant="secondary" iconLeft="pencil-fill" size="small">' . lang('Contributor.edit') . '</Button>' .
                 '<Button uri="' . route_to('contributor-remove', $podcast->id, $contributor->id) . '" variant="danger" iconLeft="delete-bin-fill" size="small">' . lang('Contributor.remove') . '</Button>';
             },

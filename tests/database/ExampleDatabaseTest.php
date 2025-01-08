@@ -45,6 +45,7 @@ class ExampleDatabaseTest extends CIUnitTestCase
         $model->delete($object->id);
 
         // The model should no longer find it
+        // @phpstan-ignore-next-line
         $this->assertNull($model->find($object->id));
 
         // ... but it should still be in the database

@@ -28,7 +28,7 @@
         <input slot="duration" type="number" name="duration" placeholder="<?= lang('VideoClip.form.duration') ?>" step="0.001" />
     </audio-clipper>
 
-    <?php // @icon('arrow-right-fill')?>
+    <?php // @icon("arrow-right-fill")?>
     <Button variant="primary" type="submit" class="self-end mt-4" iconRight="arrow-right-fill"><?= lang('Soundbite.form.submit') ?></Button>
 
 </form>

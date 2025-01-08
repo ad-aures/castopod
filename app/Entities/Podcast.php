@@ -78,7 +78,7 @@ use RuntimeException;
  * @property string|null $location_geo
  * @property string|null $location_osm
  * @property string|null $payment_pointer
- * @property array|null $custom_rss
+ * @property array<string|int,mixed>|null $custom_rss
  * @property bool $is_op3_enabled
  * @property string $op3_url
  * @property string $custom_rss_string
@@ -255,7 +255,7 @@ class Podcast extends Entity
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastCoverSizes,
+                    ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);
@@ -298,7 +298,7 @@ class Podcast extends Entity
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
                 'sizes'    => config('Images')
-->podcastBannerSizes,
+                    ->podcastBannerSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
             ]);

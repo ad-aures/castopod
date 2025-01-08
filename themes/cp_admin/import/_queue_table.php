@@ -21,12 +21,12 @@ use Modules\PodcastImport\Entities\TaskStatus;
                 ];
 
                 $pillIconMap = [
-                    'queued'   => 'timer-fill', // @icon('timer-fill')
-                    'pending'  => 'pause-fill', // @icon('pause-fill')
-                    'running'  => 'loader-fill', // @icon('loader-fill')
-                    'canceled' => 'forbid-fill', // @icon('forbid-fill')
-                    'failed'   => 'close-fill', // @icon('close-fill')
-                    'passed'   => 'check-fill', // @icon('check-fill')
+                    'queued'   => 'timer-fill', // @icon("timer-fill")
+                    'pending'  => 'pause-fill', // @icon("pause-fill")
+                    'running'  => 'loader-fill', // @icon("loader-fill")
+                    'canceled' => 'forbid-fill', // @icon("forbid-fill")
+                    'failed'   => 'close-fill', // @icon("close-fill")
+                    'passed'   => 'check-fill', // @icon("check-fill")
                 ];
 
                 $pillIconClassMap = [

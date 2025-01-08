@@ -15,7 +15,6 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
-use Modules\Api\Rest\V1\Config\Services;
 use Modules\Auth\Models\UserModel;
 
 class EpisodeController extends Controller
@@ -24,7 +23,7 @@ class EpisodeController extends Controller
 
     public function __construct()
     {
-        Services::restApiExceptions()->initialize();
+        service('restApiExceptions')->initialize();
     }
 
     public function list(): ResponseInterface
@@ -296,7 +295,7 @@ class EpisodeController extends Controller
     protected static function mapEpisode(Episode $episode): Episode
     {
         $episode->cover_url = $episode->getCover()
-->file_url;
+            ->file_url;
         $episode->audio_url = $episode->getAudioUrl();
         $episode->duration = round($episode->audio->duration);
 

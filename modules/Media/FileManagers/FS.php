@@ -13,7 +13,6 @@ class FS implements FileManagerInterface
     public function __construct(
         protected MediaConfig $config
     ) {
-        $this->config = $config;
     }
 
     /**

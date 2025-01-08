@@ -27,7 +27,7 @@
         ])) ?>"
     selected="file"
     required="true" />
-<?php // @icon('arrow-right-fill')?>
+<?php // @icon("arrow-right-fill")?>
 <Button variant="primary" class="self-end" iconRight="arrow-right-fill" type="submit"><?= lang('Install.form.next') ?></Button>
 
 <?= form_close() ?>

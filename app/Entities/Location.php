@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
-use Config\Services;
 
 /**
  * @property string $url
@@ -85,7 +84,7 @@ class Location extends Entity
      */
     public function fetchOsmLocation(): static
     {
-        $client = Services::curlrequest();
+        $client = service('curlrequest');
 
         $response = $client->request(
             'GET',

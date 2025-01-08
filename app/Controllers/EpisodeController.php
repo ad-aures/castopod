@@ -21,7 +21,6 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Embed;
-use Config\Services;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
@@ -293,7 +292,7 @@ class EpisodeController extends BaseController
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
-        $session = Services::session();
+        $session = service('session');
 
         if (service('superglobals')->server('HTTP_REFERER') !== null) {
             $session->set('embed_domain', parse_url(service('superglobals')->server('HTTP_REFERER'), PHP_URL_HOST));

@@ -158,20 +158,20 @@ if (! function_exists('publication_button')) {
                 $label = lang('Episode.publish');
                 $route = route_to('episode-publish', $podcastId, $episodeId);
                 $variant = 'primary';
-                $iconLeft = 'upload-cloud-fill'; // @icon('upload-cloud-fill')
+                $iconLeft = 'upload-cloud-fill'; // @icon("upload-cloud-fill")
                 break;
             case 'with_podcast':
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
                 $route = route_to('episode-publish_edit', $podcastId, $episodeId);
                 $variant = 'warning';
-                $iconLeft = 'upload-cloud-fill'; // @icon('upload-cloud-fill')
+                $iconLeft = 'upload-cloud-fill'; // @icon("upload-cloud-fill")
                 break;
             case 'published':
                 $label = lang('Episode.unpublish');
                 $route = route_to('episode-unpublish', $podcastId, $episodeId);
                 $variant = 'danger';
-                $iconLeft = 'cloud-off-fill'; // @icon('cloud-off-fill')
+                $iconLeft = 'cloud-off-fill'; // @icon("cloud-off-fill")
                 break;
             default:
                 $label = '';

@@ -16,7 +16,7 @@ $routes->add('scheduled-video-clips', 'SchedulerController::generateVideoClips',
 // Admin area routes
 $routes->group(
     config('Admin')
-->gateway,
+        ->gateway,
     [
         'namespace' => 'Modules\Admin\Controllers',
     ],

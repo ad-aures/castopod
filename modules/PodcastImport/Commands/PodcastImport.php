@@ -16,7 +16,6 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
-use Config\Services;
 use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Models\UserModel;
@@ -44,7 +43,7 @@ class PodcastImport extends BaseCommand
 
     protected ?Podcast $podcast = null;
 
-    public function init(): void
+    public function init(): bool
     {
         helper('podcast_import');
 
@@ -70,8 +69,8 @@ class PodcastImport extends BaseCommand
         $nextImport = end($queuedImports);
 
         if (! $nextImport instanceof PodcastImportTask) {
-            // no queued import task, stop process.
-            exit(0);
+            // no queued import task, nothing to init
+            return false;
         }
 
         $this->importTask = $nextImport;
@@ -89,15 +88,20 @@ class PodcastImport extends BaseCommand
 
         ini_set('user_agent', 'Castopod/' . CP_VERSION);
         $this->podcastFeed = new PodcastFeed($this->importTask->feed_url);
+
+        return true;
     }
 
     public function run(array $params): void
     {
         // FIXME: getting named routes doesn't work from v4.3 anymore, so loading all routes before importing
-        Services::routes()->loadRoutes();
+        service('routes')
+            ->loadRoutes();
 
         try {
-            $this->init();
+            if (! $this->init()) {
+                return;
+            }
 
             CLI::write('All good! Feed was parsed successfully!');
 
@@ -158,7 +162,7 @@ class PodcastImport extends BaseCommand
 
             $podcastModel = new PodcastModel();
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
-                throw new Exception((string) print_r($podcastModel->errors()));
+                throw new Exception(print_r($podcastModel->errors(), true));
             }
 
             CLI::showProgress(false);
@@ -258,7 +262,7 @@ class PodcastImport extends BaseCommand
         $podcastModel = new PodcastModel();
         if (! ($podcastId = $podcastModel->insert($podcast, true))) {
             $db->transRollback();
-            throw new Exception((string) print_r($podcastModel->errors()));
+            throw new Exception(print_r($podcastModel->errors(), true));
         }
 
         $podcast->id = $podcastId;
@@ -324,7 +328,7 @@ class PodcastImport extends BaseCommand
                 ]);
 
                 if (! $newPersonId = $personModel->insert($newPodcastPerson)) {
-                    throw new Exception((string) print_r($personModel->errors()));
+                    throw new Exception(print_r($personModel->errors(), true));
                 }
             }
 
@@ -351,7 +355,7 @@ class PodcastImport extends BaseCommand
                 $personGroupSlug,
                 $personRoleSlug
             )) {
-                throw new Exception((string) print_r($podcastPersonModel->errors()));
+                throw new Exception(print_r($podcastPersonModel->errors(), true));
             }
         }
 
@@ -496,7 +500,7 @@ class PodcastImport extends BaseCommand
 
             if (! ($episodeId = $episodeModel->insert($episode, true))) {
                 $db->transRollback();
-                throw new Exception((string) print_r($episodeModel->errors()));
+                throw new Exception(print_r($episodeModel->errors(), true));
             }
 
             $this->importEpisodePersons($episodeId, $item->podcast_persons);
@@ -544,7 +548,7 @@ class PodcastImport extends BaseCommand
                 ]);
 
                 if (! ($newPersonId = $personModel->insert($newPerson))) {
-                    throw new Exception((string) print_r($personModel->errors()));
+                    throw new Exception(print_r($personModel->errors(), true));
                 }
             }
 
@@ -572,7 +576,7 @@ class PodcastImport extends BaseCommand
                 $personGroupSlug,
                 $personRoleSlug
             )) {
-                throw new Exception((string) print_r($episodePersonModel->errors()));
+                throw new Exception(print_r($episodePersonModel->errors(), true));
             }
         }
     }

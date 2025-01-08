@@ -18,7 +18,6 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Router\Exceptions\RedirectException;
 use CodeIgniter\Router\Exceptions\RouterException;
 use CodeIgniter\Router\Router as CodeIgniterRouter;
-use Config\Services;
 
 class Router extends CodeIgniterRouter
 {
@@ -115,8 +114,8 @@ class Router extends CodeIgniterRouter
                     array_key_exists('alternate-content', $this->matchedRouteOptions) &&
                     is_array($this->matchedRouteOptions['alternate-content'])
                 ) {
-                    $request = Services::request();
-                    $negotiate = Services::negotiator();
+                    $request = service('request');
+                    $negotiate = service('negotiator');
 
                     // Accept header is mandatory
                     if ($request->header('Accept') === null) {

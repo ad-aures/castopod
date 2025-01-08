@@ -21,7 +21,6 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\URI;
-use Config\Services;
 use Modules\Analytics\Config\Analytics;
 use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
@@ -130,7 +129,7 @@ class EpisodeAudioController extends Controller
             }
         }
 
-        $session = Services::session();
+        $session = service('session');
 
         $serviceName = '';
         if ($this->request->getGet('_from')) {

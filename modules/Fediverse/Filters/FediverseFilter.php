@@ -9,7 +9,6 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\URI;
-use Config\Services;
 use Exception;
 use Modules\Fediverse\HttpSignature;
 
@@ -31,7 +30,7 @@ class FediverseFilter implements FilterInterface
         }
 
         if (in_array('verify-activitystream', $params, true)) {
-            $negotiate = Services::negotiator();
+            $negotiate = service('negotiator');
 
             $allowedContentTypes = [
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams',

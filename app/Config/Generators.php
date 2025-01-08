@@ -25,7 +25,7 @@ class Generators extends BaseConfig
      *
      * YOU HAVE BEEN WARNED!
      *
-     * @var array<string, string>
+     * @var array<string, array<string, string>|string>
      */
     public array $views = [
         'make:cell' => [

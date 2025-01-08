@@ -37,7 +37,7 @@
     hint="<?= esc(lang('Install.form.auth_gateway_hint')) ?>"
     value="<?= config('Auth')->gateway ?>"
     required="true" />
-<?php // @icon('arrow-right-fill')?>
+<?php // @icon("arrow-right-fill")?>
 <Button class="self-end" variant="primary" type="submit" iconRight="arrow-right-fill"><?= lang('Install.form.next') ?></Button>
 </form>
 

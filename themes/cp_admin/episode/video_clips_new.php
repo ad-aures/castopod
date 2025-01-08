@@ -71,7 +71,7 @@
             </div>
         </fieldset>
     </Forms.Section>
-    <?php // @icon('arrow-right-fill')?>
+    <?php // @icon("arrow-right-fill")?>
     <Button variant="primary" type="submit" iconRight="arrow-right-fill" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
 </div>
 </form>

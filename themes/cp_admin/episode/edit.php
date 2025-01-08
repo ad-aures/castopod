@@ -288,10 +288,10 @@
 </form>
 
 <?php if ($episode->published_at === null): ?>
-    <?php // @icon('delete-bin-fill')?>
+    <?php // @icon("delete-bin-fill")?>
     <Button class="mt-8" variant="danger" uri="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" iconLeft="delete-bin-fill"><?= lang('Episode.delete') ?></Button>    
 <?php else: ?>
-    <?php // @icon('forbid-fill')?>
+    <?php // @icon("forbid-fill")?>
     <Button class="mt-8" variant="disabled" iconLeft="forbid-fill" data-tooltip="right" title="<?= lang('Episode.messages.unpublishBeforeDeleteTip') ?>"><?= lang('Episode.delete') ?></Button>
 <?php endif ?>
 

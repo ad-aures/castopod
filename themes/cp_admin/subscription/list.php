@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Subscription.add') ?></Button>
 <?= $this->endSection() ?>
 

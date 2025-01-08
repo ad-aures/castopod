@@ -21,7 +21,7 @@
             name="episode_url"
             type="url"
             placeholder="<?= lang('Post.form.episode_url_placeholder') . ' (' . lang('Common.optional') . ')' ?>" />
-        <?php // @icon('send-plane-2-fill')?>
+        <?php // @icon("send-plane-2-fill")?>
         <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit') ?></Button>
     </div>
 </form>

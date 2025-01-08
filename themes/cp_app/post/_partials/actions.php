@@ -59,7 +59,7 @@
             <form action="<?= route_to(
                 'post-attempt-block-domain',
                 esc(interact_as_actor()
-                ->username),
+                    ->username),
                 $post->id,
             ) ?>" method="POST">
                 <?= csrf_field() ?>

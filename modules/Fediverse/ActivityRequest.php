@@ -14,7 +14,6 @@ use CodeIgniter\HTTP\CURLRequest;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
-use Config\Services;
 use Modules\Fediverse\Core\Activity;
 use phpseclib\Crypt\RSA;
 
@@ -33,7 +32,7 @@ class ActivityRequest
 
     public function __construct(string $uri, ?string $activityPayload = null)
     {
-        $this->request = Services::curlrequest();
+        $this->request = service('curlrequest');
 
         if ($activityPayload !== null) {
             $this->request->setBody($activityPayload);

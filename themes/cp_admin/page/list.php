@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php // @icon('add-fill')?>
+<?php // @icon("add-fill")?>
 <Button uri="<?= route_to('page-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Page.create') ?></Button>
 <?= $this->endSection() ?>
 

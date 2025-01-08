@@ -32,4 +32,7 @@ export default defineConfig({
       outDir: "../../public",
     }),
   ],
+  server: {
+    host: true,
+  },
 });

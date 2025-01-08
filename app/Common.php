@@ -37,7 +37,7 @@ if (! function_exists('view')) {
         $renderer = single_service('renderer', $path);
 
         $saveData = config('View')
-->saveData;
+            ->saveData;
 
         if (array_key_exists('saveData', $options)) {
             $saveData = (bool) $options['saveData'];

@@ -4,7 +4,8 @@
 
 <?php if (isset($captions)) : ?>
     <div class="flex flex-col gap-2">
-        <Button uri="<?= $transcript->file_url ?>" size="small" iconLeft="download" class="self-start" variant="secondary" target="_blank" download="" rel="noopener noreferrer"><?= lang('Episode.download_transcript', [
+        <?php // @icon("download-2-fill")?>
+        <Button uri="<?= $transcript->file_url ?>" size="small" iconLeft="download-2-fill" class="self-start" variant="secondary" target="_blank" download="" rel="noopener noreferrer"><?= lang('Episode.download_transcript', [
             'extension' => '.' . $transcript->file_extension,
         ]) ?></Button>
     <?php

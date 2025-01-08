@@ -67,7 +67,7 @@
 <Forms.Section
     title="<?= lang('Settings.images.title') ?>"
     subtitle="<?= lang('Settings.images.subtitle') ?>">
-    <?php // @icon('refresh-fill')?>
+    <?php // @icon("refresh-fill")?>
     <Button variant="primary" type="submit" iconLeft="refresh-fill"><?= lang('Settings.images.regenerate') ?></Button>
 
 </Forms.Section>
@@ -84,7 +84,7 @@
     <Forms.Toggler name="reset_counts" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
     <Forms.Toggler name="rename_episodes_files" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></Forms.Toggler>
     <Forms.Toggler name="clear_cache" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></Forms.Toggler>
-    <?php // @icon('home-gear-fill')?>
+    <?php // @icon("home-gear-fill")?>
     <Button variant="primary" type="submit" iconLeft="home-gear-fill"><?= lang('Settings.housekeeping.run') ?></Button>
 
 </Forms.Section>

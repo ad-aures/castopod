@@ -6,7 +6,6 @@ namespace Modules\Install\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use Config\Database;
-use Config\Services;
 
 class InitDatabase extends BaseCommand
 {
@@ -28,7 +27,7 @@ class InitDatabase extends BaseCommand
     public function run(array $params): void
     {
         // Run all migrations
-        $migrate = Services::migrations();
+        $migrate = service('migrations');
         $migrate->setNamespace(null)
             ->latest();
 

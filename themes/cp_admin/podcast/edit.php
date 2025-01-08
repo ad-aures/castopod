@@ -282,7 +282,7 @@ value="<?= esc($podcast->new_feed_url) ?>"
 </div>
 
 </form>
-<?php // @icon('delete-bin-fill')?>
+<?php // @icon("delete-bin-fill")?>
 <Button class="mt-8" variant="danger" uri="<?= route_to('podcast-delete', $podcast->id) ?>" iconLeft="delete-bin-fill"><?= lang('Podcast.delete') ?></Button>
 
 <?= $this->endSection() ?>

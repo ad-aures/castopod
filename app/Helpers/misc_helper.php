@@ -210,7 +210,7 @@ if (! function_exists('get_podcast_banner')) {
                 )->podcastBannerDefaultPaths['default'];
 
             $sizes = config('Images')
-->podcastBannerSizes;
+                ->podcastBannerSizes;
 
             $sizeConfig = $sizes[$size];
             helper('filesystem');
@@ -231,7 +231,7 @@ if (! function_exists('get_podcast_banner_mimetype')) {
     {
         if (! $podcast->banner instanceof Image) {
             $sizes = config('Images')
-->podcastBannerSizes;
+                ->podcastBannerSizes;
 
             $sizeConfig = $sizes[$size];
             helper('filesystem');
@@ -252,10 +252,10 @@ if (! function_exists('get_avatar_url')) {
     {
         if (! $person->avatar instanceof Image) {
             $defaultAvatarPath = config('Images')
-->avatarDefaultPath;
+                ->avatarDefaultPath;
 
             $sizes = config('Images')
-->personAvatarSizes;
+                ->personAvatarSizes;
 
             $sizeConfig = $sizes[$size];
 

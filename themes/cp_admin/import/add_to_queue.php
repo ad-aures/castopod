@@ -15,7 +15,7 @@
 
 <Forms.Section
     title="<?= lang('PodcastImport.old_podcast_section_title') ?>">
-<?php // @icon('scales-3-fill')?>
+<?php // @icon("scales-3-fill")?>
 <Alert glyph="scales-3-fill" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></Alert>
 <Forms.Field
     name="imported_feed_url"

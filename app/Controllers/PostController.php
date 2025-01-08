@@ -52,15 +52,20 @@ class PostController extends FediversePostController
         $this->podcast = $podcast;
         $this->actor = $this->podcast->actor;
 
-        if (
-            count($params) > 1 &&
-            ($post = (new PostModel())->getPostById($params[1])) instanceof CastopodPost
-        ) {
-            $this->post = $post;
-
-            unset($params[0]);
-            unset($params[1]);
+        if (count($params) <= 1) {
+            throw PageNotFoundException::forPageNotFound();
         }
+
+        if (
+            ! ($post = (new PostModel())->getPostById($params[1])) instanceof CastopodPost
+        ) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $this->post = $post;
+
+        unset($params[0]);
+        unset($params[1]);
 
         return $this->{$method}(...$params);
     }
@@ -70,10 +75,6 @@ class PostController extends FediversePostController
         // Prevent analytics hit when authenticated
         if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
-        }
-
-        if (! $this->post instanceof CastopodPost) {
-            throw PageNotFoundException::forPageNotFound();
         }
 
         $cacheName = implode(
