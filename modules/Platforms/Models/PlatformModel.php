@@ -135,12 +135,10 @@ class PlatformModel extends Model
     {
         $this->clearCache($podcastId);
 
-        $platforms = service('platforms');
-
-        $platformsData = $platforms->getPlatformsByType($platformType);
-
+        // delete all platforms given the type to overwrite them with data
         $this->builder()
-            ->whereIn('slug', array_keys($platformsData))
+            ->where('podcast_id', $podcastId)
+            ->where('type', $platformType)
             ->delete();
 
         if ($data === []) {
