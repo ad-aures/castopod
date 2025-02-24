@@ -6,8 +6,9 @@ stages:
 
 .documentation-setup:
   before_script:
+    - npm install --global corepack@latest
     - corepack enable
-    - corepack prepare pnpm@latest-9 --activate
+    - corepack prepare pnpm@latest-10 --activate
     - pnpm config set store-dir .pnpm-store
     - cd docs
     - chmod +x ./scripts/i18n-filter.sh
