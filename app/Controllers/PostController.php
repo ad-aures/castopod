@@ -53,7 +53,9 @@ class PostController extends FediversePostController
         $this->actor = $this->podcast->actor;
 
         if (count($params) <= 1) {
-            throw PageNotFoundException::forPageNotFound();
+            unset($params[0]);
+
+            return $this->{$method}(...$params);
         }
 
         if (
