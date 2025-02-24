@@ -1,3 +1,13 @@
+## [1.13.4](https://code.castopod.org/adaures/castopod/compare/v1.13.3...v1.13.4) (2025-02-24)
+
+### Bug Fixes
+
+- **platforms:** add podcast id when deleting platforms on save
+  ([019fbaf](https://code.castopod.org/adaures/castopod/commit/019fbaf74ddd7427c3b7dfaef0d2e4409aab0e7c))
+- return method instead of throwing a 404 when submitting a post
+  ([44ad651](https://code.castopod.org/adaures/castopod/commit/44ad65117635b6292b4653bca7e22acecb025146)),
+  closes [#550](https://code.castopod.org/adaures/castopod/issues/550)
+
 ## [1.13.3](https://code.castopod.org/adaures/castopod/compare/v1.13.2...v1.13.3) (2025-01-08)
 
 ### Bug Fixes
