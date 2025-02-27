@@ -2,15 +2,17 @@
 title: Podcast Home Page
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 The podcast home page is your landing page for your listeners to view episode
 announcements, messages, episodes, and links to where to find your podcast. If
 you have only one podcast, your users will be automatically redirected from your
 top level domain, such as `www.yourpodcast.com`, to the podcast page at
-`www.yourpodcast.com/yourpodcasthandle`.
+`www.yourpodcast.com/@yourpodcasthandle`.
 
 If you are hosting multiple podcasts, your top level page will display the
 artwork for each podcast. Clicking on the podcast artwork will take you to your
-podcast page at `www.yourpodcast.com/yourpodcasthandle`.
+podcast page at `www.yourpodcast.com/@yourpodcasthandle`.
 
 ## Home Page
 
@@ -20,9 +22,13 @@ if you have any new notifications, and the user who is logged in. You can click
 on the user for quick access to your account, changing your password, or to log
 out.
 
-:::note If you have multiple podcasts, you can click the user dropdown to switch
-to choose which podcast to interact with. If your account has access to two or
-more podcasts, pay attention to which podcast is broadcasting messages! :::
+<Aside>
+
+If you have multiple podcasts, you can click the user dropdown to switch to
+choose which podcast to interact with. If your account has access to two or more
+podcasts, pay attention to which podcast is broadcasting messages!
+
+</Aside>
 
 Listeners can click the `Follow` button to follow any messages, including
 episode announcements, from a Fediverse app, such as Mastodon. After clicking

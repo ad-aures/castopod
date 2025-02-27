@@ -2,6 +2,8 @@
 title: Episodes
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 From the left hand navigation, click **Episodes** and the menu will expand to
 **All Episodes** and **New Episode**.
 
@@ -52,8 +54,12 @@ displaying the status of creating the clip. Refresh the page to see if it's
 `Running` or completed. You may need to be patient depending on the length of
 the clip.
 
-:::note To create video clips and soundbites, your server must have `FFMPEG`
-installed and a transcript. :::
+<Aside>
+
+To create video clips and soundbites, your server must have `FFMPEG` installed
+and a transcript.
+
+</Aside>
 
 ## Create episode
 
@@ -149,3 +155,18 @@ Press `Publish` to finish.
 Your RSS feed will be automatically updated with your episode information and
 listeners who subscribe will be notified of a new episode. Congratulations on
 publishing your first episode!
+
+## Editing an episode
+
+You can edit an episode before or after it is published. You can change any of
+the fields, including uploading a new episode, updating the show notes, or
+updating the transcripts or chapters. Select the episode you want to edit and
+choose `Edit Episode`. You can change just one field or multiple fields at the
+same time. After you have made the changes, press `Save Episode` in the upper
+right corner to finalize the changes.
+
+You can also edit the publication for the episode. Choose the episode again, and
+press `Edit Publication` in the upper right hand corner. Update the announcement
+post or publication date. When complete, press `Edit publication`. You can also
+choose to cancel the publication and it won't be published but will not be
+deleted.
