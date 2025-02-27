@@ -361,6 +361,33 @@ Check [Docker](https://docs.docker.com/engine/reference/commandline/docker/) and
 [docker-compose](https://docs.docker.com/compose/reference/) documentations for
 more insights.
 
+### Updating Documentation
+
+Castopod's documentation is written in Markdown and uses the Astro Starlight
+framework. To update Castopod's documentation, including the Getting Started
+guide and User Guide:
+
+1. Change directories to the `docs` directory and install the dependencies:
+
+   ```bash
+   cd docs/
+   pnpm i
+   ```
+
+2. Start the documentation development server:
+
+   ```bash
+   pnpm run dev --host
+   ```
+
+3. The documentation development server runs on port 4321. In your browser visit
+   `http://localhost:4321/docs`. If the page displays a 404 Not Found error,
+   click on the Castopod logo in the upper left hand corner of the page and the
+   documentation should load.
+
+4. Edit the Markdown files with your documentation updates. The Astro Starlight
+   development server will automatically update each time you save a change.
+
 ## Known issues
 
 ### Allocation failed - JavaScript heap out of memory
