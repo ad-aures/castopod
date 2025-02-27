@@ -2,6 +2,8 @@
 title: Create or import a podcast
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 You can create a new podcast or import an existing podcast into Castopod in the
 Podcasts section. If you are adding a second podcast to Castopod, see the
 [Home page documentation](../website#home-page) for how that will change your
@@ -164,6 +166,10 @@ Podcast imports page to view the status of the import. You can refresh the page
 to see the status of the import including the import duration and how many
 episodes were imported when complete.
 
-!!! note If your import times out, check your `max_execution_time` in your
-`PHP.ini` file. You may need to increase it from 30 seconds (the default) to add
-more time, such as 300 seconds (5 minutes) for larger podcasts.
+<Aside>
+
+If your import times out, check your `max_execution_time` in your `PHP.ini`
+file. You may need to increase it from 30 seconds (the default) to add more
+time, such as 300 seconds (5 minutes) for larger podcasts.
+
+</Aside>
