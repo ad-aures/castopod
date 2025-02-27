@@ -163,7 +163,7 @@ paths:
         description: Publish parameters
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/EpisodePublishRequest"
       responses:
