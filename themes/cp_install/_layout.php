@@ -2,20 +2,7 @@
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="robots" content="noindex">
-
-    <title><?= lang('Install.title') ?></title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/icon-180.png">
-    <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
-    <?= service('vite')
-        ->asset('js/install.ts', 'js') ?>
-</head>
+<?= service('html_head')->title(lang('Install.title')) ?>
 
 <body class="flex flex-col min-h-screen mx-auto bg-base">
     <header class="border-b border-subtle">

@@ -4,12 +4,7 @@
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<?= service('html_head')
-    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
-    ->appendRawContent(service('vite')->asset('js/app.ts', 'js'))
-    ->appendRawContent(service('vite')->asset('js/podcast.ts', 'js'))
-    ->appendRawContent(service('vite')->asset('js/audio-player.ts', 'js'))
-?>
+<?= service('html_head') ?>
 
 <body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-base theme-<?= service('settings')
     ->get('App.theme') ?>">

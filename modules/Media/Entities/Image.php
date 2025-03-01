@@ -87,7 +87,7 @@ class Image extends BaseMedia
         if ($this->file_mimetype === 'image/jpeg' && $metadata = @exif_read_data(
             $file->getRealPath(),
             null,
-            true
+            true,
         )) {
             $metadata['sizes'] = $this->attributes['sizes'];
             $this->attributes['file_size'] = $metadata['FILE']['FileSize'];

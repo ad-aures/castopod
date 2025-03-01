@@ -88,7 +88,7 @@
         ],
     ],
     $episode->persons,
-    'max-w-xl mt-6'
+    'max-w-xl mt-6',
 ) ?>
 
 <?= $this->endSection() ?>

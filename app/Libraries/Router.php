@@ -15,9 +15,10 @@ declare(strict_types=1);
 namespace App\Libraries;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\Router\Exceptions\RedirectException;
+use CodeIgniter\HTTP\Exceptions\RedirectException;
 use CodeIgniter\Router\Exceptions\RouterException;
 use CodeIgniter\Router\Router as CodeIgniterRouter;
+use Config\Routing;
 use Override;
 
 class Router extends CodeIgniterRouter
@@ -68,7 +69,7 @@ class Router extends CodeIgniterRouter
 
                     throw new RedirectException(
                         preg_replace('#^' . $routeKey . '$#u', (string) $redirectTo, $uri),
-                        $this->collection->getRedirectCode($routeKey)
+                        $this->collection->getRedirectCode($routeKey),
                     );
                 }
 
@@ -78,7 +79,7 @@ class Router extends CodeIgniterRouter
                     preg_match(
                         '#^' . str_replace('{locale}', '(?<locale>[^/]+)', $matchedKey) . '$#u',
                         $uri,
-                        $matched
+                        $matched,
                     );
 
                     if ($this->collection->shouldUseSupportedLocalesOnly()
@@ -181,24 +182,50 @@ class Router extends CodeIgniterRouter
                     return true;
                 }
 
-                [$controller] = explode('::', (string) $handler);
+                if (str_contains((string) $handler, '::')) {
+                    [$controller, $methodAndParams] = explode('::', (string) $handler);
+                } else {
+                    $controller = $handler;
+                    $methodAndParams = '';
+                }
 
                 // Checks `/` in controller name
-                if (str_contains($controller, '/')) {
+                if (str_contains((string) $controller, '/')) {
                     throw RouterException::forInvalidControllerName($handler);
                 }
 
                 if (str_contains((string) $handler, '$') && str_contains($routeKey, '(')) {
                     // Checks dynamic controller
-                    if (str_contains($controller, '$')) {
+                    if (str_contains((string) $controller, '$')) {
                         throw RouterException::forDynamicController($handler);
                     }
 
-                    // Using back-references
-                    $handler = preg_replace('#^' . $routeKey . '$#u', (string) $handler, $uri);
+                    if (config(Routing::class)->multipleSegmentsOneParam === false) {
+                        // Using back-references
+                        $segments = explode(
+                            '/',
+                            (string) preg_replace('#\A' . $routeKey . '\z#u', (string) $handler, $uri),
+                        );
+                    } else {
+                        if (str_contains($methodAndParams, '/')) {
+                            [$method, $handlerParams] = explode('/', $methodAndParams, 2);
+                            $params = explode('/', $handlerParams);
+                            $handlerSegments = array_merge([$controller . '::' . $method], $params);
+                        } else {
+                            $handlerSegments = [$handler];
+                        }
+
+                        $segments = [];
+
+                        foreach ($handlerSegments as $segment) {
+                            $segments[] = $this->replaceBackReferences($segment, $matches);
+                        }
+                    }
+                } else {
+                    $segments = explode('/', (string) $handler);
                 }
 
-                $this->setRequest(explode('/', (string) $handler));
+                $this->setRequest($segments);
 
                 $this->setMatchedRoute($matchedKey, $handler);
 

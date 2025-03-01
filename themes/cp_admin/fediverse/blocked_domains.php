@@ -41,7 +41,7 @@
         ],
     ],
     $blockedDomains,
-    'mt-8'
+    'mt-8',
 ) ?>
 
 <?= $this->endSection() ?>

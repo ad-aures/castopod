@@ -85,7 +85,7 @@ data_table(
                 return publication_pill(
                     $episode->published_at,
                     $episode->publication_status,
-                    'text-sm'
+                    'text-sm',
                 );
             },
         ],
@@ -166,7 +166,7 @@ data_table(
     ],
     $episodes,
     'mb-6 mt-4',
-    $podcast
+    $podcast,
 ) ?>
 
 <?= $pager->links() ?>

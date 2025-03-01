@@ -76,7 +76,7 @@ abstract class FormComponent extends Component
 
         return old(
             $this->name,
-            in_array($this->value, ['', null], true) ? $this->defaultValue : $this->value
+            in_array($this->value, ['', null], true) ? $this->defaultValue : $this->value,
         ) ?? '';
     }
 }

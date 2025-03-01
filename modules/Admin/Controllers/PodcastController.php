@@ -226,7 +226,7 @@ class PodcastController extends BaseController
             'type'        => $this->request->getPost('type'),
             'copyright'   => $this->request->getPost('copyright'),
             'location'    => $this->request->getPost('location_name') === '' ? null : new Location(
-                $this->request->getPost('location_name')
+                $this->request->getPost('location_name'),
             ),
             'is_blocked'            => $this->request->getPost('block') === 'yes',
             'is_completed'          => $this->request->getPost('complete') === 'yes',
@@ -260,7 +260,7 @@ class PodcastController extends BaseController
 
         return redirect()->route('podcast-view', [$newPodcastId])->with(
             'message',
-            lang('Podcast.messages.createSuccess')
+            lang('Podcast.messages.createSuccess'),
         );
     }
 
@@ -317,10 +317,10 @@ class PodcastController extends BaseController
         $podcast->type = $this->request->getPost('type');
         $podcast->copyright = $this->request->getPost('copyright');
         $podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
-            $this->request->getPost('location_name')
+            $this->request->getPost('location_name'),
         );
         $podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
-            'new_feed_url'
+            'new_feed_url',
         );
 
         $podcast->is_blocked = $this->request->getPost('block') === 'yes';
@@ -356,14 +356,14 @@ class PodcastController extends BaseController
             ->set(
                 'Podcast.redirect_to_new_feed',
                 $this->request->getPost('redirect_to_new_feed') === 'yes',
-                'podcast:' . $podcast->id
+                'podcast:' . $podcast->id,
             );
 
         $db->transComplete();
 
         return redirect()->route('podcast-edit', [$podcast->id])->with(
             'message',
-            lang('Podcast.messages.editSuccess')
+            lang('Podcast.messages.editSuccess'),
         );
     }
 
@@ -607,7 +607,7 @@ class PodcastController extends BaseController
         if ($podcast->publication_status !== 'not_published') {
             return redirect()->route('podcast-view', [$podcast->id])->with(
                 'error',
-                lang('Podcast.messages.publishError')
+                lang('Podcast.messages.publishError'),
             );
         }
 
@@ -742,7 +742,7 @@ class PodcastController extends BaseController
         if ($podcast->publication_status !== 'scheduled') {
             return redirect()->route('podcast-view', [$podcast->id])->with(
                 'error',
-                lang('Podcast.messages.publishEditError')
+                lang('Podcast.messages.publishEditError'),
             );
         }
 
@@ -942,7 +942,7 @@ class PodcastController extends BaseController
 
         return redirect()->route('podcast-view', [$podcast->id])->with(
             'message',
-            lang('Podcast.messages.publishCancelSuccess')
+            lang('Podcast.messages.publishCancelSuccess'),
         );
     }
 }

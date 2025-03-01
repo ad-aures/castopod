@@ -50,7 +50,7 @@
                         'uri'   => route_to('home') . '?sort=created_asc',
                         'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
                     ],
-                ])
+                ]),
             ) ?>" />
         </div>
         <div class="grid gap-4 mt-4 grid-cols-cards">

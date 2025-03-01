@@ -71,7 +71,7 @@ class CreatePlugin extends BaseCommand
         $pluginName = CLI::prompt(
             'Plugin name (<vendor>/<name>)',
             'acme/hello-world',
-            Manifest::$validation_rules['name']
+            Manifest::$validation_rules['name'],
         );
         CLI::newLine();
         $description = CLI::prompt('Description', '', Manifest::$validation_rules['description']);
@@ -111,19 +111,19 @@ class CreatePlugin extends BaseCommand
         $manifestContents = str_replace(
             '"description": ""',
             '"description": "' . $description . '"',
-            $manifestContents
+            $manifestContents,
         );
         $manifestContents = str_replace('"license": ""', '"license": "' . $license . '"', $manifestContents);
         $manifestContents = str_replace(
             '"hooks": []',
             '"hooks": ["' . implode('", "', $hooks) . '"]',
-            $manifestContents
+            $manifestContents,
         );
 
         $pluginClassName = str_replace(
             ' ',
             '',
-            ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $name)) . 'Plugin'
+            ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $name)) . 'Plugin',
         );
         $pluginClassContents = str_replace('class Plugin', 'class ' . $pluginClassName, $pluginClassTemplate);
 
@@ -153,7 +153,7 @@ class CreatePlugin extends BaseCommand
         CLI::newLine(1);
         CLI::write(
             sprintf('Plugin %s created in %s', CLI::color($pluginName, 'white'), CLI::color($pluginDirectory, 'white')),
-            'green'
+            'green',
         );
     }
 }

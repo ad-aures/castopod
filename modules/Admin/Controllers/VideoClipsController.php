@@ -125,7 +125,7 @@ class VideoClipsController extends BaseController
 
         $this->setHtmlHead(lang('VideoClip.form.title'));
 
-        if (in_array(false, $checks, true)) {
+        if (array_any($checks, fn (bool $value): bool => ! $value)) {
             $data['checks'] = $checks;
             return view('episode/video_clips_requirements', $data);
         }
@@ -188,7 +188,7 @@ class VideoClipsController extends BaseController
 
         return redirect()->route('video-clips-list', [$episode->podcast_id, $episode->id])->with(
             'message',
-            lang('VideoClip.messages.addToQueueSuccess')
+            lang('VideoClip.messages.addToQueueSuccess'),
         );
     }
 

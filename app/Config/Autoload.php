@@ -58,7 +58,6 @@ class Autoload extends AutoloadConfig
         'Themes'                  => ROOTPATH . 'themes',
         'ViewComponents'          => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes'              => APPPATH . 'Libraries/ViewThemes/',
-        'Vite'                    => APPPATH . 'Libraries/Vite/',
     ];
 
     /**

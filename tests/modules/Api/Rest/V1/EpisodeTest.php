@@ -99,7 +99,7 @@ class EpisodeTest extends CIUnitTestCase
                 'messages' => [
                     'error' => 'Episode not found',
                 ],
-            ]
+            ],
         );
         $result->assertHeader('Content-Type', 'application/json; charset=UTF-8');
     }

@@ -42,7 +42,7 @@ class Fediverse extends FediverseBaseConfig
         }
 
         ['dirname' => $dirname, 'extension' => $extension, 'filename' => $filename] = pathinfo(
-            $defaultBanner['path']
+            $defaultBanner['path'],
         );
         $defaultBannerPath = $filename;
         if ($dirname !== '.') {

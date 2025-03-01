@@ -4,7 +4,7 @@
 # ⚠️ NOT optimized for production
 # should be used only for development purposes
 #---------------------------------------------------
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 
@@ -47,11 +47,4 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && docker-php-ext-enable redis \
     # mysqli for database access
     && docker-php-ext-install mysqli \
-    && docker-php-ext-enable mysqli \
-    # configure php
-    && echo "file_uploads = On\n" \
-         "memory_limit = 512M\n" \
-         "upload_max_filesize = 500M\n" \
-         "post_max_size = 512M\n" \
-         "max_execution_time = 300\n" \
-         > /usr/local/etc/php/conf.d/uploads.ini
+    && docker-php-ext-enable mysqli

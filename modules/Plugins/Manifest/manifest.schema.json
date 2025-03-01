@@ -204,7 +204,6 @@
         "optional": {
           "type": "boolean"
         },
-
         "validationRules": {
           "anyOf": [
             {

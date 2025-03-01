@@ -22,14 +22,8 @@ use CodeIgniter\Entity\Entity;
  */
 class Location extends Entity
 {
-    /**
-     * @var string
-     */
     private const string OSM_URL = 'https://www.openstreetmap.org/';
 
-    /**
-     * @var string
-     */
     private const string NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
 
     public function __construct(
@@ -108,14 +102,14 @@ class Location extends Entity
 
         if (property_exists($places[0], 'lat') && $places[0]->lat !== null && (property_exists(
             $places[0],
-            'lon'
+            'lon',
         ) && $places[0]->lon !== null)) {
             $this->attributes['geo'] = "geo:{$places[0]->lat},{$places[0]->lon}";
         }
 
         if (property_exists($places[0], 'osm_type') && $places[0]->osm_type !== null && (property_exists(
             $places[0],
-            'osm_id'
+            'osm_id',
         ) && $places[0]->osm_id !== null)) {
             $this->attributes['osm'] = strtoupper(substr((string) $places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
         }

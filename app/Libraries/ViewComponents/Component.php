@@ -53,7 +53,7 @@ abstract class Component implements ComponentInterface
                         'boolean' => $value === 'true',
                         'number'  => (int) $value,
                         'array'   => json_decode(htmlspecialchars_decode($value), true),
-                        default   => $value
+                        default   => $value,
                     };
                 }
 

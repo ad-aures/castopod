@@ -9,6 +9,7 @@ services:
       - 8080:8080
     volumes:
       - ../..:/workspaces:cached
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       CI_ENVIRONMENT: development
       vite_environment: development

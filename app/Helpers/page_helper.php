@@ -16,7 +16,7 @@ if (! function_exists('render_page_links')) {
      *
      * @return string html pages navigation
      */
-    function render_page_links(string $class = null, string $podcastHandle = null): string
+    function render_page_links(?string $class = null, ?string $podcastHandle = null): string
     {
         $pages = (new PageModel())->findAll();
         $links = anchor(route_to('home'), lang('Common.home'), [

@@ -20,13 +20,13 @@ class PermissionFilter implements FilterInterface
     /**
      * @param string[]|null $arguments
      *
-     * @return RequestInterface|ResponseInterface|string|void
+     * @return RequestInterface|ResponseInterface|string|null
      */
     #[Override]
     public function before(RequestInterface $request, $arguments = null)
     {
         if ($arguments === null || $arguments === []) {
-            return;
+            return null;
         }
 
         if (! auth()->loggedIn()) {
@@ -34,7 +34,7 @@ class PermissionFilter implements FilterInterface
         }
 
         if ($this->isAuthorized($arguments)) {
-            return;
+            return null;
         }
 
         throw new RuntimeException(lang('Auth.notEnoughPrivilege'), 403);
@@ -42,10 +42,13 @@ class PermissionFilter implements FilterInterface
 
     /**
      * @param string[]|null $arguments
+     *
+     * @return ResponseInterface|null
      */
     #[Override]
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
+        return null;
     }
 
     /**
@@ -67,7 +70,7 @@ class PermissionFilter implements FilterInterface
                 if (! preg_match('/\$(\d+)\./', $permission, $match)) {
                     throw new RuntimeException(sprintf(
                         'Could not get podcast identifier from permission %s',
-                        $permission
+                        $permission,
                     ), 1);
                 }
 

@@ -16,7 +16,7 @@ use Stringable;
 class Markdown implements Stringable
 {
     public function __construct(
-        protected string $markdown
+        protected string $markdown,
     ) {
     }
 

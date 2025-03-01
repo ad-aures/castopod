@@ -17,8 +17,8 @@ use Rector\ValueObject\PhpVersion;
 return RectorConfig::configure()
     ->withPaths([__DIR__ . '/app', __DIR__ . '/modules', __DIR__ . '/tests', __DIR__ . '/public'])
     ->withBootstrapFiles([__DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php'])
-    ->withPhpVersion(PhpVersion::PHP_83)
-    ->withPhpSets(php83: true)
+    ->withPhpVersion(PhpVersion::PHP_84)
+    ->withPhpSets(php84: true)
     ->withPreparedSets(
         typeDeclarations: true,
         codeQuality: true,

@@ -131,7 +131,7 @@ class SoundbiteController extends BaseController
 
         return redirect()->route('soundbites-list', [$episode->podcast_id, $episode->id])->with(
             'message',
-            lang('Soundbite.messages.createSuccess')
+            lang('Soundbite.messages.createSuccess'),
         );
     }
 
@@ -161,7 +161,7 @@ class SoundbiteController extends BaseController
 
         return redirect()->route('soundbites-list', [$episode->podcast_id, $episode->id])->with(
             'message',
-            lang('Soundbite.messages.deleteSuccess')
+            lang('Soundbite.messages.deleteSuccess'),
         );
     }
 }

@@ -22,7 +22,7 @@ class HomeController extends BaseController
     {
         $sortOptions = ['activity', 'created_desc', 'created_asc'];
         $sortBy = in_array($this->request->getGet('sort'), $sortOptions, true) ? $this->request->getGet(
-            'sort'
+            'sort',
         ) : 'activity';
 
         $allPodcasts = (new PodcastModel())->getAllPodcasts($sortBy);

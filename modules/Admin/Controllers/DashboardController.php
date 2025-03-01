@@ -29,7 +29,7 @@ class DashboardController extends BaseController
             ->getResultArray()[0]['last_published_at'];
         $podcastsData['number_of_podcasts'] = (int) $podcastsCount;
         $podcastsData['last_published_at'] = $podcastsLastPublishedAt === null ? null : new Time(
-            $podcastsLastPublishedAt
+            $podcastsLastPublishedAt,
         );
 
         $episodesData = [];
@@ -42,7 +42,7 @@ class DashboardController extends BaseController
             ->getResultArray()[0]['last_published_at'];
         $episodesData['number_of_episodes'] = (int) $episodesCount;
         $episodesData['last_published_at'] = $episodesLastPublishedAt === null ? null : new Time(
-            $episodesLastPublishedAt
+            $episodesLastPublishedAt,
         );
 
         $totalUploaded = (new MediaModel())->builder()

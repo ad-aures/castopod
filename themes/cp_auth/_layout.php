@@ -5,8 +5,7 @@
 
 <?= service('html_head')
     ->title('Castopod Auth')
-    ->description('Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.')
-    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'));
+    ->description('Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.');
 ?>
 
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-base">

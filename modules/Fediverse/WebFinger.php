@@ -15,9 +15,6 @@ use Modules\Fediverse\Entities\Actor;
 
 class WebFinger
 {
-    /**
-     * @var string
-     */
     private const string RESOURCE_PATTERN = '/^acct:(?P<username>([\w_]+))@(?P<domain>([\w\-\.]+[\w]+)(:[\d]+)?)$/x';
 
     protected string $username;
@@ -39,7 +36,7 @@ class WebFinger
     protected array $links = [];
 
     public function __construct(
-        protected string $subject
+        protected string $subject,
     ) {
         // Split resource into its parts (username, domain)
         $parts = $this->splitResource($subject);

@@ -39,7 +39,7 @@ class CommentObject extends ObjectType
             'episode-comment-replies',
             esc($comment->actor->username),
             $comment->episode->slug,
-            $comment->id
+            $comment->id,
         );
 
         $this->cc = [$comment->actor->followers_url];

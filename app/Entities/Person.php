@@ -56,7 +56,7 @@ class Person extends Entity
     /**
      * Saves the person avatar in `public/media/persons/`
      */
-    public function setAvatar(UploadedFile | File $file = null): static
+    public function setAvatar(UploadedFile | File|null $file = null): static
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -110,7 +110,7 @@ class Person extends Entity
             $this->roles = (new PersonModel())->getPersonRoles(
                 $this->id,
                 (int) $this->attributes['podcast_id'],
-                array_key_exists('episode_id', $this->attributes) ? (int) $this->attributes['episode_id'] : null
+                array_key_exists('episode_id', $this->attributes) ? (int) $this->attributes['episode_id'] : null,
             );
         }
 

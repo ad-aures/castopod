@@ -4,32 +4,10 @@
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
-    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
-    <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($podcast->handle)) ?>">
-    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
-    <script>
-    // Check that service workers are supported
-    if ('serviceWorker' in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-        });
-    }
-    </script>
-
-    <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
-    <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
-</head>
+<?= service('html_head') ?>
 
 <body class="overflow-hidden flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-base theme-<?= service('settings')
-        ->get('App.theme') ?>">
+    ->get('App.theme') ?>">
     <?php if (can_user_interact()): ?>
         <div class="col-span-full">
             <?= $this->include('_admin_navbar') ?>

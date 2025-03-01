@@ -266,7 +266,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'filter' => 'allow-cors',
         ]);
         // Actions
-        $routes->post('action', 'PostController::actionAction/$1/$2', [
+        $routes->post('action', 'PostController::action/$1/$2', [
             'as'     => 'post-attempt-action',
             'filter' => 'permission:podcast$1.interact-as',
         ]);
@@ -292,13 +292,13 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         ]);
         $routes->get(
             'remote/(:postAction)',
-            'PostController::remoteAction/$1/$2/$3',
+            'PostController::remoteActionAction/$1/$2/$3',
             [
                 'as' => 'post-remote-action',
             ],
         );
     });
-    $routes->get('follow', 'ActorController::follow/$1', [
+    $routes->get('follow', 'ActorController::followView/$1', [
         'as' => 'follow',
     ]);
     $routes->get('outbox', 'ActorController::outbox/$1', [

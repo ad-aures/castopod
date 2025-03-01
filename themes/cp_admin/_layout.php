@@ -8,12 +8,7 @@ $isEpisodeArea = isset($podcast) && isset($episode);
 <html lang="<?= service('request')
     ->getLocale() ?>">
 
-<?=
-service('html_head')
-    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
-    ->appendRawContent(service('vite')->asset('js/admin.ts', 'js'))
-    ->appendRawContent(service('vite')->asset('js/admin-audio-player.ts', 'js'))
-?>
+<?= service('html_head') ?>
 
 <body class="relative grid items-start min-h-screen bg-base grid-cols-admin grid-rows-admin">
     <?= $this->include('_partials/_nav_header') ?>

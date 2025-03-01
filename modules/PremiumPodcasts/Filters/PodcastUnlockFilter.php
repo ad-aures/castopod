@@ -20,7 +20,7 @@ class PodcastUnlockFilter implements FilterInterface
      *
      * @param string[]|null $arguments
      *
-     * @return RequestInterface|ResponseInterface|string|void
+     * @return RequestInterface|ResponseInterface|string|null
      */
     #[Override]
     public function before(RequestInterface $request, $arguments = null)
@@ -34,55 +34,61 @@ class PodcastUnlockFilter implements FilterInterface
         $routerParams = $router->params();
 
         if ($routerParams === []) {
-            return;
+            return null;
         }
 
         // no need to go through the unlock form if user is connected
         if (auth()->loggedIn()) {
-            return;
+            return null;
         }
 
         // Make sure this isn't already a premium podcast route
         if (url_is((string) route_to('premium-podcast-unlock', $routerParams[0]))) {
-            return;
+            return null;
         }
 
         // expect 2 parameters (podcast handle and episode slug)
         if (count($routerParams) < 2) {
-            return;
+            return null;
         }
 
         $episode = (new EpisodeModel())->getEpisodeBySlug($routerParams[0], $routerParams[1]);
 
         if (! $episode instanceof Episode) {
-            return;
+            return null;
         }
 
         // Make sure that public episodes are still accessible
         if (! $episode->is_premium) {
-            return;
+            return null;
         }
 
         // Episode should be embeddable even if it is premium
         if (url_is((string) route_to('embed', $episode->podcast->handle, $episode->slug))) {
-            return;
+            return null;
         }
 
-        // if podcast is locked then send to the unlock form
         /** @var PremiumPodcasts $premiumPodcasts */
         $premiumPodcasts = service('premium_podcasts');
-        if (! $premiumPodcasts->check($routerParams[0])) {
-            session()->set('redirect_url', current_url());
-
-            return redirect()->route('premium-podcast-unlock', [$routerParams[0]]);
+        if ($premiumPodcasts->check($routerParams[0])) {
+            return null;
         }
+
+        // podcast is locked, send to the unlock form
+        session()
+            ->set('redirect_url', current_url());
+
+        return redirect()->route('premium-podcast-unlock', [$routerParams[0]]);
     }
 
     /**
-     * @param string[]|null $arguments
+     * @param list<string>|null $arguments
+     *
+     * @return ResponseInterface|null
      */
     #[Override]
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
+        return null;
     }
 }

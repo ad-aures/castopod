@@ -22,7 +22,7 @@
                 ]),
                 [
                     'class' => 'inline-flex items-center text-xs hover:underline',
-                ]
+                ],
             ) ?>
         <?php endif; ?>
     <?php else: ?>
@@ -50,7 +50,7 @@
                 ]),
                 [
                     'class' => 'inline-flex items-center text-xs hover:underline',
-                ]
+                ],
             ) ?>
         <?php endif; ?>
     <?php endif; ?>

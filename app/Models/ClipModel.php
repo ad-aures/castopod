@@ -67,8 +67,8 @@ class ClipModel extends Model
 
     public function __construct(
         protected string $type = 'audio',
-        ConnectionInterface &$db = null,
-        ValidationInterface $validation = null
+        ?ConnectionInterface &$db = null,
+        ?ValidationInterface $validation = null,
     ) {
         switch ($type) {
             case 'audio':

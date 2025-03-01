@@ -43,7 +43,7 @@ class SubscriptionController extends BaseController
         }
 
         if (! ($this->subscription = (new SubscriptionModel())->getSubscriptionById(
-            (int) $params[1]
+            (int) $params[1],
         )) instanceof Subscription) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -86,7 +86,7 @@ class SubscriptionController extends BaseController
 
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'message',
-                lang('Subscription.messages.linkRemoveSuccess')
+                lang('Subscription.messages.linkRemoveSuccess'),
             );
         }
 
@@ -99,7 +99,7 @@ class SubscriptionController extends BaseController
 
         return redirect()->route('subscription-list', [$this->podcast->id])->with(
             'message',
-            lang('Subscription.messages.linkSaveSuccess')
+            lang('Subscription.messages.linkSaveSuccess'),
         );
     }
 
@@ -183,7 +183,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.addError'), $email->printDebugger([])]
+                [lang('Subscription.messages.addError'), $email->printDebugger([])],
             );
         }
 
@@ -193,7 +193,7 @@ class SubscriptionController extends BaseController
             'message',
             lang('Subscription.messages.addSuccess', [
                 'subscriber' => $newSubscription->email,
-            ])
+            ]),
         );
     }
 
@@ -230,7 +230,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.regenerateTokenError'), $email->printDebugger([])]
+                [lang('Subscription.messages.regenerateTokenError'), $email->printDebugger([])],
             );
         }
 
@@ -240,7 +240,7 @@ class SubscriptionController extends BaseController
             'message',
             lang('Subscription.messages.regenerateTokenSuccess', [
                 'subscriber' => $this->subscription->email,
-            ])
+            ]),
         );
     }
 
@@ -299,7 +299,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.editError'), $email->printDebugger([])]
+                [lang('Subscription.messages.editError'), $email->printDebugger([])],
             );
         }
 
@@ -309,7 +309,7 @@ class SubscriptionController extends BaseController
             'message',
             lang('Subscription.messages.editSuccess', [
                 'subscriber' => $this->subscription->email,
-            ])
+            ]),
         );
     }
 
@@ -355,7 +355,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.suspendError'), $email->printDebugger([])]
+                [lang('Subscription.messages.suspendError'), $email->printDebugger([])],
             );
         }
 
@@ -365,7 +365,7 @@ class SubscriptionController extends BaseController
             'messages',
             lang('Subscription.messages.suspendSuccess', [
                 'subscriber' => $this->subscription->email,
-            ])
+            ]),
         );
     }
 
@@ -395,7 +395,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.resumeError'), $email->printDebugger([])]
+                [lang('Subscription.messages.resumeError'), $email->printDebugger([])],
             );
         }
 
@@ -405,7 +405,7 @@ class SubscriptionController extends BaseController
             'message',
             lang('Subscription.messages.resumeSuccess', [
                 'subscriber' => $this->subscription->email,
-            ])
+            ]),
         );
     }
 
@@ -445,7 +445,7 @@ class SubscriptionController extends BaseController
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.deleteError'), $email->printDebugger([])]
+                [lang('Subscription.messages.deleteError'), $email->printDebugger([])],
             );
         }
 
@@ -455,7 +455,7 @@ class SubscriptionController extends BaseController
             'messages',
             lang('Subscription.messages.deleteSuccess', [
                 'subscriber' => $this->subscription->email,
-            ])
+            ]),
         );
     }
 }

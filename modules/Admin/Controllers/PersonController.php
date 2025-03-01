@@ -149,7 +149,7 @@ class PersonController extends BaseController
 
         return redirect()->route('person-edit', [$person->id])->with(
             'message',
-            lang('Person.messages.editSuccess')
+            lang('Person.messages.editSuccess'),
         );
     }
 

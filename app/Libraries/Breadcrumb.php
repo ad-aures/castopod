@@ -72,7 +72,7 @@ class Breadcrumb
     /**
      * Renders the breadcrumb object as an accessible html breadcrumb nav
      */
-    public function render(string $class = null): string
+    public function render(?string $class = null): string
     {
         $listItems = '';
         $keys = array_keys($this->links);

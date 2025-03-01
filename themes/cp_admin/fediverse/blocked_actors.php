@@ -42,7 +42,7 @@
         ],
     ],
     $blockedActors,
-    'mt-8'
+    'mt-8',
 ) ?>
 
 

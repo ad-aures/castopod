@@ -234,7 +234,7 @@ class PostModel extends UuidModel
     public function addPost(
         Post $post,
         bool $createPreviewCard = true,
-        bool $registerActivity = true
+        bool $registerActivity = true,
     ): bool|int|object|string {
         helper('fediverse');
 
@@ -327,6 +327,7 @@ class PostModel extends UuidModel
         // update published date in payload
         $newPayload = $scheduledActivity->payload;
         $newPayload->object->published = $updatedPost->published_at->format(DATE_W3C);
+
         model('ActivityModel', false)
             ->update($scheduledActivity->id, [
                 'payload'      => json_encode($newPayload, JSON_THROW_ON_ERROR),
@@ -431,7 +432,7 @@ class PostModel extends UuidModel
     public function addReply(
         Post $reply,
         bool $createPreviewCard = true,
-        bool $registerActivity = true
+        bool $registerActivity = true,
     ): string | false {
         if (! $reply->in_reply_to_id) {
             throw new Exception('Passed post is not a reply!');

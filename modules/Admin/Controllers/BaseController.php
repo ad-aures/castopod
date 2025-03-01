@@ -33,7 +33,7 @@ abstract class BaseController extends Controller
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ): void {
         $this->helpers = [...$this->helpers, 'auth', 'breadcrumb', 'svg', 'components', 'misc'];
 
@@ -51,7 +51,7 @@ abstract class BaseController extends Controller
         $head
             ->title($title . ' | Castopod Admin')
             ->description(
-                'Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.'
+                'Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.',
             );
     }
 }

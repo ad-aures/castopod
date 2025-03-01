@@ -52,7 +52,7 @@ class EpisodeController extends Controller
 
         $data = $builder->findAll(
             (int) ($this->request->getGet('limit') ?? config('RestApi')->limit),
-            (int) $this->request->getGet('offset')
+            (int) $this->request->getGet('offset'),
         );
 
         array_map(static function ($episode): void {
@@ -155,10 +155,10 @@ class EpisodeController extends Controller
                 ? $this->request->getPost('parental_advisory')
                 : null,
             'number' => $this->request->getPost('episode_number') ? (int) $this->request->getPost(
-                'episode_number'
+                'episode_number',
             ) : null,
             'season_number' => $this->request->getPost('season_number') ? (int) $this->request->getPost(
-                'season_number'
+                'season_number',
             ) : null,
             'type'              => $this->request->getPost('type'),
             'is_blocked'        => $this->request->getPost('block') === 'yes',
@@ -172,7 +172,7 @@ class EpisodeController extends Controller
             $newEpisode->setTranscript($this->request->getFile('transcript_file'));
         } elseif ($transcriptChoice === 'remote-url') {
             $newEpisode->transcript_remote_url = $this->request->getPost(
-                'transcript_remote_url'
+                'transcript_remote_url',
             ) === '' ? null : $this->request->getPost('transcript_remote_url');
         }
 
@@ -181,7 +181,7 @@ class EpisodeController extends Controller
             $newEpisode->setChapters($this->request->getFile('chapters_file'));
         } elseif ($chaptersChoice === 'remote-url') {
             $newEpisode->chapters_remote_url = $this->request->getPost(
-                'chapters_remote_url'
+                'chapters_remote_url',
             ) === '' ? null : $this->request->getPost('chapters_remote_url');
         }
 
@@ -257,7 +257,7 @@ class EpisodeController extends Controller
                     $episode->published_at = Time::createFromFormat(
                         'Y-m-d H:i',
                         $scheduledPublicationDate,
-                        $clientTimezone
+                        $clientTimezone,
                     )->setTimezone(app_timezone());
                 } else {
                     $db->transRollback();

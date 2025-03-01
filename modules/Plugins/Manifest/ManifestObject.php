@@ -116,7 +116,7 @@ abstract class ManifestObject
                     foreach ($value as $valueKey => $valueElement) {
                         if (is_subclass_of($cast[0], self::class)) {
                             $manifestClass = $cast[0] === Field::class ? $this->getFieldClass(
-                                $valueElement
+                                $valueElement,
                             ) : $cast[0];
                             $value[$valueKey] = new $manifestClass($this->pluginKey);
                             $value[$valueKey]->loadData($valueElement);
@@ -160,7 +160,7 @@ abstract class ManifestObject
         return rtrim(Field::class, "\Field") . '\\Fields\\' . str_replace(
             ' ',
             '',
-            ucwords(str_replace('-', ' ', $fieldType))
+            ucwords(str_replace('-', ' ', $fieldType)),
         );
     }
 }

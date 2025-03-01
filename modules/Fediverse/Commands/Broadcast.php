@@ -42,7 +42,7 @@ class Broadcast extends BaseCommand
                         send_activity_to_actor(
                             $scheduledActivity->actor,
                             $scheduledActivity->targetActor,
-                            json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR)
+                            json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR),
                         );
                     }
                 } else {

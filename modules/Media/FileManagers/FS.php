@@ -12,9 +12,8 @@ use Override;
 class FS implements FileManagerInterface
 {
     public function __construct(
-        protected MediaConfig $config
+        protected MediaConfig $config,
     ) {
-        $this->config = $config;
     }
 
     /**

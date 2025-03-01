@@ -46,7 +46,7 @@ class EpisodeAudioController extends Controller
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ): void {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
@@ -93,7 +93,7 @@ class EpisodeAudioController extends Controller
 
         // check if podcast is already unlocked before any token validation
         if ($this->episode->is_premium && ! ($subscription = service('premium_podcasts')->subscription(
-            $this->episode->podcast->handle
+            $this->episode->podcast->handle,
         )) instanceof Subscription) {
             // look for token as GET parameter
             if (($token = $this->request->getGet('token')) === null) {
@@ -110,7 +110,7 @@ class EpisodeAudioController extends Controller
             // check if there's a valid subscription for the provided token
             if (! ($subscription = (new SubscriptionModel())->validateSubscription(
                 $this->episode->podcast->handle,
-                $token
+                $token,
             )) instanceof Subscription) {
                 return $this->response->setStatusCode(401, 'Invalid token!')
                     ->setJSON([
@@ -154,7 +154,7 @@ class EpisodeAudioController extends Controller
             $audioDuration,
             $this->episode->published_at->getTimestamp(),
             $serviceName,
-            $subscription instanceof Subscription ? $subscription->id : null
+            $subscription instanceof Subscription ? $subscription->id : null,
         );
 
         $audioFileURI = new URI(service('file_manager')->getUrl($this->episode->audio->file_key));

@@ -104,7 +104,7 @@ if (! function_exists('get_instance_group')) {
     {
         $instanceGroups = array_filter(
             $user->getGroups() ?? [],
-            static fn ($group): bool => ! str_starts_with((string) $group, 'podcast#')
+            static fn ($group): bool => ! str_starts_with((string) $group, 'podcast#'),
         );
 
         if ($instanceGroups === []) {
@@ -141,7 +141,7 @@ if (! function_exists('get_podcast_group')) {
     {
         $podcastGroups = array_filter(
             $user->getGroups() ?? [],
-            static fn ($group): bool => str_starts_with((string) $group, "podcast#{$podcastId}-")
+            static fn ($group): bool => str_starts_with((string) $group, "podcast#{$podcastId}-"),
         );
 
         if ($podcastGroups === []) {
@@ -184,7 +184,7 @@ if (! function_exists('get_podcast_groups')) {
     {
         $podcastGroups = array_filter(
             $user->getGroups() ?? [],
-            static fn ($group): bool => str_starts_with((string) $group, 'podcast#')
+            static fn ($group): bool => str_starts_with((string) $group, 'podcast#'),
         );
 
         $userPodcastIds = [];
@@ -281,7 +281,7 @@ if (! function_exists('get_actor_ids_with_unread_notifications')) {
 
         $unreadNotifications = (new NotificationModel())->whereIn(
             'target_actor_id',
-            array_column($userPodcasts, 'actor_id')
+            array_column($userPodcasts, 'actor_id'),
         )
             ->where('read_at', null)
             ->findAll();

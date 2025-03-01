@@ -36,7 +36,7 @@ class AddEpisodeIdToPosts extends BaseMigration
             'id',
             '',
             'CASCADE',
-            $prefix . 'fediverse_posts_episode_id_foreign'
+            $prefix . 'fediverse_posts_episode_id_foreign',
         );
         $this->forge->processIndexes('fediverse_posts');
     }

@@ -24,7 +24,7 @@ if (! function_exists('media_url')) {
             $uri->getAuthority(),
             $uri->getPath(),
             $uri->getQuery(),
-            $uri->getFragment()
+            $uri->getFragment(),
         );
     }
 }

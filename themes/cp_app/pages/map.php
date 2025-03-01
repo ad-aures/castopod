@@ -9,9 +9,6 @@
         'siteName' => esc(service('settings')
             ->get('App.siteName')),
     ]))
-    ->appendRawContent(service('vite')->asset('styles/index.css', 'css'))
-    ->appendRawContent(service('vite')->asset('js/app.ts', 'js'))
-    ->appendRawContent(service('vite')->asset('js/map.ts', 'js'))
 ?>
 
 <body class="flex flex-col h-full min-h-screen mx-auto bg-base theme-<?= service('settings')

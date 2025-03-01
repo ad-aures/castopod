@@ -32,7 +32,7 @@ class Services extends BaseService
     public static function router(
         ?RouteCollectionInterface $routes = null,
         ?Request $request = null,
-        bool $getShared = true
+        bool $getShared = true,
     ): Router {
         if ($getShared) {
             return static::getSharedInstance('router', $routes, $request);

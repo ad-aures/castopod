@@ -1,4 +1,4 @@
-image: code.castopod.org:5050/adaures/castopod:ci-php8.3
+image: code.castopod.org:5050/adaures/castopod:ci-php8.4
 
 stages:
   - prepare
@@ -70,7 +70,7 @@ lint-php:
 lint-js:
   stage: quality
   script:
-    - pnpm run prettier
+    - pnpm run format
     - pnpm run typecheck
     - pnpm run lint
     - pnpm run lint:css

@@ -193,7 +193,7 @@ class Episode extends Entity
                 ->handle,
             $this->slug,
             $this->getAudio()
-                ->file_extension
+                ->file_extension,
         );
 
         $this->audio_opengraph_url = $this->audio_url . '?_from=-+Open+Graph+-';
@@ -202,7 +202,7 @@ class Episode extends Entity
         return $this;
     }
 
-    public function setCover(UploadedFile | File $file = null): self
+    public function setCover(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -248,7 +248,7 @@ class Episode extends Entity
         return $this->cover;
     }
 
-    public function setAudio(UploadedFile | File $file = null): self
+    public function setAudio(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -285,7 +285,7 @@ class Episode extends Entity
         return $this->audio;
     }
 
-    public function setTranscript(UploadedFile | File $file = null): self
+    public function setTranscript(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -322,7 +322,7 @@ class Episode extends Entity
         return $this->transcript;
     }
 
-    public function setChapters(UploadedFile | File $file = null): self
+    public function setChapters(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -451,7 +451,7 @@ class Episode extends Entity
         return $this->comments;
     }
 
-    public function getEmbedUrl(string $theme = null): string
+    public function getEmbedUrl(?string $theme = null): string
     {
         return $theme
                 ? url_to('embed-theme', esc($this->getPodcast()->handle), esc($this->attributes['slug']), $theme)

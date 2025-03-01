@@ -76,7 +76,7 @@ class Plugins
     protected static int $activeCount = 0;
 
     public function __construct(
-        protected PluginsConfig $config
+        protected PluginsConfig $config,
     ) {
         helper('plugins');
 
@@ -235,7 +235,7 @@ class Plugins
     /**
      * @param ?array{'podcast'|'episode',int} $additionalContext
      */
-    public function setOption(BasePlugin $plugin, string $name, mixed $value, array $additionalContext = null): void
+    public function setOption(BasePlugin $plugin, string $name, mixed $value, ?array $additionalContext = null): void
     {
         set_plugin_setting($plugin->getKey(), $name, $value, $additionalContext);
     }
@@ -294,7 +294,7 @@ class Plugins
             $className = str_replace(
                 ' ',
                 '',
-                ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $package)) . 'Plugin'
+                ucwords(str_replace(['-', '_', '.'], ' ', $vendor . ' ' . $package)) . 'Plugin',
             );
 
             $pluginFile = $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';

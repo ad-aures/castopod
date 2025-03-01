@@ -66,7 +66,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     /**
      * @return AnalyticsPodcastsByEpisode[]
      */
-    public function getDataByMonth(int $podcastId, int $episodeId = null): array
+    public function getDataByMonth(int $podcastId, ?int $episodeId = null): array
     {
         if (
             ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month"))

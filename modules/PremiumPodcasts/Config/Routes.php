@@ -66,7 +66,7 @@ $routes->group(
                     [
                         'as'     => 'subscription-regenerate-token',
                         'filter' => 'permission:podcast$1.manage-subscriptions',
-                    ]
+                    ],
                 );
                 $routes->get(
                     'suspend',
@@ -108,7 +108,7 @@ $routes->group(
                 );
             });
         });
-    }
+    },
 );
 
 $routes->group(
@@ -126,5 +126,5 @@ $routes->group(
         $routes->get('lock', 'LockController::lockAction/$1', [
             'as' => 'premium-podcast-lock',
         ]);
-    }
+    },
 );

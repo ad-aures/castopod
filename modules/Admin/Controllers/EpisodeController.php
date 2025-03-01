@@ -82,8 +82,8 @@ class EpisodeController extends BaseController
                     ->where('podcast_id', $podcast->id)
                     ->where(
                         "MATCH (title, description_markdown, slug, location_name) AGAINST ('{$episodeModel->db->escapeString(
-                            $query
-                        )}')"
+                            $query,
+                        )}')",
                     );
             }
         } else {
@@ -188,7 +188,7 @@ class EpisodeController extends BaseController
             'cover'                => $this->request->getFile('cover'),
             'description_markdown' => $this->request->getPost('description'),
             'location'             => $this->request->getPost('location_name') === '' ? null : new Location(
-                $this->request->getPost('location_name')
+                $this->request->getPost('location_name'),
             ),
             'transcript'        => $this->request->getFile('transcript'),
             'chapters'          => $this->request->getFile('chapters'),
@@ -212,7 +212,7 @@ class EpisodeController extends BaseController
             $newEpisode->setTranscript($this->request->getFile('transcript_file'));
         } elseif ($transcriptChoice === 'remote-url') {
             $newEpisode->transcript_remote_url = $this->request->getPost(
-                'transcript_remote_url'
+                'transcript_remote_url',
             ) === '' ? null : $this->request->getPost('transcript_remote_url');
         }
 
@@ -221,7 +221,7 @@ class EpisodeController extends BaseController
             $newEpisode->setChapters($this->request->getFile('chapters_file'));
         } elseif ($chaptersChoice === 'remote-url') {
             $newEpisode->chapters_remote_url = $this->request->getPost(
-                'chapters_remote_url'
+                'chapters_remote_url',
             ) === '' ? null : $this->request->getPost('chapters_remote_url');
         }
 
@@ -235,7 +235,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-view', [$podcast->id, $newEpisodeId])->with(
             'message',
-            lang('Episode.messages.createSuccess')
+            lang('Episode.messages.createSuccess'),
         );
     }
 
@@ -284,7 +284,7 @@ class EpisodeController extends BaseController
         $episode->slug = $validData['slug'];
         $episode->description_markdown = $this->request->getPost('description');
         $episode->location = $this->request->getPost('location_name') === '' ? null : new Location(
-            $this->request->getPost('location_name')
+            $this->request->getPost('location_name'),
         );
         $episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
@@ -349,7 +349,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-edit', [$episode->podcast_id, $episode->id])->with(
             'message',
-            lang('Episode.messages.editSuccess')
+            lang('Episode.messages.editSuccess'),
         );
     }
 
@@ -407,7 +407,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'error',
-            lang('Episode.publish_error')
+            lang('Episode.publish_error'),
         );
     }
 
@@ -490,7 +490,7 @@ class EpisodeController extends BaseController
             'message',
             lang('Episode.messages.publishSuccess', [
                 'publication_status' => $episode->publication_status,
-            ])
+            ]),
         );
     }
 
@@ -520,7 +520,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'error',
-            lang('Episode.publish_edit_error')
+            lang('Episode.publish_edit_error'),
         );
     }
 
@@ -602,7 +602,7 @@ class EpisodeController extends BaseController
             'message',
             lang('Episode.messages.publishSuccess', [
                 'publication_status' => $episode->publication_status,
-            ])
+            ]),
         );
     }
 
@@ -636,7 +636,7 @@ class EpisodeController extends BaseController
 
             return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'message',
-                lang('Episode.messages.publishCancelSuccess')
+                lang('Episode.messages.publishCancelSuccess'),
             );
         }
 
@@ -649,7 +649,7 @@ class EpisodeController extends BaseController
         if ($episode->publication_status !== 'published') {
             return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'error',
-                lang('Episode.publish_date_edit_error')
+                lang('Episode.publish_date_edit_error'),
             );
         }
 
@@ -716,7 +716,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
             'message',
-            lang('Episode.publish_date_edit_success')
+            lang('Episode.publish_date_edit_success'),
         );
     }
 
@@ -725,7 +725,7 @@ class EpisodeController extends BaseController
         if ($episode->publication_status !== 'published') {
             return redirect()->route('episode-view', [$episode->podcast_id, $episode->id])->with(
                 'error',
-                lang('Episode.unpublish_error')
+                lang('Episode.unpublish_error'),
             );
         }
 
@@ -906,7 +906,7 @@ class EpisodeController extends BaseController
 
         return redirect()->route('episode-list', [$episode->podcast_id])->with(
             'message',
-            lang('Episode.messages.deleteSuccess')
+            lang('Episode.messages.deleteSuccess'),
         );
     }
 

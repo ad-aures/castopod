@@ -12,7 +12,7 @@ class Services extends BaseService
 {
     public static function premium_podcasts(
         ?SubscriptionModel $subscriptionModel = null,
-        bool $getShared = true
+        bool $getShared = true,
     ): PremiumPodcasts {
         if ($getShared) {
             return self::getSharedInstance('premium_podcasts', $subscriptionModel);
