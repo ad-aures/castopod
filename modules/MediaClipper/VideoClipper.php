@@ -96,7 +96,7 @@ class VideoClipper
 
         if (! $tempFile) {
             throw new Exception(
-                'Could not create temporary files, check for permissions on your ' . WRITEPATH . 'temp folder.'
+                'Could not create temporary files, check for permissions on your ' . WRITEPATH . 'temp folder.',
             );
         }
 
@@ -233,11 +233,11 @@ class VideoClipper
             '[m][a]alphamerge[waves_t3]',
             "[waves_t3]scale={$this->dimensions['soundwaves']['rescaleWidth']}:{$this->dimensions['soundwaves']['rescaleHeight']},lutrgb=r='if(gt(val,100),{$this->colors['soundwaves'][0]},val)':g='if(gt(val,100),{$this->colors['soundwaves'][1]},val)':b='if(gt(val,100),{$this->colors['soundwaves'][2]},val)'[waves_final]",
             "[1:v][waves_final]overlay=x={$this->dimensions['soundwaves']['x']}:y={$this->dimensions['soundwaves']['y']}:shortest=1,drawtext=fontfile=" . $this->getFont(
-                'timestamp'
+                'timestamp',
             ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=0x{$this->colors['timestampText']}:box=1:boxcolor=0x{$this->colors['timestampBg']}:boxborderw={$this->dimensions['timestamp']['padding']}[v3]",
             "color=c=0x{$this->colors['progressbar']}:s={$this->dimensions['width']}x{$this->dimensions['progressbar']['height']}[progressbar]",
             "[v3][progressbar]overlay=-w+(w/{$this->duration})*t:0:shortest=1:format=rgb,subtitles={$this->subtitlesClipOutput}:fontsdir=" . config(
-                'MediaClipper'
+                'MediaClipper',
             )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},PrimaryColour=&H{$this->colors['subtitles']}&,BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}'[outv]",
             "[6:v]scale={$this->dimensions['watermark']['width']}:{$this->dimensions['watermark']['height']}[watermark]",
             "color=0x{$this->colors['watermarkBg']}:{$this->dimensions['watermark']['width']}x{$this->dimensions['watermark']['height']}[over]",
@@ -313,7 +313,7 @@ class VideoClipper
         $scaledEpisodeCover = $this->scaleImage(
             $episodeCover,
             $this->dimensions['cover']['width'],
-            $this->dimensions['cover']['height']
+            $this->dimensions['cover']['height'],
         );
 
         if (! $scaledEpisodeCover) {
@@ -332,7 +332,7 @@ class VideoClipper
             $this->dimensions['cover']['x'],
             $this->dimensions['cover']['y'],
             $this->dimensions['cover']['width'],
-            $this->dimensions['cover']['height']
+            $this->dimensions['cover']['height'],
         );
 
         if (! $isOverlaid) {
@@ -357,13 +357,13 @@ class VideoClipper
                 $this->dimensions['episodeTitle']['fontsize'],
                 0,
                 $this->getFont('episodeTitle'),
-                $this->episode->title
+                $this->episode->title,
             );
             $episodeNumberingBox = $this->calculateTextBox(
                 $this->dimensions['episodeNumbering']['fontsize'],
                 0,
                 $this->getFont('episodeNumbering'),
-                $this->episodeNumbering
+                $this->episodeNumbering,
             );
             if (! $episodeTitleBox || ! $episodeNumberingBox) {
                 return false;
@@ -419,7 +419,7 @@ class VideoClipper
         $scaledQuotes = $this->scaleImage(
             $cleanedQuotes,
             $this->dimensions['quotes']['width'],
-            $this->dimensions['quotes']['height']
+            $this->dimensions['quotes']['height'],
         );
 
         if (! $scaledQuotes) {
@@ -433,7 +433,7 @@ class VideoClipper
             $this->dimensions['quotes']['x'],
             $this->dimensions['quotes']['y'],
             $this->dimensions['quotes']['width'],
-            $this->dimensions['quotes']['height']
+            $this->dimensions['quotes']['height'],
         );
 
         // Save Image
@@ -606,7 +606,7 @@ class VideoClipper
         int $x,
         int $y,
         int $width,
-        int $height
+        int $height,
     ): bool {
         return imagecopy($background, $foreground, $x, $y, 0, 0, $width, $height);
     }
@@ -646,7 +646,7 @@ class VideoClipper
                 $y + $fontsize + ($leading * $i),
                 $textColor,
                 $fontPath,
-                $line
+                $line,
             );
         }
 

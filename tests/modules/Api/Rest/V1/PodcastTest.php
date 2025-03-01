@@ -98,7 +98,7 @@ class PodcastTest extends CIUnitTestCase
                 'messages' => [
                     'error' => 'Podcast not found',
                 ],
-            ]
+            ],
         );
         $result->assertHeader('Content-Type', 'application/json; charset=UTF-8');
     }

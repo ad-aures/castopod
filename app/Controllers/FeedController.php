@@ -45,7 +45,7 @@ class FeedController extends Controller
 
         if ($redirectToNewFeed && $podcast->new_feed_url !== null && filter_var(
             $podcast->new_feed_url,
-            FILTER_VALIDATE_URL
+            FILTER_VALIDATE_URL,
         ) && $podcast->new_feed_url !== current_url()) {
             return redirect()->to($podcast->new_feed_url, 301);
         }

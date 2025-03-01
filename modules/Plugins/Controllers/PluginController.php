@@ -84,8 +84,8 @@ class PluginController extends BaseController
     public function settingsView(
         string $vendor,
         string $package,
-        string $podcastId = null,
-        string $episodeId = null
+        ?string $podcastId = null,
+        ?string $episodeId = null,
     ): string {
 
         $plugin = $this->plugins->getPlugin($vendor, $package);
@@ -152,8 +152,8 @@ class PluginController extends BaseController
     public function settingsAction(
         string $vendor,
         string $package,
-        string $podcastId = null,
-        string $episodeId = null
+        ?string $podcastId = null,
+        ?string $episodeId = null,
     ): RedirectResponse {
         $plugin = $this->plugins->getPlugin($vendor, $package);
 
@@ -350,7 +350,7 @@ class PluginController extends BaseController
             'datetime' => Time::createFromFormat(
                 'Y-m-d H:i',
                 $value,
-                $this->request->getPost('client_timezone')
+                $this->request->getPost('client_timezone'),
             )->setTimezone(app_timezone()),
             'markdown' => new Markdown($value),
             'rss'      => new RSS($value),

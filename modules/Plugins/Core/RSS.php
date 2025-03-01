@@ -12,7 +12,7 @@ use Stringable;
 class RSS implements Stringable
 {
     public function __construct(
-        protected string $rss
+        protected string $rss,
     ) {
     }
 

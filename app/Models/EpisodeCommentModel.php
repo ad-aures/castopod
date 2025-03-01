@@ -102,7 +102,7 @@ class EpisodeCommentModel extends UuidModel
                 'episode-comment',
                 esc($comment->actor->username),
                 $comment->episode->slug,
-                $comment->id
+                $comment->id,
             );
 
             $createActivity = new CreateActivity();
@@ -211,7 +211,7 @@ class EpisodeCommentModel extends UuidModel
         $postModel = new PostModel();
         $episodePostsRepliesBuilder = $postModel->builder();
         $episodePostsReplies = $episodePostsRepliesBuilder->select(
-            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
+            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post',
         )
             ->whereIn('in_reply_to_id', static function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
@@ -226,12 +226,12 @@ class EpisodeCommentModel extends UuidModel
 
         /** @var BaseResult $allEpisodeComments */
         $allEpisodeComments = $this->db->query(
-            $episodeComments . ' UNION ' . $episodePostsReplies . ' ORDER BY created_at ASC'
+            $episodeComments . ' UNION ' . $episodePostsReplies . ' ORDER BY created_at ASC',
         );
 
         return $this->convertUuidFieldsToStrings(
             $allEpisodeComments->getCustomResultObject($this->tempReturnType),
-            $this->tempReturnType
+            $this->tempReturnType,
         );
     }
 

@@ -246,7 +246,7 @@ class AnalyticsPodcastModel extends Model
     {
         if (! ($found = cache('analytics_total_bandwidth_by_month'))) {
             $found = $this->select(
-                'DATE_FORMAT(updated_at,"%Y-%m") as labels, ROUND(sum(bandwidth) / 1000000, 2) as `values`'
+                'DATE_FORMAT(updated_at,"%Y-%m") as labels, ROUND(sum(bandwidth) / 1000000, 2) as `values`',
             )
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')
@@ -268,7 +268,7 @@ class AnalyticsPodcastModel extends Model
     {
         if (! ($found = cache('analytics_total_storage_by_month'))) {
             $found = (new MediaModel())->select(
-                'DATE_FORMAT(uploaded_at,"%Y-%m") as labels, ROUND(sum(file_size) / 1000000, 2) as `values`'
+                'DATE_FORMAT(uploaded_at,"%Y-%m") as labels, ROUND(sum(file_size) / 1000000, 2) as `values`',
             )
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')

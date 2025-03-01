@@ -46,5 +46,5 @@ $routes->group(
                 'filter' => 'permission:podcast$1.manage-import',
             ]);
         });
-    }
+    },
 );

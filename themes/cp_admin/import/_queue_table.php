@@ -142,5 +142,5 @@ use Modules\PodcastImport\Entities\TaskStatus;
             },
         ],
     ],
-    $podcastImportsQueue
+    $podcastImportsQueue,
 ) ?>

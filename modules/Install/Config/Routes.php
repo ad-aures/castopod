@@ -35,5 +35,5 @@ $routes->group(
                 'as' => 'create-superadmin',
             ],
         );
-    }
+    },
 );

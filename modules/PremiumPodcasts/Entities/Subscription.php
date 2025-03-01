@@ -115,7 +115,7 @@ class Subscription extends Entity
     {
         return (new AnalyticsPodcastBySubscriptionModel())->getNumberOfDownloadsLast3Months(
             $this->podcast_id,
-            $this->id
+            $this->id,
         );
     }
 }

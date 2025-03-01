@@ -16,7 +16,7 @@ class S3 implements FileManagerInterface
     public S3Client $s3;
 
     public function __construct(
-        protected MediaConfig $config
+        protected MediaConfig $config,
     ) {
         $this->s3 = new S3Client([
             'version'                 => 'latest',

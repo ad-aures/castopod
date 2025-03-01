@@ -231,24 +231,24 @@ class ActorModel extends Model
                 ->join(
                     $tablePrefix . 'fediverse_posts',
                     $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_posts.actor_id',
-                    'left outer'
+                    'left outer',
                 )
                 ->join(
                     $tablePrefix . 'fediverse_favourites',
                     $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_favourites.actor_id',
-                    'left outer'
+                    'left outer',
                 )
                 ->where($tablePrefix . 'fediverse_actors.domain', get_current_domain())
                 ->groupStart()
                 ->where(
                     "`{$tablePrefix}fediverse_posts`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
-                    false
+                    false,
                 )
                 ->orWhere(
                     "`{$tablePrefix}fediverse_favourites`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
-                    false
+                    false,
                 )
                 ->groupEnd()
                 ->get()

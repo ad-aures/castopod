@@ -35,7 +35,7 @@ class RssFeed extends SimpleXMLElement
             $this::ATOM_NAMESPACE,
             $this::ITUNES_NAMESPACE,
             $this::PODCAST_NAMESPACE,
-            $contents
+            $contents,
         ));
     }
 

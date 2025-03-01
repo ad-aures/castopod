@@ -100,8 +100,8 @@ class ActivityModel extends UuidModel
         ?int $targetActorId,
         ?string $postId,
         string $payload,
-        DateTimeInterface $scheduledAt = null,
-        ?string $taskStatus = null
+        ?DateTimeInterface $scheduledAt = null,
+        ?string $taskStatus = null,
     ): BaseResult | int | string | false {
         return $this->insert(
             [
@@ -110,7 +110,7 @@ class ActivityModel extends UuidModel
                 'post_id'         => $postId,
                 'type'            => $type === 'Undo' ? $type . '_' . (json_decode(
                     $payload,
-                    true
+                    true,
                 ))['object']['type'] : $type,
                 'payload'      => $payload,
                 'scheduled_at' => $scheduledAt,

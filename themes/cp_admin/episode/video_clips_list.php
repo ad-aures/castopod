@@ -127,7 +127,7 @@ use CodeIgniter\I18n\Time;
         ],
     ],
     $videoClips,
-    'mb-6'
+    'mb-6',
 ) ?>
 
 <?= $pager->links() ?>

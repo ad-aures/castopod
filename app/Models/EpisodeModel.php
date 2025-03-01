@@ -235,8 +235,8 @@ class EpisodeModel extends UuidModel
     public function getPodcastEpisodes(
         int $podcastId,
         string $podcastType,
-        string $year = null,
-        string $season = null
+        ?string $year = null,
+        ?string $season = null,
     ): array {
         $cacheName = implode(
             '_',
@@ -347,7 +347,7 @@ class EpisodeModel extends UuidModel
     {
         $result = $this->builder()
             ->select(
-                'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
+                'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at',
             )
             ->where('podcast_id', $podcastId)
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
@@ -384,7 +384,7 @@ class EpisodeModel extends UuidModel
 
         /** @var BaseResult $query */
         $query = $this->db->query(
-            'SELECT `episode_id` as `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `episode_id`'
+            'SELECT `episode_id` as `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `episode_id`',
         );
 
         $countsPerEpisodeId = $query->getResultArray();
@@ -480,7 +480,7 @@ class EpisodeModel extends UuidModel
              ')
             ->select("{$podcastTable}.created_at AS podcast_created_at")
             ->select(
-                "{$podcastTable}.title as podcast_title, {$podcastTable}.handle as podcast_handle, {$podcastTable}.description_markdown as podcast_description_markdown"
+                "{$podcastTable}.title as podcast_title, {$podcastTable}.handle as podcast_handle, {$podcastTable}.description_markdown as podcast_description_markdown",
             )
             ->join($podcastTable, "{$podcastTable} on {$podcastTable}.id = {$episodeTable}.podcast_id")
             ->where('
@@ -489,7 +489,7 @@ class EpisodeModel extends UuidModel
                     . 'OR' .
                     $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $query)
                 . ')
-            ');
+            ', );
 
         return $this->builder;
     }

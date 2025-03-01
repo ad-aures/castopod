@@ -24,7 +24,7 @@ if (! function_exists('get_import_tasks')) {
         if ($podcastHandle !== null) {
             $podcastImportsQueue = array_filter(
                 $podcastImportsQueue,
-                static fn ($importTask): bool => $importTask->handle === $podcastHandle
+                static fn ($importTask): bool => $importTask->handle === $podcastHandle,
             );
         }
 

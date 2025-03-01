@@ -74,7 +74,7 @@ class CreateSuperadmin extends BaseCommand
         $passwordConfirm = $this->prompt(
             'Password confirmation',
             null,
-            $this->validationRules['password']['rules']
+            $this->validationRules['password']['rules'],
         );
 
         if ($password !== $passwordConfirm) {

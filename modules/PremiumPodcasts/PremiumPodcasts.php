@@ -63,7 +63,7 @@ class PremiumPodcasts
     {
         if (array_key_exists(
             $podcastHandle,
-            $this->subscriptions
+            $this->subscriptions,
         ) && ($this->subscriptions[$podcastHandle] instanceof Subscription)) {
             return true;
         }
@@ -86,7 +86,7 @@ class PremiumPodcasts
 
         // Store the current subscription object
         $this->subscriptions[$podcastHandle] = $this->subscriptionModel->getSubscriptionById(
-            $this->subscriptions[$podcastHandle]->id
+            $this->subscriptions[$podcastHandle]->id,
         );
 
         if (! $this->subscriptions[$podcastHandle] instanceof Subscription) {

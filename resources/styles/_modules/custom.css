@@ -1,0 +1,105 @@
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .form-helper {
+    @apply text-skin-muted;
+  }
+
+  select {
+    box-shadow: 2px 2px 0 hsl(var(--color-border-contrast));
+  }
+}
+
+@layer components {
+  .post-content {
+    & a {
+      @apply text-sm font-semibold text-accent-base hover:text-accent-hover;
+    }
+  }
+
+  .ring-accent {
+    @apply outline-none ring-2 ring-offset-2 ring-accent-base;
+
+    /* FIXME: why doesn't ring-accent-base work? */
+    --tw-ring-opacity: 1;
+    --tw-ring-color: hsl(var(--color-accent-base) / var(--tw-ring-opacity));
+    --tw-ring-offset-color: hsl(var(--color-background-base));
+  }
+
+  .rounded-conditional-b-xl {
+    border-bottom-right-radius: max(
+      0px,
+      min(0.75rem, calc((100vw - 0.75rem - 100%) * 9999))
+    );
+    border-bottom-left-radius: max(
+      0px,
+      min(0.75rem, calc((100vw - 0.75rem - 100%) * 9999))
+    );
+  }
+
+  .rounded-conditional-2xl {
+    border-radius: max(0px, min(1rem, calc((100vw - 1rem - 100%) * 9999)));
+  }
+
+  .rounded-conditional-full {
+    border-radius: max(0px, min(9999px, calc((100vw - 1rem - 100%) * 9999)));
+  }
+
+  .backdrop-gradient {
+    background-image: linear-gradient(
+      180deg,
+      hsla(0deg 0% 35.29% / 0%) 0%,
+      hsla(0deg 0% 34.53% / 3.44%) 16.36%,
+      hsla(0deg 0% 32.42% / 12.5%) 33.34%,
+      hsla(0deg 0% 29.18% / 25.3%) 50.1%,
+      hsla(0deg 0% 24.96% / 40%) 65.75%,
+      hsla(0deg 0% 19.85% / 54.7%) 79.43%,
+      hsla(0deg 0% 13.95% / 67.5%) 90.28%,
+      hsla(0deg 0% 7.32% / 76.6%) 97.43%,
+      hsla(0deg 0% 0% / 80%) 100%
+    );
+  }
+
+  .backdrop-gradient-accent {
+    /* stylelint-disable-next-line declaration-property-value-no-unknown */
+    background-image: linear-gradient(
+      180deg,
+      theme(colors.background.base / 0.4) 0%,
+      theme(colors.background.base / 0.6) 65.75%,
+      theme(colors.background.base / 1) 90.28%,
+      theme(colors.background.base / 1) 97.43%,
+      theme(colors.background.base / 1) 100%
+    );
+  }
+
+  .bg-stripes-default {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #f3f4f6,
+      #f3f4f6 10px,
+      #e5e7eb 10px,
+      #e5e7eb 20px
+    );
+  }
+
+  .bg-stripes-warning {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #fde047,
+      #fde047 10px,
+      #facc15 10px,
+      #facc15 20px
+    );
+  }
+
+  .divide-fieldset-y > :not([hidden], legend) ~ :not([hidden], legend) {
+    @apply pt-4;
+
+    --tw-divide-y-reverse: 0;
+
+    border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+    border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+  }
+}

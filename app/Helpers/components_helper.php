@@ -234,7 +234,7 @@ if (! function_exists('episode_publication_status_banner')) {
         $bannerText = lang('Episode.publication_status_banner.text', [
             'publication_status' => $episode->publication_status,
             'publication_date'   => $episode->published_at instanceof Time ? local_datetime(
-                $episode->published_at
+                $episode->published_at,
             ) : null,
         ]);
         $previewLinkLabel = lang('Episode.publication_status_banner.preview');
@@ -267,7 +267,7 @@ if (! function_exists('episode_numbering')) {
         ?int $episodeNumber = null,
         ?int $seasonNumber = null,
         string $class = '',
-        bool $isAbbr = false
+        bool $isAbbr = false,
     ): string {
         if (! $episodeNumber && ! $seasonNumber) {
             return '';
@@ -381,7 +381,7 @@ if (! function_exists('relative_time')) {
     function relative_time(Time $time, string $class = ''): string
     {
         $formatter = new IntlDateFormatter(service(
-            'request'
+            'request',
         )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
         $datetime = $time->format(DateTime::ATOM);
@@ -402,7 +402,7 @@ if (! function_exists('local_datetime')) {
     function local_datetime(Time $time): string
     {
         $formatter = new IntlDateFormatter(service(
-            'request'
+            'request',
         )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::LONG);
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
         $datetime = $time->format(DateTime::ATOM);
@@ -431,7 +431,7 @@ if (! function_exists('local_date')) {
     function local_date(Time $time): string
     {
         $formatter = new IntlDateFormatter(service(
-            'request'
+            'request',
         )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
 

@@ -163,7 +163,7 @@ class PodcastModel extends Model
     /**
      * @return Podcast[]
      */
-    public function getAllPodcasts(string $orderBy = null): array
+    public function getAllPodcasts(?string $orderBy = null): array
     {
         $prefix = $this->db->getPrefix();
 
@@ -175,7 +175,7 @@ class PodcastModel extends Model
                 ->where(
                     '`' . $prefix . 'fediverse_posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
-                    false
+                    false,
                 )->orWhere('fediverse_posts.published_at', null)
                 ->groupEnd()
                 ->groupBy('podcasts.actor_id')
@@ -478,7 +478,7 @@ class PodcastModel extends Model
     {
         if (! array_key_exists(
             'guid',
-            $data['data']
+            $data['data'],
         ) || $data['data']['guid'] === null || $data['data']['guid'] === '') {
             $uuid = service('uuid');
             $feedUrl = url_to('podcast-rss-feed', $data['data']['handle']);

@@ -42,7 +42,7 @@ class ContributorController extends BaseController
 
         if (($this->contributor = (new UserModel())->getPodcastContributor(
             (int) $params[1],
-            (int) $params[0]
+            (int) $params[0],
         )) instanceof User) {
             return $this->{$method}();
         }
@@ -88,7 +88,7 @@ class ContributorController extends BaseController
         $users = (new UserModel())->findAll();
         $contributorOptions = array_reduce(
             $users,
-            static function (array $result, $user): array {
+            static function (array $result, User $user): array {
                 $result[] = [
                     'value' => $user->id,
                     'label' => $user->username,
@@ -202,7 +202,7 @@ class ContributorController extends BaseController
 
         return redirect()->route('contributor-list', [$this->podcast->id])->with(
             'message',
-            lang('Contributor.messages.editSuccess')
+            lang('Contributor.messages.editSuccess'),
         );
     }
 

@@ -308,7 +308,7 @@ class Mimes
      * @param string|null $proposedExtension - default extension (in case there is more than one with the same mime type)
      * @return string|null The extension determined, or null if unable to match.
      */
-    public static function guessExtensionFromType(string $type, string $proposedExtension = null): ?string
+    public static function guessExtensionFromType(string $type, ?string $proposedExtension = null): ?string
     {
         $type = trim(strtolower($type), '. ');
 

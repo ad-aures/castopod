@@ -45,7 +45,7 @@ if (! function_exists('set_podcast_metatags')) {
                 'publisher'   => $podcast->publisher,
                 'inLanguage'  => $podcast->language_code,
                 'genre'       => $category,
-            ])
+            ]),
         );
 
         /** @var HtmlHead $head */
@@ -65,7 +65,7 @@ if (! function_exists('set_podcast_metatags')) {
                 'type' => 'application/activity+json',
                 'href' => url_to('podcast-activity', esc($podcast->handle)),
             ])->appendRawContent('<link type="application/rss+xml" rel="alternate" title="' . esc(
-                $podcast->title
+                $podcast->title,
             ) . '" href="' . $podcast->feed_url . '" />' . $schema);
     }
 }
@@ -89,7 +89,7 @@ if (! function_exists('set_episode_metatags')) {
                     'name' => $episode->podcast->title,
                     'url'  => $episode->podcast->link,
                 ]),
-            ])
+            ]),
         );
 
         /** @var HtmlHead $head */
@@ -119,11 +119,11 @@ if (! function_exists('set_episode_metatags')) {
                 'href' => $episode->link,
             ])
             ->appendRawContent('<link rel="alternate" type="application/json+oembed" href="' . base_url(
-                route_to('episode-oembed-json', $episode->podcast->handle, $episode->slug)
+                route_to('episode-oembed-json', $episode->podcast->handle, $episode->slug),
             ) . '" title="' . esc(
-                $episode->title
+                $episode->title,
             ) . ' oEmbed json" />' . '<link rel="alternate" type="text/xml+oembed" href="' . base_url(
-                route_to('episode-oembed-xml', $episode->podcast->handle, $episode->slug)
+                route_to('episode-oembed-xml', $episode->podcast->handle, $episode->slug),
             ) . '" title="' . esc($episode->title) . ' oEmbed xml" />' . $schema);
     }
 }
@@ -188,7 +188,7 @@ if (! function_exists('set_episode_comment_metatags')) {
                 'episode-comment',
                 esc($episodeComment->actor->username),
                 $episodeComment->episode->slug,
-                $episodeComment->id
+                $episodeComment->id,
             ),
             'datePublished' => $episodeComment->created_at->format(DATE_ATOM),
             'author'        => new Thing('Person', [
@@ -218,7 +218,7 @@ if (! function_exists('set_episode_comment_metatags')) {
                     'episode-comment',
                     $episodeComment->actor->username,
                     $episodeComment->episode->slug,
-                    $episodeComment->id
+                    $episodeComment->id,
                 ),
             ])->appendRawContent((string) $schema);
     }
@@ -279,8 +279,8 @@ if (! function_exists('set_page_metatags')) {
         $head
             ->title(
                 $page->title . service('settings')->get('App.siteTitleSeparator') . service(
-                    'settings'
-                )->get('App.siteName')
+                    'settings',
+                )->get('App.siteName'),
             )
             ->description(esc(service('settings')->get('App.siteDescription')))
             ->image(get_site_icon_url('512'))

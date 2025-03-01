@@ -9,7 +9,7 @@ if (! function_exists('render_breadcrumb')) {
      * @param string|null $class to be added to the breadcrumb nav
      * @return string html breadcrumb
      */
-    function render_breadcrumb(string $class = null): string
+    function render_breadcrumb(?string $class = null): string
     {
         return service('breadcrumb')->render($class);
     }

@@ -483,7 +483,7 @@ $routes->group(
                                 [
                                     'as'     => 'comment-attempt-create',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
-                                ]
+                                ],
                             );
                             $routes->post(
                                 '(:uuid)/reply',
@@ -491,7 +491,7 @@ $routes->group(
                                 [
                                     'as'     => 'comment-attempt-reply',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
-                                ]
+                                ],
                             );
                             $routes->post(
                                 'delete',
@@ -499,7 +499,7 @@ $routes->group(
                                 [
                                     'as'     => 'comment-attempt-delete',
                                     'filter' => 'permission:podcast$1.episodes.manage-comments',
-                                ]
+                                ],
                             );
                         });
                     });

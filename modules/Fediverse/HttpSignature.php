@@ -24,9 +24,6 @@ use phpseclib\Crypt\RSA;
  */
 class HttpSignature
 {
-    /**
-     * @var string
-     */
     private const string SIGNATURE_PATTERN = '/
         (?=.*(keyId="(?P<keyId>https?:\/\/[\w\-\.]+[\w]+(:[\d]+)?[\w\-\.#\/@]+)"))
         (?=.*(signature="(?P<signature>[\w+\/]+={0,2})"))
@@ -36,7 +33,7 @@ class HttpSignature
 
     protected IncomingRequest $request;
 
-    public function __construct(IncomingRequest $request = null)
+    public function __construct(?IncomingRequest $request = null)
     {
         if (! $request instanceof IncomingRequest) {
             $request = service('request');
@@ -164,7 +161,7 @@ class HttpSignature
         string $publicKeyPem,
         string $data,
         string $signature,
-        string $algorithm = 'rsa-sha256'
+        string $algorithm = 'rsa-sha256',
     ): bool {
         if ($algorithm === 'rsa-sha512' || $algorithm === 'rsa-sha256') {
             $hash = substr($algorithm, strpos($algorithm, '-') + 1);

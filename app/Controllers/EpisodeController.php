@@ -243,7 +243,7 @@ class EpisodeController extends BaseController
                     /** @var FileManagerInterface $fileManager */
                     $fileManager = service('file_manager');
                     $transcriptJsonString = (string) $fileManager->getFileContents(
-                        $this->episode->transcript->json_key
+                        $this->episode->transcript->json_key,
                     );
 
                     $data['captions'] = json_decode($transcriptJsonString, true);
@@ -365,7 +365,7 @@ class EpisodeController extends BaseController
                 '<iframe src="' .
                     $this->episode->embed_url .
                     '" width="100%" height="' . config(
-                        Embed::class
+                        Embed::class,
                     )->height . '" frameborder="0" scrolling="no"></iframe>',
             ),
         );

@@ -145,7 +145,7 @@ class PersonModel extends Model
                 $this->select('`id`, `full_name`')
                     ->orderBy('`full_name`', 'ASC')
                     ->findAll(),
-                static function (array $result, $person): array {
+                static function (array $result, Person $person): array {
                     $result[] = [
                         'value' => $person->id,
                         'label' => $person->full_name,
@@ -215,7 +215,7 @@ class PersonModel extends Model
         if (! ($found = cache($cacheName))) {
             $this->builder()
                 ->select(
-                    'persons.*, episodes_persons.podcast_id as podcast_id, episodes_persons.episode_id as episode_id'
+                    'persons.*, episodes_persons.podcast_id as podcast_id, episodes_persons.episode_id as episode_id',
                 )
                 ->distinct()
                 ->join('episodes_persons', 'persons.id = episodes_persons.person_id')
@@ -257,7 +257,7 @@ class PersonModel extends Model
         int $episodeId,
         int $personId,
         string $groupSlug,
-        string $roleSlug
+        string $roleSlug,
     ): bool {
         return $this->db->table('episodes_persons')
             ->insert([

@@ -45,7 +45,7 @@ abstract class BasePlugin implements PluginInterface
     public function __construct(
         protected string $vendor,
         protected string $package,
-        protected string $directory
+        protected string $directory,
     ) {
         $this->key = sprintf('%s/%s', $vendor, $package);
 
@@ -59,7 +59,7 @@ abstract class BasePlugin implements PluginInterface
         if ($this->manifest->minCastopodVersion !== null && version_compare(
             CP_VERSION,
             $this->manifest->minCastopodVersion,
-            '<'
+            '<',
         )) {
             $this->status = PluginStatus::INCOMPATIBLE;
         } else {
@@ -342,7 +342,7 @@ abstract class BasePlugin implements PluginInterface
         return 'data:image/svg+xml;utf8,' . str_replace(
             ['%20', '%22', '%27', '%3D'],
             [' ', "'", "'", '='],
-            $encodedIcon
+            $encodedIcon,
         );
     }
 
@@ -369,13 +369,13 @@ abstract class BasePlugin implements PluginInterface
             DocumentParsedEvent::class,
             static function (DocumentParsedEvent $event): void {
                 (new ExternalLinkProcessor())->onDocumentParsed($event);
-            }
+            },
         );
         $environment->addEventListener(
             DocumentParsedEvent::class,
             static function (DocumentParsedEvent $event): void {
                 (new ExternalImageProcessor())->onDocumentParsed($event);
-            }
+            },
         );
 
         $converter = new MarkdownConverter($environment);

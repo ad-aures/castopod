@@ -259,8 +259,8 @@ if (! function_exists('podcast_hit')) {
                 'Analytics_Episode_' .
                 sha1(
                     $salt . '_' . date(
-                        'Y-m-d'
-                    ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $episodeId
+                        'Y-m-d',
+                    ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $episodeId,
                 );
             // The cache expires at midnight:
             $secondsToMidnight = strtotime('tomorrow') - time();
@@ -308,8 +308,8 @@ if (! function_exists('podcast_hit')) {
                         'Analytics_Podcast_' .
                         sha1(
                             $salt . '_' . date(
-                                'Y-m-d'
-                            ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $podcastId
+                                'Y-m-d',
+                            ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $podcastId,
                         );
                     $newListener = 1;
 

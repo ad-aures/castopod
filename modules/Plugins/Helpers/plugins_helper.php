@@ -15,7 +15,7 @@ if (! function_exists('get_plugin_setting')) {
     /**
      * @param ?array{'podcast'|'episode',int} $additionalContext
      */
-    function get_plugin_setting(string $pluginKey, string $option, array $additionalContext = null): mixed
+    function get_plugin_setting(string $pluginKey, string $option, ?array $additionalContext = null): mixed
     {
         $key = sprintf('Plugins.%s', $option);
         $context = sprintf('plugin:%s', $pluginKey);
@@ -36,7 +36,7 @@ if (! function_exists('set_plugin_setting')) {
         string $pluginKey,
         string $option,
         mixed $value = null,
-        array $additionalContext = null
+        ?array $additionalContext = null,
     ): void {
         $key = sprintf('Plugins.%s', $option);
         $context = sprintf('plugin:%s', $pluginKey);

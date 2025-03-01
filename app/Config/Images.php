@@ -130,7 +130,7 @@ class Images extends BaseConfig
         ],
     ];
 
-    public string $avatarDefaultPath = 'castopod-avatar.jpg';
+    public string $avatarDefaultPath = 'assets/images/castopod-avatar.jpg';
 
     public string $avatarDefaultMimeType = 'image/jpg';
 
@@ -139,31 +139,31 @@ class Images extends BaseConfig
      */
     public array $podcastBannerDefaultPaths = [
         'default' => [
-            'path'     => 'castopod-banner-pine.jpg',
+            'path'     => 'assets/images/castopod-banner-pine.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'pine' => [
-            'path'     => 'castopod-banner-pine.jpg',
+            'path'     => 'assets/images/castopod-banner-pine.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'crimson' => [
-            'path'     => 'castopod-banner-crimson.jpg',
+            'path'     => 'assets/images/castopod-banner-crimson.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'amber' => [
-            'path'     => 'castopod-banner-amber.jpg',
+            'path'     => 'assets/images/castopod-banner-amber.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'lake' => [
-            'path'     => 'castopod-banner-lake.jpg',
+            'path'     => 'assets/images/castopod-banner-lake.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'jacaranda' => [
-            'path'     => 'castopod-banner-jacaranda.jpg',
+            'path'     => 'assets/images/castopod-banner-jacaranda.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'onyx' => [
-            'path'     => 'castopod-banner-onyx.jpg',
+            'path'     => 'assets/images/castopod-banner-onyx.jpg',
             'mimetype' => 'image/jpeg',
         ],
     ];

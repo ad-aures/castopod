@@ -40,7 +40,7 @@ class EpisodeAnalyticsController extends Controller
 
         return redirect()->route(
             'episode-audio',
-            [$episode->podcast->handle, $episode->slug, $episode->audio->file_extension]
+            [$episode->podcast->handle, $episode->slug, $episode->audio->file_extension],
         );
     }
 }

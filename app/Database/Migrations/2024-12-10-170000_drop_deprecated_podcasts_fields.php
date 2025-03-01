@@ -23,7 +23,7 @@ class DropDeprecatedPodcastsFields extends BaseMigration
 
         $this->forge->dropColumn(
             'podcasts',
-            'episode_description_footer_markdown,episode_description_footer_html,is_owner_email_removed_from_feed,medium,payment_pointer,verify_txt,custom_rss,partner_id,partner_link_url,partner_image_url'
+            'episode_description_footer_markdown,episode_description_footer_html,is_owner_email_removed_from_feed,medium,payment_pointer,verify_txt,custom_rss,partner_id,partner_link_url,partner_image_url',
         );
     }
 

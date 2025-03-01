@@ -1,0 +1,46 @@
+@layer base {
+  /* kumbh-sans-regular */
+  @font-face {
+    font-family: "Kumbh Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/assets/fonts/kumbh-sans-regular.woff2") format("woff2");
+  }
+
+  /* kumbh-sans-700 */
+  @font-face {
+    font-family: "Kumbh Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/assets/fonts/kumbh-sans-700.woff2") format("woff2");
+  }
+
+  /* inter-regular */
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/assets/fonts/inter-regular.woff2") format("woff2");
+  }
+
+  /* inter-600 */
+  @font-face {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/assets/fonts/inter-600.woff2") format("woff2");
+  }
+
+  /* noto-sans-mono-regular */
+  @font-face {
+    font-family: "Noto Sans Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/assets/fonts/noto-sans-mono-regular.woff2") format("woff2");
+  }
+}

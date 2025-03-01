@@ -51,7 +51,7 @@ class PodcastImport extends BaseCommand
         $importQueue = get_import_tasks();
 
         $currentImport = current(
-            array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Running)
+            array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Running),
         );
 
         if ($currentImport instanceof PodcastImportTask) {
@@ -104,7 +104,7 @@ class PodcastImport extends BaseCommand
             CLI::write('All good! Feed was parsed successfully!');
 
             CLI::write(
-                'Starting import for @' . $this->importTask->handle . ' using feed: ' . $this->importTask->feed_url
+                'Starting import for @' . $this->importTask->handle . ' using feed: ' . $this->importTask->feed_url,
             );
 
             // --- START IMPORT TASK ---
@@ -155,7 +155,7 @@ class PodcastImport extends BaseCommand
 
             // set podcast publication date to the first ever published episode
             $this->podcast->published_at = $this->getOldestEpisodePublicationDate(
-                $this->podcast->id
+                $this->podcast->id,
             ) ?? $this->podcast->created_at;
 
             $podcastModel = new PodcastModel();
@@ -171,7 +171,7 @@ class PodcastImport extends BaseCommand
             $this->error($exception->getMessage());
             log_message(
                 'critical',
-                'Error when importing ' . $this->importTask?->feed_url . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getTraceAsString()
+                'Error when importing ' . $this->importTask?->feed_url . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getTraceAsString(),
             );
         }
     }
@@ -213,13 +213,13 @@ class PodcastImport extends BaseCommand
 
         if (($ownerName = $this->podcastFeed->channel->itunes_owner->itunes_name->getValue()) === null) {
             throw new Exception(
-                'Missing podcast owner name. Please include an <itunes:name> tag inside the <itunes:owner> tag.'
+                'Missing podcast owner name. Please include an <itunes:name> tag inside the <itunes:owner> tag.',
             );
         }
 
         if (($ownerEmail = $this->podcastFeed->channel->itunes_owner->itunes_email->getValue()) === null) {
             throw new Exception(
-                'Missing podcast owner email. Please include an <itunes:email> tag inside the <itunes:owner> tag.'
+                'Missing podcast owner email. Please include an <itunes:email> tag inside the <itunes:owner> tag.',
             );
         }
 
@@ -351,7 +351,7 @@ class PodcastImport extends BaseCommand
                 $this->podcast->id,
                 $newPersonId,
                 $personGroupSlug,
-                $personRoleSlug
+                $personRoleSlug,
             )) {
                 throw new Exception(print_r($podcastPersonModel->errors(), true));
             }
@@ -474,12 +474,12 @@ class PodcastImport extends BaseCommand
                 'podcast_id' => $this->podcast->id,
                 'title'      => $item->title->getValue(),
                 'slug'       => slugify((string) $item->title->getValue(), 120) . '-' . strtolower(
-                    random_string('alnum', 5)
+                    random_string('alnum', 5),
                 ),
                 'guid'  => $item->guid->getValue(),
                 'audio' => download_file(
                     $item->enclosure->getAttribute('url'),
-                    $item->enclosure->getAttribute('type')
+                    $item->enclosure->getAttribute('type'),
                 ),
                 'description_markdown' => $htmlConverter->convert($showNotes),
                 'description_html'     => $showNotes,
@@ -572,7 +572,7 @@ class PodcastImport extends BaseCommand
                 $episodeId,
                 $newPersonId,
                 $personGroupSlug,
-                $personRoleSlug
+                $personRoleSlug,
             )) {
                 throw new Exception(print_r($episodePersonModel->errors(), true));
             }

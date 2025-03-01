@@ -5,11 +5,11 @@ declare(strict_types=1);
 use PHPIcons\Config\PHPIconsConfig;
 
 return PHPIconsConfig::configure()
-    ->withPaths([__DIR__ . '/app', __DIR__ . '/themes'])
+    ->withPaths([__DIR__ . '/app', __DIR__ . '/themes', __DIR__ . '/resources'])
     ->withLocalIconSets([
-        'funding'    => __DIR__ . '/app/Resources/icons/funding',
-        'podcasting' => __DIR__ . '/app/Resources/icons/podcasting',
-        'social'     => __DIR__ . '/app/Resources/icons/social',
+        'funding'    => __DIR__ . '/resources/icons/funding',
+        'podcasting' => __DIR__ . '/resources/icons/podcasting',
+        'social'     => __DIR__ . '/resources/icons/social',
     ])
     ->withDefaultIconPerSet([
         'funding'    => 'funding:default',

@@ -26,7 +26,7 @@ class VideoClip extends BaseClip
     /**
      * @param array<string, mixed>|null $data
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         parent::__construct($data);
 

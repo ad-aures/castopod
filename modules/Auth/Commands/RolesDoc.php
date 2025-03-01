@@ -88,7 +88,7 @@ class RolesDoc extends BaseCommand
             $authGroups->instanceGroups,
             static function ($table, $key, array $value) use ($instanceMatrix): void {
                 $table->addRow($value['title'], $value['description'], implode(', ', $instanceMatrix[$key]));
-            }
+            },
         );
     }
 
@@ -101,7 +101,7 @@ class RolesDoc extends BaseCommand
             $authGroups->instancePermissions,
             static function ($table, $key, $value): void {
                 $table->addRow($key, $value);
-            }
+            },
         );
     }
 
@@ -115,7 +115,7 @@ class RolesDoc extends BaseCommand
             $authGroups->podcastGroups,
             static function ($table, $key, array $value) use ($podcastMatrix): void {
                 $table->addRow($value['title'], $value['description'], implode(', ', $podcastMatrix[$key]));
-            }
+            },
         );
     }
 
@@ -128,7 +128,7 @@ class RolesDoc extends BaseCommand
             $authGroups->podcastPermissions,
             static function ($table, $key, $value): void {
                 $table->addRow($key, $value);
-            }
+            },
         );
     }
 
@@ -141,7 +141,7 @@ class RolesDoc extends BaseCommand
         string $pattern,
         array $tableHeading,
         array $data,
-        Closure $callback
+        Closure $callback,
     ): string {
         // check if it has the start and end comments to insert roles table
         // looking for <AUTH-INSTANCE-ROLES-LIST:START> and <AUTH-INSTANCE-ROLES-LIST:END>
@@ -169,7 +169,7 @@ class RolesDoc extends BaseCommand
         $newFileContents = preg_replace(
             $pattern,
             '${1}' . PHP_EOL . PHP_EOL . $markdownTable . PHP_EOL . PHP_EOL . '${2}',
-            $fileContents
+            $fileContents,
         );
 
         if ($newFileContents === null) {
@@ -184,7 +184,7 @@ class RolesDoc extends BaseCommand
         preg_match(
             '~docs\/src\/content\/docs\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.mdx~',
             $fileKey,
-            $match
+            $match,
         );
 
         if ($match === []) {

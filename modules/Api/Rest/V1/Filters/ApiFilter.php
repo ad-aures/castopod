@@ -17,7 +17,8 @@ class ApiFilter implements FilterInterface
 {
     /**
      * @param Request $request
-     * @return RequestInterface|ResponseInterface|string|void
+     *
+     * @return RequestInterface|ResponseInterface|string|null
      */
     #[Override]
     public function before(RequestInterface $request, $arguments = null)
@@ -62,11 +63,18 @@ class ApiFilter implements FilterInterface
                 return $response;
             }
         }
+
+        return null;
     }
 
+    /**
+     * @param string[]|null $arguments
+     *
+     * @return ResponseInterface|null
+     */
     #[Override]
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        return null;
     }
 }

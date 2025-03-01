@@ -29,8 +29,8 @@ if (! function_exists('get_rss_feed')) {
     function get_rss_feed(
         Podcast $podcast,
         string $serviceSlug = '',
-        Subscription $subscription = null,
-        string $token = null
+        ?Subscription $subscription = null,
+        ?string $token = null,
     ): string {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
@@ -133,7 +133,7 @@ if (! function_exists('get_rss_feed')) {
             if (in_array(
                 $socialPlatform->slug,
                 ['mastodon', 'peertube', 'funkwhale', 'misskey', 'mobilizon', 'pixelfed', 'plume', 'writefreely'],
-                true
+                true,
             )) {
                 $socialElement->addAttribute('protocol', 'activitypub');
             } else {
@@ -155,35 +155,35 @@ if (! function_exists('get_rss_feed')) {
                     'homeUrl',
                     parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
                         (string) $socialPlatform->link_url,
-                        PHP_URL_HOST
-                    ) . '/public'
+                        PHP_URL_HOST,
+                    ) . '/public',
                 );
                 $socialSignUpelement->addAttribute(
                     'signUpUrl',
                     parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
                         (string) $socialPlatform->link_url,
-                        PHP_URL_HOST
-                    ) . '/auth/sign_up'
+                        PHP_URL_HOST,
+                    ) . '/auth/sign_up',
                 );
                 $castopodSocialSignUpelement = $castopodSocialElement->addChild(
                     'socialSignUp',
                     null,
-                    RssFeed::PODCAST_NAMESPACE
+                    RssFeed::PODCAST_NAMESPACE,
                 );
                 $castopodSocialSignUpelement->addAttribute('priority', '1');
                 $castopodSocialSignUpelement->addAttribute(
                     'homeUrl',
                     parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
                         (string) $socialPlatform->link_url,
-                        PHP_URL_HOST
-                    ) . '/public'
+                        PHP_URL_HOST,
+                    ) . '/public',
                 );
                 $castopodSocialSignUpelement->addAttribute(
                     'signUpUrl',
                     parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
                         (string) $socialPlatform->link_url,
-                        PHP_URL_HOST
-                    ) . '/auth/sign_up'
+                        PHP_URL_HOST,
+                    ) . '/auth/sign_up',
                 );
             }
         }
@@ -348,12 +348,12 @@ if (! function_exists('get_rss_feed')) {
                 $socialInteractElement->addAttribute('protocol', 'activitypub');
                 $socialInteractElement->addAttribute(
                     'accountId',
-                    "@{$podcast->actor->username}@{$podcast->actor->domain}"
+                    "@{$podcast->actor->username}@{$podcast->actor->domain}",
                 );
                 $socialInteractElement->addAttribute(
                     'pubDate',
                     $episode->getPosts()[0]
-                        ->published_at->format(DateTime::ISO8601)
+                        ->published_at->format(DateTime::ISO8601),
                 );
             }
 
@@ -363,7 +363,7 @@ if (! function_exists('get_rss_feed')) {
                 $transcriptElement->addAttribute(
                     'type',
                     Mimes::guessTypeFromExtension(
-                        pathinfo($episode->transcript->file_url, PATHINFO_EXTENSION)
+                        pathinfo($episode->transcript->file_url, PATHINFO_EXTENSION),
                     ) ?? 'text/html',
                 );
                 // Castopod only allows for captions (SubRip files)

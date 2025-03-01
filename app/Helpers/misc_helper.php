@@ -206,7 +206,7 @@ if (! function_exists('get_podcast_banner')) {
         if (! $podcast->banner instanceof Image) {
             $defaultBanner = config('Images')
                 ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
-                    Images::class
+                    Images::class,
                 )->podcastBannerDefaultPaths['default'];
 
             $sizes = config('Images')
@@ -217,7 +217,7 @@ if (! function_exists('get_podcast_banner')) {
 
             // return default site icon url
             return base_url(
-                change_file_path($defaultBanner['path'], '_' . $size, $sizeConfig['extension'] ?? null)
+                change_file_path($defaultBanner['path'], '_' . $size, $sizeConfig['extension'] ?? null),
             );
         }
 
@@ -238,7 +238,7 @@ if (! function_exists('get_podcast_banner_mimetype')) {
 
             // return default site icon url
             return array_key_exists('mimetype', $sizeConfig) ? $sizeConfig['mimetype'] : config(
-                Images::class
+                Images::class,
             )->podcastBannerDefaultMimeType;
         }
 

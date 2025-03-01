@@ -32,7 +32,7 @@ class OrderedCollectionObject extends ObjectType
      */
     public function __construct(
         protected ?array $orderedItems = null,
-        ?Pager $pager = null
+        ?Pager $pager = null,
     ) {
         $this->id = current_url();
 

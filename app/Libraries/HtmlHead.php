@@ -44,12 +44,12 @@ class HtmlHead implements Stringable
                 'rel' => 'manifest',
                 // @phpstan-ignore-next-line
                 'href' => isset($podcast) ? route_to('podcast-webmanifest', esc($podcast->handle)) : route_to(
-                    'webmanifest'
+                    'webmanifest',
                 ),
             ])
             ->meta(
                 'theme-color',
-                WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme']
+                WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'],
             )
             ->tag('link', null, [
                 'rel'  => 'stylesheet',
@@ -62,7 +62,7 @@ class HtmlHead implements Stringable
                 if ('serviceWorker' in navigator) {
                     // Use the window load event to keep the page load performant
                     window.addEventListener('load', () => {
-                        navigator.serviceWorker.register('/sw.js');
+                        navigator.serviceWorker.register('/assets/sw.js');
                     });
                 }
                 </script>

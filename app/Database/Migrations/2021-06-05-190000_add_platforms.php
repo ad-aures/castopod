@@ -44,7 +44,7 @@ class AddPlatforms extends BaseMigration
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP()');
         $this->forge->addField(
-            '`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()'
+            '`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()',
         );
         $this->forge->addPrimaryKey('slug');
         $this->forge->createTable('platforms');

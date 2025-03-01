@@ -19,8 +19,8 @@
 
     /* Module Resolution Options */
     "moduleResolution": "node",
-    "baseUrl": "app/Resources/js" /* Base directory to resolve non-absolute module names. */
+    "baseUrl": "resources/js" /* Base directory to resolve non-absolute module names. */
   },
-  "include": ["app/Resources/js/**/*.ts"],
+  "include": ["resources/js/**/*.ts"],
   "exclude": []
 }

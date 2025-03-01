@@ -36,7 +36,7 @@ class AddCreatedByToPosts extends BaseMigration
             'id',
             '',
             'CASCADE',
-            $prefix . 'fediverse_posts_created_by_foreign'
+            $prefix . 'fediverse_posts_created_by_foreign',
         );
         $this->forge->processIndexes('fediverse_posts');
     }

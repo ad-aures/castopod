@@ -81,8 +81,8 @@ class MediaModel extends Model
      */
     public function __construct(
         protected string $fileType = 'document',
-        ConnectionInterface &$db = null,
-        ValidationInterface $validation = null
+        ?ConnectionInterface &$db = null,
+        ?ValidationInterface $validation = null,
     ) {
         $this->returnType = match ($fileType) {
             'audio'      => Audio::class,
@@ -90,7 +90,7 @@ class MediaModel extends Model
             'image'      => Image::class,
             'transcript' => Transcript::class,
             'chapters'   => Chapters::class,
-            default      => Document::class
+            default      => Document::class,
         };
 
         parent::__construct($db, $validation);

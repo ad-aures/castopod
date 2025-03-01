@@ -215,7 +215,7 @@ class Podcast extends Entity
         return $this->actor;
     }
 
-    public function setCover(UploadedFile | File $file = null): self
+    public function setCover(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
@@ -258,7 +258,7 @@ class Podcast extends Entity
         return $this->cover;
     }
 
-    public function setBanner(UploadedFile | File $file = null): self
+    public function setBanner(UploadedFile | File|null $file = null): self
     {
         if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;

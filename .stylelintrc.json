@@ -10,8 +10,15 @@
           "responsive",
           "variants",
           "screen",
-          "layer"
+          "layer",
+          "config"
         ]
+      }
+    ],
+    "at-rule-no-deprecated": [
+      true,
+      {
+        "ignoreAtRules": ["apply"]
       }
     ],
     "function-no-unknown": [

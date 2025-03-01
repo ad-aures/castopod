@@ -12,19 +12,23 @@ use Override;
 class AllowCorsFilter implements FilterInterface
 {
     /**
-     * @param string[]|null $arguments
+     * @param list<string>|null $arguments
+     *
+     * @return RequestInterface|ResponseInterface|string|null
      */
     #[Override]
-    public function before(RequestInterface $request, $arguments = null): void
+    public function before(RequestInterface $request, $arguments = null)
     {
-        // Do something here
+        return null;
     }
 
     /**
-     * @param string[]|null $arguments
+     * @param list<string>|null $arguments
+     *
+     * @return ResponseInterface|null
      */
     #[Override]
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         if (! $response->hasHeader('Cache-Control')) {
             $response->setHeader('Cache-Control', 'public, max-age=86400');
@@ -34,5 +38,7 @@ class AllowCorsFilter implements FilterInterface
             ->setHeader('Access-Control-Allow-Headers', '*') // for allowing any headers, insecure
             ->setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS') // allows GET and OPTIONS methods only
             ->setHeader('Access-Control-Max-Age', '86400');
+
+        return $response;
     }
 }
