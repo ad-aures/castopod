@@ -50,13 +50,27 @@ The URL to the project homepage.
 
 ### license
 
+**Default:** `"UNLICENSED"`
+
 Specify a license for your plugin so that people know how they are permitted to
 use it, and any restrictions you're placing on it.
 
 ### private
 
+**Default:** `false`
+
 Whether or not to publish the plugin in public directories. If set to `true`,
 directories should refuse to publish the plugin.
+
+### submodule
+
+**Default:** `false`
+
+Indicates whether the plugin is part of a monorepo (a single Git repository
+containing multiple plugins). If `true`, the plugin shares its repository with
+other plugins. In this case, releases should be tagged using the format
+`<plugin-name>@<version>` (eg. `acme/hello-world@1.0.0`) to ensure proper
+version indexing by plugin repositories.
 
 ### keywords
 

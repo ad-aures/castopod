@@ -15,6 +15,7 @@ use CodeIgniter\HTTP\URI;
  * @property ?URI $homepage
  * @property ?string $license
  * @property bool $private
+ * @property bool $submodule
  * @property list<string> $keywords
  * @property ?string $minCastopodVersion
  * @property list<string> $hooks
@@ -31,6 +32,7 @@ class Manifest extends ManifestObject
         'homepage'           => 'permit_empty|valid_url_strict',
         'license'            => 'permit_empty|string',
         'private'            => 'permit_empty|is_boolean',
+        'submodule'          => 'permit_empty|is_boolean',
         'keywords.*'         => 'permit_empty',
         'minCastopodVersion' => 'permit_empty|regex_match[/^(0|[1-9]\d*)\.(0|[1-9]\d*)(\.(0|[1-9]\d*))?(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/]',
         'hooks.*'            => 'permit_empty|in_list[rssBeforeChannel,rssAfterChannel,rssBeforeItem,rssAfterItem,siteHead]',
@@ -61,6 +63,8 @@ class Manifest extends ManifestObject
     protected ?string $license = null;
 
     protected bool $private = false;
+
+    protected bool $submodule = false;
 
     /**
      * @var list<string>

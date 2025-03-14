@@ -59,7 +59,13 @@
     },
     "private": {
       "type": "boolean",
-      "description": "If set to true, then repositories should refuse to publish it."
+      "description": "If set to true, then repositories should refuse to publish it.",
+      "default": false
+    },
+    "submodule": {
+      "type": "boolean",
+      "description": "Set to `true` if the plugin is part of a monorepo (i.e., in the same Git repository as other plugins). Releases should be tagged as `<plugin-name>@<version>` to ensure proper version indexing by plugin repositories.",
+      "default": false
     },
     "keywords": {
       "description": "This helps people discover your plugin as it's listed in repositories",
