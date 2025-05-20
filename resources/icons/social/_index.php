@@ -5,6 +5,7 @@ declare(strict_types=1);
 /**
  * @icon("social:bluesky")
  * @icon("social:discord")
+ * @icon("social:discourse")
  * @icon("social:facebook")
  * @icon("social:funkwhale")
  * @icon("social:instagram")

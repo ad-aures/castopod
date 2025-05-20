@@ -274,6 +274,11 @@ class Platforms
                 'home_url'   => 'https://discord.com/',
                 'submit_url' => 'https://discord.com/register',
             ],
+            'discourse' => [
+                'label'      => 'Discourse',
+                'home_url'   => 'https://www.discourse.org/',
+                'submit_url' => null,
+            ],
             'facebook' => [
                 'label'      => 'Facebook',
                 'home_url'   => 'https://www.facebook.com/',
