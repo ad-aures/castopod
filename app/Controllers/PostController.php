@@ -66,6 +66,11 @@ class PostController extends FediversePostController
 
         $this->post = $post;
 
+        // show 404 if post is private
+        if ($this->post->is_private && ! can_user_interact()) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         unset($params[0]);
         unset($params[1]);
 
@@ -183,6 +188,7 @@ class PostController extends FediversePostController
             'actor_id'       => interact_as_actor_id(),
             'in_reply_to_id' => $this->post->id,
             'message'        => $validData['message'],
+            'is_private'     => $this->post->is_private,
             'published_at'   => Time::now(),
             'created_by'     => user_id(),
         ]);

@@ -11,7 +11,9 @@
         ->display_name) ?><span class="ml-1 text-sm font-normal text-skin-muted">@<?= esc($reply
         ->actor->username) .
     ($reply->actor->is_local ? '' : '@' . esc($reply->actor->domain)) ?></span></a>
-            <?= relative_time($reply->published_at, 'flex-shrink-0 ml-auto text-xs text-skin-muted') ?>
+        <a href="<?= route_to('post', esc($podcast->handle), $reply->id) ?>" class="flex-shrink-0 ml-auto text-xs text-skin-muted inline-flex items-center gap-x-1">
+            <?= relative_time($reply->published_at) ?><span data-tooltip="bottom" title="<?= $reply->is_private ? lang('Post.is_private') : lang('Post.is_public') ?>"><?= $reply->is_private ? icon('lock-fill') : icon('earth-fill') ?></span>
+        </a>
         </header>
         <p class="mb-2 post-content"><?= $reply->message_html ?></p>
         <?php if ($reply->preview_card_id): ?>

@@ -6,7 +6,9 @@
         <a href="<?= route_to('episode', esc($podcast->handle), esc($episode->slug)) ?>"
         class="inline-flex items-center px-4 py-2 text-sm focus:ring-accent"><?= icon(
             'arrow-left-line',
-            'mr-2 text-lg',
+            [
+                'class' => 'mr-2 text-lg',
+            ],
         ) . lang('Comment.back_to_comments') ?></a>
     </nav>
     <div class="pb-12">

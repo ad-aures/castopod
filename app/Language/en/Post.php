@@ -37,4 +37,7 @@ return [
     'block_actor' => 'Block user @{actorUsername}',
     'block_domain' => 'Block domain @{actorDomain}',
     'delete' => 'Delete post',
+    'is_public' => 'Post is public',
+    'is_private' => 'Post is private',
+    'cannot_reblog' => 'This private post cannot be shared.',
 ];

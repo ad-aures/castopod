@@ -17,8 +17,8 @@
                         : '@' . esc($post->actor->domain)) ?></span>
             </a>
             <a href="<?= route_to('post', esc($podcast->handle), $post->id) ?>"
-            class="text-xs text-skin-muted">
-                <?= relative_time($post->published_at) ?>
+            class="text-xs text-skin-muted inline-flex items-center">
+                <?= relative_time($post->published_at) ?><span class="ml-1" data-tooltip="bottom" title="<?= $post->is_private ? lang('Post.is_private') : lang('Post.is_public') ?>"><?= $post->is_private ? icon('lock-fill') : icon('earth-fill') ?></span>
             </a>
         </div>
     </header>

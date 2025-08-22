@@ -26,4 +26,17 @@ class UpdateActivitiesStatus extends BaseMigration
 
         $this->forge->modifyColumn('fediverse_activities', $fields);
     }
+
+    public function down(): void
+    {
+        $fields = [
+            'status' => [
+                'type'       => 'ENUM',
+                'constraint' => ['queued', 'delivered'],
+                'null'       => true,
+            ],
+        ];
+
+        $this->forge->modifyColumn('fediverse_activities', $fields);
+    }
 }

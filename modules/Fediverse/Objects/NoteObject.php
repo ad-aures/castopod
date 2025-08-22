@@ -39,13 +39,19 @@ class NoteObject extends ObjectType
         $this->attributedTo = $post->actor->uri;
 
         if ($post->in_reply_to_id !== null) {
-            $this->to[] = $post->reply_to_post->actor->uri;
+            if ($post->is_private) {
+                $this->to = [$post->reply_to_post->actor->uri];
+            } else {
+                $this->to[] = $post->reply_to_post->actor->uri;
+            }
 
             $this->inReplyTo = $post->reply_to_post->uri;
         }
 
         $this->replies = url_to('post-replies', esc($post->actor->username), $post->id);
 
-        $this->cc = [$post->actor->followers_url];
+        if (! $post->is_private) {
+            $this->cc = [$post->actor->followers_url];
+        }
     }
 }

@@ -34,6 +34,7 @@ class Post extends FediversePost
         'episode_id'       => '?integer',
         'message'          => 'string',
         'message_html'     => 'string',
+        'is_private'       => 'boolean',
         'favourites_count' => 'integer',
         'reblogs_count'    => 'integer',
         'replies_count'    => 'integer',

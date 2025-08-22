@@ -16,14 +16,22 @@ if (can_user_interact()): ?>
                     ]),
                 ],
             ) ?>
-            <button type="submit" name="action" value="reblog" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
-                'Post.reblogs',
-                [
-                    'numberOfReblogs' => $reply->reblogs_count,
-                ],
-            ) ?>"><?= icon('repeat-fill', [
-                'class' => 'text-lg mr-1 opacity-40',
-            ]) . $reply->reblogs_count ?></button>
+            <?php if ($reply->is_private): ?>
+                <button type="button" class="inline-flex items-center text-sm cursor-not-allowed" title="<?= lang(
+                    'Post.cannot_reblog'
+                ) ?>"><?= icon('custom:repeat-off', [
+                    'class' => 'text-lg mr-1 opacity-40',
+                ]) ?></button>
+            <?php else: ?>
+                <button type="submit" name="action" value="reblog" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
+                    'Post.reblogs',
+                    [
+                        'numberOfReblogs' => $reply->reblogs_count,
+                    ],
+                ) ?>"><?= icon('repeat-fill', [
+                    'class' => 'text-lg mr-1 opacity-40',
+                ]) . $reply->reblogs_count ?></button>
+            <?php endif; ?>
                 <button type="submit" name="action" value="favourite" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
                     'Post.favourites',
                     [

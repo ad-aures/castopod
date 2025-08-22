@@ -345,7 +345,7 @@ if (! function_exists('get_message_from_object')) {
      */
     function get_message_from_object(stdClass $object): string | false
     {
-        if (property_exists($object, 'content')) {
+        if (property_exists($object, 'content') && is_string($object->content)) {
             extract_text_from_html($object->content);
             return $object->content;
         }
@@ -362,6 +362,29 @@ if (! function_exists('get_message_from_object')) {
         }
 
         return $message;
+    }
+}
+
+if (! function_exists('is_note_public')) {
+    /**
+     * Check whether note is public or not
+     */
+    function is_note_public(stdClass $object): bool
+    {
+        $isPublic = false;
+        if (property_exists($object, 'to') && is_array($object->to)) {
+            $isPublic = in_array('https://www.w3.org/ns/activitystreams#Public', $object->to, true);
+        }
+
+        if ($isPublic) {
+            return true;
+        }
+
+        if (property_exists($object, 'cc') && is_array($object->cc)) {
+            return in_array('https://www.w3.org/ns/activitystreams#Public', $object->cc, true);
+        }
+
+        return $isPublic;
     }
 }
 

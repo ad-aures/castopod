@@ -744,7 +744,8 @@ export class AudioClipper extends LitElement {
         var(--tw-ring-offset-shadow),
         var(--tw-ring-shadow),
         0 0 rgba(0, 0, 0, 0);
-      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+      box-shadow:
+        var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
         var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));
       --tw-ring-offset-width: 2px;
       --tw-ring-opacity: 1;

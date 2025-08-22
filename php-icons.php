@@ -10,6 +10,7 @@ return PHPIconsConfig::configure()
         'funding'    => __DIR__ . '/app/Resources/icons/funding',
         'podcasting' => __DIR__ . '/app/Resources/icons/podcasting',
         'social'     => __DIR__ . '/app/Resources/icons/social',
+        'custom'     => __DIR__ . '/app/Resources/icons/custom',
     ])
     ->withDefaultIconPerSet([
         'funding'    => 'funding:default',
