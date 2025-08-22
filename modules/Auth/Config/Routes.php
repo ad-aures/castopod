@@ -6,10 +6,7 @@ namespace Modules\Auth\Config;
 
 use CodeIgniter\Router\RouteCollection;
 
-/**
- * @var RouteCollection
- */
-
+/** @var RouteCollection $routes */
 service('auth')
     ->routes($routes);
 

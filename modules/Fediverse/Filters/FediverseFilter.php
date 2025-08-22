@@ -59,6 +59,8 @@ class FediverseFilter implements FilterInterface
             }
         }
 
+        log_message('critical', 'ITS HEEEEEEEEEEEERE');
+
         if (in_array('verify-signature', $params, true)) {
             try {
                 // securityCheck: check activity signature before handling it

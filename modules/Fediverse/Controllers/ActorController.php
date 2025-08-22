@@ -111,6 +111,7 @@ class ActorController extends Controller
                             'actor_id'       => $payloadActor->id,
                             'in_reply_to_id' => $replyToPost->id,
                             'message'        => $message,
+                            'is_private'     => ! is_note_public($payload->object),
                             'published_at'   => Time::parse($payload->object->published),
                         ]);
                     }

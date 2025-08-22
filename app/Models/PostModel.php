@@ -32,6 +32,7 @@ class PostModel extends FediversePostModel
         'episode_id',
         'message',
         'message_html',
+        'is_private',
         'favourites_count',
         'reblogs_count',
         'replies_count',

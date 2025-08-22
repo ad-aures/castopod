@@ -204,7 +204,7 @@ class EpisodeCommentModel extends UuidModel
     {
         // TODO: merge with replies from posts linked to episode linked
         $episodeCommentsBuilder = $this->builder();
-        $episodeComments = $episodeCommentsBuilder->select('*, 0 as is_from_post')
+        $episodeComments = $episodeCommentsBuilder->select('*, 0 as is_private, 0 as is_from_post')
             ->where([
                 'episode_id'     => $episodeId,
                 'in_reply_to_id' => null,
@@ -214,7 +214,7 @@ class EpisodeCommentModel extends UuidModel
         $postModel = new PostModel();
         $episodePostsRepliesBuilder = $postModel->builder();
         $episodePostsReplies = $episodePostsRepliesBuilder->select(
-            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post',
+            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, is_private, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post',
         )
             ->whereIn('in_reply_to_id', static function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
@@ -224,8 +224,14 @@ class EpisodeCommentModel extends UuidModel
                         'in_reply_to_id' => null,
                     ]);
             })
-            ->where('`created_at` <= UTC_TIMESTAMP()', null, false)
-            ->getCompiledSelect();
+            ->where('`created_at` <= UTC_TIMESTAMP()', null, false);
+
+        // do not get private replies if public
+        if (! can_user_interact()) {
+            $episodePostsRepliesBuilder->where('is_private', false);
+        }
+
+        $episodePostsReplies = $episodePostsRepliesBuilder->getCompiledSelect();
 
         /** @var BaseResult $allEpisodeComments */
         $allEpisodeComments = $this->db->query(

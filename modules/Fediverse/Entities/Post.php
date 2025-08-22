@@ -25,9 +25,12 @@ use RuntimeException;
  * @property Post|null $reblog_of_post
  * @property string $message
  * @property string $message_html
+ * @property bool $is_private
+ *
  * @property int $favourites_count
  * @property int $reblogs_count
  * @property int $replies_count
+ *
  * @property Time $published_at
  * @property Time $created_at
  *
@@ -80,6 +83,7 @@ class Post extends UuidEntity
         'reblog_of_id'     => '?string',
         'message'          => 'string',
         'message_html'     => 'string',
+        'is_private'       => 'boolean',
         'favourites_count' => 'integer',
         'reblogs_count'    => 'integer',
         'replies_count'    => 'integer',

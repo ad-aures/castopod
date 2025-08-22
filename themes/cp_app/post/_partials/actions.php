@@ -14,14 +14,22 @@
                     ]),
                 ],
             ) ?>
-            <button type="submit" name="action" value="reblog" class="inline-flex items-center hover:underline" title="<?= lang(
-                'Post.reblogs',
-                [
-                    'numberOfReblogs' => $post->reblogs_count,
-                ],
-            ) ?>"><?= icon('repeat-fill', [
-                'class' => 'text-2xl mr-1 opacity-40',
-            ]) . $post->reblogs_count ?></button>
+            <?php if ($post->is_private): ?>
+                <button type="button" class="inline-flex items-center cursor-not-allowed" title="<?= lang(
+                    'Post.cannot_reblog',
+                ) ?>"><?= icon('custom:repeat-off', [
+                    'class' => 'text-2xl mr-1 opacity-40',
+                ]) ?></button>
+            <?php else: ?>
+                <button type="submit" name="action" value="reblog" class="inline-flex items-center hover:underline" title="<?= lang(
+                    'Post.reblogs',
+                    [
+                        'numberOfReblogs' => $post->reblogs_count,
+                    ],
+                ) ?>"><?= icon('repeat-fill', [
+                    'class' => 'text-2xl mr-1 opacity-40',
+                ]) . $post->reblogs_count ?></button>
+            <?php endif; ?>
             <button type="submit" name="action" value="favourite" class="inline-flex items-center hover:underline" title="<?= lang(
                 'Post.favourites',
                 [
@@ -33,8 +41,8 @@
             <button id="<?= $post->id . '-more-dropdown' ?>" type="button" class="px-2 py-1 text-2xl text-skin-muted" data-dropdown="button" data-dropdown-target="<?= $post->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more-2-fill') ?></button>
         </form>
         <nav id="<?= $post->id .
-                            '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $post->id .
-                        '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
+            '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $post->id .
+            '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
             <?= anchor(
                 route_to('post', esc($podcast->handle), $post->id),
                 lang('Post.expand'),

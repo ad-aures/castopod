@@ -52,6 +52,7 @@ class PostModel extends UuidModel
         'reblog_of_id',
         'message',
         'message_html',
+        'is_private',
         'favourites_count',
         'reblogs_count',
         'replies_count',
@@ -183,6 +184,12 @@ class PostModel extends UuidModel
             $this->where('in_reply_to_id', $this->uuid->fromString($postId) ->getBytes())
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('published_at', 'ASC');
+
+            // do not get private replies if public
+            if (! can_user_interact()) {
+                $this->where('is_private', false);
+            }
+
             $found = $this->findAll();
 
             cache()
@@ -283,6 +290,10 @@ class PostModel extends UuidModel
             $createActivity
                 ->set('actor', $post->actor->uri)
                 ->set('object', new $noteObjectClass($post));
+
+            if ($post->in_reply_to_id !== null && $post->is_private) {
+                $createActivity->set('to', [$post->reply_to_post->actor->uri]);
+            }
 
             $activityId = model('ActivityModel', false)
                 ->newActivity(
@@ -410,11 +421,13 @@ class PostModel extends UuidModel
 
             Events::trigger('on_post_remove', $post);
         } elseif ($post->in_reply_to_id !== null) {
-            // Post to remove is a reply
-            model('PostModel', false)
-                ->builder()
-                ->where('id', $this->uuid->fromString($post->in_reply_to_id) ->getBytes())
-                ->decrement('replies_count');
+            if (! $post->is_private) {
+                // Post to remove is a reply
+                model('PostModel', false)
+                    ->builder()
+                    ->where('id', $this->uuid->fromString($post->in_reply_to_id) ->getBytes())
+                    ->decrement('replies_count');
+            }
 
             Events::trigger('on_reply_remove', $post);
         }
@@ -442,10 +455,12 @@ class PostModel extends UuidModel
 
         $postId = $this->addPost($reply, $createPreviewCard, $registerActivity);
 
-        model('PostModel', false)
-            ->builder()
-            ->where('id', $this->uuid->fromString($reply->in_reply_to_id) ->getBytes())
-            ->increment('replies_count');
+        if (! $reply->is_private) {
+            model('PostModel', false)
+                ->builder()
+                ->where('id', $this->uuid->fromString($reply->in_reply_to_id) ->getBytes())
+                ->increment('replies_count');
+        }
 
         Events::trigger('on_post_reply', $reply);
 
@@ -458,6 +473,11 @@ class PostModel extends UuidModel
 
     public function reblog(Actor $actor, Post $post, bool $registerActivity = true): string | false
     {
+        // cannot reblog a private post
+        if ($post->is_private) {
+            return false;
+        }
+
         $this->db->transStart();
 
         $userId = null;
