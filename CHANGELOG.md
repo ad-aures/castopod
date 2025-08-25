@@ -1,3 +1,20 @@
+## <small>1.13.5 (2025-08-25)</small>
+
+- chore: add discourse social network
+  ([08a3779](https://code.castopod.org/adaures/castopod/commit/08a3779))
+- chore: fix rector issues with filters' methods return types
+  ([3d7969d](https://code.castopod.org/adaures/castopod/commit/3d7969d))
+- chore: update .releaserc to include more detailed release notes
+  ([5b4403e](https://code.castopod.org/adaures/castopod/commit/5b4403e))
+- chore: update CI to v4.6.3 + all php and js dependencies
+  ([842c4e4](https://code.castopod.org/adaures/castopod/commit/842c4e4))
+- fix(episodes): set dropdown menu for seasons / years to a maximum height with
+  auto scroll
+  ([f88abd2](https://code.castopod.org/adaures/castopod/commit/f88abd2))
+- fix(fediverse): add is_private field to posts to flag private posts and hide
+  them from public views
+  ([d5ef2ab](https://code.castopod.org/adaures/castopod/commit/d5ef2ab))
+
 ## [1.13.4](https://code.castopod.org/adaures/castopod/compare/v1.13.3...v1.13.4) (2025-02-24)
 
 ### Bug Fixes
