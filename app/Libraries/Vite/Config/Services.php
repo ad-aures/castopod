@@ -22,6 +22,7 @@ class Services extends BaseService
     public static function vite(bool $getShared = true): Vite
     {
         if ($getShared) {
+            /** @phpstan-ignore return.type */
             return self::getSharedInstance('vite');
         }
 

@@ -41,8 +41,7 @@
     </form>
 </div>
 
-<?=
-data_table(
+<?= data_table(
     [
         [
             'header' => lang('Episode.list.episode'),

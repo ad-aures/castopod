@@ -4,14 +4,7 @@ declare(strict_types=1);
 
 use CodeIgniter\Router\RouteCollection;
 
-/**
- * @var RouteCollection $routes
- *
- * --------------------------------------------------------------------
- * Placeholder definitions
- * --------------------------------------------------------------------
- */
-
+/** @var RouteCollection $routes */
 $routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,128}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');

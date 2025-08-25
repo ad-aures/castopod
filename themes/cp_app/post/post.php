@@ -10,14 +10,14 @@
         ],
     ) .
         lang('Post.back_to_actor_posts', [
-                'actor' => esc($post->actor->display_name),
-            ]) ?></a>
+            'actor' => esc($post->actor->display_name),
+        ]) ?></a>
 </nav>
 <div class="pb-12">
     <?= view('post/_partials/post_with_replies', [
-            'index'   => 1,
-            'post'    => $post,
-            'podcast' => $podcast,
-        ]) ?>
+        'index'   => 1,
+        'post'    => $post,
+        'podcast' => $podcast,
+    ]) ?>
 </div>
 <?= $this->endSection() ?>

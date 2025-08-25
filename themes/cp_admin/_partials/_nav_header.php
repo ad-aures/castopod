@@ -11,15 +11,15 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
             'admin',
         ) ?>" class="inline-flex items-center h-full px-2 border-r border-navigation focus:ring-inset focus:ring-accent">
             <?= (isset($podcast) ? icon('arrow-left-line', [
-                        'class' => 'mr-2',
-                    ]) : '') . svg('castopod-logo-base', 'h-6') ?>
+                'class' => 'mr-2',
+            ]) : '') . svg('castopod-logo-base', 'h-6') ?>
         </a>
         <a href="<?= route_to(
             'home',
         ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline focus:ring-inset focus:ring-accent" title="<?= lang('Navigation.go_to_website') ?>">
                 <span class="hidden sm:block"><?= lang('Navigation.go_to_website') ?></span>
                 <?= icon('external-link-fill', [
-        'class' => 'sm:ml-1 text-xl sm:text-base sm:opacity-60',
+                    'class' => 'sm:ml-1 text-xl sm:text-base sm:opacity-60',
                 ]) ?>
         </a>
     </div>

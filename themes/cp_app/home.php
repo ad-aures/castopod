@@ -41,9 +41,9 @@
             <a href="<?= route_to(
                 'home',
             ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
-            ->get('App.siteName') === 'Castopod' ? 'castopod' .
+        ->get('App.siteName') === 'Castopod' ? 'castopod' .
     svg('castopod-logo-base', 'h-6 ml-2') : esc(service('settings')
-            ->get('App.siteName')) ?></a>
+        ->get('App.siteName')) ?></a>
         </h1>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">

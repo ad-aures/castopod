@@ -22,6 +22,7 @@ class Services extends BaseService
     public static function components(bool $getShared = true): ComponentRenderer
     {
         if ($getShared) {
+            /** @phpstan-ignore return.type */
             return self::getSharedInstance('components');
         }
 

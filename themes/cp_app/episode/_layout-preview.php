@@ -90,8 +90,8 @@
                 <?= explicit_badge($episode->parental_advisory === 'explicit', 'rounded absolute left-0 bottom-0 ml-2 mb-2 bg-black/75 text-accent-contrast') ?>
                 <?php if ($episode->is_premium): ?>
                     <?= icon('exchange-dollar-fill', [
-                'class' => 'absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
-            ]) ?>
+                        'class' => 'absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
+                    ]) ?>
                 <?php endif; ?>
                 <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="flex-shrink-0 rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
             </div>

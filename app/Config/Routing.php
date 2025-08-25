@@ -136,7 +136,7 @@ class Routing extends BaseRouting
      *
      * If you enable this, $translateURIDashes is ignored.
      *
-     * Default: false
+     * Default: true
      */
-    public bool $translateUriToCamelCase = false;
+    public bool $translateUriToCamelCase = true;
 }

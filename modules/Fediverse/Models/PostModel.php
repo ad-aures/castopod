@@ -338,6 +338,7 @@ class PostModel extends UuidModel
         // update published date in payload
         $newPayload = $scheduledActivity->payload;
         $newPayload->object->published = $updatedPost->published_at->format(DATE_W3C);
+
         model('ActivityModel', false)
             ->update($scheduledActivity->id, [
                 'payload'      => json_encode($newPayload, JSON_THROW_ON_ERROR),

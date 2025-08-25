@@ -60,5 +60,5 @@
 
 
 <?= service('vite')
-        ->asset('js/charts.ts', 'js') ?>
+    ->asset('js/charts.ts', 'js') ?>
 <?= $this->endSection() ?>

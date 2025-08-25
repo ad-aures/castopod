@@ -81,8 +81,9 @@ class FediverseFilter implements FilterInterface
      * stop execution of other after filters, short of throwing an Exception or Error.
      *
      * @param string[]|null                          $arguments
+     * @return ResponseInterface|void
      */
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
     }
 

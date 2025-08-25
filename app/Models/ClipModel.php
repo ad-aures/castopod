@@ -162,15 +162,11 @@ class ClipModel extends Model
         return (int) $result[0]['id'];
     }
 
-    public function deleteVideoClip(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
+    public function deleteVideoClip(int $clipId): BaseResult | bool
     {
         $this->clearVideoClipCache($clipId);
 
-        return $this->delete([
-            'podcast_id' => $podcastId,
-            'episode_id' => $episodeId,
-            'id'         => $clipId,
-        ]);
+        return $this->delete($clipId);
     }
 
     public function getClipCount(int $podcastId, int $episodeId): int
@@ -240,11 +236,7 @@ class ClipModel extends Model
     {
         $this->clearSoundbiteCache($podcastId, $episodeId, $clipId);
 
-        return $this->delete([
-            'podcast_id' => $podcastId,
-            'episode_id' => $episodeId,
-            'id'         => $clipId,
-        ]);
+        return $this->delete($clipId);
     }
 
     public function clearSoundbiteCache(int $podcastId, int $episodeId, int $clipId): void

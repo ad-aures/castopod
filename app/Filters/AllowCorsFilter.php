@@ -12,16 +12,18 @@ class AllowCorsFilter implements FilterInterface
 {
     /**
      * @param string[]|null $arguments
+     * @return RequestInterface|ResponseInterface|string|void
      */
-    public function before(RequestInterface $request, $arguments = null): void
+    public function before(RequestInterface $request, $arguments = null)
     {
         // Do something here
     }
 
     /**
      * @param string[]|null $arguments
+     * @return ResponseInterface|void
      */
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
         if (! $response->hasHeader('Cache-Control')) {
             $response->setHeader('Cache-Control', 'public, max-age=86400');

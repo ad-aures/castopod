@@ -36,19 +36,20 @@
   .backdrop-gradient {
     background-image: linear-gradient(
       180deg,
-      hsla(0deg 0% 35.29% / 0%) 0%,
-      hsla(0deg 0% 34.53% / 3.44%) 16.36%,
-      hsla(0deg 0% 32.42% / 12.5%) 33.34%,
-      hsla(0deg 0% 29.18% / 25.3%) 50.1%,
-      hsla(0deg 0% 24.96% / 40%) 65.75%,
-      hsla(0deg 0% 19.85% / 54.7%) 79.43%,
-      hsla(0deg 0% 13.95% / 67.5%) 90.28%,
-      hsla(0deg 0% 7.32% / 76.6%) 97.43%,
-      hsla(0deg 0% 0% / 80%) 100%
+      hsl(0deg 0% 35.29% / 0%) 0%,
+      hsl(0deg 0% 34.53% / 3.44%) 16.36%,
+      hsl(0deg 0% 32.42% / 12.5%) 33.34%,
+      hsl(0deg 0% 29.18% / 25.3%) 50.1%,
+      hsl(0deg 0% 24.96% / 40%) 65.75%,
+      hsl(0deg 0% 19.85% / 54.7%) 79.43%,
+      hsl(0deg 0% 13.95% / 67.5%) 90.28%,
+      hsl(0deg 0% 7.32% / 76.6%) 97.43%,
+      hsl(0deg 0% 0% / 80%) 100%
     );
   }
 
   .backdrop-gradient-accent {
+    /* stylelint-disable-next-line declaration-property-value-no-unknown */
     background-image: linear-gradient(
       180deg,
       theme(colors.background.base / 0.4) 0%,

@@ -20,7 +20,7 @@
                 <a href="<?= route_to($data['count-route'], $podcastId ?? null, $episodeId ?? null) ?>" class="px-2 ml-2 text-xs font-normal rounded-full focus:ring-accent <?= $isSectionActive ? 'bg-navigation' : 'bg-navigation-active' ?>"><?= $data['count'] ?></a>
                 <?php endif; ?>
             </div>
-            <?php if(array_key_exists('add-cta', $data)): ?>
+            <?php if (array_key_exists('add-cta', $data)): ?>
                 <a href="<?= route_to($data['add-cta'], $podcastId ?? null, $episodeId ?? null)  ?>" class="p-2 rounded-full shadow bg-accent-base focus:ring-accent" title="<?= lang($langKey . '.' . $data['add-cta']) ?>" data-tooltip="bottom">
                     <?= icon('add-fill') ?>
                 </a>

@@ -7,16 +7,16 @@
         ) ?>" class="inline-flex items-center text-sm underline hover:no-underline focus:ring-accent">
             <?= lang('Podcast.see_all_episodes') ?>
             <?= icon('arrow-right-s-fill', [
-                        'class' => 'ml-2',
-                    ]) ?>
+                'class' => 'ml-2',
+            ]) ?>
         </a>
     </header>
     <?php if ($episodes): ?>
         <div class="grid px-4 pt-2 pb-5 -mx-2 overflow-x-auto grid-cols-latestEpisodes gap-x-4 snap snap-x snap-proximity">
         <?php foreach ($episodes as $episode): ?>
             <?= view('episode/_card', [
-                        'episode' => $episode,
-                    ]) ?>
+                'episode' => $episode,
+            ]) ?>
         <?php endforeach; ?>
         </div>
     <?php else: ?>
