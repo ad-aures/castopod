@@ -65,10 +65,10 @@ class ApiFilter implements FilterInterface
     /**
      * @param string[]|null        $arguments
      *
-     * @return ResponseInterface|void
+     * @return ResponseInterface|null
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // Do something here
+        return null;
     }
 }
