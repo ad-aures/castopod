@@ -136,7 +136,8 @@ class SettingsController extends BaseController
     public function regenerateImagesAction(): RedirectResponse
     {
         /** @var Podcast[] $allPodcasts */
-        $allPodcasts = (new PodcastModel())->findAll();
+        $allPodcasts = new PodcastModel()
+            ->findAll();
 
         /** @var FileManagerInterface $fileManager */
         $fileManager = service('file_manager');
@@ -158,7 +159,8 @@ class SettingsController extends BaseController
 
         $fileManager->deletePersonImagesSizes();
 
-        $persons = (new PersonModel())->findAll();
+        $persons = new PersonModel()
+            ->findAll();
         foreach ($persons as $person) {
             if ($person->avatar_id !== null) {
                 $person->avatar->saveSizes();
@@ -172,16 +174,26 @@ class SettingsController extends BaseController
     {
         if ($this->request->getPost('reset_counts') === 'yes') {
             // recalculate fediverse counts
-            (new ActorModel())->resetFollowersCount();
-            (new ActorModel())->resetPostsCount();
-            (new PostModel())->setEpisodeIdForRepliesOfEpisodePosts();
-            (new PostModel())->resetFavouritesCount();
-            (new PostModel())->resetReblogsCount();
-            (new PostModel())->resetRepliesCount();
-            (new EpisodeModel())->resetCommentsCount();
-            (new EpisodeModel())->resetPostsCount();
-            (new EpisodeCommentModel())->resetLikesCount();
-            (new EpisodeCommentModel())->resetRepliesCount();
+            new ActorModel()
+                ->resetFollowersCount();
+            new ActorModel()
+                ->resetPostsCount();
+            new PostModel()
+                ->setEpisodeIdForRepliesOfEpisodePosts();
+            new PostModel()
+                ->resetFavouritesCount();
+            new PostModel()
+                ->resetReblogsCount();
+            new PostModel()
+                ->resetRepliesCount();
+            new EpisodeModel()
+                ->resetCommentsCount();
+            new EpisodeModel()
+                ->resetPostsCount();
+            new EpisodeCommentModel()
+                ->resetLikesCount();
+            new EpisodeCommentModel()
+                ->resetRepliesCount();
         }
 
         if ($this->request->getPost('clear_cache') === 'yes') {
@@ -190,7 +202,8 @@ class SettingsController extends BaseController
 
         if ($this->request->getPost('rename_episodes_files') === 'yes') {
             /** @var Audio[] $allAudio */
-            $allAudio = (new MediaModel('audio'))->getAllOfType();
+            $allAudio = new MediaModel('audio')
+                ->getAllOfType();
 
             foreach ($allAudio as $audio) {
                 $audio->rename();

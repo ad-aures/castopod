@@ -51,7 +51,10 @@ class PodcastImport extends BaseCommand
         $importQueue = get_import_tasks();
 
         $currentImport = current(
-            array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Running),
+            array_filter(
+                $importQueue,
+                static fn (PodcastImportTask $task): bool => $task->status === TaskStatus::Running,
+            ),
         );
 
         if ($currentImport instanceof PodcastImportTask) {
@@ -66,7 +69,10 @@ class PodcastImport extends BaseCommand
         }
 
         // Get the next queued import
-        $queuedImports = array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Queued);
+        $queuedImports = array_filter(
+            $importQueue,
+            static fn (PodcastImportTask $task): bool => $task->status === TaskStatus::Queued,
+        );
         $nextImport = end($queuedImports);
 
         if (! $nextImport instanceof PodcastImportTask) {
@@ -77,7 +83,8 @@ class PodcastImport extends BaseCommand
         $this->importTask = $nextImport;
 
         // retrieve user who created import task
-        $user = (new UserModel())->find($this->importTask->created_by);
+        $user = new UserModel()
+            ->find($this->importTask->created_by);
 
         if (! $user instanceof User) {
             throw new Exception('Could not retrieve user with ID: ' . $this->importTask->created_by);
@@ -121,10 +128,12 @@ class PodcastImport extends BaseCommand
             // check if podcast to be imported already exists by guid if exists or handle otherwise
             $podcastGuid = $this->podcastFeed->channel->podcast_guid->getValue();
             if ($podcastGuid !== null) {
-                $podcast = (new PodcastModel())->where('guid', $podcastGuid)
+                $podcast = new PodcastModel()
+                    ->where('guid', $podcastGuid)
                     ->first();
             } else {
-                $podcast = (new PodcastModel())->where('handle', $this->importTask->handle)
+                $podcast = new PodcastModel()
+                    ->where('handle', $this->importTask->handle)
                     ->first();
             }
 
@@ -178,7 +187,7 @@ class PodcastImport extends BaseCommand
 
     private function getOldestEpisodePublicationDate(int $podcastId): ?Time
     {
-        $result = (new EpisodeModel())
+        $result = new EpisodeModel()
             ->builder()
             ->selectMax('published_at', 'oldest_published_at')
             ->where('podcast_id', $podcastId)
@@ -514,7 +523,7 @@ class PodcastImport extends BaseCommand
      */
     private function getImportedGUIDs(int $podcastId): array
     {
-        $result = (new EpisodeModel())
+        $result = new EpisodeModel()
             ->builder()
             ->select('guid')
             ->where('podcast_id', $podcastId)

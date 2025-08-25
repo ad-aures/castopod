@@ -105,7 +105,8 @@ class Subscription extends Entity
         }
 
         if (! $this->podcast instanceof Podcast) {
-            $this->podcast = (new PodcastModel())->getPodcastById($this->podcast_id);
+            $this->podcast = new PodcastModel()
+                ->getPodcastById($this->podcast_id);
         }
 
         return $this->podcast;
@@ -113,9 +114,7 @@ class Subscription extends Entity
 
     public function getDownloadsLast3Months(): int
     {
-        return (new AnalyticsPodcastBySubscriptionModel())->getNumberOfDownloadsLast3Months(
-            $this->podcast_id,
-            $this->id,
-        );
+        return new AnalyticsPodcastBySubscriptionModel()
+            ->getNumberOfDownloadsLast3Months($this->podcast_id, $this->id);
     }
 }

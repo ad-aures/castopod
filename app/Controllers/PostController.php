@@ -47,7 +47,7 @@ class PostController extends FediversePostController
     {
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -62,7 +62,7 @@ class PostController extends FediversePostController
         }
 
         if (
-            ! ($post = (new PostModel())->getPostById($params[1])) instanceof CastopodPost
+            ! ($post = new PostModel()->getPostById($params[1])) instanceof CastopodPost
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -143,7 +143,7 @@ class PostController extends FediversePostController
         if (
             $episodeUri &&
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastHandle'], $params['episodeSlug']))
+            ($episode = new EpisodeModel()->getEpisodeBySlug($params['podcastHandle'], $params['episodeSlug']))
         ) {
             $newPost->episode_id = $episode->id;
         }
@@ -216,7 +216,8 @@ class PostController extends FediversePostController
     #[Override]
     public function reblogAction(): RedirectResponse
     {
-        (new PostModel())->toggleReblog(interact_as_actor(), $this->post);
+        new PostModel()
+            ->toggleReblog(interact_as_actor(), $this->post);
 
         return redirect()->back();
     }

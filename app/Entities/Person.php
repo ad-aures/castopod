@@ -67,7 +67,8 @@ class Person extends Entity
                 ->setFile($file);
             $this->getAvatar()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('image'))->updateMedia($this->getAvatar());
+            new MediaModel('image')
+                ->updateMedia($this->getAvatar());
         } else {
             $avatar = new Image([
                 'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
@@ -78,7 +79,7 @@ class Person extends Entity
             ]);
             $avatar->setFile($file);
 
-            $this->attributes['avatar_id'] = (new MediaModel('image'))->saveMedia($avatar);
+            $this->attributes['avatar_id'] = new MediaModel('image')->saveMedia($avatar);
         }
 
         return $this;
@@ -91,7 +92,8 @@ class Person extends Entity
         }
 
         if (! $this->avatar instanceof Image) {
-            $this->avatar = (new MediaModel('image'))->getMediaById($this->avatar_id);
+            $this->avatar = new MediaModel('image')
+                ->getMediaById($this->avatar_id);
         }
 
         return $this->avatar;
@@ -107,11 +109,12 @@ class Person extends Entity
         }
 
         if ($this->roles === null) {
-            $this->roles = (new PersonModel())->getPersonRoles(
-                $this->id,
-                (int) $this->attributes['podcast_id'],
-                array_key_exists('episode_id', $this->attributes) ? (int) $this->attributes['episode_id'] : null,
-            );
+            $this->roles = new PersonModel()
+                ->getPersonRoles(
+                    $this->id,
+                    (int) $this->attributes['podcast_id'],
+                    array_key_exists('episode_id', $this->attributes) ? (int) $this->attributes['episode_id'] : null,
+                );
         }
 
         return $this->roles;

@@ -60,7 +60,8 @@ class Credit extends Entity
         }
 
         if (! $this->person instanceof Person) {
-            $this->person = (new PersonModel())->getPersonById($this->person_id);
+            $this->person = new PersonModel()
+                ->getPersonById($this->person_id);
         }
 
         return $this->person;
@@ -73,7 +74,8 @@ class Credit extends Entity
         }
 
         if (! $this->podcast instanceof Podcast) {
-            $this->podcast = (new PodcastModel())->getPodcastById($this->podcast_id);
+            $this->podcast = new PodcastModel()
+                ->getPodcastById($this->podcast_id);
         }
 
         return $this->podcast;
@@ -86,7 +88,8 @@ class Credit extends Entity
         }
 
         if (! $this->episode instanceof Episode) {
-            $this->episode = (new EpisodeModel())->getPublishedEpisodeById($this->podcast_id, $this->episode_id);
+            $this->episode = new EpisodeModel()
+                ->getPublishedEpisodeById($this->podcast_id, $this->episode_id);
         }
 
         return $this->episode;

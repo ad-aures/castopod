@@ -80,7 +80,8 @@ class EpisodeComment extends UuidEntity
         }
 
         if (! $this->episode instanceof Episode) {
-            $this->episode = (new EpisodeModel())->getEpisodeById($this->episode_id);
+            $this->episode = new EpisodeModel()
+                ->getEpisodeById($this->episode_id);
         }
 
         return $this->episode;
@@ -113,7 +114,8 @@ class EpisodeComment extends UuidEntity
         }
 
         if ($this->replies === null) {
-            $this->replies = (new EpisodeCommentModel())->getCommentReplies($this->id);
+            $this->replies = new EpisodeCommentModel()
+                ->getCommentReplies($this->id);
         }
 
         return $this->replies;

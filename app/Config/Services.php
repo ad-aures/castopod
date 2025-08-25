@@ -9,9 +9,11 @@ use App\Libraries\HtmlHead;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
 use CodeIgniter\Config\BaseService;
+use CodeIgniter\HTTP\Negotiate as CodeIgniterHTTPNegotiate;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\Router\RouteCollectionInterface;
+use CodeIgniter\Router\Router as CodeIgniterRouter;
 
 /**
  * Services Configuration file.
@@ -33,7 +35,7 @@ class Services extends BaseService
         ?RouteCollectionInterface $routes = null,
         ?Request $request = null,
         bool $getShared = true,
-    ): Router {
+    ): CodeIgniterRouter {
         if ($getShared) {
             return static::getSharedInstance('router', $routes, $request);
         }
@@ -48,8 +50,10 @@ class Services extends BaseService
      * The Negotiate class provides the content negotiation features for working the request to determine correct
      * language, encoding, charset, and more.
      */
-    public static function negotiator(?RequestInterface $request = null, bool $getShared = true): Negotiate
-    {
+    public static function negotiator(
+        ?RequestInterface $request = null,
+        bool $getShared = true,
+    ): CodeIgniterHTTPNegotiate {
         if ($getShared) {
             return static::getSharedInstance('negotiator', $request);
         }

@@ -214,7 +214,8 @@ if (! function_exists('get_user_podcasts')) {
      */
     function get_user_podcasts(User $user): array
     {
-        return (new PodcastModel())->getUserPodcasts($user->id, get_user_podcast_ids($user));
+        return new PodcastModel()
+            ->getUserPodcasts($user->id, get_user_podcast_ids($user));
     }
 }
 
@@ -224,7 +225,8 @@ if (! function_exists('get_podcasts_user_can_interact_with')) {
      */
     function get_podcasts_user_can_interact_with(User $user): array
     {
-        $userPodcasts = (new PodcastModel())->getUserPodcasts($user->id, get_user_podcast_ids($user));
+        $userPodcasts = new PodcastModel()
+            ->getUserPodcasts($user->id, get_user_podcast_ids($user));
 
         $hasInteractAsPrivilege = interact_as_actor_id() === null;
 
@@ -279,10 +281,8 @@ if (! function_exists('get_actor_ids_with_unread_notifications')) {
             return [];
         }
 
-        $unreadNotifications = (new NotificationModel())->whereIn(
-            'target_actor_id',
-            array_column($userPodcasts, 'actor_id'),
-        )
+        $unreadNotifications = new NotificationModel()
+            ->whereIn('target_actor_id', array_column($userPodcasts, 'actor_id'))
             ->where('read_at', null)
             ->findAll();
 

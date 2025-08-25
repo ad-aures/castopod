@@ -47,9 +47,9 @@
     <footer
         class="flex-col w-full px-2 py-4 mt-auto text-xs text-center border-t text-skin-muted border-subtle">
         <?= lang('Common.powered_by', [
-                'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
-                    'class' => 'ml-1 text-lg',
-                ]) . '</a>',
-            ], null, false) ?>
+            'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                'class' => 'ml-1 text-lg',
+            ]) . '</a>',
+        ], null, false) ?>
     </footer>
 </body>

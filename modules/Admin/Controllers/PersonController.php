@@ -25,7 +25,7 @@ class PersonController extends BaseController
         }
 
         if (
-            ($person = (new PersonModel())->getPersonById((int) $params[0])) instanceof Person
+            ($person = new PersonModel()->getPersonById((int) $params[0])) instanceof Person
         ) {
             return $this->{$method}($person);
         }
@@ -36,7 +36,8 @@ class PersonController extends BaseController
     public function list(): string
     {
         $data = [
-            'persons' => (new PersonModel())->orderBy('full_name')
+            'persons' => new PersonModel()
+                ->orderBy('full_name')
                 ->findAll(),
         ];
 
@@ -157,10 +158,12 @@ class PersonController extends BaseController
     {
         if ($person->avatar_id !== null) {
             // delete avatar to prevent collision if recreating person
-            (new MediaModel())->deleteMedia($person->avatar);
+            new MediaModel()
+                ->deleteMedia($person->avatar);
         }
 
-        (new PersonModel())->delete($person->id);
+        new PersonModel()
+            ->delete($person->id);
 
         return redirect()->route('person-list')
             ->with('message', lang('Person.messages.deleteSuccess'));

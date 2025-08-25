@@ -297,9 +297,10 @@ class PersonModel extends Model
 
         cache()
             ->delete("podcast#{$podcastId}_persons");
-        (new PodcastModel())->clearCache([
-            'id' => $podcastId,
-        ]);
+        new PodcastModel()
+            ->clearCache([
+                'id' => $podcastId,
+            ]);
 
         $data = [];
         foreach ($personIds as $personId) {
@@ -339,9 +340,10 @@ class PersonModel extends Model
         cache()->deleteMatching("podcast#{$podcastId}_person#{$personId}*");
         cache()
             ->delete("podcast#{$podcastId}_persons");
-        (new PodcastModel())->clearCache([
-            'id' => $podcastId,
-        ]);
+        new PodcastModel()
+            ->clearCache([
+                'id' => $podcastId,
+            ]);
 
         return $this->db->table('podcasts_persons')
             ->delete([
@@ -363,9 +365,10 @@ class PersonModel extends Model
         if ($personIds !== []) {
             cache()
                 ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
-            (new EpisodeModel())->clearCache([
-                'id' => $episodeId,
-            ]);
+            new EpisodeModel()
+                ->clearCache([
+                    'id' => $episodeId,
+                ]);
 
             $data = [];
             foreach ($personIds as $personId) {
@@ -404,9 +407,10 @@ class PersonModel extends Model
         cache()->deleteMatching("podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}*");
         cache()
             ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
-        (new EpisodeModel())->clearCache([
-            'id' => $episodeId,
-        ]);
+        new EpisodeModel()
+            ->clearCache([
+                'id' => $episodeId,
+            ]);
 
         return $this->db->table('episodes_persons')
             ->delete([

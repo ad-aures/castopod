@@ -41,23 +41,23 @@ class RadioGroup extends FormComponent
                 'isRequired'  => var_export($this->isRequired, true),
             ];
 
-            $options .= (new RadioButton($radioButtonData))->render();
+            $options .= new RadioButton($radioButtonData)->render();
         }
 
         $helperText = '';
         if ($this->helper !== '') {
             $helperId = $this->name . 'Help';
-            $helperText = (new Helper([
+            $helperText = new Helper([
                 'id'   => $helperId,
                 'slot' => $this->helper,
-            ]))->render();
+            ])->render();
             $this->attributes['aria-describedby'] = $helperId;
         }
 
-        $hint = $this->hint === '' ? '' : (new Hint([
+        $hint = $this->hint === '' ? '' : new Hint([
             'class' => 'ml-1',
             'slot'  => $this->hint,
-        ]))->render();
+        ])->render();
 
         return <<<HTML
         <fieldset {$this->getStringifiedAttributes()}>

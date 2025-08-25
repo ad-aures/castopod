@@ -45,7 +45,8 @@ class FediverseFilter implements FilterInterface
             $payload = $request->getJSON();
 
             $actorUri = $payload->actor;
-            $domain = (new URI($actorUri))->getHost();
+            $domain = new URI($actorUri)
+                ->getHost();
 
             // check first if domain is blocked
             if (model('BlockedDomainModel', false)->isDomainBlocked($domain)) {
@@ -61,7 +62,8 @@ class FediverseFilter implements FilterInterface
         if (in_array('verify-signature', $params, true)) {
             try {
                 // securityCheck: check activity signature before handling it
-                (new HttpSignature())->verify();
+                new HttpSignature()
+                    ->verify();
             } catch (Exception) {
                 // Invalid HttpSignature (401 = unauthorized)
                 // TODO: show error message?

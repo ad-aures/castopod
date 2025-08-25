@@ -368,13 +368,15 @@ class EpisodeModel extends UuidModel
 
     public function resetCommentsCount(): int | false
     {
-        $episodeCommentsCount = (new EpisodeCommentModel())->builder()
+        $episodeCommentsCount = new EpisodeCommentModel()
+            ->builder()
             ->select('episode_id, COUNT(*) as `comments_count`')
             ->where('in_reply_to_id', null)
             ->groupBy('episode_id')
             ->getCompiledSelect();
 
-        $episodePostsRepliesCount = (new PostModel())->builder()
+        $episodePostsRepliesCount = new PostModel()
+            ->builder()
             ->select('fediverse_posts.episode_id as episode_id, COUNT(*) as `comments_count`')
             ->join('fediverse_posts as fp', 'fediverse_posts.id = fp.in_reply_to_id')
             ->where('fediverse_posts.in_reply_to_id', null)
@@ -390,7 +392,8 @@ class EpisodeModel extends UuidModel
         $countsPerEpisodeId = $query->getResultArray();
 
         if ($countsPerEpisodeId !== []) {
-            return (new self())->updateBatch($countsPerEpisodeId, 'id');
+            return new self()
+                ->updateBatch($countsPerEpisodeId, 'id');
         }
 
         return 0;
@@ -429,7 +432,8 @@ class EpisodeModel extends UuidModel
         }
 
         /** @var ?Episode $episode */
-        $episode = (new self())->find($episodeId);
+        $episode = new self()
+            ->find($episodeId);
 
         if (! $episode instanceof Episode) {
             return $data;
@@ -523,7 +527,8 @@ class EpisodeModel extends UuidModel
         }
 
         /** @var ?Episode $episode */
-        $episode = (new self())->find($episodeId);
+        $episode = new self()
+            ->find($episodeId);
 
         if (! $episode instanceof Episode) {
             return $data;

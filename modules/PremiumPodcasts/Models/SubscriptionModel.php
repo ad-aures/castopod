@@ -134,7 +134,8 @@ class SubscriptionModel extends Model
     protected function clearCache(array $data): array
     {
         /** @var ?Subscription */
-        $subscription = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $subscription = new self()
+            ->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         if (! $subscription instanceof Subscription) {
             return $data;

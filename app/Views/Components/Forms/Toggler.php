@@ -36,19 +36,19 @@ class Toggler extends FormComponent
             in_array($this->getValue(), ['yes', 'true', 'on', '1'], true),
         );
 
-        $hint = $this->hint === '' ? '' : (new Hint([
+        $hint = $this->hint === '' ? '' : new Hint([
             'class' => 'ml-1',
             'slot'  => $this->hint,
-        ]))->render();
+        ])->render();
 
         $helperText = '';
         if ($this->helper !== '') {
             $helperId = $this->name . 'Help';
-            $helperText = (new Helper([
+            $helperText = new Helper([
                 'id'    => $helperId,
                 'slot'  => $this->helper,
                 'class' => '-mt-1',
-            ]))->render();
+            ])->render();
             $this->attributes['aria-describedby'] = $helperId;
         }
 

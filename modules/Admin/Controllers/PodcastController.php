@@ -45,7 +45,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             return $this->{$method}($podcast);
         }
@@ -57,7 +57,8 @@ class PodcastController extends BaseController
     {
         if (auth()->user()->can('podcasts.view')) {
             $data = [
-                'podcasts' => (new PodcastModel())->findAll(),
+                'podcasts' => new PodcastModel()
+                    ->findAll(),
             ];
         } else {
             $data = [
@@ -177,8 +178,10 @@ class PodcastController extends BaseController
     {
         helper(['form', 'misc']);
 
-        $languageOptions = (new LanguageModel())->getLanguageOptions();
-        $categoryOptions = (new CategoryModel())->getCategoryOptions();
+        $languageOptions = new LanguageModel()
+            ->getLanguageOptions();
+        $categoryOptions = new CategoryModel()
+            ->getCategoryOptions();
 
         $data = [
             'languageOptions' => $languageOptions,
@@ -251,10 +254,8 @@ class PodcastController extends BaseController
         add_podcast_group(auth()->user(), (int) $newPodcastId, setting('AuthGroups.mostPowerfulPodcastGroup'));
 
         // set Podcast categories
-        (new CategoryModel())->setPodcastCategories(
-            (int) $newPodcastId,
-            $this->request->getPost('other_categories') ?? [],
-        );
+        new CategoryModel()
+            ->setPodcastCategories((int) $newPodcastId, $this->request->getPost('other_categories') ?? []);
 
         $db->transComplete();
 
@@ -268,8 +269,10 @@ class PodcastController extends BaseController
     {
         helper('form');
 
-        $languageOptions = (new LanguageModel())->getLanguageOptions();
-        $categoryOptions = (new CategoryModel())->getCategoryOptions();
+        $languageOptions = new LanguageModel()
+            ->getLanguageOptions();
+        $categoryOptions = new CategoryModel()
+            ->getCategoryOptions();
 
         $data = [
             'podcast'         => $podcast,
@@ -346,10 +349,8 @@ class PodcastController extends BaseController
         }
 
         // set Podcast categories
-        (new CategoryModel())->setPodcastCategories(
-            $podcast->id,
-            $this->request->getPost('other_categories') ?? [],
-        );
+        new CategoryModel()
+            ->setPodcastCategories($podcast->id, $this->request->getPost('other_categories') ?? []);
 
         // New feed url redirect
         service('settings')
@@ -385,18 +386,21 @@ class PodcastController extends BaseController
                 ->with('errors', $mediaModel->errors());
         }
 
-        (new PodcastModel())->clearCache([
-            'id' => $podcast->id,
-        ]);
+        new PodcastModel()
+            ->clearCache([
+                'id' => $podcast->id,
+            ]);
 
         // remove banner url from actor
-        $actor = (new ActorModel())->getActorById($podcast->actor_id);
+        $actor = new ActorModel()
+            ->getActorById($podcast->actor_id);
 
         if ($actor instanceof Actor) {
             $actor->cover_image_url = null;
             $actor->cover_image_mimetype = null;
 
-            (new ActorModel())->update($actor->id, $actor);
+            new ActorModel()
+                ->update($actor->id, $actor);
         }
 
         $db->transComplete();
@@ -406,7 +410,7 @@ class PodcastController extends BaseController
 
     public function latestEpisodesView(int $limit, int $podcastId): string
     {
-        $episodes = (new EpisodeModel())
+        $episodes = new EpisodeModel()
             ->where('podcast_id', $podcastId)
             ->orderBy('-`published_at`', '', false)
             ->orderBy('created_at', 'desc')
@@ -414,7 +418,8 @@ class PodcastController extends BaseController
 
         return view('podcast/latest_episodes', [
             'episodes' => $episodes,
-            'podcast'  => (new PodcastModel())->getPodcastById($podcastId),
+            'podcast'  => new PodcastModel()
+                ->getPodcastById($podcastId),
         ]);
     }
 
@@ -451,7 +456,8 @@ class PodcastController extends BaseController
         $db->transStart();
 
         //delete podcast episodes
-        $podcastEpisodes = (new EpisodeModel())->where('podcast_id', $podcast->id)
+        $podcastEpisodes = new EpisodeModel()
+            ->where('podcast_id', $podcast->id)
             ->findAll();
 
         foreach ($podcastEpisodes as $podcastEpisode) {
@@ -669,7 +675,7 @@ class PodcastController extends BaseController
             }
         }
 
-        $episodes = (new EpisodeModel())
+        $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();
@@ -686,7 +692,8 @@ class PodcastController extends BaseController
                     ->with('errors', $episodeModel->errors());
             }
 
-            $post = (new PostModel())->where('episode_id', $episode->id)
+            $post = new PostModel()
+                ->where('episode_id', $episode->id)
                 ->first();
 
             if ($post instanceof Post) {
@@ -722,7 +729,7 @@ class PodcastController extends BaseController
 
         $data = [
             'podcast' => $podcast,
-            'post'    => (new PostModel())
+            'post'    => new PostModel()
                 ->where([
                     'actor_id'   => $podcast->actor_id,
                     'episode_id' => null,
@@ -783,7 +790,7 @@ class PodcastController extends BaseController
             $podcast->published_at = Time::now();
         }
 
-        $post = (new PostModel())
+        $post = new PostModel()
             ->where([
                 'actor_id'   => $podcast->actor_id,
                 'episode_id' => null,
@@ -837,7 +844,7 @@ class PodcastController extends BaseController
             }
         }
 
-        $episodes = (new EpisodeModel())
+        $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();
@@ -854,7 +861,8 @@ class PodcastController extends BaseController
                     ->with('errors', $episodeModel->errors());
             }
 
-            $post = (new PostModel())->where('episode_id', $episode->id)
+            $post = new PostModel()
+                ->where('episode_id', $episode->id)
                 ->first();
 
             if ($post instanceof Post) {
@@ -904,7 +912,7 @@ class PodcastController extends BaseController
             $postModel->removePost($post);
         }
 
-        $episodes = (new EpisodeModel())
+        $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
             ->where('published_at !=', null)
             ->findAll();

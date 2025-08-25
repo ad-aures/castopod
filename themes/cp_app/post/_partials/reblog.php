@@ -22,13 +22,13 @@
     <div class="px-6 mb-4 post-content"><?= $post->message_html ?></div>
     <?php if ($post->episode_id) : ?>
         <?= view('episode/_partials/preview_card', [
-                'index'   => $index,
-                'episode' => $post->episode,
-            ]) ?>
+            'index'   => $index,
+            'episode' => $post->episode,
+        ]) ?>
     <?php elseif ($post->preview_card_id) : ?>
         <?= view('post/_partials/preview_card', [
-                'preview_card' => $post->preview_card,
-            ]) ?>
+            'preview_card' => $post->preview_card,
+        ]) ?>
     <?php endif; ?>
     <?= $this->include('post/_partials/actions') ?>
 </article>

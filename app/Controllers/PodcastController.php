@@ -35,7 +35,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -78,7 +78,8 @@ class PodcastController extends BaseController
             set_podcast_metatags($this->podcast, 'activity');
             $data = [
                 'podcast' => $this->podcast,
-                'posts'   => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
+                'posts'   => new PostModel()
+                    ->getActorPublishedPosts($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view
@@ -88,9 +89,8 @@ class PodcastController extends BaseController
                 return view('podcast/activity', $data);
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             return view('podcast/activity', $data, [
                 'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
@@ -120,7 +120,8 @@ class PodcastController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
-            $stats = (new EpisodeModel())->getPodcastStats($this->podcast->id);
+            $stats = new EpisodeModel()
+                ->getPodcastStats($this->podcast->id);
 
             set_podcast_metatags($this->podcast, 'about');
             $data = [
@@ -135,9 +136,8 @@ class PodcastController extends BaseController
                 return view('podcast/about', $data);
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             return view('podcast/about', $data, [
                 'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
@@ -156,7 +156,8 @@ class PodcastController extends BaseController
         $seasonQuery = $this->request->getGet('season');
 
         if (! $yearQuery && ! $seasonQuery) {
-            $defaultQuery = (new PodcastModel())->getDefaultQuery($this->podcast->id);
+            $defaultQuery = new PodcastModel()
+                ->getDefaultQuery($this->podcast->id);
             if ($defaultQuery) {
                 if ($defaultQuery['type'] === 'season') {
                     $seasonQuery = $defaultQuery['data']['season_number'];
@@ -241,21 +242,16 @@ class PodcastController extends BaseController
                 'podcast'     => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,
-                'episodes'    => (new EpisodeModel())->getPodcastEpisodes(
-                    $this->podcast->id,
-                    $this->podcast->type,
-                    $yearQuery,
-                    $seasonQuery,
-                ),
+                'episodes'    => new EpisodeModel()
+                    ->getPodcastEpisodes($this->podcast->id, $this->podcast->type, $yearQuery, $seasonQuery),
             ];
 
             if (auth()->loggedIn()) {
                 return view('podcast/episodes', $data);
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
             return view('podcast/episodes', $data, [
                 'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
@@ -291,7 +287,7 @@ class PodcastController extends BaseController
             $orderedItems = [];
             if ($paginatedEpisodes !== null) {
                 foreach ($paginatedEpisodes as $episode) {
-                    $orderedItems[] = (new PodcastEpisode($episode))->toArray();
+                    $orderedItems[] = new PodcastEpisode($episode)->toArray();
                 }
             }
 

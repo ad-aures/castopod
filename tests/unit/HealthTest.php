@@ -13,6 +13,7 @@ final class HealthTest extends CIUnitTestCase
 {
     public function testIsDefinedAppPath(): void
     {
+        /** @phpstan-ignore method.alreadyNarrowedType */
         $this->assertTrue(defined('APPPATH'));
     }
 

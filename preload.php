@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use CodeIgniter\Boot;
+use Config\Paths;
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
@@ -56,6 +59,7 @@ class preload
                 '/system/Config/Routes.php',
                 '/system/Language/',
                 '/system/bootstrap.php',
+                '/system/util_bootstrap.php',
                 '/system/rewrite.php',
                 '/Views/',
                 // Errors occur.
@@ -94,10 +98,10 @@ class preload
 
     private function loadAutoloader(): void
     {
-        $paths = new Config\Paths();
+        $paths = new Paths();
         require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
 
-        CodeIgniter\Boot::preload($paths);
+        Boot::preload($paths);
     }
 }
 

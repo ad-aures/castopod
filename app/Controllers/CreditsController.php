@@ -33,8 +33,10 @@ class CreditsController extends BaseController
                 'content_markdown' => '',
             ]);
 
-            $allPodcasts = (new PodcastModel())->findAll();
-            $allCredits = (new CreditModel())->findAll();
+            $allPodcasts = new PodcastModel()
+                ->findAll();
+            $allCredits = new CreditModel()
+                ->findAll();
 
             // Unlike the carpenter, we make a tree from a table:
             $personGroup = null;

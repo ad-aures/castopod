@@ -28,8 +28,8 @@
                 $podcasts,
             ) ?>)</x-Heading>
             <button class="inline-flex items-center px-2 py-1 text-sm font-semibold" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('material-symbols:sort', [
-                        'class' => 'mr-1 text-xl opacity-50',
-                    ]) . lang('Home.sort_by') ?></button>
+                'class' => 'mr-1 text-xl opacity-50',
+            ]) . lang('Home.sort_by') ?></button>
             <x-DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(
                 json_encode([
                     [
@@ -63,8 +63,8 @@
                                 <?php if ($podcast->is_premium): ?>
                                     <div class="absolute top-0 left-0 z-10 inline-flex items-center mt-2 gap-x-2">
                                         <?= icon('exchange-dollar-fill', [
-                                    'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
-                                ]) ?>
+                                            'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
+                                        ]) ?>
                                         <?= explicit_badge($podcast->parental_advisory === 'explicit', 'rounded bg-black/75') ?>
                                     </div>
                                 <?php else: ?>

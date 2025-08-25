@@ -43,13 +43,14 @@ class FakePodcastsAnalyticsSeeder extends Seeder
             JSON_THROW_ON_ERROR,
         );
 
-        $podcast = (new PodcastModel())->first();
+        $podcast = new PodcastModel()
+            ->first();
 
         if (! $podcast instanceof Podcast) {
             throw new Exception("COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n");
         }
 
-        $firstEpisode = (new EpisodeModel())
+        $firstEpisode = new EpisodeModel()
             ->selectMin('published_at')
             ->first();
 
@@ -69,7 +70,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
             $analyticsPodcastsByPlayer = [];
             $analyticsPodcastsByRegion = [];
 
-            $episodes = (new EpisodeModel())
+            $episodes = new EpisodeModel()
                 ->where('podcast_id', $podcast->id)
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->findAll();

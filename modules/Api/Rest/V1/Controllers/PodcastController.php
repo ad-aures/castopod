@@ -6,14 +6,10 @@ namespace Modules\Api\Rest\V1\Controllers;
 
 use App\Entities\Podcast;
 use App\Models\PodcastModel;
-use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class PodcastController extends Controller
+class PodcastController extends BaseApiController
 {
-    use ResponseTrait;
-
     public function __construct()
     {
         service('restApiExceptions')->initialize();
@@ -21,7 +17,9 @@ class PodcastController extends Controller
 
     public function list(): ResponseInterface
     {
-        $data = (new PodcastModel())->findAll();
+        /** @var array<string,mixed> $data */
+        $data = new PodcastModel()
+            ->findAll();
         array_map(static function ($podcast): void {
             self::mapPodcast($podcast);
         }, $data);
@@ -30,7 +28,8 @@ class PodcastController extends Controller
 
     public function view(int $id): ResponseInterface
     {
-        $podcast = (new PodcastModel())->getPodcastById($id);
+        $podcast = new PodcastModel()
+            ->getPodcastById($id);
         if (! $podcast instanceof Podcast) {
             return $this->failNotFound('Podcast not found');
         }

@@ -82,7 +82,7 @@ class WebmanifestController extends Controller
     public function podcastManifest(string $podcastHandle): ResponseInterface
     {
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastByHandle($podcastHandle)) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastByHandle($podcastHandle)) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

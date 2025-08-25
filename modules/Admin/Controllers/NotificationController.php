@@ -32,7 +32,7 @@ class NotificationController extends BaseController
         }
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -41,7 +41,7 @@ class NotificationController extends BaseController
 
         if (count($params) > 1) {
             if (
-                ! ($notification = (new NotificationModel())->find($params[1])) instanceof Notification
+                ! ($notification = new NotificationModel()->find($params[1])) instanceof Notification
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }
@@ -54,7 +54,8 @@ class NotificationController extends BaseController
 
     public function list(Podcast $podcast): string
     {
-        $notifications = (new NotificationModel())->where('target_actor_id', $podcast->actor_id)
+        $notifications = new NotificationModel()
+            ->where('target_actor_id', $podcast->actor_id)
             ->orderBy('created_at', 'desc');
 
         $data = [
@@ -72,13 +73,15 @@ class NotificationController extends BaseController
 
     public function markAllAsReadAction(Podcast $podcast): RedirectResponse
     {
-        $notifications = (new NotificationModel())->where('target_actor_id', $podcast->actor_id)
+        $notifications = new NotificationModel()
+            ->where('target_actor_id', $podcast->actor_id)
             ->where('read_at', null)
             ->findAll();
 
         foreach ($notifications as $notification) {
             $notification->read_at = new Time('now');
-            (new NotificationModel())->update($notification->id, $notification);
+            new NotificationModel()
+                ->update($notification->id, $notification);
         }
 
         return redirect()->back();
@@ -94,7 +97,8 @@ class NotificationController extends BaseController
             return redirect()->route('podcast-activity', [esc($podcast->handle)]);
         }
 
-        $post = (new PostModel())->getPostById($notification->post_id);
+        $post = new PostModel()
+            ->getPostById($notification->post_id);
 
         return redirect()->route('post', [$podcast->handle, $post->id]);
     }

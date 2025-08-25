@@ -146,12 +146,10 @@ To see your changes, go to:
 
 - `http://localhost:8080/` for the Castopod website
 - `http://localhost:8080/cp-admin` for the Castopod admin:
-
   - email: **admin@castopod.local**
   - password: **castopod**
 
 - `http://localhost:8888/` for the phpmyadmin interface:
-
   - username: **castopod**
   - password: **castopod**
 
@@ -294,7 +292,6 @@ You do not wish to use the VSCode devcontainer? No problem!
    ```
 
 3. (optional) Populate the database with test data:
-
    - Populate with fake podcast analytics:
 
    ```bash

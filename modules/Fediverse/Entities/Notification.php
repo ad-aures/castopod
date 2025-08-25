@@ -70,7 +70,8 @@ class Notification extends UuidEntity
         }
 
         if (! $this->actor instanceof Actor) {
-            $this->actor = (new ActorModel())->getActorById($this->actor_id);
+            $this->actor = new ActorModel()
+                ->getActorById($this->actor_id);
         }
 
         return $this->actor;
@@ -83,7 +84,8 @@ class Notification extends UuidEntity
         }
 
         if (! $this->target_actor instanceof Actor) {
-            $this->target_actor = (new ActorModel())->getActorById($this->target_actor_id);
+            $this->target_actor = new ActorModel()
+                ->getActorById($this->target_actor_id);
         }
 
         return $this->target_actor;
@@ -96,7 +98,8 @@ class Notification extends UuidEntity
         }
 
         if (! $this->post instanceof Post) {
-            $this->post = (new PostModel())->getPostById($this->post_id);
+            $this->post = new PostModel()
+                ->getPostById($this->post_id);
         }
 
         return $this->post;

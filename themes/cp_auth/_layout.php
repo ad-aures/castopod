@@ -26,9 +26,9 @@
 	<footer class="flex flex-col text-sm">
 		<?= $this->renderSection('footer') ?>
 		<small class="py-4 text-center border-t border-subtle"><?= lang('Common.powered_by', [
-				    'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
-				        'class' => 'ml-1 text-lg',
-				    ]) . '</a>',
-				], null, false) ?></small>
+		    'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+		        'class' => 'ml-1 text-lg',
+		    ]) . '</a>',
+		], null, false) ?></small>
 	</footer>
 </body>

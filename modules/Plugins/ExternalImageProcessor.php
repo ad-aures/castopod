@@ -39,6 +39,7 @@ class ExternalImageProcessor
         $host = parse_url($url, PHP_URL_HOST);
 
         // TODO: load from environment's config
-        return $host !== (new URI(base_url()))->getHost();
+        return $host !== new URI(base_url())
+            ->getHost();
     }
 }

@@ -20,9 +20,11 @@ class DashboardController extends BaseController
     public function index(): string
     {
         $podcastsData = [];
-        $podcastsCount = (new PodcastModel())->builder()
+        $podcastsCount = new PodcastModel()
+            ->builder()
             ->countAll();
-        $podcastsLastPublishedAt = (new PodcastModel())->builder()
+        $podcastsLastPublishedAt = new PodcastModel()
+            ->builder()
             ->selectMax('published_at', 'last_published_at')
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->get()
@@ -33,9 +35,11 @@ class DashboardController extends BaseController
         );
 
         $episodesData = [];
-        $episodesCount = (new EpisodeModel())->builder()
+        $episodesCount = new EpisodeModel()
+            ->builder()
             ->countAll();
-        $episodesLastPublishedAt = (new EpisodeModel())->builder()
+        $episodesLastPublishedAt = new EpisodeModel()
+            ->builder()
             ->selectMax('published_at', 'last_published_at')
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->get()
@@ -45,7 +49,8 @@ class DashboardController extends BaseController
             $episodesLastPublishedAt,
         );
 
-        $totalUploaded = (new MediaModel())->builder()
+        $totalUploaded = new MediaModel()
+            ->builder()
             ->selectSum('file_size')
             ->get()
             ->getResultArray()[0];
@@ -66,7 +71,8 @@ class DashboardController extends BaseController
 
         $onlyPodcastId = null;
         if ($podcastsData['number_of_podcasts'] === 1) {
-            $onlyPodcastId = (new PodcastModel())->first()
+            $onlyPodcastId = new PodcastModel()
+                ->first()
                 ->id;
         }
 

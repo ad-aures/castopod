@@ -27,7 +27,7 @@ class EpisodePersonController extends BaseController
         }
 
         if (count($params) === 1) {
-            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+            if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
@@ -35,7 +35,7 @@ class EpisodePersonController extends BaseController
         }
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeById((int) $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -51,10 +51,12 @@ class EpisodePersonController extends BaseController
         helper('form');
 
         $data = [
-            'episode'         => $episode,
-            'podcast'         => $episode->podcast,
-            'personOptions'   => (new PersonModel())->getPersonOptions(),
-            'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
+            'episode'       => $episode,
+            'podcast'       => $episode->podcast,
+            'personOptions' => new PersonModel()
+                ->getPersonOptions(),
+            'taxonomyOptions' => new PersonModel()
+                ->getTaxonomyOptions(),
         ];
 
         $this->setHtmlHead(lang('Person.episode_form.title'));
@@ -80,19 +82,21 @@ class EpisodePersonController extends BaseController
 
         $validData = $this->validator->getValidated();
 
-        (new PersonModel())->addEpisodePersons(
-            $episode->podcast_id,
-            $episode->id,
-            $validData['persons'],
-            $this->request->getPost('roles') ?? [],
-        );
+        new PersonModel()
+            ->addEpisodePersons(
+                $episode->podcast_id,
+                $episode->id,
+                $validData['persons'],
+                $this->request->getPost('roles') ?? [],
+            );
 
         return redirect()->back();
     }
 
     public function deleteAction(Episode $episode, string $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromEpisode($episode->podcast_id, $episode->id, (int) $personId);
+        new PersonModel()
+            ->removePersonFromEpisode($episode->podcast_id, $episode->id, (int) $personId);
 
         return redirect()->back();
     }

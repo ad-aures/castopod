@@ -15,12 +15,11 @@ use App\Models\EpisodeModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Deprecated;
 
 class EpisodeAnalyticsController extends Controller
 {
-    /**
-     * @deprecated Replaced by EpisodeAudioController::index method
-     */
+    #[Deprecated(message: 'Replaced by EpisodeAudioController::index method')]
     public function hit(string $base64EpisodeData, string ...$audioPath): RedirectResponse
     {
         $episodeData = unpack(
@@ -32,7 +31,8 @@ class EpisodeAnalyticsController extends Controller
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $episode = (new EpisodeModel())->getEpisodeById($episodeData['episodeId']);
+        $episode = new EpisodeModel()
+            ->getEpisodeById($episodeData['episodeId']);
 
         if (! $episode instanceof Episode) {
             throw PageNotFoundException::forPageNotFound();

@@ -185,13 +185,14 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
     #[Override]
     public function run(): void
     {
-        $podcast = (new PodcastModel())->first();
+        $podcast = new PodcastModel()
+            ->first();
 
         if (! $podcast instanceof Podcast) {
             throw new Exception("COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n");
         }
 
-        $firstEpisode = (new EpisodeModel())
+        $firstEpisode = new EpisodeModel()
             ->selectMin('published_at')
             ->first();
 
@@ -208,7 +209,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
             $websiteByEntryPage = [];
             $websiteByReferer = [];
 
-            $episodes = (new EpisodeModel())
+            $episodes = new EpisodeModel()
                 ->where('podcast_id', $podcast->id)
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->findAll();

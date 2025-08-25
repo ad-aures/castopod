@@ -58,10 +58,10 @@
             <div class="flex flex-col">
                 <p><?= esc($podcast->copyright) ?></p>
                 <p><?= lang('Common.powered_by', [
-                                'castopod' => '<a class="inline-flex font-semibold text-skin-muted hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
-                                    'class' => 'ml-1 text-lg',
-                                ]) . '</a>',
-                            ], null, false) ?></p>
+                    'castopod' => '<a class="inline-flex font-semibold text-skin-muted hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                        'class' => 'ml-1 text-lg',
+                    ]) . '</a>',
+                ], null, false) ?></p>
             </div>
         </footer>
     </div>

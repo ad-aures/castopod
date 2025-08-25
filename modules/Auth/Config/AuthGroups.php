@@ -228,7 +228,8 @@ class AuthGroups extends ShieldAuthGroups
          * For each podcast, include podcast groups, permissions, and matrix into $groups, $permissions, and $matrix
          * attributes.
          */
-        $podcasts = (new PodcastModel())->findAll();
+        $podcasts = new PodcastModel()
+            ->findAll();
         foreach ($podcasts as $podcast) {
             $this->generatePodcastAuthorizations($podcast->id);
         }

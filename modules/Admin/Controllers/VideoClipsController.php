@@ -30,7 +30,7 @@ class VideoClipsController extends BaseController
         }
 
         if (count($params) === 1) {
-            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+            if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
@@ -38,7 +38,7 @@ class VideoClipsController extends BaseController
         }
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeById((int) $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -51,7 +51,7 @@ class VideoClipsController extends BaseController
 
     public function list(Episode $episode): string
     {
-        $videoClipsBuilder = (new ClipModel('video'))
+        $videoClipsBuilder = new ClipModel('video')
             ->where([
                 'podcast_id' => $episode->podcast_id,
                 'episode_id' => $episode->id,
@@ -83,7 +83,8 @@ class VideoClipsController extends BaseController
 
     public function view(Episode $episode, string $videoClipId): string
     {
-        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+        $videoClip = new ClipModel()
+            ->getVideoClipById((int) $videoClipId);
 
         $data = [
             'podcast'   => $episode->podcast,
@@ -176,7 +177,7 @@ class VideoClipsController extends BaseController
         ]);
 
         // Check if video clip exists before inserting a new line
-        if ((new ClipModel())->doesVideoClipExist($videoClip)) {
+        if (new ClipModel()->doesVideoClipExist($videoClip)) {
             // video clip already exists
             return redirect()
                 ->back()
@@ -184,7 +185,8 @@ class VideoClipsController extends BaseController
                 ->with('error', lang('VideoClip.messages.alreadyExistingError'));
         }
 
-        (new ClipModel())->insert($videoClip);
+        new ClipModel()
+            ->insert($videoClip);
 
         return redirect()->route('video-clips-list', [$episode->podcast_id, $episode->id])->with(
             'message',
@@ -194,24 +196,27 @@ class VideoClipsController extends BaseController
 
     public function retryAction(Episode $episode, string $videoClipId): RedirectResponse
     {
-        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+        $videoClip = new ClipModel()
+            ->getVideoClipById((int) $videoClipId);
 
         if (! $videoClip instanceof VideoClip) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        (new ClipModel())->update($videoClip->id, [
-            'status'         => 'queued',
-            'job_started_at' => null,
-            'job_ended_at'   => null,
-        ]);
+        new ClipModel()
+            ->update($videoClip->id, [
+                'status'         => 'queued',
+                'job_started_at' => null,
+                'job_ended_at'   => null,
+            ]);
 
         return redirect()->back();
     }
 
     public function deleteAction(Episode $episode, string $videoClipId): RedirectResponse
     {
-        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+        $videoClip = new ClipModel()
+            ->getVideoClipById((int) $videoClipId);
 
         if (! $videoClip instanceof VideoClip) {
             throw PageNotFoundException::forPageNotFound();
@@ -219,9 +224,11 @@ class VideoClipsController extends BaseController
 
         if ($videoClip->media === null) {
             // delete Clip directly
-            (new ClipModel())->deleteVideoClip($episode->podcast_id, $episode->id, $videoClip->id);
+            new ClipModel()
+                ->deleteVideoClip($videoClip->id);
         } else {
-            (new ClipModel())->clearVideoClipCache($videoClip->id);
+            new ClipModel()
+                ->clearVideoClipCache($videoClip->id);
 
             $mediaModel = new MediaModel();
             // delete the videoClip file, the clip will be deleted on cascade

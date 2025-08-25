@@ -52,7 +52,8 @@ class PodcastUnlockFilter implements FilterInterface
             return null;
         }
 
-        $episode = (new EpisodeModel())->getEpisodeBySlug($routerParams[0], $routerParams[1]);
+        $episode = new EpisodeModel()
+            ->getEpisodeBySlug($routerParams[0], $routerParams[1]);
 
         if (! $episode instanceof Episode) {
             return null;

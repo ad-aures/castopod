@@ -9,20 +9,20 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>
-<?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
+<?php if ($plugin->getStatus() === PluginStatus::ACTIVE): ?>
     <?php // @icon("check-fill")?>
     <x-Pill variant="success" icon="check-fill" class="lowercase"><?= lang('Plugins.active') ?></x-Pill>
-<?php elseif($plugin->getStatus() === PluginStatus::INACTIVE): ?>
+<?php elseif ($plugin->getStatus() === PluginStatus::INACTIVE): ?>
     <?php // @icon("close-fill")?>
     <x-Pill variant="default" icon="close-fill" class="lowercase"><?= lang('Plugins.inactive') ?></x-Pill>
-<?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
+<?php elseif ($plugin->getStatus() === PluginStatus::INVALID): ?>
     <?php // @icon("alert-fill")?>
     <x-Pill variant="warning" icon="alert-fill" class="lowercase"><?= lang('Plugins.invalid') ?></x-Pill>
 <?php endif; ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?php if($plugin->getStatus() === PluginStatus::ACTIVE): ?>
+<?php if ($plugin->getStatus() === PluginStatus::ACTIVE): ?>
     <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="danger"><?= lang('Plugins.deactivate') ?></x-Button>
@@ -31,7 +31,7 @@
         <x-Button class="ring-2 ring-inset ring-gray-600" iconLeft="equalizer-fill" uri="<?= route_to('plugins-settings-general', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= lang('Plugins.settings') ?></x-Button>
         <?php endif; ?>
     </form>
-<?php elseif($plugin->getStatus() === PluginStatus::INVALID): ?>
+<?php elseif ($plugin->getStatus() === PluginStatus::INVALID): ?>
     <form class="flex justify-end gap-x-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="secondary"><?= lang('Plugins.activate') ?></x-Button>
@@ -116,7 +116,7 @@
         <pf-tab slot="tab"><?= icon('article-line', [
             'slot' => 'icon',
         ]) ?>README.md</pf-tab>
-    <?php if($plugin->getReadmeHTML()): ?>
+    <?php if ($plugin->getReadmeHTML()): ?>
         <pf-tab-panel class="p-4 prose md:p-6 xl:p-12 prose-headings:font-display">
             <?= $plugin->getReadmeHTML() ?>
         </pf-tab-panel>
@@ -130,7 +130,7 @@
             </div>
         </pf-tab-panel>
     <?php endif; ?>
-    <?php if($plugin->getLicenseHTML()): ?>
+    <?php if ($plugin->getLicenseHTML()): ?>
         <pf-tab slot="tab"><?= icon('scales-3-fill', [
             'slot' => 'icon',
         ]) ?>LICENSE.md</pf-tab>

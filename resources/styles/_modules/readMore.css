@@ -22,8 +22,7 @@ Read more component (basic unstyled component)
   .read-more__checkbox {
     @apply absolute overflow-hidden whitespace-nowrap;
 
-    clip: rect(0 0 0 0);
-    clip-path: inset(100%);
+    clip-path: inset(50%);
     height: 1px;
     width: 1px;
   }

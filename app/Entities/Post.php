@@ -50,7 +50,8 @@ class Post extends FediversePost
         }
 
         if (! $this->episode instanceof Episode) {
-            $this->episode = (new EpisodeModel())->getEpisodeById($this->episode_id);
+            $this->episode = new EpisodeModel()
+                ->getEpisodeById($this->episode_id);
         }
 
         return $this->episode;

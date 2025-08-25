@@ -25,7 +25,8 @@ class HomeController extends BaseController
             'sort',
         ) : 'activity';
 
-        $allPodcasts = (new PodcastModel())->getAllPodcasts($sortBy);
+        $allPodcasts = new PodcastModel()
+            ->getAllPodcasts($sortBy);
 
         // check if there's only one podcast to redirect user to it
         if (count($allPodcasts) === 1) {

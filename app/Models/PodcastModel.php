@@ -309,7 +309,8 @@ class PodcastModel extends Model
                 ];
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode($podcastId);
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
                 ->save($cacheName, $defaultQuery, $secondsToNextUnpublishedEpisode ?: DECADE);
@@ -325,7 +326,8 @@ class PodcastModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $podcast = (new self())->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
+        $podcast = new self()
+            ->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         // delete cache for users' podcasts
         cache()
@@ -389,21 +391,22 @@ class PodcastModel extends Model
         $domain =
             $url->getHost() . ($url->getPort() ? ':' . $url->getPort() : '');
 
-        $actorId = (new ActorModel())->insert(
-            [
-                'uri'           => url_to('podcast-activity', $username),
-                'username'      => $username,
-                'domain'        => $domain,
-                'private_key'   => $privatekey,
-                'public_key'    => $publickey,
-                'display_name'  => $data['data']['title'],
-                'summary'       => $data['data']['description_html'],
-                'inbox_url'     => url_to('inbox', $username),
-                'outbox_url'    => url_to('outbox', $username),
-                'followers_url' => url_to('followers', $username),
-            ],
-            true,
-        );
+        $actorId = new ActorModel()
+            ->insert(
+                [
+                    'uri'           => url_to('podcast-activity', $username),
+                    'username'      => $username,
+                    'domain'        => $domain,
+                    'private_key'   => $privatekey,
+                    'public_key'    => $publickey,
+                    'display_name'  => $data['data']['title'],
+                    'summary'       => $data['data']['description_html'],
+                    'inbox_url'     => url_to('inbox', $username),
+                    'outbox_url'    => url_to('outbox', $username),
+                    'followers_url' => url_to('followers', $username),
+                ],
+                true,
+            );
 
         $data['data']['actor_id'] = $actorId;
 
@@ -417,10 +420,12 @@ class PodcastModel extends Model
      */
     protected function setActorAvatar(array $data): array
     {
-        $podcast = (new self())->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
+        $podcast = new self()
+            ->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         if ($podcast instanceof Podcast) {
-            $podcastActor = (new ActorModel())->find($podcast->actor_id);
+            $podcastActor = new ActorModel()
+                ->find($podcast->actor_id);
 
             if (! $podcastActor instanceof Actor) {
                 return $data;
@@ -429,7 +434,8 @@ class PodcastModel extends Model
             $podcastActor->avatar_image_url = $podcast->cover->federation_url;
             $podcastActor->avatar_image_mimetype = $podcast->cover->federation_mimetype;
 
-            (new ActorModel())->update($podcast->actor_id, $podcastActor);
+            new ActorModel()
+                ->update($podcast->actor_id, $podcastActor);
         }
 
         return $data;
@@ -442,7 +448,8 @@ class PodcastModel extends Model
      */
     protected function updatePodcastActor(array $data): array
     {
-        $podcast = (new self())->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
+        $podcast = new self()
+            ->find((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         if ($podcast instanceof Podcast) {
             $actorModel = new ActorModel();

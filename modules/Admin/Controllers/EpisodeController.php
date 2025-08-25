@@ -40,7 +40,7 @@ class EpisodeController extends BaseController
         }
 
         if (count($params) === 1) {
-            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+            if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
@@ -48,7 +48,7 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeById((int) $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -127,11 +127,13 @@ class EpisodeController extends BaseController
     {
         helper(['form']);
 
-        $currentSeasonNumber = (new EpisodeModel())->getCurrentSeasonNumber($podcast->id);
+        $currentSeasonNumber = new EpisodeModel()
+            ->getCurrentSeasonNumber($podcast->id);
         $data = [
             'podcast'             => $podcast,
             'currentSeasonNumber' => $currentSeasonNumber,
-            'nextEpisodeNumber'   => (new EpisodeModel())->getNextEpisodeNumber($podcast->id, $currentSeasonNumber),
+            'nextEpisodeNumber'   => new EpisodeModel()
+                ->getNextEpisodeNumber($podcast->id, $currentSeasonNumber),
         ];
 
         $this->setHtmlHead(lang('Episode.create'));
@@ -165,7 +167,7 @@ class EpisodeController extends BaseController
 
         $validData = $this->validator->getValidated();
 
-        if ((new EpisodeModel())
+        if (new EpisodeModel()
             ->where([
                 'slug'       => $validData['slug'],
                 'podcast_id' => $podcast->id,
@@ -315,7 +317,8 @@ class EpisodeController extends BaseController
                 ($transcriptRemoteUrl = $this->request->getPost('transcript_remote_url')) &&
                 (($transcriptFile = $episode->transcript_id) !== null)
             ) {
-                (new MediaModel())->deleteMedia($episode->transcript);
+                new MediaModel()
+                    ->deleteMedia($episode->transcript);
             }
 
             $episode->transcript_remote_url = $transcriptRemoteUrl === '' ? null : $transcriptRemoteUrl;
@@ -333,7 +336,8 @@ class EpisodeController extends BaseController
                 ($chaptersRemoteUrl = $this->request->getPost('chapters_remote_url')) &&
                 (($chaptersFile = $episode->chapters) instanceof Chapters)
             ) {
-                (new MediaModel())->deleteMedia($episode->chapters);
+                new MediaModel()
+                    ->deleteMedia($episode->chapters);
             }
 
             $episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
@@ -502,7 +506,7 @@ class EpisodeController extends BaseController
             $data = [
                 'podcast' => $episode->podcast,
                 'episode' => $episode,
-                'post'    => (new PostModel())
+                'post'    => new PostModel()
                     ->where([
                         'actor_id'   => $episode->podcast->actor_id,
                         'episode_id' => $episode->id,
@@ -571,7 +575,8 @@ class EpisodeController extends BaseController
             $episode->published_at = Time::now();
         }
 
-        $post = (new PostModel())->getPostById($this->request->getPost('post_id'));
+        $post = new PostModel()
+            ->getPostById($this->request->getPost('post_id'));
 
         if ($post instanceof Post) {
             $post->message = $this->request->getPost('message');
@@ -761,7 +766,7 @@ class EpisodeController extends BaseController
 
         $db->transStart();
 
-        $allPostsLinkedToEpisode = (new PostModel())
+        $allPostsLinkedToEpisode = new PostModel()
             ->where([
                 'episode_id'     => $episode->id,
                 'in_reply_to_id' => null,
@@ -769,17 +774,19 @@ class EpisodeController extends BaseController
             ])
             ->findAll();
         foreach ($allPostsLinkedToEpisode as $post) {
-            (new PostModel())->removePost($post);
+            new PostModel()
+                ->removePost($post);
         }
 
-        $allCommentsLinkedToEpisode = (new EpisodeCommentModel())
+        $allCommentsLinkedToEpisode = new EpisodeCommentModel()
             ->where([
                 'episode_id'     => $episode->id,
                 'in_reply_to_id' => null,
             ])
             ->findAll();
         foreach ($allCommentsLinkedToEpisode as $comment) {
-            (new EpisodeCommentModel())->removeComment($comment);
+            new EpisodeCommentModel()
+                ->removeComment($comment);
         }
 
         // set episode published_at to null to unpublish
@@ -795,9 +802,10 @@ class EpisodeController extends BaseController
         }
 
         // set podcast is_published_on_hubs to false to trigger websub push
-        (new PodcastModel())->update($episode->podcast_id, [
-            'is_published_on_hubs' => 0,
-        ]);
+        new PodcastModel()
+            ->update($episode->podcast_id, [
+                'is_published_on_hubs' => 0,
+            ]);
 
         $db->transComplete();
 

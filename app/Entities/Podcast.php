@@ -226,7 +226,8 @@ class Podcast extends Entity
                 ->setFile($file);
             $this->getCover()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('image'))->updateMedia($this->getCover());
+            new MediaModel('image')
+                ->updateMedia($this->getCover());
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
@@ -237,7 +238,7 @@ class Podcast extends Entity
             ]);
             $cover->setFile($file);
 
-            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+            $this->attributes['cover_id'] = new MediaModel('image')->saveMedia($cover);
         }
 
         return $this;
@@ -246,7 +247,8 @@ class Podcast extends Entity
     public function getCover(): Image
     {
         if (! $this->cover instanceof Image) {
-            $cover = (new MediaModel('image'))->getMediaById($this->cover_id);
+            $cover = new MediaModel('image')
+                ->getMediaById($this->cover_id);
 
             if (! $cover instanceof Image) {
                 throw new Exception('Could not retrieve podcast cover.');
@@ -269,7 +271,8 @@ class Podcast extends Entity
                 ->setFile($file);
             $this->getBanner()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('image'))->updateMedia($this->getBanner());
+            new MediaModel('image')
+                ->updateMedia($this->getBanner());
         } else {
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
@@ -280,7 +283,7 @@ class Podcast extends Entity
             ]);
             $banner->setFile($file);
 
-            $this->attributes['banner_id'] = (new MediaModel('image'))->saveMedia($banner);
+            $this->attributes['banner_id'] = new MediaModel('image')->saveMedia($banner);
         }
 
         return $this;
@@ -293,7 +296,8 @@ class Podcast extends Entity
         }
 
         if (! $this->banner instanceof Image) {
-            $this->banner = (new MediaModel('image'))->getMediaById($this->banner_id);
+            $this->banner = new MediaModel('image')
+                ->getMediaById($this->banner_id);
         }
 
         return $this->banner;
@@ -321,7 +325,8 @@ class Podcast extends Entity
         }
 
         if ($this->episodes === null) {
-            $this->episodes = (new EpisodeModel())->getPodcastEpisodes($this->id, $this->type);
+            $this->episodes = new EpisodeModel()
+                ->getPodcastEpisodes($this->id, $this->type);
         }
 
         return $this->episodes;
@@ -336,7 +341,8 @@ class Podcast extends Entity
             throw new RuntimeException('Podcast must be created before getting number of episodes.');
         }
 
-        return (new EpisodeModel())->getPodcastEpisodesCount($this->id);
+        return new EpisodeModel()
+            ->getPodcastEpisodesCount($this->id);
     }
 
     /**
@@ -351,7 +357,8 @@ class Podcast extends Entity
         }
 
         if ($this->persons === null) {
-            $this->persons = (new PersonModel())->getPodcastPersons($this->id);
+            $this->persons = new PersonModel()
+                ->getPodcastPersons($this->id);
         }
 
         return $this->persons;
@@ -367,7 +374,8 @@ class Podcast extends Entity
         }
 
         if (! $this->category instanceof Category) {
-            $this->category = (new CategoryModel())->getCategoryById($this->category_id);
+            $this->category = new CategoryModel()
+                ->getCategoryById($this->category_id);
         }
 
         return $this->category;
@@ -385,7 +393,8 @@ class Podcast extends Entity
         }
 
         if ($this->subscriptions === null) {
-            $this->subscriptions = (new SubscriptionModel())->getPodcastSubscriptions($this->id);
+            $this->subscriptions = new SubscriptionModel()
+                ->getPodcastSubscriptions($this->id);
         }
 
         return $this->subscriptions;
@@ -403,7 +412,8 @@ class Podcast extends Entity
         }
 
         if ($this->contributors === null) {
-            $this->contributors = (new UserModel())->getPodcastContributors($this->id);
+            $this->contributors = new UserModel()
+                ->getPodcastContributors($this->id);
         }
 
         return $this->contributors;
@@ -468,7 +478,8 @@ class Podcast extends Entity
         }
 
         if ($this->podcasting_platforms === null) {
-            $this->podcasting_platforms = (new PlatformModel())->getPlatforms($this->id, 'podcasting');
+            $this->podcasting_platforms = new PlatformModel()
+                ->getPlatforms($this->id, 'podcasting');
         }
 
         return $this->podcasting_platforms;
@@ -486,7 +497,8 @@ class Podcast extends Entity
         }
 
         if ($this->social_platforms === null) {
-            $this->social_platforms = (new PlatformModel())->getPlatforms($this->id, 'social');
+            $this->social_platforms = new PlatformModel()
+                ->getPlatforms($this->id, 'social');
         }
 
         return $this->social_platforms;
@@ -504,7 +516,8 @@ class Podcast extends Entity
         }
 
         if ($this->funding_platforms === null) {
-            $this->funding_platforms = (new PlatformModel())->getPlatforms($this->id, 'funding');
+            $this->funding_platforms = new PlatformModel()
+                ->getPlatforms($this->id, 'funding');
         }
 
         return $this->funding_platforms;
@@ -520,7 +533,8 @@ class Podcast extends Entity
         }
 
         if ($this->other_categories === null) {
-            $this->other_categories = (new CategoryModel())->getPodcastCategories($this->id);
+            $this->other_categories = new CategoryModel()
+                ->getPodcastCategories($this->id);
         }
 
         return $this->other_categories;
@@ -581,6 +595,7 @@ class Podcast extends Entity
     public function getIsPremium(): bool
     {
         // podcast is premium if at least one of its episodes is set as premium
-        return (new EpisodeModel())->doesPodcastHavePremiumEpisodes($this->id);
+        return new EpisodeModel()
+            ->doesPodcastHavePremiumEpisodes($this->id);
     }
 }

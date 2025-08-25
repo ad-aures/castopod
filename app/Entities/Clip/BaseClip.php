@@ -110,18 +110,21 @@ class BaseClip extends Entity
 
     public function getPodcast(): ?Podcast
     {
-        return (new PodcastModel())->getPodcastById($this->podcast_id);
+        return new PodcastModel()
+            ->getPodcastById($this->podcast_id);
     }
 
     public function getEpisode(): ?Episode
     {
-        return (new EpisodeModel())->getEpisodeById($this->episode_id);
+        return new EpisodeModel()
+            ->getEpisodeById($this->episode_id);
     }
 
     public function getUser(): ?User
     {
         /** @var ?User */
-        return (new UserModel())->find($this->created_by);
+        return new UserModel()
+            ->find($this->created_by);
     }
 
     public function setMedia(File $file, string $fileKey): static
@@ -131,7 +134,8 @@ class BaseClip extends Entity
                 ->setFile($file);
             $this->getMedia()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('audio'))->updateMedia($this->getMedia());
+            new MediaModel('audio')
+                ->updateMedia($this->getMedia());
         } else {
             $media = new Audio([
                 'file_key'      => $fileKey,
@@ -142,7 +146,7 @@ class BaseClip extends Entity
             ]);
             $media->setFile($file);
 
-            $this->attributes['media_id'] = (new MediaModel())->saveMedia($media);
+            $this->attributes['media_id'] = new MediaModel()->saveMedia($media);
         }
 
         return $this;
@@ -151,7 +155,8 @@ class BaseClip extends Entity
     public function getMedia(): Audio | Video | null
     {
         if ($this->media_id !== null && $this->media === null) {
-            $this->media = (new MediaModel($this->type))->getMediaById($this->media_id);
+            $this->media = new MediaModel($this->type)
+                ->getMediaById($this->media_id);
         }
 
         return $this->media;

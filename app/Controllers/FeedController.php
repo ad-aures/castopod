@@ -33,7 +33,8 @@ class FeedController extends Controller
 
     public function index(string $podcastHandle): ResponseInterface
     {
-        $podcast = (new PodcastModel())->where('handle', $podcastHandle)
+        $podcast = new PodcastModel()
+            ->where('handle', $podcastHandle)
             ->first();
         if (! $podcast instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
@@ -68,7 +69,8 @@ class FeedController extends Controller
         $subscription = null;
         $token = $this->request->getGet('token');
         if ($token) {
-            $subscription = (new SubscriptionModel())->validateSubscription($podcastHandle, $token);
+            $subscription = new SubscriptionModel()
+                ->validateSubscription($podcastHandle, $token);
         }
 
         $cacheName = implode(
@@ -85,9 +87,8 @@ class FeedController extends Controller
             $found = get_rss_feed($podcast, $serviceSlug, $subscription, $token);
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($podcast->id);
 
             cache()
                 ->save($cacheName, $found, $secondsToNextUnpublishedEpisode ?: DECADE);

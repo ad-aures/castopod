@@ -62,7 +62,7 @@
                 href="<?= $podcastingPlatform->link_url ?>"
                 target="_blank"
                 rel="noopener noreferrer"><?= icon($podcastingPlatform->type . ':' . $podcastingPlatform->slug, [
-                'class' => 'text-xl mr-auto',
+                    'class' => 'text-xl mr-auto',
                 ]) ?><span class="mr-auto -ml-8"><?= $podcastingPlatform->label ?></span>
             </a>
             <?php endif; ?>

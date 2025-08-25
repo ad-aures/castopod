@@ -213,7 +213,8 @@ class Episode extends Entity
                 ->setFile($file);
             $this->getCover()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('image'))->updateMedia($this->getCover());
+            new MediaModel('image')
+                ->updateMedia($this->getCover());
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
@@ -224,7 +225,7 @@ class Episode extends Entity
             ]);
             $cover->setFile($file);
 
-            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+            $this->attributes['cover_id'] = new MediaModel('image')->saveMedia($cover);
         }
 
         return $this;
@@ -243,7 +244,8 @@ class Episode extends Entity
             return $this->cover;
         }
 
-        $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
+        $this->cover = new MediaModel('image')
+            ->getMediaById($this->cover_id);
 
         return $this->cover;
     }
@@ -259,7 +261,8 @@ class Episode extends Entity
                 ->setFile($file);
             $this->getAudio()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('audio'))->updateMedia($this->getAudio());
+            new MediaModel('audio')
+                ->updateMedia($this->getAudio());
         } else {
             $audio = new Audio([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $file->getRandomName(),
@@ -270,7 +273,7 @@ class Episode extends Entity
             ]);
             $audio->setFile($file);
 
-            $this->attributes['audio_id'] = (new MediaModel())->saveMedia($audio);
+            $this->attributes['audio_id'] = new MediaModel()->saveMedia($audio);
         }
 
         return $this;
@@ -279,7 +282,8 @@ class Episode extends Entity
     public function getAudio(): Audio
     {
         if (! $this->audio instanceof Audio) {
-            $this->audio = (new MediaModel('audio'))->getMediaById($this->audio_id);
+            $this->audio = new MediaModel('audio')
+                ->getMediaById($this->audio_id);
         }
 
         return $this->audio;
@@ -296,7 +300,8 @@ class Episode extends Entity
                 ->setFile($file);
             $this->getTranscript()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('transcript'))->updateMedia($this->getTranscript());
+            new MediaModel('transcript')
+                ->updateMedia($this->getTranscript());
         } else {
             $transcript = new Transcript([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
@@ -307,7 +312,7 @@ class Episode extends Entity
             ]);
             $transcript->setFile($file);
 
-            $this->attributes['transcript_id'] = (new MediaModel('transcript'))->saveMedia($transcript);
+            $this->attributes['transcript_id'] = new MediaModel('transcript')->saveMedia($transcript);
         }
 
         return $this;
@@ -316,7 +321,8 @@ class Episode extends Entity
     public function getTranscript(): ?Transcript
     {
         if ($this->transcript_id !== null && ! $this->transcript instanceof Transcript) {
-            $this->transcript = (new MediaModel('transcript'))->getMediaById($this->transcript_id);
+            $this->transcript = new MediaModel('transcript')
+                ->getMediaById($this->transcript_id);
         }
 
         return $this->transcript;
@@ -333,7 +339,8 @@ class Episode extends Entity
                 ->setFile($file);
             $this->getChapters()
                 ->updated_by = $this->attributes['updated_by'];
-            (new MediaModel('chapters'))->updateMedia($this->getChapters());
+            new MediaModel('chapters')
+                ->updateMedia($this->getChapters());
         } else {
             $chapters = new Chapters([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
@@ -344,7 +351,7 @@ class Episode extends Entity
             ]);
             $chapters->setFile($file);
 
-            $this->attributes['chapters_id'] = (new MediaModel('chapters'))->saveMedia($chapters);
+            $this->attributes['chapters_id'] = new MediaModel('chapters')->saveMedia($chapters);
         }
 
         return $this;
@@ -353,7 +360,8 @@ class Episode extends Entity
     public function getChapters(): ?Chapters
     {
         if ($this->chapters_id !== null && ! $this->chapters instanceof Chapters) {
-            $this->chapters = (new MediaModel('chapters'))->getMediaById($this->chapters_id);
+            $this->chapters = new MediaModel('chapters')
+                ->getMediaById($this->chapters_id);
         }
 
         return $this->chapters;
@@ -395,7 +403,8 @@ class Episode extends Entity
         }
 
         if ($this->persons === null) {
-            $this->persons = (new PersonModel())->getEpisodePersons($this->podcast_id, $this->id);
+            $this->persons = new PersonModel()
+                ->getEpisodePersons($this->podcast_id, $this->id);
         }
 
         return $this->persons;
@@ -413,7 +422,8 @@ class Episode extends Entity
         }
 
         if ($this->soundbites === null) {
-            $this->soundbites = (new ClipModel())->getEpisodeSoundbites($this->getPodcast()->id, $this->id);
+            $this->soundbites = new ClipModel()
+                ->getEpisodeSoundbites($this->getPodcast()->id, $this->id);
         }
 
         return $this->soundbites;
@@ -429,7 +439,8 @@ class Episode extends Entity
         }
 
         if ($this->posts === null) {
-            $this->posts = (new PostModel())->getEpisodePosts($this->id);
+            $this->posts = new PostModel()
+                ->getEpisodePosts($this->id);
         }
 
         return $this->posts;
@@ -445,7 +456,8 @@ class Episode extends Entity
         }
 
         if ($this->comments === null) {
-            $this->comments = (new EpisodeCommentModel())->getEpisodeComments($this->id);
+            $this->comments = new EpisodeCommentModel()
+                ->getEpisodeComments($this->id);
         }
 
         return $this->comments;
@@ -467,7 +479,8 @@ class Episode extends Entity
 
     public function getPodcast(): ?Podcast
     {
-        return (new PodcastModel())->getPodcastById($this->podcast_id);
+        return new PodcastModel()
+            ->getPodcastById($this->podcast_id);
     }
 
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
@@ -563,7 +576,7 @@ class Episode extends Entity
     {
         if ($this->preview_id === null) {
             // generate preview id
-            if (! $previewUUID = (new EpisodeModel())->setEpisodePreviewId($this->id)) {
+            if (! $previewUUID = new EpisodeModel()->setEpisodePreviewId($this->id)) {
                 throw new Exception('Could not set episode preview id');
             }
 
@@ -582,6 +595,7 @@ class Episode extends Entity
             throw new RuntimeException('Episode must be created before getting number of video clips.');
         }
 
-        return (new ClipModel())->getClipCount($this->podcast_id, $this->id);
+        return new ClipModel()
+            ->getClipCount($this->podcast_id, $this->id);
     }
 }

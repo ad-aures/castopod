@@ -21,10 +21,10 @@
     name="cache_handler"
     label="<?= esc(lang('Install.form.cache_handler')) ?>"
     options="<?= esc(json_encode([
-            'file'   => lang('Install.form.cacheHandlerOptions.file'),
-            'redis'  => lang('Install.form.cacheHandlerOptions.redis'),
-            'predis' => lang('Install.form.cacheHandlerOptions.predis'),
-        ])) ?>"
+        'file'   => lang('Install.form.cacheHandlerOptions.file'),
+        'redis'  => lang('Install.form.cacheHandlerOptions.redis'),
+        'predis' => lang('Install.form.cacheHandlerOptions.predis'),
+    ])) ?>"
     defaultValue="file"
     isRequired="true" />
 <?php // @icon("arrow-right-fill")?>

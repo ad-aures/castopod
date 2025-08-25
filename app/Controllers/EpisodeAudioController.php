@@ -65,7 +65,7 @@ class EpisodeAudioController extends Controller
         }
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -73,7 +73,7 @@ class EpisodeAudioController extends Controller
         $this->podcast = $podcast;
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -108,7 +108,7 @@ class EpisodeAudioController extends Controller
             }
 
             // check if there's a valid subscription for the provided token
-            if (! ($subscription = (new SubscriptionModel())->validateSubscription(
+            if (! ($subscription = new SubscriptionModel()->validateSubscription(
                 $this->episode->podcast->handle,
                 $token,
             )) instanceof Subscription) {

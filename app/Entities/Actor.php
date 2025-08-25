@@ -37,7 +37,8 @@ class Actor extends FediverseActor
         }
 
         if (! $this->podcast instanceof Podcast) {
-            $this->podcast = (new PodcastModel())->getPodcastByActorId($this->id);
+            $this->podcast = new PodcastModel()
+                ->getPodcastByActorId($this->id);
         }
 
         return $this->podcast;

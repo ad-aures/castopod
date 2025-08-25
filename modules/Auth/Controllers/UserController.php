@@ -29,7 +29,7 @@ class UserController extends BaseController
             return $this->{$method}();
         }
 
-        if (($this->user = (new UserModel())->find($params[0])) instanceof User) {
+        if (($this->user = new UserModel()->find($params[0])) instanceof User) {
             return $this->{$method}();
         }
 
@@ -39,7 +39,8 @@ class UserController extends BaseController
     public function list(): string
     {
         $data = [
-            'users' => (new UserModel())->findAll(),
+            'users' => new UserModel()
+                ->findAll(),
         ];
 
         $this->setHtmlHead(lang('User.all_users'));
@@ -280,7 +281,8 @@ class UserController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        (new UserModel())->delete($this->user->id, true);
+        new UserModel()
+            ->delete($this->user->id, true);
 
         return redirect()
             ->route('user-list')

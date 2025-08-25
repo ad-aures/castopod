@@ -23,7 +23,7 @@ class PageController extends BaseController
             return $this->{$method}();
         }
 
-        if (($page = (new PageModel())->find($params[0])) instanceof Page) {
+        if (($page = new PageModel()->find($params[0])) instanceof Page) {
             return $this->{$method}($page);
         }
 
@@ -34,7 +34,8 @@ class PageController extends BaseController
     {
         $this->setHtmlHead(lang('Page.all_pages'));
         $data = [
-            'pages' => (new PageModel())->findAll(),
+            'pages' => new PageModel()
+                ->findAll(),
         ];
 
         return view('page/list', $data);
@@ -113,7 +114,8 @@ class PageController extends BaseController
 
     public function deleteAction(Page $page): RedirectResponse
     {
-        (new PageModel())->delete($page->id);
+        new PageModel()
+            ->delete($page->id);
 
         return redirect()->route('page-list');
     }

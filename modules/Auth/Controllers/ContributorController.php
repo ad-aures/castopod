@@ -30,7 +30,7 @@ class ContributorController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -40,7 +40,7 @@ class ContributorController extends BaseController
             return $this->{$method}();
         }
 
-        if (($this->contributor = (new UserModel())->getPodcastContributor(
+        if (($this->contributor = new UserModel()->getPodcastContributor(
             (int) $params[1],
             (int) $params[0],
         )) instanceof User) {
@@ -67,7 +67,8 @@ class ContributorController extends BaseController
     {
         $data = [
             'podcast'     => $this->podcast,
-            'contributor' => (new UserModel())->getPodcastContributor($this->contributor->id, $this->podcast->id),
+            'contributor' => new UserModel()
+                ->getPodcastContributor($this->contributor->id, $this->podcast->id),
         ];
 
         $this->setHtmlHead(lang('Contributor.view', [
@@ -85,7 +86,8 @@ class ContributorController extends BaseController
     {
         helper('form');
 
-        $users = (new UserModel())->findAll();
+        $users = new UserModel()
+            ->findAll();
         $contributorOptions = array_reduce(
             $users,
             static function (array $result, User $user): array {
@@ -128,7 +130,8 @@ class ContributorController extends BaseController
     public function createAction(): RedirectResponse
     {
         /** @var User $user */
-        $user = (new UserModel())->find((int) $this->request->getPost('user'));
+        $user = new UserModel()
+            ->find((int) $this->request->getPost('user'));
 
         if (get_podcast_group($user, $this->podcast->id)) {
             return redirect()

@@ -31,10 +31,10 @@ class Label extends Component
         lang('Common.optional') .
         ')</small>' : '';
 
-        $hint = $this->hint === '' ? '' : (new Hint([
+        $hint = $this->hint === '' ? '' : new Hint([
             'class' => 'ml-1',
             'slot'  => $this->hint,
-        ]))->render();
+        ])->render();
 
         $this->attributes['for'] = $this->for;
 

@@ -27,7 +27,7 @@ class PodcastPersonController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             unset($params[0]);
             return $this->{$method}($podcast, ...$params);
@@ -41,10 +41,13 @@ class PodcastPersonController extends BaseController
         helper('form');
 
         $data = [
-            'podcast'         => $podcast,
-            'podcastPersons'  => (new PersonModel())->getPodcastPersons($podcast->id),
-            'personOptions'   => (new PersonModel())->getPersonOptions(),
-            'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
+            'podcast'        => $podcast,
+            'podcastPersons' => new PersonModel()
+                ->getPodcastPersons($podcast->id),
+            'personOptions' => new PersonModel()
+                ->getPersonOptions(),
+            'taxonomyOptions' => new PersonModel()
+                ->getTaxonomyOptions(),
         ];
 
         $this->setHtmlHead(lang('Person.podcast_form.title'));
@@ -69,18 +72,16 @@ class PodcastPersonController extends BaseController
 
         $validData = $this->validator->getValidated();
 
-        (new PersonModel())->addPodcastPersons(
-            $podcast->id,
-            $validData['persons'],
-            $this->request->getPost('roles') ?? [],
-        );
+        new PersonModel()
+            ->addPodcastPersons($podcast->id, $validData['persons'], $this->request->getPost('roles') ?? []);
 
         return redirect()->back();
     }
 
     public function deleteAction(Podcast $podcast, string $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromPodcast($podcast->id, (int) $personId);
+        new PersonModel()
+            ->removePersonFromPodcast($podcast->id, (int) $personId);
 
         return redirect()->back();
     }

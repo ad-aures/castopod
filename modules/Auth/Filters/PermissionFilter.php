@@ -86,7 +86,8 @@ class PermissionFilter implements FilterInterface
                 if (is_numeric($podcastParam)) {
                     $podcastId = (int) $podcastParam;
                 } else {
-                    $podcast = (new PodcastModel())->getPodcastByHandle($podcastParam);
+                    $podcast = new PodcastModel()
+                        ->getPodcastByHandle($podcastParam);
                     if ($podcast instanceof Podcast) {
                         $podcastId = $podcast->id;
                     }

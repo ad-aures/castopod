@@ -86,11 +86,13 @@ class EpisodeCommentModel extends UuidModel
         }
 
         if ($comment->in_reply_to_id === null) {
-            (new EpisodeModel())->builder()
+            new EpisodeModel()
+                ->builder()
                 ->where('id', $comment->episode_id)
                 ->increment('comments_count');
         } else {
-            (new self())->builder()
+            new self()
+                ->builder()
                 ->where('id', service('uuid')->fromString($comment->in_reply_to_id)->getBytes())
                 ->increment('replies_count');
         }
@@ -180,7 +182,8 @@ class EpisodeCommentModel extends UuidModel
                 ->where('id', $comment->episode_id)
                 ->decrement('comments_count');
         } else {
-            (new self())->builder()
+            new self()
+                ->builder()
                 ->where('id', service('uuid')->fromString($comment->in_reply_to_id)->getBytes())
                 ->decrement('replies_count');
         }

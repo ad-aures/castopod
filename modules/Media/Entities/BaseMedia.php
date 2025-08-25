@@ -116,12 +116,12 @@ class BaseMedia extends Entity
 
     public function rename(): bool
     {
-        $newFileKey = $this->file_directory . '/' . (new File(''))->getRandomName() . '.' . $this->file_extension;
+        $newFileKey = $this->file_directory . '/' . new File('')->getRandomName() . '.' . $this->file_extension;
 
         $db = db_connect();
         $db->transStart();
 
-        if (! (new MediaModel())->update($this->id, [
+        if (! new MediaModel()->update($this->id, [
             'file_key' => $newFileKey,
         ])) {
             return false;

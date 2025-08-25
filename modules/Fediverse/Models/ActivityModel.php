@@ -139,7 +139,8 @@ class ActivityModel extends UuidModel
     protected function notify(array $data): array
     {
         /** @var ?Activity $activity */
-        $activity = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $activity = new self()
+            ->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         if (! $activity instanceof Activity) {
             return $data;
@@ -155,35 +156,39 @@ class ActivityModel extends UuidModel
         }
 
         if ($activity->type === 'Follow') {
-            (new NotificationModel())->insert([
-                'actor_id'        => $activity->actor_id,
-                'target_actor_id' => $activity->target_actor_id,
-                'activity_id'     => $activity->id,
-                'type'            => 'follow',
-                'created_at'      => $activity->created_at,
-            ]);
+            new NotificationModel()
+                ->insert([
+                    'actor_id'        => $activity->actor_id,
+                    'target_actor_id' => $activity->target_actor_id,
+                    'activity_id'     => $activity->id,
+                    'type'            => 'follow',
+                    'created_at'      => $activity->created_at,
+                ]);
         } elseif ($activity->type === 'Undo_Follow') {
-            (new NotificationModel())->builder()
+            new NotificationModel()
+                ->builder()
                 ->delete([
                     'actor_id'        => $activity->actor_id,
                     'target_actor_id' => $activity->target_actor_id,
                     'type'            => 'follow',
                 ]);
         } elseif (in_array($activity->type, ['Create', 'Like', 'Announce'], true) && $activity->post_id !== null) {
-            (new NotificationModel())->insert([
-                'actor_id'        => $activity->actor_id,
-                'target_actor_id' => $activity->target_actor_id,
-                'post_id'         => $activity->post_id,
-                'activity_id'     => $activity->id,
-                'type'            => match ($activity->type) {
-                    'Create'   => 'reply',
-                    'Like'     => 'like',
-                    'Announce' => 'share',
-                },
-                'created_at' => $activity->created_at,
-            ]);
+            new NotificationModel()
+                ->insert([
+                    'actor_id'        => $activity->actor_id,
+                    'target_actor_id' => $activity->target_actor_id,
+                    'post_id'         => $activity->post_id,
+                    'activity_id'     => $activity->id,
+                    'type'            => match ($activity->type) {
+                        'Create'   => 'reply',
+                        'Like'     => 'like',
+                        'Announce' => 'share',
+                    },
+                    'created_at' => $activity->created_at,
+                ]);
         } elseif (in_array($activity->type, ['Undo_Like', 'Undo_Announce'], true) && $activity->post_id !== null) {
-            (new NotificationModel())->builder()
+            new NotificationModel()
+                ->builder()
                 ->delete([
                     'actor_id'        => $activity->actor_id,
                     'target_actor_id' => $activity->target_actor_id,

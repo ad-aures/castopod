@@ -44,10 +44,10 @@ class Field extends Component
         $helperText = '';
         if ($this->helper !== '') {
             $helperId = $this->name . 'Help';
-            $helperText = (new Helper([
+            $helperText = new Helper([
                 'id'   => $helperId,
                 'slot' => $this->helper,
-            ]))->render();
+            ])->render();
             $this->attributes['aria-describedby'] = $helperId;
         }
 

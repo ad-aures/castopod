@@ -28,7 +28,7 @@ class PlatformController extends BaseController
         }
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -51,7 +51,8 @@ class PlatformController extends BaseController
         $data = [
             'podcast'      => $this->podcast,
             'platformType' => $platformType,
-            'platforms'    => (new PlatformModel())->getPlatformsWithData($this->podcast->id, $platformType),
+            'platforms'    => new PlatformModel()
+                ->getPlatformsWithData($this->podcast->id, $platformType),
         ];
 
         $this->setHtmlHead(lang("Platforms.title.{$platformType}"));
@@ -100,7 +101,8 @@ class PlatformController extends BaseController
 
     public function removeAction(string $platformType, string $platformSlug): RedirectResponse
     {
-        (new PlatformModel())->removePlatform($this->podcast->id, $platformType, $platformSlug);
+        new PlatformModel()
+            ->removePlatform($this->podcast->id, $platformType, $platformSlug);
 
         return redirect()
             ->back()

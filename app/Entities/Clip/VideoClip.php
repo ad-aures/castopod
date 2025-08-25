@@ -81,7 +81,7 @@ class VideoClip extends BaseClip
         ]);
         $video->setFile($file);
 
-        $this->attributes['media_id'] = (new MediaModel('video'))->saveMedia($video);
+        $this->attributes['media_id'] = new MediaModel('video')->saveMedia($video);
 
         return $this;
     }

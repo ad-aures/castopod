@@ -36,7 +36,7 @@ class PodcastImportController extends BaseController
 
     public function podcastList(int $podcastId): string
     {
-        if (! ($podcast = (new PodcastModel())->getPodcastById($podcastId)) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastById($podcastId)) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -56,8 +56,10 @@ class PodcastImportController extends BaseController
     {
         helper(['form', 'misc']);
 
-        $languageOptions = (new LanguageModel())->getLanguageOptions();
-        $categoryOptions = (new CategoryModel())->getCategoryOptions();
+        $languageOptions = new LanguageModel()
+            ->getLanguageOptions();
+        $categoryOptions = new CategoryModel()
+            ->getCategoryOptions();
 
         $data = [
             'languageOptions' => $languageOptions,
@@ -109,7 +111,7 @@ class PodcastImportController extends BaseController
 
     public function syncImport(int $podcastId): string
     {
-        if (! ($podcast = (new PodcastModel())->getPodcastById($podcastId)) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastById($podcastId)) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -126,7 +128,7 @@ class PodcastImportController extends BaseController
 
     public function syncImportAttempt(int $podcastId): RedirectResponse
     {
-        if (! ($podcast = (new PodcastModel())->getPodcastById($podcastId)) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastById($podcastId)) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 

@@ -42,6 +42,7 @@ class Category extends Entity
             return null;
         }
 
-        return (new CategoryModel())->getCategoryById($this->parent_id);
+        return new CategoryModel()
+            ->getCategoryById($this->parent_id);
     }
 }

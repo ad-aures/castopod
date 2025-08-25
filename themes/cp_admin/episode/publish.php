@@ -62,14 +62,14 @@
     </div>
     <footer class="flex justify-around px-6 py-3">
         <span class="inline-flex items-center"><?= icon('chat-4-fill', [
-                            'class' => 'mr-1 text-xl opacity-40',
-                        ]) ?>0</span>
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
         <span class="inline-flex items-center"><?= icon('repeat-fill', [
-                            'class' => 'mr-1 text-xl opacity-40',
-                        ]) ?>0</span>
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
         <span class="inline-flex items-center"><?= icon('heart-fill', [
-                            'class' => 'mr-1 text-xl opacity-40',
-                        ]) ?>0</span>
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
     </footer>
 </div>
 

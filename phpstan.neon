@@ -51,4 +51,4 @@ parameters:
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
         - identifier: missingType.generics
-        - identifier: property.readOnlyByPhpDocDefaultValue
+        - '#\$callback of static method CodeIgniter\\Events\\Events\:\:on\(\) expects callable\(mixed\)\: mixed, Closure\(mixed, mixed\)\: void given.#'

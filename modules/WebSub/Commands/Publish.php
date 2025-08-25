@@ -78,12 +78,14 @@ class Publish extends BaseCommand
             }
 
             // set podcast feed as having been pushed onto hubs
-            (new PodcastModel())->update($podcast->id, [
-                'is_published_on_hubs' => 1,
-            ]);
+            new PodcastModel()
+                ->update($podcast->id, [
+                    'is_published_on_hubs' => 1,
+                ]);
 
             // set newly published episodes as pushed onto hubs
-            (new EpisodeModel())->set('is_published_on_hubs', true)
+            new EpisodeModel()
+                ->set('is_published_on_hubs', true)
                 ->where([
                     'podcast_id'           => $podcast->id,
                     'is_published_on_hubs' => false,

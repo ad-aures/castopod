@@ -11,16 +11,12 @@ use App\Entities\Post;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
-use CodeIgniter\API\ResponseTrait;
-use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 use Modules\Auth\Models\UserModel;
 
-class EpisodeController extends Controller
+class EpisodeController extends BaseApiController
 {
-    use ResponseTrait;
-
     public function __construct()
     {
         service('restApiExceptions')->initialize();
@@ -50,6 +46,7 @@ class EpisodeController extends Controller
             $builder->orderBy('episodes.created_at', 'desc');
         }
 
+        /** @var array<string,mixed> $data */
         $data = $builder->findAll(
             (int) ($this->request->getGet('limit') ?? config('RestApi')->limit),
             (int) $this->request->getGet('offset'),
@@ -64,7 +61,8 @@ class EpisodeController extends Controller
 
     public function view(int $id): ResponseInterface
     {
-        $episode = (new EpisodeModel())->getEpisodeById($id);
+        $episode = new EpisodeModel()
+            ->getEpisodeById($id);
 
         if (! $episode instanceof Episode) {
             return $this->failNotFound('Episode not found');
@@ -96,7 +94,8 @@ class EpisodeController extends Controller
 
         $podcastId = (int) $this->request->getPost('podcast_id');
 
-        $podcast = (new PodcastModel())->getPodcastById($podcastId);
+        $podcast = new PodcastModel()
+            ->getPodcastById($podcastId);
 
         if (! $podcast instanceof Podcast) {
             return $this->failNotFound('Podcast not found');
@@ -129,7 +128,7 @@ class EpisodeController extends Controller
 
         $validData = $this->validator->getValidated();
 
-        if ((new EpisodeModel())
+        if (new EpisodeModel()
             ->where([
                 'slug'       => $validData['slug'],
                 'podcast_id' => $podcast->id,
@@ -187,7 +186,7 @@ class EpisodeController extends Controller
 
         $episodeModel = new EpisodeModel();
         if (($newEpisodeId = (int) $episodeModel->insert($newEpisode, true)) === 0) {
-            return $this->fail($episodeModel->errors(), 400);
+            return $this->fail(array_values($episodeModel->errors()), 400);
         }
 
         $episode = $episodeModel->find($newEpisodeId)
@@ -278,12 +277,12 @@ class EpisodeController extends Controller
         $postModel = new PostModel();
         if (! $postModel->addPost($newPost)) {
             $db->transRollback();
-            return $this->fail($postModel->errors(), 400);
+            return $this->fail(array_values($postModel->errors()), 400);
         }
 
         if (! $episodeModel->update($episode->id, $episode)) {
             $db->transRollback();
-            return $this->fail($episodeModel->errors(), 400);
+            return $this->fail(array_values($episodeModel->errors()), 400);
         }
 
         $db->transComplete();

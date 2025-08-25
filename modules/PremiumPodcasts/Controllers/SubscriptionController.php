@@ -32,7 +32,7 @@ class SubscriptionController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -42,7 +42,7 @@ class SubscriptionController extends BaseController
             return $this->{$method}();
         }
 
-        if (! ($this->subscription = (new SubscriptionModel())->getSubscriptionById(
+        if (! ($this->subscription = new SubscriptionModel()->getSubscriptionById(
             (int) $params[1],
         )) instanceof Subscription) {
             throw PageNotFoundException::forPageNotFound();
@@ -431,7 +431,8 @@ class SubscriptionController extends BaseController
         $db = db_connect();
         $db->transStart();
 
-        (new SubscriptionModel())->delete($this->subscription->id);
+        new SubscriptionModel()
+            ->delete($this->subscription->id);
 
         /** @var Email $email */
         $email = service('email');

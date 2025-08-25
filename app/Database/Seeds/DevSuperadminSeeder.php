@@ -22,7 +22,7 @@ class DevSuperadminSeeder extends Seeder
     #[Override]
     public function run(): void
     {
-        if ((new UserModel())->where('is_owner', true)->first() instanceof User) {
+        if (new UserModel()->where('is_owner', true)->first() instanceof User) {
             return;
         }
 

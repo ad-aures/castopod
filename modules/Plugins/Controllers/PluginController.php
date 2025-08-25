@@ -105,7 +105,8 @@ class PluginController extends BaseController
         ];
 
         if ($podcastId !== null) {
-            $podcast = (new PodcastModel())->getPodcastById((int) $podcastId);
+            $podcast = new PodcastModel()
+                ->getPodcastById((int) $podcastId);
 
             if (! $podcast instanceof Podcast) {
                 throw PageNotFoundException::forPageNotFound();
@@ -118,7 +119,8 @@ class PluginController extends BaseController
         }
 
         if ($episodeId !== null) {
-            $episode = (new EpisodeModel())->getEpisodeById((int) $episodeId);
+            $episode = new EpisodeModel()
+                ->getEpisodeById((int) $episodeId);
 
             if (! $episode instanceof Episode) {
                 throw PageNotFoundException::forPageNotFound();

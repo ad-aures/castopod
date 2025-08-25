@@ -41,7 +41,7 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
+            ! ($podcast = new PodcastModel()->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -49,7 +49,7 @@ class EpisodeController extends BaseController
         $this->podcast = $podcast;
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -87,9 +87,8 @@ class EpisodeController extends BaseController
                 'episode' => $this->episode,
             ];
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             if (auth()->loggedIn()) {
                 helper('form');
@@ -133,9 +132,8 @@ class EpisodeController extends BaseController
                 'episode' => $this->episode,
             ];
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             if (auth()->loggedIn()) {
                 helper('form');
@@ -189,9 +187,8 @@ class EpisodeController extends BaseController
                 $data['chapters'] = $chapters;
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             if (auth()->loggedIn()) {
                 helper('form');
@@ -250,9 +247,8 @@ class EpisodeController extends BaseController
                 }
             }
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             if (auth()->loggedIn()) {
                 helper('form');
@@ -306,9 +302,8 @@ class EpisodeController extends BaseController
                 'themeData' => $themeData,
             ];
 
-            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id,
-            );
+            $secondsToNextUnpublishedEpisode = new EpisodeModel()
+                ->getSecondsToNextUnpublishedEpisode($this->podcast->id);
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('embed', $data, [
@@ -410,7 +405,7 @@ class EpisodeController extends BaseController
             $orderedItems = [];
             if ($paginatedComments !== null) {
                 foreach ($paginatedComments as $comment) {
-                    $orderedItems[] = (new NoteObject($comment))->toArray();
+                    $orderedItems[] = new NoteObject($comment)->toArray();
                 }
             }
 

@@ -267,9 +267,8 @@ class AnalyticsPodcastModel extends Model
     public function getDataTotalStorageByMonth(): array
     {
         if (! ($found = cache('analytics_total_storage_by_month'))) {
-            $found = (new MediaModel())->select(
-                'DATE_FORMAT(uploaded_at,"%Y-%m") as labels, ROUND(sum(file_size) / 1000000, 2) as `values`',
-            )
+            $found = new MediaModel()
+                ->select('DATE_FORMAT(uploaded_at,"%Y-%m") as labels, ROUND(sum(file_size) / 1000000, 2) as `values`')
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')
                 ->findAll();

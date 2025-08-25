@@ -358,7 +358,8 @@ abstract class BasePlugin implements PluginInterface
         $environment = new Environment([
             'html_input'         => 'escape',
             'allow_unsafe_links' => false,
-            'host'               => (new URI(base_url()))->getHost(),
+            'host'               => new URI(base_url())
+                ->getHost(),
         ]);
         $environment->addExtension(new CommonMarkCoreExtension());
 
@@ -368,13 +369,15 @@ abstract class BasePlugin implements PluginInterface
         $environment->addEventListener(
             DocumentParsedEvent::class,
             static function (DocumentParsedEvent $event): void {
-                (new ExternalLinkProcessor())->onDocumentParsed($event);
+                new ExternalLinkProcessor()
+                    ->onDocumentParsed($event);
             },
         );
         $environment->addEventListener(
             DocumentParsedEvent::class,
             static function (DocumentParsedEvent $event): void {
-                (new ExternalImageProcessor())->onDocumentParsed($event);
+                new ExternalImageProcessor()
+                    ->onDocumentParsed($event);
             },
         );
 

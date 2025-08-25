@@ -43,7 +43,7 @@ class MapController extends BaseController
     {
         $cacheName = 'episodes_markers';
         if (! ($found = cache($cacheName))) {
-            $episodes = (new EpisodeModel())
+            $episodes = new EpisodeModel()
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->where('location_geo is not', null)
                 ->findAll();

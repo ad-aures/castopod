@@ -29,7 +29,7 @@ class SoundbiteController extends BaseController
         }
 
         if (count($params) === 1) {
-            if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
+            if (! ($podcast = new PodcastModel()->getPodcastById((int) $params[0])) instanceof Podcast) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
@@ -37,7 +37,7 @@ class SoundbiteController extends BaseController
         }
 
         if (
-            ! ($episode = (new EpisodeModel())->getEpisodeById((int) $params[1])) instanceof Episode
+            ! ($episode = new EpisodeModel()->getEpisodeById((int) $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -50,7 +50,7 @@ class SoundbiteController extends BaseController
 
     public function list(Episode $episode): string
     {
-        $soundbitesBuilder = (new ClipModel('audio'))
+        $soundbitesBuilder = new ClipModel('audio')
             ->where([
                 'podcast_id' => $episode->podcast_id,
                 'episode_id' => $episode->id,
@@ -137,7 +137,8 @@ class SoundbiteController extends BaseController
 
     public function deleteAction(Episode $episode, string $soundbiteId): RedirectResponse
     {
-        $soundbite = (new ClipModel())->getSoundbiteById((int) $soundbiteId);
+        $soundbite = new ClipModel()
+            ->getSoundbiteById((int) $soundbiteId);
 
         if (! $soundbite instanceof Soundbite) {
             throw PageNotFoundException::forPageNotFound();
@@ -145,9 +146,11 @@ class SoundbiteController extends BaseController
 
         if ($soundbite->media === null) {
             // delete Clip directly
-            (new ClipModel())->deleteSoundbite($episode->podcast_id, $episode->id, $soundbite->id);
+            new ClipModel()
+                ->deleteSoundbite($episode->podcast_id, $episode->id, $soundbite->id);
         } else {
-            (new ClipModel())->clearSoundbiteCache($episode->podcast_id, $episode->id, $soundbite->id);
+            new ClipModel()
+                ->clearSoundbiteCache($episode->podcast_id, $episode->id, $soundbite->id);
 
             $mediaModel = new MediaModel();
             // delete the soundbite file, the clip will be deleted on cascade

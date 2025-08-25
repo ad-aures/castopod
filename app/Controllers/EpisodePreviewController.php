@@ -26,7 +26,8 @@ class EpisodePreviewController extends BaseController
         }
 
         // find episode by previewUUID
-        $episode = (new EpisodeModel())->getEpisodeByPreviewId($params[0]);
+        $episode = new EpisodeModel()
+            ->getEpisodeByPreviewId($params[0]);
 
         if (! $episode instanceof Episode) {
             throw PageNotFoundException::forPageNotFound();

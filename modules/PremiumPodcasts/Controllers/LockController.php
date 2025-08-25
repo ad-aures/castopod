@@ -34,7 +34,7 @@ class LockController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast) {
+        if (! ($podcast = new PodcastModel()->getPodcastByHandle($params[0])) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
