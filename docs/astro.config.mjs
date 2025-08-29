@@ -1,8 +1,7 @@
+// @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightOpenAPI from "starlight-openapi";
-
-import tailwind from "@astrojs/tailwind";
 
 const site = "https://docs.castopod.org/";
 const base = process.env.BASE ?? "/docs";
@@ -17,8 +16,7 @@ export default defineConfig({
       description:
         "Check out the Castopod documentation! Install your own free & open-source podcast host, help make it better by contributing, or simply learn more about Castopod!",
       components: {
-        Header: "./src/components/Header.astro",
-        MobileMenuFooter: "./src/components/MobileMenuFooter.astro",
+        ThemeSelect: "./src/components/ThemeSelect.astro",
       },
       logo: {
         src: "./src/assets/castopod-logo-inline.svg",
@@ -29,7 +27,7 @@ export default defineConfig({
         "@fontsource/inter/400.css",
         "@fontsource/inter/600.css",
         "@fontsource/rubik/700.css",
-        "./src/styles/tailwind.css",
+        "./src/styles/custom.css",
       ],
       head: [
         {
@@ -82,6 +80,33 @@ export default defineConfig({
           },
         },
       ],
+      social: [
+        {
+          icon: "discord",
+          label: "Discord",
+          href: "https://castopod.org/chat",
+        },
+        {
+          icon: "x.com",
+          label: "Twitter/X",
+          href: "https://twitter.com/castopod",
+        },
+        {
+          icon: "mastodon",
+          label: "Mastodon",
+          href: "https://podlibre.social/@Castopod",
+        },
+        {
+          icon: "gitlab",
+          label: "Source code",
+          href: "https://code.castopod.org/adaures/castopod",
+        },
+        {
+          icon: "github",
+          label: "Github",
+          href: "https://github.com/ad-aures/castopod",
+        },
+      ],
       defaultLocale: "en",
       locales: {
         en: {
@@ -116,14 +141,8 @@ export default defineConfig({
           lang: "zh-Hans",
         },
       },
-      social: {
-        discord: "https://castopod.org/chat",
-        "x.com": "https://twitter.com/castopod",
-        mastodon: "https://podlibre.social/@Castopod",
-        gitlab: "https://code.castopod.org/adaures/castopod",
-        github: "https://github.com/ad-aures/castopod",
-      },
       plugins: [
+        // Generate the OpenAPI documentation pages.
         starlightOpenAPI([
           {
             base: "en/api",
@@ -373,9 +392,6 @@ export default defineConfig({
       editLink: {
         baseUrl: "https://code.castopod.org/adaures/castopod/-/edit/main/docs/",
       },
-    }),
-    tailwind({
-      applyBaseStyles: false,
     }),
   ],
 });

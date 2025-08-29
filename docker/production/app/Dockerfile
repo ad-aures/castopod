@@ -1,6 +1,6 @@
-FROM docker.io/golang:1.20-bookworm AS CRON_BUILDER
+FROM docker.io/golang:1.25-bookworm AS CRON_BUILDER
 
-ARG SUPERCRONIC_VERSION=v0.2.25
+ARG SUPERCRONIC_VERSION=v0.2.34
 
 RUN apt-get update && \
     apt-get install -y git && \

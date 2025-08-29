@@ -1,0 +1,44 @@
+/* Dark mode colors. */
+:root {
+  --sl-font: "Inter", sans-serif;
+  --sl-color-accent-low: #002b26;
+  --sl-color-accent: #007b6f;
+  --sl-color-accent-high: #81dcce;
+  --sl-color-white: #fff;
+  --sl-color-gray-1: #e8efee;
+  --sl-color-gray-2: #bbc4c2;
+  --sl-color-gray-3: #7f908c;
+  --sl-color-gray-4: #4c5c59;
+  --sl-color-gray-5: #2d3c39;
+  --sl-color-gray-6: #1c2a28;
+  --sl-color-black: #131a19;
+}
+
+/* Light mode colors. */
+:root[data-theme="light"] {
+  --sl-color-accent-low: #a5e6db;
+  --sl-color-accent: #007368;
+  --sl-color-accent-high: #003b35;
+  --sl-color-white: #131a19;
+  --sl-color-gray-1: #1c2a28;
+  --sl-color-gray-2: #2d3c39;
+  --sl-color-gray-3: #4c5c59;
+  --sl-color-gray-4: #7f908c;
+  --sl-color-gray-5: #bbc4c2;
+  --sl-color-gray-6: #e8efee;
+  --sl-color-gray-7: #f3f7f6;
+  --sl-color-black: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Rubik, sans-serif;
+}
+
+:is(code, kbd, samp) {
+  font-family: monospace;
+}
