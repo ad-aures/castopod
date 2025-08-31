@@ -87,9 +87,9 @@ export default defineConfig({
           href: "https://castopod.org/chat",
         },
         {
-          icon: "x.com",
-          label: "Twitter/X",
-          href: "https://twitter.com/castopod",
+          icon: "blueSky",
+          label: "Bluesky",
+          href: "https://bsky.app/profile/castopod.org",
         },
         {
           icon: "mastodon",
