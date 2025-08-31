@@ -1,6 +1,6 @@
-FROM docker.io/golang:1.21-bookworm AS CRON_BUILDER
+FROM docker.io/golang:1.25-bookworm AS CRON_BUILDER
 
-ARG SUPERCRONIC_VERSION=v0.2.26
+ARG SUPERCRONIC_VERSION=v0.2.34
 
 RUN apt-get update && \
     apt-get install -y git && \
@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 FROM docker.io/php:8.2-cli
 
-ARG UNIT_VERSION=1.31.1
+ARG UNIT_VERSION=1.34.2
 
 COPY --from=CRON_BUILDER /usr/local/bin/supercronic /usr/local/bin/supercronic
 

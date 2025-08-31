@@ -1,4 +1,4 @@
-FROM docker.io/nginx:1.25
+FROM docker.io/nginx:1.29
 
 COPY docker/production/web-server/entrypoint.sh /entrypoint.sh
 COPY docker/production/web-server/nginx.template.conf /nginx.template.conf

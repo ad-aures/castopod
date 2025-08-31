@@ -1,4 +1,4 @@
-image: node:20
+image: node:22
 
 stages:
   - build
@@ -33,6 +33,7 @@ build:
     - main
     - beta
     - alpha
+    - next
 
 build-production:
   extends: .documentation-setup
@@ -51,6 +52,7 @@ build-production:
     - main
     - beta
     - alpha
+    - next
 
 deploy:
   stage: deploy
@@ -81,3 +83,4 @@ deploy:
     - main
     - beta
     - alpha
+    - next

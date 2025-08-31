@@ -1,4 +1,4 @@
-image: code.castopod.org:5050/adaures/castopod:ci
+image: code.castopod.org:5050/adaures/castopod:ci-php8.1
 
 stages:
   - prepare
@@ -85,7 +85,7 @@ tests:
     MYSQL_USER: "castopod"
     MYSQL_PASSWORD: "castopod"
   script:
-    - echo "SHOW DATABASES;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb "$MYSQL_DATABASE"
+    - echo "SHOW DATABASES;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb "$MYSQL_DATABASE" --skip-ssl
 
     # run phpunit without code coverage
     # TODO: add code coverage

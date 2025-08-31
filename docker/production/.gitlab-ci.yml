@@ -4,9 +4,9 @@ stages:
 docker-build-rolling:
   stage: build
   image:
-    name: docker.io/docker:23.0.3-dind
+    name: docker.io/docker:28.3-dind
   services:
-    - docker:23.0.3-dind
+    - docker:28.3-dind
   variables:
     TAG: $CI_COMMIT_BRANCH
     DOCKER_BUILDKIT: 1
@@ -30,9 +30,9 @@ docker-build-rolling:
 docker-build-main-release:
   stage: build
   image:
-    name: docker.io/docker:23.0.3-dind
+    name: docker.io/docker:28.3-dind
   services:
-    - docker:23.0.3-dind
+    - docker:28.3-dind
   variables:
     DOCKER_BUILDKIT: 1
     DOCKER_HOST: tcp://docker:2376
@@ -59,9 +59,9 @@ docker-build-main-release:
 docker-build-alpha-beta-release:
   stage: build
   image:
-    name: docker.io/docker:23.0.3-dind
+    name: docker.io/docker:28.3-dind
   services:
-    - docker:23.0.3-dind
+    - docker:28.3-dind
   variables:
     TAG: $CI_COMMIT_BRANCH
     DOCKER_BUILDKIT: 1
