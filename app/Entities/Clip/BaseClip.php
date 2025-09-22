@@ -31,7 +31,7 @@ use Modules\Media\Models\MediaModel;
  * @property Episode $episode
  * @property string $title
  * @property double $start_time
- * @property double $end_time
+ * @property ?double $end_time
  * @property double $duration
  * @property string $type
  * @property int|null $media_id

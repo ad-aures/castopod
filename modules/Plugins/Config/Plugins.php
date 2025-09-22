@@ -10,8 +10,5 @@ class Plugins extends BaseConfig
 {
     public string $folder = PLUGINS_PATH;
 
-    /**
-     * @var list<string>
-     */
-    public array $repositories = ['https://castopod.org/plugins/repository.json'];
+    public string $repositoryUrl = 'https://plugins.castopod.org/';
 }

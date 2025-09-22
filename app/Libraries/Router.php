@@ -45,7 +45,7 @@ class Router extends CodeIgniterRouter
 
         // Loop through the route array looking for wildcards
         foreach ($routes as $routeKey => $handler) {
-            $routeKey = $routeKey === '/' ? $routeKey : ltrim($routeKey, '/ ');
+            $routeKey = $routeKey === '/' ? $routeKey : ltrim((string) $routeKey, '/ ');
 
             $matchedKey = $routeKey;
 

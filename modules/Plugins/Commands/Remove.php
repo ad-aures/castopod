@@ -4,26 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Plugins\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
+use Castopod\PluginsManager\PluginsManager;
 use CodeIgniter\CLI\CLI;
 use Modules\Plugins\Core\Plugins;
 use Override;
 
-class UninstallPlugin extends BaseCommand
+class Remove extends BaseCommand
 {
-    /**
-     * The Command's Group
-     *
-     * @var string
-     */
-    protected $group = 'Plugins';
-
     /**
      * The Command's Name
      *
      * @var string
      */
-    protected $name = 'plugins:uninstall';
+    protected $name = 'plugins:remove';
 
     /**
      * The Command's Description
@@ -37,7 +30,7 @@ class UninstallPlugin extends BaseCommand
      *
      * @var string
      */
-    protected $usage = 'plugins:uninstall [plugins]';
+    protected $usage = 'plugins:remove [plugins]';
 
     /**
      * The Command's Arguments
@@ -49,17 +42,22 @@ class UninstallPlugin extends BaseCommand
     ];
 
     /**
-     * @param list<string> $pluginKeys
+     * @param list<string> $params
      */
     #[Override]
-    public function run(array $pluginKeys): int
+    public function run(array $params): int
     {
+        parent::run($params);
+
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
+        /** @var PluginsManager $cpm */
+        $cpm = service('cpm');
+
         /** @var list<string> $errors */
         $errors = [];
-        foreach ($pluginKeys as $pluginKey) {
+        foreach ($params as $pluginKey) {
             $plugin = $plugins->getPluginByKey($pluginKey);
 
             if ($plugin === null) {
@@ -69,11 +67,17 @@ class UninstallPlugin extends BaseCommand
 
             if (! $plugins->uninstall($plugin)) {
                 $errors[] = sprintf('Something happened when removing %s', $pluginKey);
+                break;
             }
+
+            // delete plugin folder
+            $cpm->remove($pluginKey);
         }
 
         foreach ($errors as $error) {
-            CLI::error($error . PHP_EOL);
+            CLI::write(' error ', 'white', 'red');
+            CLI::error($error);
+            CLI::newLine();
         }
 
         return $errors === [] ? 0 : 1;

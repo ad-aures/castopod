@@ -24,7 +24,7 @@ use RuntimeException;
  * @property Episode|null $episode
  * @property int $actor_id
  * @property Actor|null $actor
- * @property string $in_reply_to_id
+ * @property ?string $in_reply_to_id
  * @property EpisodeComment|null $reply_to_comment
  * @property string $message
  * @property string $message_html
@@ -75,10 +75,6 @@ class EpisodeComment extends UuidEntity
 
     public function getEpisode(): ?Episode
     {
-        if ($this->episode_id === null) {
-            throw new RuntimeException('Comment must have an episode_id before getting episode.');
-        }
-
         if (! $this->episode instanceof Episode) {
             $this->episode = new EpisodeModel()
                 ->getEpisodeById($this->episode_id);
@@ -92,10 +88,6 @@ class EpisodeComment extends UuidEntity
      */
     public function getActor(): ?Actor
     {
-        if ($this->actor_id === null) {
-            throw new RuntimeException('Comment must have an actor_id before getting actor.');
-        }
-
         if (! $this->actor instanceof Actor) {
             $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
@@ -109,10 +101,6 @@ class EpisodeComment extends UuidEntity
      */
     public function getReplies(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Comment must be created before getting replies.');
-        }
-
         if ($this->replies === null) {
             $this->replies = new EpisodeCommentModel()
                 ->getCommentReplies($this->id);

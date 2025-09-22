@@ -27,7 +27,7 @@ use Exception;
  * @property int $episodes_imported
  * @property ?int $episodes_count
  * @property int $progress
- * @property int $duration
+ * @property ?int $duration
  *
  * @property ?int $process_id
  *
@@ -100,7 +100,7 @@ class PodcastImportTask extends Entity
 
     public function getDuration(): int
     {
-        if ($this->duration === null && $this->started_at && $this->ended_at) {
+        if ($this->duration === null && $this->started_at !== null && $this->ended_at !== null) {
             $this->duration = ($this->started_at->difference($this->ended_at))
                 ->getSeconds();
         }

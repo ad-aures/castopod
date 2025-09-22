@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Plugins\Commands;
 
-use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use Exception;
 use Modules\Plugins\Config\Plugins as PluginsConfig;
@@ -44,11 +43,6 @@ class CreatePlugin extends BaseCommand
         // YOUR CODE HERE
     }',
     ];
-
-    /**
-     * @var string
-     */
-    protected $group = 'Plugins';
 
     /**
      * @var string

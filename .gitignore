@@ -192,3 +192,5 @@ castopod-*.tar.gz
 # Plugins
 plugins/*
 !plugins/.gitkeep
+writable/plugins.json
+writable/plugins-lock.json

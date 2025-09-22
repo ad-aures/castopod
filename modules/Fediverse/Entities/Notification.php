@@ -65,10 +65,6 @@ class Notification extends UuidEntity
 
     public function getActor(): ?Actor
     {
-        if ($this->actor_id === null) {
-            throw new RuntimeException('Notification must have an actor_id before getting actor.');
-        }
-
         if (! $this->actor instanceof Actor) {
             $this->actor = new ActorModel()
                 ->getActorById($this->actor_id);
@@ -79,10 +75,6 @@ class Notification extends UuidEntity
 
     public function getTargetActor(): ?Actor
     {
-        if ($this->target_actor_id === null) {
-            throw new RuntimeException('Notification must have a target_actor_id before getting target actor.');
-        }
-
         if (! $this->target_actor instanceof Actor) {
             $this->target_actor = new ActorModel()
                 ->getActorById($this->target_actor_id);

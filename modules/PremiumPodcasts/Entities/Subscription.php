@@ -15,7 +15,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
 use Modules\Analytics\Models\AnalyticsPodcastBySubscriptionModel;
-use RuntimeException;
 
 /**
  * @property int $id
@@ -100,10 +99,6 @@ class Subscription extends Entity
      */
     public function getPodcast(): ?Podcast
     {
-        if ($this->podcast_id === null) {
-            throw new RuntimeException('Subscription must have a podcast_id before getting podcast.');
-        }
-
         if (! $this->podcast instanceof Podcast) {
             $this->podcast = new PodcastModel()
                 ->getPodcastById($this->podcast_id);

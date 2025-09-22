@@ -1,21 +1,19 @@
-version: "3"
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 8080:8080
     volumes:
       - ../..:/workspaces:cached
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
+      APP_PORT: ${APP_PORT:-8080} # used in devcontainer.json file
+      VITE_PORT: ${VITE_PORT:-5173} # used in ../vite.config.js file
       CI_ENVIRONMENT: development
       vite_environment: development
       app_forceGlobalSecureRequests: 0 #false
-      app_baseURL: http://localhost:8080/
-      media_baseURL: http://localhost:8080/
+      app_baseURL: http://localhost:${APP_PORT:-8080}/
+      media_baseURL: http://localhost:${APP_PORT:-8080}/
       admin_gateway: cp-admin
       auth_gateway: cp-auth
       analytics_salt: dev_analytics_salt
@@ -30,15 +28,9 @@ services:
       email_SMTPHost: mailpit
       email_SMTPUser: castopod
       email_SMTPPass: castopod
-      email_SMTPPort: 1025
+      email_SMTPPort: ${MAILPIT_SMTP_PORT:-1025}
     depends_on:
-      - redis
       - mariadb
-
-  redis:
-    image: redis:alpine
-    volumes:
-      - redis:/data
 
   mariadb:
     image: mariadb:10.2
@@ -70,8 +62,8 @@ services:
     volumes:
       - mailpit:/data
     ports:
-      - 8025:8025
-      - 1025:1025
+      - ${MAILPIT_WEBUI_PORT:-8025}:8025
+      - ${MAILPIT_SMTP_PORT:-1025}:1025
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATA_FILE: /data/mailpit.db
@@ -79,7 +71,6 @@ services:
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
 volumes:
-  redis:
   mariadb:
   phpmyadmin:
   mailpit:

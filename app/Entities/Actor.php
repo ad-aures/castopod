@@ -13,7 +13,6 @@ namespace App\Entities;
 use App\Models\PodcastModel;
 use Modules\Fediverse\Entities\Actor as FediverseActor;
 use Override;
-use RuntimeException;
 
 /**
  * @property Podcast|null $podcast
@@ -32,10 +31,6 @@ class Actor extends FediverseActor
 
     public function getPodcast(): ?Podcast
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast id must be set before getting associated podcast.');
-        }
-
         if (! $this->podcast instanceof Podcast) {
             $this->podcast = new PodcastModel()
                 ->getPodcastByActorId($this->id);

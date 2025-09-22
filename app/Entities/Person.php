@@ -23,7 +23,7 @@ use RuntimeException;
  * @property string $full_name
  * @property string $unique_name
  * @property string|null $information_url
- * @property int $avatar_id
+ * @property ?int $avatar_id
  * @property ?Image $avatar
  * @property int $created_by
  * @property int $updated_by

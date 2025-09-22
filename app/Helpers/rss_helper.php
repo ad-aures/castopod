@@ -113,9 +113,7 @@ if (! function_exists('get_rss_feed')) {
                 $podcastingPlatformElement->addAttribute('id', $podcastingPlatform->account_id);
             }
 
-            if ($podcastingPlatform->link_url !== null) {
-                $podcastingPlatformElement->addAttribute('url', $podcastingPlatform->link_url);
-            }
+            $podcastingPlatformElement->addAttribute('url', $podcastingPlatform->link_url);
         }
 
         $castopodSocialElement = $channel->addChild('social', null, RssFeed::PODCAST_NAMESPACE);
@@ -145,9 +143,7 @@ if (! function_exists('get_rss_feed')) {
                 $socialElement->addAttribute('accountId', esc($socialPlatform->account_id));
             }
 
-            if ($socialPlatform->link_url !== null) {
-                $socialElement->addAttribute('accountUrl', esc($socialPlatform->link_url));
-            }
+            $socialElement->addAttribute('accountUrl', esc($socialPlatform->link_url));
 
             if ($socialPlatform->slug === 'mastodon') {
                 $socialSignUpelement = $socialElement->addChild('socialSignUp', null, RssFeed::PODCAST_NAMESPACE);
@@ -196,9 +192,7 @@ if (! function_exists('get_rss_feed')) {
                 RssFeed::PODCAST_NAMESPACE,
             );
             $fundingPlatformElement->addAttribute('platform', $fundingPlatform->slug);
-            if ($fundingPlatform->link_url !== null) {
-                $fundingPlatformElement->addAttribute('url', $fundingPlatform->link_url);
-            }
+            $fundingPlatformElement->addAttribute('url', $fundingPlatform->link_url);
         }
 
         foreach ($podcast->persons as $person) {

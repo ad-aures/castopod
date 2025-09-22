@@ -99,7 +99,7 @@ class Plugins
     /**
      * @return array<BasePlugin>
      */
-    public function getPlugins(int $page, int $perPage): array
+    public function getPlugins(int $page = 1, int $perPage = 12): array
     {
         return array_slice(static::$plugins, (($page - 1) * $perPage), $perPage);
     }
@@ -180,7 +180,7 @@ class Plugins
     public function getPlugin(string $vendor, string $package): ?BasePlugin
     {
         foreach ($this->getVendorPlugins($vendor) as $plugin) {
-            if ($plugin->getKey() === $vendor . '/' . $package) {
+            if ($plugin->getPackage() === $package) {
                 return $plugin;
             }
         }
@@ -190,7 +190,7 @@ class Plugins
 
     public function getPluginByKey(string $key): ?BasePlugin
     {
-        if (! str_contains('/', $key)) {
+        if (! str_contains($key, '/')) {
             return null;
         }
 
@@ -265,13 +265,7 @@ class Plugins
             return false;
         }
 
-        // delete plugin folder
-        $pluginFolder = $this->config->folder . $plugin->getKey();
-        $rmdirResult = $this->rrmdir($pluginFolder);
-
-        $transResult = $db->transCommit();
-
-        return $rmdirResult && $transResult;
+        return $db->transCommit();
     }
 
     protected function registerPlugins(): void
@@ -327,39 +321,5 @@ class Plugins
                 ++static::$activeCount;
             }
         }
-    }
-
-    /**
-     * Adapted from https://stackoverflow.com/a/3338133
-     */
-    private function rrmdir(string $dir): bool
-    {
-        if (! is_dir($dir)) {
-            return false;
-        }
-
-        $objects = scandir($dir);
-
-        if (! $objects) {
-            return false;
-        }
-
-        foreach ($objects as $object) {
-            if ($object === '.') {
-                continue;
-            }
-
-            if ($object === '..') {
-                continue;
-            }
-
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $object) && ! is_link($dir . '/' . $object)) {
-                $this->rrmdir($dir . DIRECTORY_SEPARATOR . $object);
-            } else {
-                unlink($dir . DIRECTORY_SEPARATOR . $object);
-            }
-        }
-
-        return rmdir($dir);
     }
 }

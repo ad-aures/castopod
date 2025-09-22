@@ -15,7 +15,7 @@ use CodeIgniter\Entity\Entity;
 
 /**
  * @property int $id
- * @property int $parent_id
+ * @property ?int $parent_id
  * @property Category|null $parent
  * @property string $code
  * @property string $apple_category

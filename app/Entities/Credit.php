@@ -55,10 +55,6 @@ class Credit extends Entity
 
     public function getPerson(): ?Person
     {
-        if ($this->person_id === null) {
-            throw new RuntimeException('Credit must have person_id before getting person.');
-        }
-
         if (! $this->person instanceof Person) {
             $this->person = new PersonModel()
                 ->getPersonById($this->person_id);
@@ -69,10 +65,6 @@ class Credit extends Entity
 
     public function getPodcast(): ?Podcast
     {
-        if ($this->podcast_id === null) {
-            throw new RuntimeException('Credit must have podcast_id before getting podcast.');
-        }
-
         if (! $this->podcast instanceof Podcast) {
             $this->podcast = new PodcastModel()
                 ->getPodcastById($this->podcast_id);
@@ -97,7 +89,7 @@ class Credit extends Entity
 
     public function getGroupLabel(): string
     {
-        if ($this->person_group === null) {
+        if ($this->person_group === '') {
             return '';
         }
 
