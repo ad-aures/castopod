@@ -7,10 +7,10 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.4",
-    "adaures/ipcat-php": "^v1.0.0",
     "adaures/castopod-plugins-manager": "dev-main",
+    "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
-    "aws/aws-sdk-php": "^3.356.22",
+    "aws/aws-sdk-php": "^3.356.29",
     "chrisjean/php-ico": "^1.0.4",
     "cocur/slugify": "^v4.6.0",
     "codeigniter4/framework": "4.6.3",
@@ -37,8 +37,8 @@
     "codeigniter/phpstan-codeigniter": "1.5.4",
     "mikey179/vfsstream": "^v1.6.12",
     "phpstan/extension-installer": "^1.4.3",
-    "phpstan/phpstan": "^2.1.28",
-    "phpunit/phpunit": "^12.3.12",
+    "phpstan/phpstan": "^2.1.29",
+    "phpunit/phpunit": "^12.3.15",
     "rector/rector": "^2.1.7",
     "symplify/coding-standard": "^12.4.3",
     "symplify/easy-coding-standard": "^12.6.0"
