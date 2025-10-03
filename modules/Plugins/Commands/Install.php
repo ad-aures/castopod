@@ -21,7 +21,7 @@ class Install extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Install all plugins specified in plugins.txt file.';
+    protected $description = 'Install all plugins specified in plugins.json file.';
 
     /**
      * The Command's Usage

@@ -4,9 +4,33 @@ title: Castopod Plugins
 
 import { FileTree, Aside, Tabs, TabItem } from "@astrojs/starlight/components";
 
-Plugins are ways to extend Castopod's core features.
+Plugins let you extend Castopod with new features and custom functionality.
 
-## Plugin folder structure
+Each plugin lives in the `plugins/` directory under its vendor's folder (the
+organization or person who created it):
+
+<FileTree>
+
+- **plugins**
+  - acme
+    - hello-world/ # “hello-world/” is a plugin authored by the vendor “acme”.
+    - …
+  - atlantis/
+
+</FileTree>
+
+Castopod automatically detects valid plugins in the `plugins/` directory.
+
+## Discovering Castopod plugins
+
+🧩👉 Browse and download plugins from the official plugin repository:
+[plugins.castopod.org](https://plugins.castopod.org).
+
+This official open source repository includes plugins developed and maintained
+by the Castopod team and contributions from community developers, so you can
+easily add new features and enhancements to your podcasting setup!
+
+## Anatomy of a Castopod plugin
 
 <FileTree>
 
@@ -23,19 +47,6 @@ Plugins are ways to extend Castopod's core features.
 
 </FileTree>
 
-Plugins reside in the `plugins/` directory under a `vendor/` folder, ie. the
-organisation or person who authored the plugin.
-
-<FileTree>
-
-- **plugins**
-  - acme
-    - hello-world/
-    - …
-  - atlantis/
-
-</FileTree>
-
 ### Plugin manifest (required)
 
 The plugin manifest is a JSON file containing the plugin's metadata and
@@ -48,18 +59,20 @@ data being:
 // manifest.json
 {
   "name": "acme/hello-world",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "minCastopodVersion": "2.0.0"
 }
 ```
 
-Checkout the [manifest.json reference](./manifest).
+Checkout the [manifest.json reference](./reference/manifest).
 
 ### Plugin class (required)
 
 This is where the plugin's logic lives.
 
 The Plugin class extends Castopod's BasePlugin class and implements one or more
-[Hooks](./hooks) (methods) intended to be run throughout Castopod's codebase.
+[Hooks](./reference/hooks) (methods) intended to be run throughout Castopod's
+codebase.
 
 ```php
 // Plugin.php

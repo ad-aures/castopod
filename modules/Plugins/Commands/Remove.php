@@ -23,7 +23,7 @@ class Remove extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Removes a plugin from the plugins directory.';
+    protected $description = 'Deletes every data associated with the plugin and removes it the plugins directory.';
 
     /**
      * The Command's Usage

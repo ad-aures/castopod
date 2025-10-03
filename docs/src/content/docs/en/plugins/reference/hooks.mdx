@@ -15,7 +15,7 @@ Castopod codebase.
 | rssAfterItem     | RSS Feed    |
 | siteHead         | Website     |
 
-### rssBeforeChannel
+### `rssBeforeChannel`
 
 This hook is executed just before rendering the `<channel>` tag in the Podcast
 RSS feed using the given Podcast object.
@@ -29,7 +29,7 @@ public function rssBeforeChannel(Podcast $podcast): void
 }
 ```
 
-### rssAfterChannel
+### `rssAfterChannel`
 
 This hook is executed after rendering all of the `<channel>` tags in the Podcast
 RSS feed.
@@ -43,7 +43,7 @@ public function rssAfterChannel(Podcast $podcast, RssFeed $channel): void
 }
 ```
 
-### rssBeforeItem
+### `rssBeforeItem`
 
 This hook is executed before rendering an `<item>` tag in the Podcast RSS feed
 using the given Episode object.
@@ -57,7 +57,7 @@ public function rssBeforeItem(Episode $episode): void
 }
 ```
 
-### rssAfterItem
+### `rssAfterItem`
 
 This hook is executed after rendering an `<item>`'s tags in the Podcast RSS
 feed.

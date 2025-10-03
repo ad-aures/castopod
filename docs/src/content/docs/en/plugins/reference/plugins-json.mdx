@@ -1,0 +1,35 @@
+---
+title: plugins.json
+---
+
+`plugins.json` declares which plugins are intended for installation and the
+version ranges to satisfy. It is human-edited, concise, and designed for sharing
+intent across environments.
+
+## Example
+
+```json
+// writable/plugins.json
+{
+  "plugins": {
+    "acme/hello-world": "2.1.0",
+    "ad-aures/custom-rss": "^1.0.0",
+    "ad-aures/show-notes-signature": "dev-main"
+  },
+  "repositories": {}
+}
+```
+
+## Properties
+
+### `plugins`
+
+A mapping of plugin identifiers to version ranges, expressing intent for what to
+install. Keys use the vendor/plugin naming convention; values accept semantic
+version ranges or development versions like `dev-main`.
+
+### `repositories`
+
+An array of additional plugin sources to consult when resolving versions.
+
+> Not yet implemented.

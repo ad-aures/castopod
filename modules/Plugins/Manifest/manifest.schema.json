@@ -17,6 +17,12 @@
       "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
       "examples": ["1.0.0"]
     },
+    "minCastopodVersion": {
+      "description": "The minimal version of Castopod for which the plugin is compatible with.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "examples": ["2.0"]
+    },
     "description": {
       "description": "This helps people discover your plugin as it's listed in repositories",
       "type": "string"
@@ -90,12 +96,6 @@
       },
       "uniqueItems": true
     },
-    "minCastopodVersion": {
-      "description": "The minimal version of Castopod for which the plugin is compatible with.",
-      "type": "string",
-      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(\\.(0|[1-9]\\d*))?(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-      "examples": ["2.0"]
-    },
     "hooks": {
       "description": "The hooks used by the plugin.",
       "type": "array",
@@ -147,7 +147,7 @@
       }
     }
   },
-  "required": ["name", "version"],
+  "required": ["name", "version", "minCastopodVersion"],
   "additionalProperties": false,
   "$defs": {
     "person": {

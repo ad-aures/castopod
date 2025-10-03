@@ -1,0 +1,81 @@
+---
+title: Share your plugin
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+After taking some time to create your plugin, you may want to share it with the
+community for other podcasters to enjoy!
+
+You can choose to make your plugin discoverable by submitting it to the
+[official Castopod plugin repository](https://plugins.castopod.org/) so that
+other podcasters can install it in a few clicks or with one
+[CLI command](./install#cli).
+
+## Before submitting
+
+The official Castopod plugin repository has stricter requirements than what’s
+needed for a plugin to merely load in Castopod; it also requires rich metadata
+to improve search, categorization, and discovery.
+
+<Aside type="note">
+
+Quick refresher: skim through [“Anatomy of a plugin”](./#anatomy-of-a-plugin) to
+confirm basic structure and required files before proceeding.
+
+</Aside>
+
+### Requirements for the official repository
+
+**Your plugin must be hosted in a public Git repository.** Private or local
+repositories cannot be crawled or indexed by the official repository.
+
+Having said that, make sure to go through the following list to check that
+everything is ready for indexing.
+
+#### Required files
+
+- `manifest.json` with the following required properties:
+  - `name` (vendor/plugin)
+  - `version` (semantic version; must match a Git tag to be listed)
+  - `description` (one concise sentence)
+  - `minCastopodVersion` (minimum compatible Castopod version)
+  - `hooks` (declared hooks the plugin implements)
+  - `license` (SPDX identifier or license name, matching the LICENSE file)
+- `Plugin.php` (main class; implementing the declared hooks)
+- `LICENSE.md` (matches the license declared in the manifest)
+
+#### Optional (recommended)
+
+- `README.md` (what it does, install/config steps, usage examples, changelog,
+  etc.)
+- `icon.svg` (squared, readable at small sizes; displayed as a ~64x64 circle)
+
+#### Encouraged
+
+- `i18n/` translations (e.g., `en.json`, `fr.json`) to reach more users across
+  the globe!
+
+## Submit
+
+When everything is ready, submit at:
+[plugins.castopod.org/submit](https://plugins.castopod.org/submit)
+
+Provide the plugin’s Git repository URL and the path to its `manifest.json` if
+needed (the plugin’s root directory).
+
+## After submission
+
+The repository is queued for crawling; within a few moments, the plugin should
+be indexed.
+
+During crawling, automated checks validate structure and metadata; all Git tags
+are scanned and each release is bundled as a zip file and listed as a version.
+
+<Aside type="note">
+
+Only tags that follow [semantic versioning](https://semver.org/) are listed as
+releases. Name tags like `1.0.0` or `v1.0.0` (prefixed with a lowercase `v` if
+that makes you happy!).
+
+</Aside>

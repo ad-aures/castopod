@@ -1,0 +1,55 @@
+---
+title: plugins-lock.json
+---
+
+`plugins-lock.json` records the exact versions and artifact locations that were
+resolved and installed, ensuring repeatable environments across machines and
+deployments. It is generated and updated by tooling, not hand-edited.
+
+## Example
+
+```json
+// manifest-lock.json
+{
+  "version": "1.0",
+  "plugins": {
+    "ad-aures/custom-rss": {
+      "version": "dev-main",
+      "source": {
+        "url": "https://github.com/ad-aures/castopod-plugins.git",
+        "reference": "20433933ab4e42bb44f8367ab72ee1ffae723019"
+      },
+      "dist": {
+        "url": "https://plugins.castopod.org/static/plugins/db/cf/15/ad-aures_custom-rss_dev-main.zip",
+        "checksum": "dbcf153694f09c5788e6cccbca2db4cb9605faa7c1399d59960edee00fa9f853"
+      }
+    }
+    // ...
+  }
+}
+```
+
+## Properties
+
+### `version`
+
+The lockfile schema version, used by tooling to parse and validate the file
+across releases; not related to any plugin version. Changing schema may alter
+field shapes or semantics.
+
+### `plugins`
+
+A mapping from plugin identifier to a locked entry that captures the exact
+resolved version plus source and distribution details. This section is the
+authoritative record for reinstalls.
+
+Each plugin entry contains:
+
+    - `version`: The exact version (or branch reference such as dev-main) that was resolved and installed for this plugin, guaranteeing consistent reinstallation.
+
+    - `source`: Describes the canonical source of the plugin’s code used to produce the distribution artifact.
+        - `url`: The upstream repository, typically a Git URL.
+        - `reference`: The exact commit, tag, or revision used, enabling precise provenance and reproducibility.
+    - `dist` Points to the installable artifact and verifies its integrity, analogous to resolved tarballs in npm locks or dist in Composer.
+        - `url`: A direct link to the packaged plugin archive that the installer downloads.
+        - `checksum`: A cryptographic hash of the archive used to validate integrity and prevent tampering during install.

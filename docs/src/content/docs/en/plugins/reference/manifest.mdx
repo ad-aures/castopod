@@ -2,10 +2,11 @@
 title: manifest.json reference
 ---
 
-This page details the attributes of a Castopod Plugin's manifest, which must be
-a JSON file.
+This page details the attributes of a
+[Castopod Plugin's manifest](../../../../pages/plugin-manifest.schema.json),
+which must be a JSON file.
 
-### name (required)
+### `name` (required)
 
 The plugin name, including 'vendor-name/' prefix. Examples:
 
@@ -16,16 +17,20 @@ The name must be lowercase and consist of words separated by `-`, `.` or `_`.
 The complete name should match
 `^[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9]([_.-]?[a-z0-9]+)*$`.
 
-### version (required)
+### `version` (required)
 
 The plugin's semantic version (eg. 1.0.0) - see https://semver.org/
 
-### description
+### `minCastopodVersion` (required)
+
+The minimal version of Castopod with which the plugin is compatible.
+
+### `description`
 
 The plugin's description. This helps people discover your plugin when listed in
 repositories.
 
-### authors
+### `authors`
 
 Array one or more persons having authored the plugin. A person is an object with
 a required "name" field and optional "email" and "url" fields:
@@ -44,25 +49,25 @@ Or you can shorten the object into a single string:
 "Jean Deau <jean.deau@example.com> (https://example.com/)"
 ```
 
-### homepage
+### `homepage`
 
 The URL to the project homepage.
 
-### license
+### `license`
 
 **Default:** `"UNLICENSED"`
 
 Specify a license for your plugin so that people know how they are permitted to
 use it, and any restrictions you're placing on it.
 
-### private
+### `private`
 
 **Default:** `false`
 
 Whether or not to publish the plugin in public directories. If set to `true`,
 directories should refuse to publish the plugin.
 
-### submodule
+### `submodule`
 
 **Default:** `false`
 
@@ -72,20 +77,16 @@ other plugins. In this case, releases should be tagged using the format
 `<plugin-name>@<version>` (eg. `acme/hello-world@1.0.0`) to ensure proper
 version indexing by plugin repositories.
 
-### keywords
+### `keywords`
 
 Array of strings to help your plugin get discovered when listed in repositories.
 
-### minCastopodVersion
-
-The minimal version of Castopod with which the plugin is compatible.
-
-### hooks
+### `hooks`
 
 List of hooks used by the plugin. If the hook is not specified, Castopod will
 not run it.
 
-### settings
+### `settings`
 
 Declare settings forms for persisting user data. The plugin's settings forms can
 be declared at three levels: `general`, `podcast`, and `episode`.
@@ -139,12 +140,12 @@ The `Options` object properties are option keys and the value is an `Option`.
 | `label` (required) | `string` | Can be translated (see i18n) |
 | `description`      | `string` | Can be translated (see i18n) |
 
-### files
+### `files`
 
 Array of file patterns that describes the entries to be included when your
 plugin is installed.
 
-### repository
+### `repository`
 
 Repository where the plugin's code lives. Helpful for people who want to
 contribute.

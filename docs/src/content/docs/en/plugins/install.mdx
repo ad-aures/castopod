@@ -1,0 +1,88 @@
+---
+title: Install plugins
+---
+
+import { Aside, Badge } from "@astrojs/starlight/components";
+
+The recommended way to add and maintain plugins is via the CLI for speed,
+reliability, and reproducible setups. A manual file-based method is also
+available if terminal access isn’t possible.
+
+- [CLI](#cli): install, update, remove, or sync all plugins from a configuration
+  file for consistent environments.
+
+- [Manual](#install-manually-drag-and-drop): place the plugin folder in the
+  correct path; Castopod detects valid plugins automatically.
+
+## CLI <Badge text="Recommended" size="small" />
+
+Use the CLI when server access is available; it supports version pinning and
+reproducible setups via configuration files.
+
+With that, plugins are automatically tracked in two writable configuration files
+whenever you run the commands:
+
+- [`plugins.json`](./reference/plugins-json): lists the plugins you want to use,
+  along with their version requirements. Think of it as a _wish list_ of
+  plugins.
+
+- [`plugins-lock.json`](./reference/plugins-lock-json): records the exact
+  versions that were actually installed, along with extra metadata. This ensures
+  that even if a plugin updates later, Castopod can reproduce the same working
+  setup you had before.
+
+### Commands
+
+- Install the latest compatible version of a plugin:
+
+  ```sh
+  php spark plugins:add acme/hello-world
+  ```
+
+- Install a specific version to pin environments:
+
+  ```sh
+  php spark plugins:add acme/hello-world@1.0.0
+  ```
+
+- Update a plugin to the latest available release:
+
+  ```sh
+  php spark plugins:update acme/hello-world
+  ```
+
+- Completely remove an installed plugin:
+
+  ```sh
+  php spark plugins:remove acme/hello-world
+  ```
+
+- Install all plugins listed in [`plugins.json`](./reference/plugins-json):
+
+  ```sh
+  php spark plugins:install
+  ```
+
+<Aside type="note">
+
+By default, all commands use the
+[official Castopod plugin repository](https://plugins.castopod.org/) as the
+source for discovery, version resolution, and downloads.
+
+You can edit the default repository by setting it in your .env:
+
+```ini
+plugins.repositoryUrl="YOUR_CUSTOM_REPOSITORY_URL"
+```
+
+</Aside>
+
+## Install manually (drag-and-drop)
+
+If you only have FTP access or prefer a simple approach:
+
+1. Download the plugin from
+   [**plugins.castopod.org**](https://plugins.castopod.org/).
+
+2. Place the plugin folder inside your Castopod installation at:  
+   `plugins/{vendor}/{plugin-name}/`
