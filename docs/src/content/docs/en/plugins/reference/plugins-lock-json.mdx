@@ -21,6 +21,7 @@ deployments. It is generated and updated by tooling, not hand-edited.
       },
       "dist": {
         "url": "https://plugins.castopod.org/static/plugins/db/cf/15/ad-aures_custom-rss_dev-main.zip",
+        "path": "",
         "checksum": "dbcf153694f09c5788e6cccbca2db4cb9605faa7c1399d59960edee00fa9f853"
       }
     }
@@ -39,8 +40,8 @@ field shapes or semantics.
 
 ### `plugins`
 
-A mapping from plugin identifier to a locked entry that captures the exact
-resolved version plus source and distribution details. This section is the
+A mapping from a plugin identifier to a locked entry that captures the exact
+resolved version, the source and distribution details. This section is the
 authoritative record for reinstalls.
 
 Each plugin entry contains:
@@ -48,8 +49,9 @@ Each plugin entry contains:
     - `version`: The exact version (or branch reference such as dev-main) that was resolved and installed for this plugin, guaranteeing consistent reinstallation.
 
     - `source`: Describes the canonical source of the plugin’s code used to produce the distribution artifact.
-        - `url`: The upstream repository, typically a Git URL.
-        - `reference`: The exact commit, tag, or revision used, enabling precise provenance and reproducibility.
-    - `dist` Points to the installable artifact and verifies its integrity, analogous to resolved tarballs in npm locks or dist in Composer.
+        - `url`: The upstream Git repository.
+        - `path`: The root path of the plugin.
+        - `reference`: The exact commit or revision used, for provenance and reproducibility.
+    - `dist`: Points to the installable artifact and verifies its integrity.
         - `url`: A direct link to the packaged plugin archive that the installer downloads.
         - `checksum`: A cryptographic hash of the archive used to validate integrity and prevent tampering during install.

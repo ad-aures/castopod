@@ -6,7 +6,7 @@
 
 1. [First step]
 2. [Second step]
-3. [and so on...]
+3. [and so on…]
 
 ### Expected behavior
 
@@ -27,7 +27,7 @@ logs, and code as it's very hard to read otherwise.
 - OS: [e.g. Ubuntu server]
 - Browser: [e.g. chrome, safari]
 - Web server: [eg. Apache]
-- [any other relevant context...]
+- [any other relevant context…]
 
 ### Possible fixes
 

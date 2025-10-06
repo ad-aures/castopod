@@ -8,12 +8,12 @@ Missing a feature in Castopod? Build it as a plugin and even
 [share it with the community](./share)!
 
 In order to get started, you first need to
-[setup your Castopod dev environment](https://code.castopod.org/adaures/castopod/-/blob/develop/CONTRIBUTING-DEV.md).
+[set up your Castopod dev environment](https://code.castopod.org/adaures/castopod/-/blob/develop/CONTRIBUTING-DEV.md).
 
 ## 1. Create the plugin folder
 
-You'll first need to create your [plugin folder](./#plugin-folder-structure) in
-the `plugins/` directory.
+You'll first need to create your
+[plugin folder](./#anatomy-of-a-castopod-plugin) in the `plugins/` directory.
 
 ### Using the create command <Badge text="Recommended" size="small" />
 
@@ -24,8 +24,8 @@ following CLI command:
 php spark plugins:create
 ```
 
-👉 You will be prompted for metadata and hooks usage to have a skeleton plugin
-project generated for you!
+👉 You will be prompted for metadata and hooks usage in order to have a
+personalized skeleton plugin generated for you!
 
 ### Manual setup
 
@@ -49,7 +49,7 @@ project generated for you!
 
         </FileTree>
 
-          See the [manifest reference](./manifest).
+          See the [manifest reference](./reference/manifest-json).
 
     3. add the Plugin.php class
 
@@ -64,7 +64,7 @@ project generated for you!
 
 ## 2. Build your plugin
 
-Now that your plugin folder is set, you can start working on your Plugin's logic
+Now that your plugin folder is set, you can start working on your plugin's logic
 by implementing [the hooks](./reference/hooks) needed.
 
 ### Settings forms
@@ -72,7 +72,7 @@ by implementing [the hooks](./reference/hooks) needed.
 You can prompt users for data through settings forms.
 
 These forms can be built declaratively using the
-[settings attribute](./manifest#settings) in your manifest.
+[`settings` attribute](./reference/manifest#settings) in your manifest.
 
 ```json
 // manifest.json
@@ -100,14 +100,15 @@ These forms can be built declaratively using the
 }
 ```
 
-This example will generate settings forms at 3 levels:
+This example will generate 3 different settings forms at 3 different levels in
+the Castopod admin area:
 
-- `general`: a general form to prompt data to be used by the plugin
-- `podcast`: a form for each podcast to prompt for podcast specific data
-- `episode`: a form for each episode to prompt for episode specific data
+- `general`: a general form
+- `podcast`: a form for each podcast
+- `episode`: a form for each episode
 
-The data can then be accessed in the Plugin class methods via helper methods
-taking in the field key:
+You can then access the data (input by the user) via helper methods by
+specifying the field key as a parameter:
 
 ```php
 $this->getGeneralSetting('field-key');

@@ -228,9 +228,6 @@ export default defineConfig({
         },
         {
           label: "Plugins",
-          badge: {
-            text: "Experimental",
-          },
           items: [
             {
               label: "Introduction",

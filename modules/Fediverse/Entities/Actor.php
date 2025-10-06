@@ -41,7 +41,7 @@ class Actor extends Entity
     protected string $public_key_id;
 
     /**
-     * @var \Modules\Fediverse\Entities\Actor[]|null
+     * @var Actor[]|null
      */
     protected ?array $followers = null;
 

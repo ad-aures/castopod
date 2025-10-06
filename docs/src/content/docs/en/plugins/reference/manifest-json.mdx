@@ -2,8 +2,10 @@
 title: manifest.json reference
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 This page details the attributes of a
-[Castopod Plugin's manifest](../../../../pages/plugin-manifest.schema.json),
+[Castopod Plugin's manifest](../../../../../pages/plugin-manifest.schema.json.ts),
 which must be a JSON file.
 
 ### `name` (required)
@@ -32,8 +34,8 @@ repositories.
 
 ### `authors`
 
-Array one or more persons having authored the plugin. A person is an object with
-a required "name" field and optional "email" and "url" fields:
+Array of one or more persons having authored the plugin. A person is represented
+by object with a required "name" field and optional "email" and "url" fields:
 
 ```json
 {
@@ -43,15 +45,19 @@ a required "name" field and optional "email" and "url" fields:
 }
 ```
 
-Or you can shorten the object into a single string:
+<Aside type="note">
+
+You can shorten the object into a single string:
 
 ```json
 "Jean Deau <jean.deau@example.com> (https://example.com/)"
 ```
 
+</Aside>
+
 ### `homepage`
 
-The URL to the project homepage.
+The URL to the plugin's homepage.
 
 ### `license`
 
@@ -109,8 +115,8 @@ Each level accepts one or more fields, identified by a key.
 }
 ```
 
-The `general`, `podcast`, and `episode` settings are of `Fields` object with
-each property being a field key and the value being a `Field` object.
+The `general`, `podcast`, and `episode` settings are maps with each key being a
+field key and the value being a `Field` object.
 
 #### Field object
 

@@ -50,7 +50,7 @@ easily add new features and enhancements to your podcasting setup!
 ### Plugin manifest (required)
 
 The plugin manifest is a JSON file containing the plugin's metadata and
-declarations.
+technical declarations.
 
 This file will determine whether a plugin is valid or not. The minimal required
 data being:
@@ -64,7 +64,7 @@ data being:
 }
 ```
 
-Checkout the [manifest.json reference](./reference/manifest).
+Checkout the [manifest.json reference](./reference/manifest-json).
 
 ### Plugin class (required)
 
@@ -99,28 +99,30 @@ For example, a plugin living under the `acme/hello-world` folder must be named
 `AcmeHelloWorldPlugin`:
 
 - the first letter of every word is capitalized (ie. PascalCase)
-- any special caracter is removed
+- any special character is removed
 - the `Plugin` suffix is added
 
 </Aside>
 
 ### Plugin README
 
-The `README.md` file is loaded into the plugin's view page for the user to read
-through.  
-It should be used for any additional information to help guide the user in using
-the plugin.
+The `README.md` file should contain with any additional information to help
+guide the user in using the plugin.
+
+It is loaded on Castopod's admin area when the plugin is installed.
 
 ### Plugin LICENSE
 
 In addition to specifying [the license in the manifest](./manifest#license), you
-may add a `LICENSE.md` file. Just as the `README.md` file, its contents will be
-loaded into the plugin's view page for the user to read.
+may add a `LICENSE.md` file.
+
+Just like the `README.md` file, its contents will be loaded into Castopod's
+admin area, in the plugin's view page for the user to read.
 
 ### Plugin icon
 
-The plugin icon is displayed next to its title, it is an SVG file intended to
-give a graphical representation of the plugin.
+Generally, the plugin icon is displayed next to its title, it is an SVG file
+intended to give a graphical representation of the plugin.
 
 The icon should be squared, and be legible in a 64px by 64px circle.
 

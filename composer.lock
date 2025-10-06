@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "b7b1a865360730d639a2fa78a061b98f",
+  "content-hash": "ac82be167b412b822f42f3a328a94344",
   "packages": [
     {
       "name": "adaures/castopod-plugins-manager",
@@ -12,12 +12,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/ad-aures/castopod-plugins-manager.git",
-        "reference": "5c491a4fb1143ba19a72a66e6af3bd1161c90046"
+        "reference": "53430f9a57cd38eee3e3dfe5953764cc42c2a0c9"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/ad-aures/castopod-plugins-manager/zipball/5c491a4fb1143ba19a72a66e6af3bd1161c90046",
-        "reference": "5c491a4fb1143ba19a72a66e6af3bd1161c90046",
+        "url": "https://api.github.com/repos/ad-aures/castopod-plugins-manager/zipball/53430f9a57cd38eee3e3dfe5953764cc42c2a0c9",
+        "reference": "53430f9a57cd38eee3e3dfe5953764cc42c2a0c9",
         "shasum": ""
       },
       "require": {
@@ -37,6 +37,7 @@
       "type": "library",
       "autoload": {
         "files": [
+          "src/Constants.php",
           "src/helpers.php"
         ],
         "psr-4": {
@@ -58,7 +59,7 @@
         "issues": "https://github.com/ad-aures/castopod-plugins-manager/issues",
         "source": "https://github.com/ad-aures/castopod-plugins-manager/tree/main"
       },
-      "time": "2025-09-22T17:11:34+00:00"
+      "time": "2025-10-06T15:58:43+00:00"
     },
     {
       "name": "adaures/ipcat-php",
@@ -260,16 +261,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.356.29",
+      "version": "3.356.32",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "3e413221956aa969f379ff6fa67a303ce76aad13"
+        "reference": "c564fb87e180da5ae45185a4526bb05a69998d05"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3e413221956aa969f379ff6fa67a303ce76aad13",
-        "reference": "3e413221956aa969f379ff6fa67a303ce76aad13",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c564fb87e180da5ae45185a4526bb05a69998d05",
+        "reference": "c564fb87e180da5ae45185a4526bb05a69998d05",
         "shasum": ""
       },
       "require": {
@@ -351,9 +352,9 @@
       "support": {
         "forum": "https://github.com/aws/aws-sdk-php/discussions",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.356.29"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.356.32"
       },
-      "time": "2025-09-30T18:12:45+00:00"
+      "time": "2025-10-03T18:12:05+00:00"
     },
     {
       "name": "brick/math",
@@ -2560,16 +2561,16 @@
     },
     {
       "name": "phpseclib/phpseclib",
-      "version": "2.0.48",
+      "version": "2.0.49",
       "source": {
         "type": "git",
         "url": "https://github.com/phpseclib/phpseclib.git",
-        "reference": "eaa7be704b8b93a6913b69eb7f645a59d7731b61"
+        "reference": "4de468f48f0ab9709fc875aca0762abdc81cfa9b"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/eaa7be704b8b93a6913b69eb7f645a59d7731b61",
-        "reference": "eaa7be704b8b93a6913b69eb7f645a59d7731b61",
+        "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/4de468f48f0ab9709fc875aca0762abdc81cfa9b",
+        "reference": "4de468f48f0ab9709fc875aca0762abdc81cfa9b",
         "shasum": ""
       },
       "require": {
@@ -2650,7 +2651,7 @@
       ],
       "support": {
         "issues": "https://github.com/phpseclib/phpseclib/issues",
-        "source": "https://github.com/phpseclib/phpseclib/tree/2.0.48"
+        "source": "https://github.com/phpseclib/phpseclib/tree/2.0.49"
       },
       "funding": [
         {
@@ -2666,7 +2667,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2024-12-14T21:03:54+00:00"
+      "time": "2025-10-06T01:05:33+00:00"
     },
     {
       "name": "psr/cache",
@@ -4914,16 +4915,11 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "2.1.29",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/phpstan/phpstan-phar-composer-source.git",
-        "reference": "git"
-      },
+      "version": "2.1.30",
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d618573eed4a1b6b75e37b2e0b65ac65c885d88e",
-        "reference": "d618573eed4a1b6b75e37b2e0b65ac65c885d88e",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
+        "reference": "a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
         "shasum": ""
       },
       "require": {
@@ -4968,7 +4964,7 @@
           "type": "github"
         }
       ],
-      "time": "2025-09-25T06:58:18+00:00"
+      "time": "2025-10-02T16:07:52+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",
@@ -5306,16 +5302,16 @@
     },
     {
       "name": "phpunit/phpunit",
-      "version": "12.3.15",
+      "version": "12.4.0",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "reference": "b035ee2cd8ecad4091885b61017ebb1d80eb0e57"
+        "reference": "f62aab5794e36ccd26860db2d1bbf89ac19028d9"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b035ee2cd8ecad4091885b61017ebb1d80eb0e57",
-        "reference": "b035ee2cd8ecad4091885b61017ebb1d80eb0e57",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f62aab5794e36ccd26860db2d1bbf89ac19028d9",
+        "reference": "f62aab5794e36ccd26860db2d1bbf89ac19028d9",
         "shasum": ""
       },
       "require": {
@@ -5351,7 +5347,7 @@
       "type": "library",
       "extra": {
         "branch-alias": {
-          "dev-main": "12.3-dev"
+          "dev-main": "12.4-dev"
         }
       },
       "autoload": {
@@ -5383,7 +5379,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/phpunit/issues",
         "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-        "source": "https://github.com/sebastianbergmann/phpunit/tree/12.3.15"
+        "source": "https://github.com/sebastianbergmann/phpunit/tree/12.4.0"
       },
       "funding": [
         {
@@ -5407,7 +5403,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2025-09-28T12:10:54+00:00"
+      "time": "2025-10-03T04:28:03+00:00"
     },
     {
       "name": "psr/container",
@@ -5990,21 +5986,21 @@
     },
     {
       "name": "rector/rector",
-      "version": "2.1.7",
+      "version": "2.2.0",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "c34cc07c4698f007a20dc5c99ff820089ae413ce"
+        "reference": "3c5a641c39f2def0c93d36df118fb2e75cfc2aae"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/c34cc07c4698f007a20dc5c99ff820089ae413ce",
-        "reference": "c34cc07c4698f007a20dc5c99ff820089ae413ce",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/3c5a641c39f2def0c93d36df118fb2e75cfc2aae",
+        "reference": "3c5a641c39f2def0c93d36df118fb2e75cfc2aae",
         "shasum": ""
       },
       "require": {
         "php": "^7.4|^8.0",
-        "phpstan/phpstan": "^2.1.18"
+        "phpstan/phpstan": "^2.1.26"
       },
       "conflict": {
         "rector/rector-doctrine": "*",
@@ -6038,7 +6034,7 @@
       ],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/2.1.7"
+        "source": "https://github.com/rectorphp/rector/tree/2.2.0"
       },
       "funding": [
         {
@@ -6046,7 +6042,7 @@
           "type": "github"
         }
       ],
-      "time": "2025-09-10T11:13:58+00:00"
+      "time": "2025-10-06T12:18:16+00:00"
     },
     {
       "name": "sebastian/cli-parser",
