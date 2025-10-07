@@ -1,3 +1,39 @@
+## [2.0.0-next.4](https://code.castopod.org/adaures/castopod/compare/v2.0.0-next.3...v2.0.0-next.4) (2025-10-07)
+
+### Features
+
+- **plugins:** add `submodule` boolean property to manifest schema
+  ([567d5e0](https://code.castopod.org/adaures/castopod/commit/567d5e01a343dc50057f8f1d9d378a13f3adeefc))
+- **plugins:** add spark commands to install, add, update and remove plugins
+  using adaures' cpm
+  ([3d0db5c](https://code.castopod.org/adaures/castopod/commit/3d0db5c64adfeb17a7009379abf1a72532ab2ba7))
+- set min PHP version to 8.4
+  ([94cea0c](https://code.castopod.org/adaures/castopod/commit/94cea0ce91e0c3e37d1cf1938e8b4a254a818213))
+
+### Bug Fixes
+
+- **analytics:** edit permission filters to include podcast id in routes
+  ([0265775](https://code.castopod.org/adaures/castopod/commit/0265775177be9a1d529dfdaa8a30aa58809dd502))
+- **bundle:** edit rsync filter to include resources/icons directory
+  ([265cbba](https://code.castopod.org/adaures/castopod/commit/265cbbac096bf53ab7308801356b578b7cdb0063))
+- **fediverse:** add is_private field to posts to flag private posts and hide
+  them from public views
+  ([8ec42c3](https://code.castopod.org/adaures/castopod/commit/8ec42c33ff23053b86bd35a1b8787c3a0bd06e5d))
+- update api schema to pass form data when publishing an episode
+  ([5dce8cb](https://code.castopod.org/adaures/castopod/commit/5dce8cb949b9b378edf11893d2d4b06705b2dc01)),
+  closes [#553](https://code.castopod.org/adaures/castopod/issues/553)
+
+### Internal
+
+- add discourse social network
+  ([96b2df1](https://code.castopod.org/adaures/castopod/commit/96b2df15b000a530fd0952aa3efec9263abf7cba))
+- replace twitter links by bluesky in docs
+  ([b5a403b](https://code.castopod.org/adaures/castopod/commit/b5a403b9908320b9e1e7328374dd9ae6649fc02d))
+- update CI to v4.6.3 + all php and js dependencies
+  ([346c00e](https://code.castopod.org/adaures/castopod/commit/346c00e7b5899bcddaf166bcfc4ee21cdee78cae))
+- update php and js dependencies to latest
+  ([bbfaa1b](https://code.castopod.org/adaures/castopod/commit/bbfaa1bfc39018ca4a876dc445ea9524a420b279))
+
 ## [2.0.0-next.3](https://code.castopod.org/adaures/castopod/compare/v2.0.0-next.2...v2.0.0-next.3) (2024-12-30)
 
 ### Features
