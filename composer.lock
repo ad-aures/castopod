@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ac82be167b412b822f42f3a328a94344",
+  "content-hash": "e8c2a40051cf8753a69af8be525f7c8f",
   "packages": [
     {
       "name": "adaures/castopod-plugins-manager",
@@ -261,16 +261,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.356.32",
+      "version": "3.356.33",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "c564fb87e180da5ae45185a4526bb05a69998d05"
+        "reference": "b93da7b0eeec09b220daa9b598a94832f99cefa7"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c564fb87e180da5ae45185a4526bb05a69998d05",
-        "reference": "c564fb87e180da5ae45185a4526bb05a69998d05",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b93da7b0eeec09b220daa9b598a94832f99cefa7",
+        "reference": "b93da7b0eeec09b220daa9b598a94832f99cefa7",
         "shasum": ""
       },
       "require": {
@@ -352,9 +352,9 @@
       "support": {
         "forum": "https://github.com/aws/aws-sdk-php/discussions",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.356.32"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.356.33"
       },
-      "time": "2025-10-03T18:12:05+00:00"
+      "time": "2025-10-06T19:01:41+00:00"
     },
     {
       "name": "brick/math",
@@ -5986,16 +5986,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "2.2.0",
+      "version": "2.2.1",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "3c5a641c39f2def0c93d36df118fb2e75cfc2aae"
+        "reference": "e1aaf3061e9ae9342ed0824865e3a3360defddeb"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/3c5a641c39f2def0c93d36df118fb2e75cfc2aae",
-        "reference": "3c5a641c39f2def0c93d36df118fb2e75cfc2aae",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/e1aaf3061e9ae9342ed0824865e3a3360defddeb",
+        "reference": "e1aaf3061e9ae9342ed0824865e3a3360defddeb",
         "shasum": ""
       },
       "require": {
@@ -6034,7 +6034,7 @@
       ],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/2.2.0"
+        "source": "https://github.com/rectorphp/rector/tree/2.2.1"
       },
       "funding": [
         {
@@ -6042,7 +6042,7 @@
           "type": "github"
         }
       ],
-      "time": "2025-10-06T12:18:16+00:00"
+      "time": "2025-10-06T21:25:14+00:00"
     },
     {
       "name": "sebastian/cli-parser",
