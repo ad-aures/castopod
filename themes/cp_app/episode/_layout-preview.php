@@ -33,7 +33,7 @@
         </a>
         <div class="inline-flex items-center self-end h-full px-2 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
+                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.funding') ?>"><?= icon('heart-fill') ?></button>
             <?php endif; ?>
             <?= anchor_popup(
                 route_to('follow', esc($podcast->handle)),

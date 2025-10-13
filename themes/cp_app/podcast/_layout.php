@@ -32,7 +32,7 @@
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
                 <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden"><?= icon('heart-fill', [
                     'class' => 'mr-2 text-sm',
-                ]) ?><?= lang('Podcast.sponsor') ?></button>
+                ]) ?><?= lang('Podcast.funding') ?></button>
             <?php endif; ?>
             <?= anchor_popup(
                 route_to('follow', esc($podcast->handle)),

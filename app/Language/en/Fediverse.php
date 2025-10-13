@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
+    'your_handle' => 'Your Fediverse handle',
     'your_handle_hint' => 'Enter the @username@domain you want to act from.',
     'follow' => [
         'label' => 'Follow',

@@ -17,26 +17,6 @@ class Platforms
      */
     public const DATA = [
         'podcasting' => [
-            'podcastindex' => [
-                'label'      => 'Podcast Index',
-                'home_url'   => 'https://podcastindex.org/',
-                'submit_url' => 'https://podcastindex.org/add',
-            ],
-            'apple' => [
-                'label'      => 'Apple Podcasts',
-                'home_url'   => 'https://www.apple.com/itunes/podcasts/',
-                'submit_url' => 'https://podcastsconnect.apple.com/my-podcasts/new-feed',
-            ],
-            'spotify' => [
-                'label'      => 'Spotify',
-                'home_url'   => 'https://www.spotify.com/',
-                'submit_url' => 'https://podcasters.spotify.com/dash/submit',
-            ],
-            'youtube-music' => [
-                'label'      => 'YouTube Music',
-                'home_url'   => 'https://www.youtube.com/creators/podcasts/',
-                'submit_url' => 'https://studio.youtube.com/channel/content/podcasts',
-            ],
             'amazon' => [
                 'label'      => 'Amazon Music',
                 'home_url'   => 'https://music.amazon.com/',
@@ -47,10 +27,30 @@ class Platforms
                 'home_url'   => 'https://antennapod.org/',
                 'submit_url' => 'https://antennapod.org/documentation/podcasters-hosters/add-on-antennapod',
             ],
+            'anytime' => [
+                'label'      => 'Anytime Podcast Player',
+                'home_url'   => 'https://anytimeplayer.app/',
+                'submit_url' => null,
+            ],
+            'apple' => [
+                'label'      => 'Apple Podcasts',
+                'home_url'   => 'https://www.apple.com/itunes/podcasts/',
+                'submit_url' => 'https://podcastsconnect.apple.com/my-podcasts/new-feed',
+            ],
             'blubrry' => [
                 'label'      => 'Blubrry',
                 'home_url'   => 'https://www.blubrry.com/',
                 'submit_url' => 'https://www.blubrry.com/addpodcast.php',
+            ],
+            'breez' => [
+                'label'      => 'Breez',
+                'home_url'   => 'https://breez.technology/',
+                'submit_url' => null,
+            ],
+            'castamatic' => [
+                'label'      => 'Castamatic',
+                'home_url'   => 'https://castamatic.com/',
+                'submit_url' => null,
             ],
             'castbox' => [
                 'label'      => 'Castbox',
@@ -67,15 +67,35 @@ class Platforms
                 'home_url'   => 'http://castro.fm/',
                 'submit_url' => 'https://castro.fm/support/link-to-your-podcast-in-castro',
             ],
+            'curiocaster' => [
+                'label'      => 'CurioCaster',
+                'home_url'   => 'https://curiocaster.com/',
+                'submit_url' => null,
+            ],
             'deezer' => [
                 'label'      => 'Deezer',
                 'home_url'   => 'https://www.deezer.com/',
                 'submit_url' => 'https://podcasters.deezer.com/submission',
             ],
+            'episodes-fm' => [
+                'label'      => 'Episodes.fm',
+                'home_url'   => 'https://episodes.fm/',
+                'submit_url' => 'https://podcastindex.org/add',
+            ],
+            'fountain' => [
+                'label'      => 'Fountain',
+                'home_url'   => 'https://www.fountain.fm/',
+                'submit_url' => 'https://support.fountain.fm/article/56-how-to-claim-your-show-on-fountain',
+            ],
             'fyyd' => [
                 'label'      => 'fyyd',
                 'home_url'   => 'https://fyyd.de/',
                 'submit_url' => 'https://fyyd.de/add-feed',
+            ],
+            'gpodder' => [
+                'label'      => 'gPodder',
+                'home_url'   => 'https://gpodder.org/',
+                'submit_url' => null,
             ],
             'ivoox' => [
                 'label'      => 'Ivoox',
@@ -112,6 +132,11 @@ class Platforms
                 'home_url'   => 'https://podcastaddict.com/',
                 'submit_url' => 'https://podcastaddict.com/submit',
             ],
+            'podcastindex' => [
+                'label'      => 'Podcast Index',
+                'home_url'   => 'https://podcastindex.org/',
+                'submit_url' => 'https://podcastindex.org/add',
+            ],
             'podchaser' => [
                 'label'      => 'Podchaser',
                 'home_url'   => 'https://www.podchaser.com/',
@@ -147,6 +172,11 @@ class Platforms
                 'home_url'   => 'https://radiopublic.com/',
                 'submit_url' => 'https://podcasters.radiopublic.com/signup',
             ],
+            'spotify' => [
+                'label'      => 'Spotify',
+                'home_url'   => 'https://www.spotify.com/',
+                'submit_url' => 'https://podcasters.spotify.com/dash/submit',
+            ],
             'spreaker' => [
                 'label'      => 'Spreaker',
                 'home_url'   => 'https://www.spreaker.com/',
@@ -156,41 +186,6 @@ class Platforms
                 'label'      => 'TuneIn',
                 'home_url'   => 'https://tunein.com/',
                 'submit_url' => 'https://help.tunein.com/contact/add-podcast-S19TR3Sdf',
-            ],
-            'anytime' => [
-                'label'      => 'Anytime Podcast Player',
-                'home_url'   => 'https://anytimeplayer.app/',
-                'submit_url' => null,
-            ],
-            'breez' => [
-                'label'      => 'Breez',
-                'home_url'   => 'https://breez.technology/',
-                'submit_url' => null,
-            ],
-            'castamatic' => [
-                'label'      => 'Castamatic',
-                'home_url'   => 'https://castamatic.com/',
-                'submit_url' => null,
-            ],
-            'curiocaster' => [
-                'label'      => 'CurioCaster',
-                'home_url'   => 'https://curiocaster.com/',
-                'submit_url' => null,
-            ],
-            'episodes-fm' => [
-                'label'      => 'Episodes.fm',
-                'home_url'   => 'https://episodes.fm/',
-                'submit_url' => 'https://podcastindex.org/add',
-            ],
-            'fountain' => [
-                'label'      => 'Fountain',
-                'home_url'   => 'https://www.fountain.fm/',
-                'submit_url' => 'https://support.fountain.fm/article/56-how-to-claim-your-show-on-fountain',
-            ],
-            'gpodder' => [
-                'label'      => 'gPodder',
-                'home_url'   => 'https://gpodder.org/',
-                'submit_url' => null,
             ],
             'hypercatcher' => [
                 'label'      => 'HyperCatcher',
@@ -261,6 +256,11 @@ class Platforms
                 'label'      => 'Tsacdop',
                 'home_url'   => 'https://www.tsacdop.app/',
                 'submit_url' => null,
+            ],
+            'youtube-music' => [
+                'label'      => 'YouTube Music',
+                'home_url'   => 'https://www.youtube.com/creators/podcasts/',
+                'submit_url' => 'https://studio.youtube.com/channel/content/podcasts',
             ],
         ],
         'social' => [
