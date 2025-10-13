@@ -17,9 +17,9 @@ return [
     'no_episode' => 'No episode found!',
     'follow' => 'Follow',
     'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
-    'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+    'fediverseFollowers' => '{numberOfFollowers, plural,
+        one {# Fediverse follower}
+        other {# Fediverse followers}
     }',
     'posts' => '{numberOfPosts, plural,
         one {# post}

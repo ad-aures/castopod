@@ -58,7 +58,7 @@
                 <div class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= esc($podcast->title) ?><span class="ml-1 font-sans text-base font-normal">@<?= esc($podcast->handle) ?></span></div>
                 <div>
                     <?= explicit_badge($podcast->parental_advisory === 'explicit', 'mr-1') ?>
-                    <span class="text-xs"><?= lang('Podcast.followers', [
+                    <span class="text-xs"><?= lang('Podcast.fediverseFollowers', [
                         'numberOfFollowers' => $podcast->actor->followers_count,
                     ]) ?></span>
                 </div>

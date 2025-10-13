@@ -25,7 +25,7 @@
                 <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= esc($episode->podcast->title) ?>" loading="lazy" />
                 <div class="flex flex-col overflow-hidden">
                     <span class="text-sm font-semibold leading-none truncate"><?= esc($episode->podcast->title) ?></span>
-                    <span class="text-xs"><?= lang('Podcast.followers', [
+                    <span class="text-xs"><?= lang('Podcast.fediverseFollowers', [
                         'numberOfFollowers' => $podcast->actor->followers_count,
                     ]) ?></span>
                 </div>
