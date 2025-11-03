@@ -230,7 +230,7 @@ if (! function_exists('get_rss_feed')) {
             foreach ($person->roles as $role) {
                 $personElement = $channel->addChild('person', $person->full_name, $podcastNamespace);
 
-                $personElement->addAttribute('img', get_avatar_url($person, 'medium'));
+                $personElement->addAttribute('img', get_avatar_url($person, 'federation'));
 
                 if ($person->information_url !== null) {
                     $personElement->addAttribute('href', $person->information_url);
@@ -435,7 +435,7 @@ if (! function_exists('get_rss_feed')) {
                         esc(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                     );
 
-                    $personElement->addAttribute('img', get_avatar_url($person, 'medium'));
+                    $personElement->addAttribute('img', get_avatar_url($person, 'federation'));
 
                     if ($person->information_url !== null) {
                         $personElement->addAttribute('href', $person->information_url);
