@@ -1,3 +1,11 @@
+## <small>1.13.6 (2025-11-03)</small>
+
+- fix(fediverse): access to URI in 'object' instead of going down with '->id' in
+  delete case
+  ([41211a1](https://code.castopod.org/adaures/castopod/commit/41211a1))
+- build: update docker images' versions + docs to latest
+  ([07e3a9c](https://code.castopod.org/adaures/castopod/commit/07e3a9c))
+
 ## <small>1.13.5 (2025-08-25)</small>
 
 - chore: add discourse social network
