@@ -135,7 +135,7 @@ class ActorController extends Controller
                     ->setJSON([]);
             case 'Delete':
                 $postToDelete = model('PostModel', false)
-                    ->getPostByUri($payload->object->id);
+                    ->getPostByUri($payload->object);
 
                 if ($postToDelete instanceof Post) {
                     model('PostModel', false)
