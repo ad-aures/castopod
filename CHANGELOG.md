@@ -1,3 +1,8 @@
+## <small>1.13.7 (2025-11-03)</small>
+
+- fix(rss): set person's avatar url to "federation" for width and height of
+  400px ([a50b0f3](https://code.castopod.org/adaures/castopod/commit/a50b0f3))
+
 ## <small>1.13.6 (2025-11-03)</small>
 
 - fix(fediverse): access to URI in 'object' instead of going down with '->id' in
