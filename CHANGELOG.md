@@ -1,3 +1,11 @@
+## <small>1.13.8 (2025-12-20)</small>
+
+- chore: update CI4 to v4.6.4 + php and js packages to latest
+  ([133e308](https://code.castopod.org/adaures/castopod/commit/133e308))
+- fix(fediverse): match episode posts replies fields with comments in union
+  query ([d438190](https://code.castopod.org/adaures/castopod/commit/d438190)),
+  closes [#577](https://code.castopod.org/adaures/castopod/issues/577)
+
 ## <small>1.13.7 (2025-11-03)</small>
 
 - fix(rss): set person's avatar url to "federation" for width and height of
