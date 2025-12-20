@@ -57,10 +57,6 @@ class SimpleRSSElement extends SimpleXMLElement
             return $newChild;
         }
 
-        if (is_array($value)) {
-            return $newChild;
-        }
-
         $node->appendChild($no->createTextNode($value));
 
         return $newChild;

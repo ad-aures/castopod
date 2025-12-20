@@ -61,10 +61,6 @@ class Activity extends UuidEntity
 
     public function getActor(): Actor
     {
-        if ($this->actor_id === null) {
-            throw new RuntimeException('Activity must have an actor_id before getting the actor.');
-        }
-
         if (! $this->actor instanceof Actor) {
             $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);

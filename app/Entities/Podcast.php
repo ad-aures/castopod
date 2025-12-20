@@ -56,7 +56,7 @@ use RuntimeException;
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category
- * @property int[] $other_categories_ids
+ * @property int[]|null $other_categories_ids
  * @property Category[] $other_categories
  * @property string|null $parental_advisory
  * @property string|null $publisher
@@ -125,7 +125,7 @@ class Podcast extends Entity
     protected ?array $other_categories = null;
 
     /**
-     * @var string[]|null
+     * @var int[]|null
      */
     protected ?array $other_categories_ids = null;
 
@@ -340,10 +340,6 @@ class Podcast extends Entity
      */
     public function getEpisodes(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting episodes.');
-        }
-
         if ($this->episodes === null) {
             $this->episodes = (new EpisodeModel())->getPodcastEpisodes($this->id, $this->type);
         }
@@ -356,10 +352,6 @@ class Podcast extends Entity
      */
     public function getEpisodesCount(): int|string
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting number of episodes.');
-        }
-
         return (new EpisodeModel())->getPodcastEpisodesCount($this->id);
     }
 
@@ -370,10 +362,6 @@ class Podcast extends Entity
      */
     public function getPersons(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting persons.');
-        }
-
         if ($this->persons === null) {
             $this->persons = (new PersonModel())->getPodcastPersons($this->id);
         }
@@ -386,10 +374,6 @@ class Podcast extends Entity
      */
     public function getCategory(): ?Category
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting category.');
-        }
-
         if (! $this->category instanceof Category) {
             $this->category = (new CategoryModel())->getCategoryById($this->category_id);
         }
@@ -404,10 +388,6 @@ class Podcast extends Entity
      */
     public function getSubscriptions(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcasts must be created before getting subscriptions.');
-        }
-
         if ($this->subscriptions === null) {
             $this->subscriptions = (new SubscriptionModel())->getPodcastSubscriptions($this->id);
         }
@@ -422,10 +402,6 @@ class Podcast extends Entity
      */
     public function getContributors(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcasts must be created before getting contributors.');
-        }
-
         if ($this->contributors === null) {
             $this->contributors = (new UserModel())->getPodcastContributors($this->id);
         }
@@ -523,10 +499,6 @@ class Podcast extends Entity
      */
     public function getPodcastingPlatforms(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting podcasting platform links.');
-        }
-
         if ($this->podcasting_platforms === null) {
             $this->podcasting_platforms = (new PlatformModel())->getPlatforms($this->id, 'podcasting');
         }
@@ -541,10 +513,6 @@ class Podcast extends Entity
      */
     public function getSocialPlatforms(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting social platform links.');
-        }
-
         if ($this->social_platforms === null) {
             $this->social_platforms = (new PlatformModel())->getPlatforms($this->id, 'social');
         }
@@ -559,9 +527,6 @@ class Podcast extends Entity
      */
     public function getFundingPlatforms(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting funding platform links.');
-        }
 
         if ($this->funding_platforms === null) {
             $this->funding_platforms = (new PlatformModel())->getPlatforms($this->id, 'funding');
@@ -575,10 +540,6 @@ class Podcast extends Entity
      */
     public function getOtherCategories(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Podcast must be created before getting other categories.');
-        }
-
         if ($this->other_categories === null) {
             $this->other_categories = (new CategoryModel())->getPodcastCategories($this->id);
         }

@@ -94,10 +94,6 @@ class Post extends UuidEntity
      */
     public function getActor(): Actor
     {
-        if ($this->actor_id === null) {
-            throw new RuntimeException('Post must have an actor_id before getting actor.');
-        }
-
         if (! $this->actor instanceof Actor) {
             $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);
@@ -108,10 +104,6 @@ class Post extends UuidEntity
 
     public function getPreviewCard(): ?PreviewCard
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Post must be created before getting preview_card.');
-        }
-
         if (! $this->preview_card instanceof PreviewCard) {
             $this->preview_card = model('PreviewCardModel', false)
                 ->getPostPreviewCard($this->id);
@@ -125,10 +117,6 @@ class Post extends UuidEntity
      */
     public function getReplies(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Post must be created before getting replies.');
-        }
-
         if ($this->replies === null) {
             $this->replies = model('PostModel', false)
                 ->getPostReplies($this->id);
@@ -161,10 +149,6 @@ class Post extends UuidEntity
      */
     public function getReblogs(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Post must be created before getting reblogs.');
-        }
-
         if ($this->reblogs === null) {
             $this->reblogs = model('PostModel', false)
                 ->getPostReblogs($this->id);

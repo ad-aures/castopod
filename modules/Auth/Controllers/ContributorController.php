@@ -83,7 +83,7 @@ class ContributorController extends BaseController
         $users = (new UserModel())->findAll();
         $contributorOptions = array_reduce(
             $users,
-            static function (array $result, $user): array {
+            static function (array $result, User $user): array {
                 $result[$user->id] = $user->username;
                 return $result;
             },

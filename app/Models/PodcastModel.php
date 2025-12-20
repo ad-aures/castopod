@@ -186,7 +186,7 @@ class PodcastModel extends Model
                     '`' . $prefix . 'fediverse_posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
                     false
-                )->orWhere('fediverse_posts.published_at', null)
+                )->orWhere('fediverse_posts.published_at')
                 ->groupEnd()
                 ->groupBy('podcasts.actor_id')
                 ->orderBy('max_published_at', 'DESC');

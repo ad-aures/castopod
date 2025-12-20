@@ -11,6 +11,9 @@ namespace Config;
  * more.
  *
  * All paths are relative to the project's root folder.
+ *
+ * NOTE: This class is required prior to Autoloader instantiation,
+ *       and does not extend BaseConfig.
  */
 
 class Paths

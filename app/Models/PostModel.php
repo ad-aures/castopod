@@ -50,7 +50,7 @@ class PostModel extends FediversePostModel
         return $this->where([
             'episode_id' => $episodeId,
         ])
-            ->where('in_reply_to_id', null)
+            ->where('in_reply_to_id')
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'DESC')
             ->findAll();

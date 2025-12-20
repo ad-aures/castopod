@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
-use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
+use Rector\CodingStyle\Rector\String_\SimplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
@@ -48,7 +48,7 @@ return RectorConfig::configure()
             __DIR__ . '/app/Language/*',
             __DIR__ . '/modules/*/Language/*',
         ],
-        SymplifyQuoteEscapeRector::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/*/Language/*'],
+        SimplifyQuoteEscapeRector::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/*/Language/*'],
 
         NewlineAfterStatementRector::class => [__DIR__ . '/app/Views'],
 

@@ -120,7 +120,7 @@ class SubscriptionModel extends Model
                 'status' => 'active',
             ])
             ->groupStart()
-            ->where('expires_at', null)
+            ->where('expires_at')
             ->orWhere('`expires_at` > UTC_TIMESTAMP()', null, false)
             ->groupEnd()
             ->first();

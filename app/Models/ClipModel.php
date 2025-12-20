@@ -122,7 +122,6 @@ class ClipModel extends Model
             $found[$key] = new VideoClip($videoClip->toArray());
         }
 
-        // @phpstan-ignore-next-line
         return $found;
     }
 

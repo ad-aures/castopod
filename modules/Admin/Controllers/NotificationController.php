@@ -91,7 +91,7 @@ class NotificationController extends BaseController
     public function markAllAsRead(): RedirectResponse
     {
         $notifications = (new NotificationModel())->where('target_actor_id', $this->podcast->actor_id)
-            ->where('read_at', null)
+            ->where('read_at')
             ->findAll();
 
         foreach ($notifications as $notification) {

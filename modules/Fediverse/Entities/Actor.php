@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Entities;
 
 use CodeIgniter\Entity\Entity;
-use RuntimeException;
 
 /**
  * @property int $id
@@ -42,7 +41,7 @@ class Actor extends Entity
     protected string $public_key_id;
 
     /**
-     * @var \Modules\Fediverse\Entities\Actor[]|null
+     * @var Actor[]|null
      */
     protected ?array $followers = null;
 
@@ -96,10 +95,6 @@ class Actor extends Entity
      */
     public function getFollowers(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Actor must be created before getting followers.');
-        }
-
         if ($this->followers === null) {
             $this->followers = model('ActorModel', false)
                 ->getFollowers($this->id);

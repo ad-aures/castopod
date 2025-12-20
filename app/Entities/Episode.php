@@ -35,7 +35,6 @@ use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Image;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
-use RuntimeException;
 use SimpleXMLElement;
 
 /**
@@ -66,7 +65,7 @@ use SimpleXMLElement;
  * @property string|null $chapters_remote_url
  * @property string|null $parental_advisory
  * @property int $number
- * @property int $season_number
+ * @property int|null $season_number
  * @property string $type
  * @property bool $is_blocked
  * @property Location|null $location
@@ -406,10 +405,6 @@ class Episode extends Entity
      */
     public function getPersons(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting persons.');
-        }
-
         if ($this->persons === null) {
             $this->persons = (new PersonModel())->getEpisodePersons($this->podcast_id, $this->id);
         }
@@ -424,10 +419,6 @@ class Episode extends Entity
      */
     public function getSoundbites(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting soundbites.');
-        }
-
         if ($this->soundbites === null) {
             $this->soundbites = (new ClipModel())->getEpisodeSoundbites($this->getPodcast()->id, $this->id);
         }
@@ -440,10 +431,6 @@ class Episode extends Entity
      */
     public function getPosts(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting posts.');
-        }
-
         if ($this->posts === null) {
             $this->posts = (new PostModel())->getEpisodePosts($this->id);
         }
@@ -456,10 +443,6 @@ class Episode extends Entity
      */
     public function getComments(): array
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting comments.');
-        }
-
         if ($this->comments === null) {
             $this->comments = (new EpisodeCommentModel())->getEpisodeComments($this->id);
         }
@@ -712,10 +695,6 @@ class Episode extends Entity
      */
     public function getClipCount(): int|string
     {
-        if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting number of video clips.');
-        }
-
         return (new ClipModel())->getClipCount($this->podcast_id, $this->id);
     }
 }
