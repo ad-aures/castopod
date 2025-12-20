@@ -214,7 +214,7 @@ class EpisodeCommentModel extends UuidModel
         $postModel = new PostModel();
         $episodePostsRepliesBuilder = $postModel->builder();
         $episodePostsReplies = $episodePostsRepliesBuilder->select(
-            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, is_private, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post',
+            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, is_private, 1 as is_from_post',
         )
             ->whereIn('in_reply_to_id', static function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
