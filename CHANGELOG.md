@@ -1,3 +1,8 @@
+## 1.14.0 (2026-01-23)
+
+- feat: add Lithuanian and Czech languages
+  ([9582f2a](https://code.castopod.org/adaures/castopod/commit/9582f2a))
+
 ## <small>1.13.8 (2025-12-20)</small>
 
 - chore: update CI4 to v4.6.4 + php and js packages to latest
