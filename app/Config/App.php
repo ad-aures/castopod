@@ -123,17 +123,19 @@ class App extends BaseConfig
      * @var list<string>
      */
     public array $supportedLocales = [
-        'en',
-        'fr',
-        'pl',
-        'de',
-        'pt-br',
-        'nn-no',
-        'es',
-        'zh-hans',
-        'ca',
         'br',
+        'ca',
+        'cs',
+        'de',
+        'en',
+        'es',
+        'fr',
+        'lt',
+        'nn-no',
+        'pl',
+        'pt-br',
         'sr-latn',
+        'zh-hans',
     ];
 
     /**
