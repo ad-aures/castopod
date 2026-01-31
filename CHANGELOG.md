@@ -1,3 +1,9 @@
+## <small>1.14.1 (2026-01-31)</small>
+
+- fix(i18n): set english as first item in supported locales in case locale
+  negotiation does not work
+  ([44fb904](https://code.castopod.org/adaures/castopod/commit/44fb904))
+
 ## 1.14.0 (2026-01-23)
 
 - feat: add Lithuanian and Czech languages
