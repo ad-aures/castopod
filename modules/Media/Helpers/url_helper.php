@@ -17,6 +17,14 @@ if (! function_exists('media_url')) {
             $relativePath = implode('/', $relativePath);
         }
 
+        // Route audio files through MediaController for HTTP Range request support (enables seeking)
+        // This is needed because some servers (PHP built-in, nginx Unit) don't support Range requests
+        $isAudioFile = preg_match('/\.(mp3|m4a|ogg|wav|flac|aac|opus)$/i', $relativePath);
+        if ($isAudioFile) {
+            $baseURL = rtrim(config('App')->baseURL, '/');
+            return $baseURL . '/media-serve/' . ltrim($relativePath, '/');
+        }
+
         $uri = new URI(rtrim(config('Media')->baseURL, '/') . '/' . ltrim($relativePath));
 
         return URI::createURIString(

@@ -43,7 +43,7 @@
                 class="w-full mt-auto"
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight)); --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
             >
-            <vm-audio preload="none">
+            <vm-audio preload="metadata">
                 <?php
                 $superglobals = service('superglobals');
             $source = auth()->loggedIn() ? $episode->audio_url : $episode->audio_url .

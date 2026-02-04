@@ -355,7 +355,7 @@ if (! function_exists('audio_player')) {
                 class="{$class} relative z-0"
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
             >
-                <vm-audio preload="none">
+                <vm-audio preload="metadata">
                     <source src="{$source}" type="{$mediaType}" />
                 </vm-audio>
                 <vm-ui>

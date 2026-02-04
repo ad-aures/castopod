@@ -38,6 +38,11 @@ $routes->get('/health', 'HomeController::health', [
     'as' => 'health',
 ]);
 
+// Media file server with Range support (for development - enables audio seeking)
+$routes->get('media-serve/(.+)', 'MediaController::serve/$1', [
+    'as' => 'media-serve',
+]);
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController', [

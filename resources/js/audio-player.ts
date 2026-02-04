@@ -65,7 +65,7 @@ const player = html`<div
     class="flex-1"
     style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
   >
-    <vm-audio preload="none" id="testing-audio">
+    <vm-audio preload="metadata" id="testing-audio">
       <source src="" type="" />
     </vm-audio>
     <vm-ui>

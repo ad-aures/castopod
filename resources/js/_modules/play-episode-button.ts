@@ -151,7 +151,18 @@ export class PlayEpisodeButton extends LitElement {
   private _loadEpisode(): void {
     this._castopodAudioPlayer.dataset.episode = this.id;
 
-    this._audio.src = this.src;
+    // Update the source element inside vm-audio so Vime properly detects the change
+    const sourceElement = this._castopodAudioPlayer.querySelector(
+      "vm-audio source"
+    ) as HTMLSourceElement;
+    if (sourceElement) {
+      sourceElement.setAttribute("src", this.src);
+      if (this.mediaType) {
+        sourceElement.setAttribute("type", this.mediaType);
+      }
+    }
+
+    // Trigger Vime to reload by calling load on the audio element
     this._audio.load();
     this._audio.playbackRate = this._playbackSpeed;
     for (const event of this._events) {
