@@ -4,9 +4,9 @@ stages:
 docker-build-rolling:
   stage: build
   image:
-    name: docker.io/docker:28.3-dind
+    name: docker.io/docker:29.2-dind
   services:
-    - docker:28.3-dind
+    - docker:29.2-dind
   variables:
     TAG: $CI_COMMIT_BRANCH
     DOCKER_BUILDKIT: 1
@@ -17,22 +17,16 @@ docker-build-rolling:
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
     - docker context create tls-environment
     - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${TAG} .
-  needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: bundle
-  only:
-    refs:
-      - develop
+    - docker buildx build --secret id=maxmind-licence-key,env=MAXMIND_LICENCE_KEY --push --platform=linux/amd64 --file=docker/production/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
+  rules:
+    - if: $CI_COMMIT_BRANCH == 'develop'
 
-docker-build-main-release:
+docker-build-release:
   stage: build
   image:
-    name: docker.io/docker:28.3-dind
+    name: docker.io/docker:29.2-dind
   services:
-    - docker:28.3-dind
+    - docker:29.2-dind
   variables:
     DOCKER_BUILDKIT: 1
     DOCKER_HOST: tcp://docker:2376
@@ -40,49 +34,15 @@ docker-build-main-release:
   script:
     - mkdir -p /root/.docker
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
-    - export CP_VERSION=$(cat CP_VERSION.env)
+    # extract Castopod version from tag (remove "v" prefix)
+    - export CP_VERSION=$(echo "$CI_COMMIT_TAG" | sed 's/^v//')
+    # extract pre release identifier (eg. alpha, beta, next, ...) from CP_VERSION or "latest" if none exists
+    - export CP_TAG=$(echo "$CP_VERSION" | sed 's/^[^-]*-\([^.]*\)\..*/\1/; t; s/.*/latest/')
     - docker context create tls-environment
     - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:latest .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag=${DOCKER_IMAGE_WEB_SERVER}:latest .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:latest .
+    - docker buildx build --secret id=maxmind-licence-key,env=MAXMIND_LICENCE_KEY --push --platform=linux/amd64 --file=docker/production/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_TAG} .
     # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
-    # --> build and push amd64 image to be pushed first, then overwrite manifest after building arm64
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:latest .
-  needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: release
-  only:
-    refs:
-      - main
-
-docker-build-alpha-beta-release:
-  stage: build
-  image:
-    name: docker.io/docker:28.3-dind
-  services:
-    - docker:28.3-dind
-  variables:
-    TAG: $CI_COMMIT_BRANCH
-    DOCKER_BUILDKIT: 1
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: "/certs"
-  script:
-    - mkdir -p /root/.docker
-    - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
-    - export CP_VERSION=$(cat CP_VERSION.env)
-    - docker context create tls-environment
-    - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag=${DOCKER_IMAGE_WEB_SERVER}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:${TAG} .
-    # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
-    # --> build and push amd64 image to be pushed first, then overwrite manifest after building arm64
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
-  needs:
-    - pipeline: $PARENT_PIPELINE_ID
-      job: release
-  only:
-    refs:
-      - alpha
-      - beta
+    # --> build and push amd64 image first, then overwrite manifest after building arm64
+    - docker buildx build --secret id=maxmind-licence-key,env=MAXMIND_LICENCE_KEY --push --platform=linux/amd64,linux/arm64 --file=docker/production/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_TAG} .
+  rules:
+    - if: $CI_COMMIT_TAG

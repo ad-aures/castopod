@@ -11,10 +11,10 @@
     "prepare": "astro telemetry disable"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.35.2",
-    "@fontsource/inter": "^5.2.6",
-    "@fontsource/rubik": "^5.2.6",
-    "astro": "^5.13.4",
-    "sharp": "^0.34.3"
+    "@astrojs/starlight": "^0.37.6",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/rubik": "^5.2.8",
+    "astro": "^5.17.1",
+    "sharp": "^0.34.5"
   }
 }

@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/command/with-contenv sh
+
+ENV_FILE_LOCATION=/app/.env
 
 log_error() {
 	printf "\033[0;31mERROR:\033[0m $1\n"
@@ -9,6 +11,13 @@ log_warning() {
 	printf "\033[0;33mWARNING:\033[0m $1\n"
 }
 
+log_info() {
+	printf "\033[0;34mINFO:\033[0m $1\n"
+}
+
+# Remove .env file if exists to recreate it.
+rm -f $ENV_FILE_LOCATION
+
 if [ -z "${CP_BASEURL}" ]
 then
 	log_error "CP_BASEURL must be set"
@@ -16,19 +25,19 @@ fi
 
 if [ -z "${CP_MEDIA_BASEURL}" ]
 then
-	echo "CP_MEDIA_BASEURL is empty, using CP_BASEURL by default"
+	log_info "CP_MEDIA_BASEURL is empty, using CP_BASEURL by default"
 	CP_MEDIA_BASEURL=$CP_BASEURL
 fi
 
 if [ -z "${CP_ADMIN_GATEWAY}" ]
 then
-	echo "CP_ADMIN_GATEWAY is empty, using default"
+	log_info "CP_ADMIN_GATEWAY is empty, using default \"cp-admin\""
 	CP_ADMIN_GATEWAY="cp-admin"
 fi
 
 if [ -z "${CP_AUTH_GATEWAY}" ]
 then
-	echo "CP_AUTH_GATEWAY is empty, using default"
+	log_info "CP_AUTH_GATEWAY is empty, using default \"cp-auth\""
 	CP_AUTH_GATEWAY="cp-auth"
 fi
 
@@ -39,13 +48,13 @@ fi
 
 if [ -z "${CP_DATABASE_HOSTNAME}" ]
 then
-	log_warning "CP_DATABASE_HOSTNAME is empty, using default"
+	log_warning "CP_DATABASE_HOSTNAME is empty, using default \"mariadb\""
 	CP_DATABASE_HOSTNAME="mariadb"
 fi
 
 if [ -z "${CP_DATABASE_PREFIX}" ]
 then
-	echo "CP_DATABASE_PREFIX is empty, using default"
+	log_info "CP_DATABASE_PREFIX is empty, using default \"cp_\""
 	CP_DATABASE_PREFIX="cp_"
 fi
 
@@ -84,29 +93,28 @@ fi
 
 if [ ! -z "${CP_REDIS_HOST}" ]
 then
-	echo "Using redis cache handler"
+	log_info "Using redis cache handler"
 	CP_CACHE_HANDLER="redis"
 	if [ -z "${CP_REDIS_PASSWORD}" ]
 	then
-		echo "CP_REDIS_PASSWORD is empty, using default"
-		CP_REDIS_PASSWORD="null"
+		log_error "You must set CP_REDIS_PASSWORD when using redis as a cache handler."
 	else
 		CP_REDIS_PASSWORD="\"${CP_REDIS_PASSWORD}\""
 	fi
 
 	if [ -z "${CP_REDIS_PORT}" ]
 	then
-		echo "CP_REDIS_PORT is empty, using default"
+		log_info "CP_REDIS_PORT is empty, using default port \"6379\""
 		CP_REDIS_PORT="6379"
 	fi
 
 	if [ -z "${CP_REDIS_DATABASE}" ]
 	then
-		echo "CP_REDIS_DATABASE is empty, using default"
+		log_info "CP_REDIS_DATABASE is empty, using default \"0\""
 		CP_REDIS_DATABASE="0"
 	fi
 else
-	echo "Using file cache handler"
+	log_info "Using file cache handler"
 	CP_CACHE_HANDLER="file"
 fi
 
@@ -132,28 +140,6 @@ then
 	then
 		log_warning "CP_MEDIA_S3_BUCKET is empty, using default"
 	fi
-fi
-
-if [ -z "${CP_PHP_MEMORY_LIMIT}" ]
-then
-	export CP_PHP_MEMORY_LIMIT="512M"
-fi
-
-if [ -z "${CP_MAX_BODY_SIZE}" ]
-then
-	export CP_MAX_BODY_SIZE="512M"
-fi
-
-CP_MAX_BODY_SIZE_BYTES=$(numfmt --from=iec "$CP_MAX_BODY_SIZE")
-if [ $? -ne 0 ]
-then
-	log_error "Failed to parse CP_MAX_BODY_SIZE ($CP_MAX_BODY_SIZE) as human readable number"
-fi
-export CP_MAX_BODY_SIZE_BYTES=$CP_MAX_BODY_SIZE_BYTES
-
-if [ -z "${CP_TIMEOUT}" ]
-then
-	export CP_TIMEOUT=900
 fi
 
 cat << EOF > $ENV_FILE_LOCATION
@@ -238,20 +224,17 @@ if [ ! -z "${CP_EMAIL_SMTP_HOST}" ]
 then
 	if [ -z "${CP_EMAIL_SMTP_USERNAME}" ]
 	then
-		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_USERNAME must be set"
-		exit 1
+		log_error "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_USERNAME must be set"
 	fi
 
 	if [ -z "${CP_EMAIL_SMTP_PASSWORD}" ]
 	then
-		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_PASSWORD must be set"
-		exit 1
+		log_error "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_PASSWORD must be set"
 	fi
 
 	if [ -z "${CP_EMAIL_FROM}" ]
 	then
-		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_FROM must be set"
-		exit 1
+		log_error "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_FROM must be set"
 	fi
 
 	cat << EOF >> $ENV_FILE_LOCATION
@@ -273,8 +256,7 @@ EOF
 	then
 		if [ "${CP_EMAIL_SMTP_CRYPTO}" != "ssl" ] && [ "${CP_EMAIL_SMTP_CRYPTO}" != "tls" ]
 		then
-			echo "CP_EMAIL_SMTP_CRYPTO must be ssl or tls"
-			exit 1
+			log_error "CP_EMAIL_SMTP_CRYPTO must be ssl or tls"
 		fi
 		cat << EOF >> $ENV_FILE_LOCATION
 email.SMTPCrypto=${CP_EMAIL_SMTP_CRYPTO}
@@ -282,14 +264,14 @@ EOF
 	fi
 fi
 
-echo "Using config:"
+log_info "Using config:"
 cat $ENV_FILE_LOCATION
 
-#Run database migrations after 10 seconds (to wait for the database to be started)
-(sleep 10 && php spark castopod:database-update) &
+# prevent .env from being writable
+chmod -w $ENV_FILE_LOCATION
+
+#Run database migrations
+/usr/local/bin/php /var/www/html/spark castopod:database-update
 
 # clear cache to account for new assets and any change in data structure
-php spark cache:clear
-
-#Apply php configuration
-cat /uploads.template.ini | envsubst '$CP_MAX_BODY_SIZE$CP_MAX_BODY_SIZE_BYTES$CP_TIMEOUT$CP_PHP_MEMORY_LIMIT' > /usr/local/etc/php/conf.d/uploads.ini
+/usr/local/bin/php /var/www/html/spark cache:clear

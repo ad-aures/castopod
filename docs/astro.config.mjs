@@ -7,6 +7,9 @@ const base = process.env.BASE ?? "/docs";
 
 // https://astro.build/config
 export default defineConfig({
+  server: {
+    host: true,
+  },
   site,
   base,
   integrations: [
