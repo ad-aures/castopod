@@ -283,7 +283,7 @@ if (! function_exists('get_actor_ids_with_unread_notifications')) {
 
         $unreadNotifications = new NotificationModel()
             ->whereIn('target_actor_id', array_column($userPodcasts, 'actor_id'))
-            ->where('read_at', null)
+            ->where('read_at')
             ->findAll();
 
         return array_column($unreadNotifications, 'target_actor_id');

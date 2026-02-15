@@ -20,7 +20,7 @@ class PodcastController extends BaseApiController
         /** @var array<string,mixed> $data */
         $data = new PodcastModel()
             ->findAll();
-        array_map(static function ($podcast): void {
+        array_map(static function (Podcast $podcast): void {
             self::mapPodcast($podcast);
         }, $data);
         return $this->respond($data);

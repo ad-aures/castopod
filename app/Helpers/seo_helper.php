@@ -30,22 +30,25 @@ if (! function_exists('set_podcast_metatags')) {
         $category .= $podcast->category->apple_category;
 
         $schema = new Schema(
-            new Thing('PodcastSeries', [
-                'name'        => $podcast->title,
-                'headline'    => $podcast->title,
-                'url'         => current_url(),
-                'sameAs'      => $podcast->link,
-                'identifier'  => $podcast->guid,
-                'image'       => $podcast->cover->feed_url,
-                'description' => $podcast->description,
-                'webFeed'     => $podcast->feed_url,
-                'accessMode'  => 'auditory',
-                'author'      => $podcast->owner_name,
-                'creator'     => $podcast->owner_name,
-                'publisher'   => $podcast->publisher,
-                'inLanguage'  => $podcast->language_code,
-                'genre'       => $category,
-            ]),
+            new Thing(
+                props: [
+                    'name'        => $podcast->title,
+                    'headline'    => $podcast->title,
+                    'url'         => current_url(),
+                    'sameAs'      => $podcast->link,
+                    'identifier'  => $podcast->guid,
+                    'image'       => $podcast->cover->feed_url,
+                    'description' => $podcast->description,
+                    'webFeed'     => $podcast->feed_url,
+                    'accessMode'  => 'auditory',
+                    'author'      => $podcast->owner_name,
+                    'creator'     => $podcast->owner_name,
+                    'publisher'   => $podcast->publisher,
+                    'inLanguage'  => $podcast->language_code,
+                    'genre'       => $category,
+                ],
+                type: 'PodcastSeries',
+            ),
         );
 
         /** @var HtmlHead $head */
@@ -74,22 +77,31 @@ if (! function_exists('set_episode_metatags')) {
     function set_episode_metatags(Episode $episode): void
     {
         $schema = new Schema(
-            new Thing('PodcastEpisode', [
-                'url'             => url_to('episode', esc($episode->podcast->handle), $episode->slug),
-                'name'            => $episode->title,
-                'image'           => $episode->cover->feed_url,
-                'description'     => $episode->description,
-                'datePublished'   => $episode->published_at->format(DATE_ATOM),
-                'timeRequired'    => iso8601_duration($episode->audio->duration),
-                'duration'        => iso8601_duration($episode->audio->duration),
-                'associatedMedia' => new Thing('MediaObject', [
-                    'contentUrl' => $episode->audio_url,
-                ]),
-                'partOfSeries' => new Thing('PodcastSeries', [
-                    'name' => $episode->podcast->title,
-                    'url'  => $episode->podcast->link,
-                ]),
-            ]),
+            new Thing(
+                props: [
+                    'url'             => url_to('episode', esc($episode->podcast->handle), $episode->slug),
+                    'name'            => $episode->title,
+                    'image'           => $episode->cover->feed_url,
+                    'description'     => $episode->description,
+                    'datePublished'   => $episode->published_at->format(DATE_ATOM),
+                    'timeRequired'    => iso8601_duration($episode->audio->duration),
+                    'duration'        => iso8601_duration($episode->audio->duration),
+                    'associatedMedia' => new Thing(
+                        props: [
+                            'contentUrl' => $episode->audio_url,
+                        ],
+                        type: 'MediaObject',
+                    ),
+                    'partOfSeries' => new Thing(
+                        props: [
+                            'name' => $episode->podcast->title,
+                            'url'  => $episode->podcast->link,
+                        ],
+                        type: 'PodcastSeries',
+                    ),
+                ],
+                type: 'PodcastEpisode',
+            ),
         );
 
         /** @var HtmlHead $head */
@@ -131,32 +143,50 @@ if (! function_exists('set_episode_metatags')) {
 if (! function_exists('set_post_metatags')) {
     function set_post_metatags(Post $post): void
     {
-        $socialMediaPosting = new Thing('SocialMediaPosting', [
-            '@id'           => url_to('post', esc($post->actor->username), $post->id),
-            'datePublished' => $post->published_at->format(DATE_ATOM),
-            'author'        => new Thing('Person', [
-                'name' => $post->actor->display_name,
-                'url'  => $post->actor->uri,
-            ]),
-            'text' => $post->message,
-        ]);
+        $socialMediaPosting = new Thing(
+            props: [
+                '@id'           => url_to('post', esc($post->actor->username), $post->id),
+                'datePublished' => $post->published_at->format(DATE_ATOM),
+                'author'        => new Thing(
+                    props: [
+                        'name' => $post->actor->display_name,
+                        'url'  => $post->actor->uri,
+                    ],
+                    type: 'Person',
+                ),
+                'text' => $post->message,
+            ],
+            type: 'SocialMediaPosting',
+        );
 
         if ($post->episode_id !== null) {
-            $socialMediaPosting->__set('sharedContent', new Thing('Audio', [
-                'headline' => $post->episode->title,
-                'url'      => $post->episode->link,
-                'author'   => new Thing('Person', [
-                    'name' => $post->episode->podcast->owner_name,
-                ]),
-            ]));
+            $socialMediaPosting->__set('sharedContent', new Thing(
+                props: [
+                    'headline' => $post->episode->title,
+                    'url'      => $post->episode->link,
+                    'author'   => new Thing(
+                        props: [
+                            'name' => $post->episode->podcast->owner_name,
+                        ],
+                        type: 'Person',
+                    ),
+                ],
+                type: 'Audio',
+            ));
         } elseif ($post->preview_card instanceof PreviewCard) {
-            $socialMediaPosting->__set('sharedContent', new Thing('WebPage', [
-                'headline' => $post->preview_card->title,
-                'url'      => $post->preview_card->url,
-                'author'   => new Thing('Person', [
-                    'name' => $post->preview_card->author_name,
-                ]),
-            ]));
+            $socialMediaPosting->__set('sharedContent', new Thing(
+                props: [
+                    'headline' => $post->preview_card->title,
+                    'url'      => $post->preview_card->url,
+                    'author'   => new Thing(
+                        props: [
+                            'name' => $post->preview_card->author_name,
+                        ],
+                        type: 'Person',
+                    ),
+                ],
+                type: 'WebPage',
+            ));
         }
 
         $schema = new Schema($socialMediaPosting);
@@ -183,21 +213,27 @@ if (! function_exists('set_post_metatags')) {
 if (! function_exists('set_episode_comment_metatags')) {
     function set_episode_comment_metatags(EpisodeComment $episodeComment): void
     {
-        $schema = new Schema(new Thing('SocialMediaPosting', [
-            '@id' => url_to(
-                'episode-comment',
-                esc($episodeComment->actor->username),
-                $episodeComment->episode->slug,
-                $episodeComment->id,
-            ),
-            'datePublished' => $episodeComment->created_at->format(DATE_ATOM),
-            'author'        => new Thing('Person', [
-                'name' => $episodeComment->actor->display_name,
-                'url'  => $episodeComment->actor->uri,
-            ]),
-            'text'        => $episodeComment->message,
-            'upvoteCount' => $episodeComment->likes_count,
-        ]));
+        $schema = new Schema(new Thing(
+            props: [
+                '@id' => url_to(
+                    'episode-comment',
+                    esc($episodeComment->actor->username),
+                    $episodeComment->episode->slug,
+                    $episodeComment->id,
+                ),
+                'datePublished' => $episodeComment->created_at->format(DATE_ATOM),
+                'author'        => new Thing(
+                    props: [
+                        'name' => $episodeComment->actor->display_name,
+                        'url'  => $episodeComment->actor->uri,
+                    ],
+                    type: 'Person',
+                ),
+                'text'        => $episodeComment->message,
+                'upvoteCount' => $episodeComment->likes_count,
+            ],
+            type: 'SocialMediaPosting',
+        ));
 
         /** @var HtmlHead $head */
         $head = service('html_head');

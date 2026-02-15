@@ -1,19 +1,18 @@
 ---
-title: Official Docker images
+title: Official Docker image
 ---
 
-Castopod pushes 3 Docker images to the Docker Hub during its automated build
-process:
+Castopod publishes a single official Docker image to the Docker Hub as part of
+its automated build process:
 
-- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
-  in one castopod image using nginx unit
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an
+  all-in-one image integrating [FrankenPHP](https://frankenphp.dev/) and
+  [Caddy](https://caddyserver.com/), optimized for production environments. It
+  is based on
+  [serversideup/php](https://serversideup.net/open-source/docker-php/docs/image-variations/frankenphp).
 
-Additionally, Castopod requires a MySQL-compatible database. A Redis database
-can be added as a cache handler.
+Castopod requires a MySQL-compatible database to function. Optionally, a Redis
+service can be configured as the caching layer.
 
 ## Supported tags
 
@@ -25,18 +24,16 @@ can be added as a cache handler.
 ## Example usage
 
 1.  Install [docker](https://docs.docker.com/get-docker/) and
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+    [docker compose](https://docs.docker.com/compose/install/)
+2.  Create a `compose.yml` file with the following:
 
     ```yml
-    version: "3.7"
-
     services:
       castopod:
         image: castopod/castopod:latest
         container_name: "castopod"
         volumes:
-          - castopod-media:/var/www/castopod/public/media
+          - castopod-media:/app/public/media
         environment:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
@@ -47,14 +44,28 @@ can be added as a cache handler.
           CP_REDIS_HOST: redis
           CP_REDIS_PASSWORD: changeme
         networks:
-          - castopod
+          - castopod-app
           - castopod-db
         ports:
-          - 8000:8000
+          - "8080:8080" # HTTP
+          - "8443:8443" # HTTPS
+          - "8443:8443/udp" # HTTP/3
         restart: unless-stopped
+        healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+          interval: 30s
+          timeout: 10s
+          retries: 3
+          start_period: 30s # allows bootstrap/migrations time
+        depends_on:
+          mariadb:
+            condition: service_healthy
+            restart: true
+          redis:
+            condition: service_started
 
       mariadb:
-        image: mariadb:11.2
+        image: mariadb:12.1
         container_name: "castopod-mariadb"
         networks:
           - castopod-db
@@ -66,15 +77,21 @@ can be added as a cache handler.
           MYSQL_USER: castopod
           MYSQL_PASSWORD: changeme
         restart: unless-stopped
+        healthcheck:
+          test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+          start_period: 10s
+          interval: 10s
+          timeout: 5s
+          retries: 3
 
       redis:
-        image: redis:7.2-alpine
+        image: redis:8.4-alpine
         container_name: "castopod-redis"
         command: --requirepass changeme
         volumes:
           - castopod-cache:/data
         networks:
-          - castopod
+          - castopod-app
 
     volumes:
       castopod-media:
@@ -82,8 +99,9 @@ can be added as a cache handler.
       castopod-cache:
 
     networks:
-      castopod:
+      castopod-app:
       castopod-db:
+        internal: true
     ```
 
     You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
@@ -97,61 +115,53 @@ can be added as a cache handler.
     ```
     #castopod
     castopod.example.com {
-    	reverse_proxy localhost:8000
+    	reverse_proxy localhost:8080
     }
     ```
 
-4.  Run `docker-compose up -d`, wait for it to initialize and head on to
+4.  Run `docker compose up -d`, wait for it to initialize and head on to
     `https://castopod.example.com/cp-install` to finish setting up Castopod!
 
 5.  You're all set, start podcasting! 🎙️🚀
 
 ## Environment Variables
 
-- **castopod/castopod** and **castopod/app**
-
-  | Variable name                         | Type (`default`)        | Default          |
-  | ------------------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**                      | string                  | `undefined`      |
-  | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**                | ?string                 | `"cp-admin"`     |
-  | **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
-  | **`CP_ANALYTICS_SALT`**               | string                  | `undefined`      |
-  | **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**                | ?string                 | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`**            | ?string                 | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`**            | ?string                 | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**              | ?string                 | `"cp_"`          |
-  | **`CP_CACHE_HANDLER`**                | [`"file"` or `"redis"`] | `"file"`         |
-  | **`CP_REDIS_HOST`**                   | ?string                 | `"localhost"`    |
-  | **`CP_REDIS_PASSWORD`**               | ?string                 | `null`           |
-  | **`CP_REDIS_PORT`**                   | ?number                 | `6379`           |
-  | **`CP_REDIS_DATABASE`**               | ?number                 | `0`              |
-  | **`CP_EMAIL_SMTP_HOST`**              | ?string                 | `undefined`      |
-  | **`CP_EMAIL_FROM`**                   | ?string                 | `undefined`      |
-  | **`CP_EMAIL_SMTP_USERNAME`**          | ?string                 | `"localhost"`    |
-  | **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                 | `null`           |
-  | **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` or `"ssl"`]    | `"tls"`          |
-  | **`CP_ENABLE_2FA`**                   | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_KEY`**                 | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_SECRET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_REGION`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `undefined`      |
-  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `undefined`      |
-  | **`CP_DISABLE_HTTPS`**                | ?[`0` or `1`]           | `undefined`      |
-  | **`CP_MAX_BODY_SIZE`**                | ?number (with suffix)   | `512M`           |
-  | **`CP_PHP_MEMORY_LIMIT`**             | ?number (with suffix)   | `512M`           |
-  | **`CP_TIMEOUT`**                      | ?number                 | `900`            |
-
-- **castopod/web-server**
-
-  | Variable name          | Type                  | Default |
-  | ---------------------- | --------------------- | ------- |
-  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
-  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |
-  | **`CP_TIMEOUT`**       | ?number               | `900`   |
+| Variable name                         | Type (`default`)        | Default          |
+| ------------------------------------- | ----------------------- | ---------------- |
+| **`CP_BASEURL`**                      | string                  | `undefined`      |
+| **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
+| **`CP_ADMIN_GATEWAY`**                | ?string                 | `"cp-admin"`     |
+| **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
+| **`CP_ANALYTICS_SALT`**               | string                  | `undefined`      |
+| **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
+| **`CP_DATABASE_NAME`**                | ?string                 | `MYSQL_DATABASE` |
+| **`CP_DATABASE_USERNAME`**            | ?string                 | `MYSQL_USER`     |
+| **`CP_DATABASE_PASSWORD`**            | ?string                 | `MYSQL_PASSWORD` |
+| **`CP_DATABASE_PREFIX`**              | ?string                 | `"cp_"`          |
+| **`CP_CACHE_HANDLER`**                | [`"file"` or `"redis"`] | `"file"`         |
+| **`CP_REDIS_HOST`**                   | ?string                 | `"localhost"`    |
+| **`CP_REDIS_PASSWORD`**               | ?string                 | `null`           |
+| **`CP_REDIS_PORT`**                   | ?number                 | `6379`           |
+| **`CP_REDIS_DATABASE`**               | ?number                 | `0`              |
+| **`CP_EMAIL_SMTP_HOST`**              | ?string                 | `undefined`      |
+| **`CP_EMAIL_FROM`**                   | ?string                 | `undefined`      |
+| **`CP_EMAIL_SMTP_USERNAME`**          | ?string                 | `"localhost"`    |
+| **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                 | `null`           |
+| **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`             |
+| **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` or `"ssl"`]    | `"tls"`          |
+| **`CP_ENABLE_2FA`**                   | ?boolean                | `undefined`      |
+| **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_KEY`**                 | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_SECRET`**              | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_REGION`**              | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `undefined`      |
+| **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `undefined`      |
+| **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `undefined`      |
+| **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `undefined`      |
+| **`CP_DISABLE_HTTPS`**                | ?[`0` or `1`]           | `undefined`      |
+| **`PHP_MEMORY_LIMIT`**                | ?number (with suffix)   | `512M`           |
+| **`PHP_UPLOAD_MAX_FILE_SIZE`**        | ?number (with suffix)   | `512M`           |
+| **`PHP_POST_MAX_SIZE`**               | ?number (with suffix)   | `512M`           |
+| **`PHP_MAX_EXECUTION_TIME`**          | ?number                 | `300`            |
+| **`PHP_OPCACHE_ENABLE`**              | ?[`0` or `1`]           | `1`              |

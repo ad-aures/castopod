@@ -81,14 +81,6 @@ class BaseClip extends Entity
         'updated_by' => 'integer',
     ];
 
-    /**
-     * @param array<string, mixed>|null $data
-     */
-    public function __construct(?array $data = null)
-    {
-        parent::__construct($data);
-    }
-
     public function getJobDuration(): ?int
     {
         if ($this->job_duration === null && $this->job_started_at && $this->job_ended_at) {

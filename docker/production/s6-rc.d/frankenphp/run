@@ -1,0 +1,2 @@
+#!/command/with-contenv sh
+frankenphp run --config /etc/frankenphp/Caddyfile --adapter caddyfile

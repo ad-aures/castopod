@@ -1,0 +1,2 @@
+#!/command/with-contenv sh
+/etc/s6-overlay/s6-rc.d/bootstrap/prepare-environment.sh

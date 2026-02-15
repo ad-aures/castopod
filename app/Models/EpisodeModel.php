@@ -371,7 +371,7 @@ class EpisodeModel extends UuidModel
         $episodeCommentsCount = new EpisodeCommentModel()
             ->builder()
             ->select('episode_id, COUNT(*) as `comments_count`')
-            ->where('in_reply_to_id', null)
+            ->where('in_reply_to_id')
             ->groupBy('episode_id')
             ->getCompiledSelect();
 
@@ -379,8 +379,8 @@ class EpisodeModel extends UuidModel
             ->builder()
             ->select('fediverse_posts.episode_id as episode_id, COUNT(*) as `comments_count`')
             ->join('fediverse_posts as fp', 'fediverse_posts.id = fp.in_reply_to_id')
-            ->where('fediverse_posts.in_reply_to_id', null)
-            ->where('fediverse_posts.episode_id IS NOT', null)
+            ->where('fediverse_posts.in_reply_to_id')
+            ->where('fediverse_posts.episode_id IS NOT')
             ->groupBy('fediverse_posts.episode_id')
             ->getCompiledSelect();
 
@@ -404,7 +404,7 @@ class EpisodeModel extends UuidModel
         $episodePostsCount = $this->builder()
             ->select('episodes.id, COUNT(*) as `posts_count`')
             ->join('fediverse_posts', 'episodes.id = fediverse_posts.episode_id')
-            ->where('in_reply_to_id', null)
+            ->where('in_reply_to_id')
             ->groupBy('episodes.id')
             ->get()
             ->getResultArray();

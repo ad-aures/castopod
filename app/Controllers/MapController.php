@@ -45,7 +45,7 @@ class MapController extends BaseController
         if (! ($found = cache($cacheName))) {
             $episodes = new EpisodeModel()
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
-                ->where('location_geo is not', null)
+                ->where('location_geo is not')
                 ->findAll();
             $found = [];
             foreach ($episodes as $episode) {

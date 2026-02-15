@@ -75,7 +75,7 @@ class NotificationController extends BaseController
     {
         $notifications = new NotificationModel()
             ->where('target_actor_id', $podcast->actor_id)
-            ->where('read_at', null)
+            ->where('read_at')
             ->findAll();
 
         foreach ($notifications as $notification) {

@@ -191,26 +191,23 @@ function formatXML(contents: string) {
     return contents;
   }
 
-  let editorContents = "";
   try {
-    editorContents = xmlFormat(contents, {
+    return xmlFormat(contents, {
       indentation: "  ",
     });
   } catch {
     // xml doesn't have a root node
-    editorContents = xmlFormat("<root>" + contents + "</root>", {
+    const editorContents = xmlFormat("<root>" + contents + "</root>", {
       indentation: "  ",
     });
     // remove root, unnecessary lines and indents
-    editorContents = editorContents
+    return editorContents
       .replace(/^<root>/, "")
       .replace(/<\/root>$/, "")
       .replace(/^\s*[\r\n]/gm, "")
       .replace(/[\r\n] {2}/gm, "\r\n")
       .trim();
   }
-
-  return editorContents;
 }
 
 function minifyXML(contents: string) {
@@ -218,20 +215,15 @@ function minifyXML(contents: string) {
     return contents;
   }
 
-  let minifiedContent = "";
   try {
-    minifiedContent = xmlFormat.minify(contents, {
+    return xmlFormat.minify(contents, {
       collapseContent: true,
     });
   } catch {
-    minifiedContent = xmlFormat.minify(`<root>${contents}</root>`, {
+    const minifiedContent = xmlFormat.minify(`<root>${contents}</root>`, {
       collapseContent: true,
     });
     // remove root
-    minifiedContent = minifiedContent
-      .replace(/^<root>/, "")
-      .replace(/<\/root>$/, "");
+    return minifiedContent.replace(/^<root>/, "").replace(/<\/root>$/, "");
   }
-
-  return minifiedContent;
 }

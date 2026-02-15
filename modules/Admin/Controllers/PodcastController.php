@@ -677,7 +677,7 @@ class PodcastController extends BaseController
 
         $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
-            ->where('published_at !=', null)
+            ->where('published_at !=')
             ->findAll();
 
         foreach ($episodes as $episode) {
@@ -846,7 +846,7 @@ class PodcastController extends BaseController
 
         $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
-            ->where('published_at !=', null)
+            ->where('published_at !=')
             ->findAll();
 
         foreach ($episodes as $episode) {
@@ -914,7 +914,7 @@ class PodcastController extends BaseController
 
         $episodes = new EpisodeModel()
             ->where('podcast_id', $podcast->id)
-            ->where('published_at !=', null)
+            ->where('published_at !=')
             ->findAll();
 
         foreach ($episodes as $episode) {

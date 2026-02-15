@@ -52,7 +52,7 @@ class EpisodeController extends BaseApiController
             (int) $this->request->getGet('offset'),
         );
 
-        array_map(static function ($episode): void {
+        array_map(static function (Episode $episode): void {
             self::mapEpisode($episode);
         }, $data);
 

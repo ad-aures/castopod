@@ -28,12 +28,10 @@ build:
   stage: build
   script:
     - pnpm run build
-  except:
-    - develop
-    - main
-    - beta
-    - alpha
-    - next
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop|main|alpha|beta|next)$/
+      when: never
+    - when: on_success
 
 build-production:
   extends: .documentation-setup
@@ -47,12 +45,8 @@ build-production:
     paths:
       - docs/dist/$CI_COMMIT_REF_SLUG
     expire_in: 30 mins
-  only:
-    - develop
-    - main
-    - beta
-    - alpha
-    - next
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop|main|alpha|beta|next)$/
 
 deploy:
   stage: deploy
@@ -78,9 +72,5 @@ deploy:
   script:
     - rsync -avzuh -e "ssh -p $SSH_PORT" $SOURCE_FOLDER $USER@$HOST:$TEMP_DIRECTORY --progress
     - ssh $USER@$HOST -p $SSH_PORT "rsync -rtv $TEMP_DIRECTORY $DIRECTORY"
-  only:
-    - develop
-    - main
-    - beta
-    - alpha
-    - next
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop|main|alpha|beta|next)$/
