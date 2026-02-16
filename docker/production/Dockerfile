@@ -56,7 +56,7 @@ RUN \
 # Define production image based on FrankenPHP /
 # Debian with services managed by s6-overlay
 #---------------------------------------------------
-FROM serversideup/php:${PHP_VERSION}-frankenphp-trixie AS build
+FROM serversideup/php:${PHP_VERSION}-frankenphp-trixie AS production
 
 LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 
