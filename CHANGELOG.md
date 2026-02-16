@@ -1,3 +1,11 @@
+## [1.15.0](https://code.castopod.org/adaures/castopod/compare/v1.14.1...v1.15.0) (2026-02-16)
+
+### Features
+
+- **docker:** replace all-in-one image with FrankenPHP and Caddy based image +
+  discard other images
+  ([14089f0](https://code.castopod.org/adaures/castopod/commit/14089f0542ccdf187bd64bea8ad2787b9e8c7d59))
+
 ## <small>1.14.1 (2026-01-31)</small>
 
 - fix(i18n): set english as first item in supported locales in case locale
