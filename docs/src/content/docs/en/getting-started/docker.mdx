@@ -2,6 +2,8 @@
 title: Official Docker image
 ---
 
+import { Aside } from "@astrojs/starlight/components";
+
 Castopod publishes a single official Docker image to the Docker Hub as part of
 its automated build process:
 
@@ -15,10 +17,20 @@ service can be configured as the caching layer.
 
 ## Supported tags
 
-- `develop` [unstable], latest development branch build
-- `beta` [stable], latest beta version build
-- `latest` [stable], latest version build
 - `1.x.x` [stable], specific version build (since `1.0.0`)
+- `latest` [stable], latest version build
+- `develop` [unstable], latest development branch build
+
+Other unstable tags (e.g., `beta`, `next`) may be actively pushed during development phases.
+See [all tags in the docker hub](https://hub.docker.com/r/castopod/castopod/tags).
+
+<Aside type="tip">
+  To ensure reproducibility and stability during production, always pin to a
+  specific version tag like `1.x.x` (e.g., `1.15.1`) instead of `latest`.
+  <br />
+  The latest tag changes unexpectedly, risking downtime and inconsistent
+  deployments.
+</Aside>
 
 ## Example usage
 
@@ -29,7 +41,7 @@ service can be configured as the caching layer.
     ```yml
     services:
       castopod:
-        image: castopod/castopod:latest
+        image: castopod/castopod:latest # Pin to a specific version during production
         container_name: "castopod"
         volumes:
           - castopod-media:/app/public/media
