@@ -80,7 +80,17 @@ docker-build-release:
     # configure BuildKit features that aren't enabled by default
     - docker buildx inspect --bootstrap
   script:
-    # build multiplatform image for amd64 and arm64
+    - docker buildx build
+      --target production
+      --secret id=maxmind-licence-key,env=MAXMIND_LICENCE_KEY
+      --platform linux/amd64
+      --file docker/production/Dockerfile
+      --push
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_TAG}
+      .
+    # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
+    # --> build and push amd64 image first, then overwrite manifest after building arm64
     - docker buildx build
       --target production
       --secret id=maxmind-licence-key,env=MAXMIND_LICENCE_KEY
@@ -89,7 +99,6 @@ docker-build-release:
       --push
       --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION}
       --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_TAG}
-      --progress=plain
       .
   rules:
     - if: $CI_COMMIT_TAG
