@@ -13,9 +13,14 @@ use ViewThemes\Theme;
 
 /**
  * BaseController provides a convenient place for loading components and performing functions that are needed by all
- * your controllers. Extend this class in any new controllers: class Home extends BaseController
+ * your controllers.
  *
- * For security be sure to declare any new methods as protected or private.
+ * Extend this class in any new controllers:
+ * ```
+ *     class Home extends BaseController
+ * ```
+ *
+ * For security, be sure to declare any new methods as protected or private.
  */
 abstract class BaseController extends Controller
 {
@@ -40,6 +45,8 @@ abstract class BaseController extends Controller
         ResponseInterface $response,
         LoggerInterface $logger,
     ): void {
+        // Load here all helpers you want to be available in your controllers that extend BaseController.
+        // Caution: Do not put the this below the parent::initController() call below.
         $this->helpers = [...$this->helpers, 'svg', 'components', 'misc', 'seo', 'premium_podcasts'];
 
         // Do Not Edit This Line
