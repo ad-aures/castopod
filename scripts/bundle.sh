@@ -18,4 +18,4 @@ wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Cit
 mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 
 # create castopod folder bundle: uses .rsync-filter (-F) file to copy only needed files
-rsync -aF --progress . ./castopod
+rsync -aF . ./castopod
