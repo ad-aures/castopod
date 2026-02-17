@@ -1,3 +1,12 @@
+## [1.15.1](https://code.castopod.org/adaures/castopod/compare/v1.15.0...v1.15.1) (2026-02-17)
+
+### Bug Fixes
+
+- **docker:** create optimized builder with docker-container driver for arm64
+  builds
+  ([89ae2b8](https://code.castopod.org/adaures/castopod/commit/89ae2b89fd20fa31851a31fe44f514294fbcd688)),
+  closes [#580](https://code.castopod.org/adaures/castopod/issues/580)
+
 ## [1.15.0](https://code.castopod.org/adaures/castopod/compare/v1.14.1...v1.15.0) (2026-02-16)
 
 ### Features
