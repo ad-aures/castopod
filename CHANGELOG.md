@@ -1,3 +1,12 @@
+## [1.15.2](https://code.castopod.org/adaures/castopod/compare/v1.15.1...v1.15.2) (2026-02-18)
+
+### Bug Fixes
+
+- **player:** load icons locally instead of relying on vimejs picking them from
+  third party scripts
+  ([0961987](https://code.castopod.org/adaures/castopod/commit/096198727627b3dba9c5bd28f20e90cff680316b)),
+  closes [#551](https://code.castopod.org/adaures/castopod/issues/551)
+
 ## [1.15.1](https://code.castopod.org/adaures/castopod/compare/v1.15.0...v1.15.1) (2026-02-17)
 
 ### Bug Fixes
