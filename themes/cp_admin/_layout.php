@@ -21,11 +21,11 @@ $isEpisodeArea = isset($podcast) && isset($episode);
 
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/admin.ts', 'js') ?>
+        ->asset('js/admin.ts') ?>
     <?= service('vite')
-        ->asset('js/admin-audio-player.ts', 'js') ?>
+        ->asset('js/admin-audio-player.ts') ?>
 </head>
 
 <body class="relative grid items-start min-h-screen bg-base grid-cols-admin grid-rows-admin">

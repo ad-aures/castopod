@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ea6bde95b3b80d923a0dc0e9c946a0c0",
+  "content-hash": "ae175922494cbac88f4477946a143ae8",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -206,16 +206,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.369.34",
+      "version": "3.369.36",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "5db21cd0e5c8a5b5344596649033acf861a5e117"
+        "reference": "2a69e7df5e03be9e08f9f73fb6a8cc9dd63b59c0"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5db21cd0e5c8a5b5344596649033acf861a5e117",
-        "reference": "5db21cd0e5c8a5b5344596649033acf861a5e117",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2a69e7df5e03be9e08f9f73fb6a8cc9dd63b59c0",
+        "reference": "2a69e7df5e03be9e08f9f73fb6a8cc9dd63b59c0",
         "shasum": ""
       },
       "require": {
@@ -297,9 +297,9 @@
       "support": {
         "forum": "https://github.com/aws/aws-sdk-php/discussions",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.369.34"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.369.36"
       },
-      "time": "2026-02-13T19:09:12+00:00"
+      "time": "2026-02-17T19:45:01+00:00"
     },
     {
       "name": "brick/math",
@@ -3669,6 +3669,64 @@
       "time": "2024-04-17T12:47:41+00:00"
     },
     {
+      "name": "yassinedoghri/codeigniter-vite",
+      "version": "v2.1.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/yassinedoghri/codeigniter-vite.git",
+        "reference": "95c1dd30b716e3204ce981aa564202b299f9c8a5"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/yassinedoghri/codeigniter-vite/zipball/95c1dd30b716e3204ce981aa564202b299f9c8a5",
+        "reference": "95c1dd30b716e3204ce981aa564202b299f9c8a5",
+        "shasum": ""
+      },
+      "require": {
+        "php": ">=8.1"
+      },
+      "require-dev": {
+        "codeigniter/phpstan-codeigniter": "^1.5.4",
+        "codeigniter4/framework": "^v4.6.0",
+        "pestphp/pest": "^3.8.4",
+        "pestphp/pest-plugin-type-coverage": "^3.6.1",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^2.1.22",
+        "rector/rector": "^2.1.4",
+        "symplify/coding-standard": "^12.4.3",
+        "symplify/easy-coding-standard": "^12.5.24"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "CodeIgniterVite\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "authors": [
+        {
+          "name": "Yassine Doghri",
+          "homepage": "https://yassinedoghri.com/"
+        }
+      ],
+      "description": "An opinionated Vite integration for CodeIgniter4 projects.",
+      "keywords": [
+        "codeigniter",
+        "codeigniter4",
+        "iconify",
+        "icons",
+        "php-icons"
+      ],
+      "support": {
+        "issues": "https://github.com/yassinedoghri/codeigniter-vite/issues",
+        "source": "https://github.com/yassinedoghri/codeigniter-vite/tree/v2.1.0"
+      },
+      "time": "2025-09-09T18:36:45+00:00"
+    },
+    {
       "name": "yassinedoghri/php-icons",
       "version": "v1.3.0",
       "source": {
@@ -3783,16 +3841,16 @@
   "packages-dev": [
     {
       "name": "captainhook/captainhook",
-      "version": "5.28.2",
+      "version": "5.28.3",
       "source": {
         "type": "git",
         "url": "https://github.com/captainhook-git/captainhook.git",
-        "reference": "2adbc8fea26823ecf52578998de5daf57846872f"
+        "reference": "5d35b249f3843ef36ead119f4347e649278ad6d8"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/2adbc8fea26823ecf52578998de5daf57846872f",
-        "reference": "2adbc8fea26823ecf52578998de5daf57846872f",
+        "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/5d35b249f3843ef36ead119f4347e649278ad6d8",
+        "reference": "5d35b249f3843ef36ead119f4347e649278ad6d8",
         "shasum": ""
       },
       "require": {
@@ -3855,7 +3913,7 @@
       ],
       "support": {
         "issues": "https://github.com/captainhook-git/captainhook/issues",
-        "source": "https://github.com/captainhook-git/captainhook/tree/5.28.2"
+        "source": "https://github.com/captainhook-git/captainhook/tree/5.28.3"
       },
       "funding": [
         {
@@ -3863,7 +3921,7 @@
           "type": "github"
         }
       ],
-      "time": "2026-02-15T14:36:43+00:00"
+      "time": "2026-02-16T14:08:58+00:00"
     },
     {
       "name": "captainhook/secrets",
@@ -4389,16 +4447,16 @@
     },
     {
       "name": "friendsofphp/php-cs-fixer",
-      "version": "v3.94.0",
+      "version": "v3.94.1",
       "source": {
         "type": "git",
         "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-        "reference": "883b20fb38c7866de9844ab6d0a205c423bde2d4"
+        "reference": "d1a3634e29916367b885250e1fc4dfd5ffe3b091"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/883b20fb38c7866de9844ab6d0a205c423bde2d4",
-        "reference": "883b20fb38c7866de9844ab6d0a205c423bde2d4",
+        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/d1a3634e29916367b885250e1fc4dfd5ffe3b091",
+        "reference": "d1a3634e29916367b885250e1fc4dfd5ffe3b091",
         "shasum": ""
       },
       "require": {
@@ -4481,7 +4539,7 @@
       ],
       "support": {
         "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.94.0"
+        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.94.1"
       },
       "funding": [
         {
@@ -4489,7 +4547,7 @@
           "type": "github"
         }
       ],
-      "time": "2026-02-11T16:44:33+00:00"
+      "time": "2026-02-18T12:24:42+00:00"
     },
     {
       "name": "mikey179/vfsstream",

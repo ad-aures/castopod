@@ -24,9 +24,9 @@
 
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
+        ->asset('js/app.ts') ?>
 </head>
 
 

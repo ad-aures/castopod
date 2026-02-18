@@ -25,13 +25,13 @@
 
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
+        ->asset('js/app.ts') ?>
     <?= service('vite')
-        ->asset('js/podcast.ts', 'js') ?>
+        ->asset('js/podcast.ts') ?>
     <?= service('vite')
-        ->asset('js/audio-player.ts', 'js') ?>
+        ->asset('js/audio-player.ts') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-base theme-<?= service('settings')

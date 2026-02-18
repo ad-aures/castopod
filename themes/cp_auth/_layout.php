@@ -12,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-base">

@@ -38,5 +38,5 @@
 
 
 <?= service('vite')
-    ->asset('js/charts.ts', 'js') ?>
+    ->asset('js/charts.ts') ?>
 <?= $this->endSection() ?>

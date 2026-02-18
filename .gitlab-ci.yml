@@ -83,6 +83,7 @@ lint-js:
     - pnpm run format
     - pnpm run typecheck
     - pnpm run lint
+    - pnpm run lint:css
   dependencies:
     - js-dependencies
   rules:

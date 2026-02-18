@@ -8,7 +8,7 @@
 
     <title>403 Forbidden</title>
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')->asset('styles/index.css') ?>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-base theme-<?= service('settings')

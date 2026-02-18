@@ -1,38 +1,40 @@
+import path from "path";
 import { defineConfig } from "vite";
+import codeigniter from "vite-plugin-codeigniter";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: "./app/Resources",
-  base: "/assets/",
-  build: {
-    outDir: "../../public/assets",
-    assetsDir: "",
-    manifest: true,
-    sourcemap: true,
-    rollupOptions: {
-      input: {
-        "admin-audio-player.ts": "app/Resources/js/admin-audio-player.ts",
-        "admin.ts": "app/Resources/js/admin.ts",
-        "app.ts": "app/Resources/js/app.ts",
-        "audio-player.ts": "app/Resources/js/audio-player.ts",
-        "charts.ts": "app/Resources/js/charts.ts",
-        "embed.ts": "app/Resources/js/embed.ts",
-        "error.ts": "app/Resources/js/error.ts",
-        "install.ts": "app/Resources/js/install.ts",
-        "map.ts": "app/Resources/js/map.ts",
-        "podcast.ts": "app/Resources/js/podcast.ts",
-        "styles/index.css": "app/Resources/styles/index.css",
-      },
-    },
-  },
-  plugins: [
-    VitePWA({
-      manifest: false,
-      outDir: "../../public",
-    }),
-  ],
   server: {
     host: true,
+    port: 5173,
+    strictPort: true,
   },
+  plugins: [
+    codeigniter({
+      imageVariants: [
+        {
+          src: "images/castopod-banner-*.jpg",
+          sizes: {
+            "%NAME%_small.webp": 320,
+            "%NAME%_medium.webp": 960,
+            "%NAME%_federation.jpg": 1500,
+          },
+        },
+        {
+          src: "images/castopod-avatar.jpg",
+          sizes: {
+            "%NAME%_tiny.webp": 40,
+            "%NAME%_thumbnail.webp": 150,
+            "%NAME%_medium.webp": 320,
+            "%NAME%_federation.jpg": 400,
+          },
+        },
+      ],
+    }),
+    VitePWA({
+      manifest: false,
+      outDir: path.resolve(__dirname, "public/assets"),
+    }),
+  ],
 });

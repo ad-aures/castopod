@@ -27,11 +27,11 @@
 
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/app.ts', 'js') ?>
+        ->asset('js/app.ts') ?>
     <?= service('vite')
-        ->asset('js/map.ts', 'js') ?>
+        ->asset('js/map.ts') ?>
 </head>
 
 <body class="flex flex-col h-full min-h-screen mx-auto bg-base theme-<?= service('settings')

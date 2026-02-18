@@ -8,7 +8,7 @@ module.exports = {
     "./modules/**/Views/**/*.php",
     "./themes/**/*.php",
     "./app/Helpers/*.php",
-    "./app/Resources/**/*.ts",
+    "./resources/**/*.ts",
   ],
   theme: {
     extend: {

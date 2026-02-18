@@ -9,9 +9,9 @@
 
 	<title><?= lang('Errors.whoops') ?></title>
 	<link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')->asset('styles/index.css') ?>
 	<?php if (auth()->loggedIn()): ?>
-		<?= service('vite')->asset('js/error.ts', 'js') ?>
+		<?= service('vite')->asset('js/error.ts') ?>
 	<?php endif; ?>
 </head>
 

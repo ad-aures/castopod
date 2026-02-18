@@ -23,9 +23,9 @@
 
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/podcast.ts', 'js') ?>
+        ->asset('js/podcast.ts') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')

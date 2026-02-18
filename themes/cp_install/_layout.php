@@ -12,9 +12,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/icon-180.png">
     <?= service('vite')
-        ->asset('styles/index.css', 'css') ?>
+        ->asset('styles/index.css') ?>
     <?= service('vite')
-        ->asset('js/install.ts', 'js') ?>
+        ->asset('js/install.ts') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-base">
