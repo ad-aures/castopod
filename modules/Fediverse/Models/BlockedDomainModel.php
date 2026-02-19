@@ -33,7 +33,7 @@ class BlockedDomainModel extends Model
     protected $allowedFields = ['name'];
 
     /**
-     * @var string
+     * @var class-string<BlockedDomain>
      */
     protected $returnType = BlockedDomain::class;
 

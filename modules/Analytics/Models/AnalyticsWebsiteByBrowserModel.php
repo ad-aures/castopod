@@ -23,7 +23,7 @@ class AnalyticsWebsiteByBrowserModel extends Model
     protected $table = 'analytics_website_by_browser';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsWebsiteByBrowser>
      */
     protected $returnType = AnalyticsWebsiteByBrowser::class;
 

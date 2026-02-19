@@ -20,6 +20,8 @@ use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Activity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
+use Modules\Fediverse\Models\ActivityModel;
+use Modules\Fediverse\Models\ActorModel;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
 
@@ -262,6 +264,7 @@ class ActorController extends Controller
     public function outbox(): ResponseInterface
     {
         // get published activities by publication date
+        /** @var ActivityModel $actorActivity */
         $actorActivity = model('ActivityModel', false)
             ->where('actor_id', $this->actor->id)
             ->where('`created_at` <= UTC_TIMESTAMP()', null, false)
@@ -274,6 +277,7 @@ class ActorController extends Controller
             $pager = $actorActivity->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
+            /** @var Activity[] $paginatedActivity */
             $paginatedActivity = $actorActivity->paginate(12, 'default', $pageNumber);
             $pager = $actorActivity->pager;
             $orderedItems = [];
@@ -292,6 +296,7 @@ class ActorController extends Controller
     public function followers(): ResponseInterface
     {
         // get followers for a specific actor
+        /** @var ActorModel $followers */
         $followers = model('ActorModel', false)
             ->join('fediverse_follows', 'fediverse_follows.actor_id = id', 'inner')
             ->where('fediverse_follows.target_actor_id', $this->actor->id)
@@ -304,6 +309,7 @@ class ActorController extends Controller
             $pager = $followers->pager;
             $followersCollection = new OrderedCollectionObject(null, $pager);
         } else {
+            /** @var Actor[] $paginatedFollowers */
             $paginatedFollowers = $followers->paginate(12, 'default', $pageNumber);
             $pager = $followers->pager;
 

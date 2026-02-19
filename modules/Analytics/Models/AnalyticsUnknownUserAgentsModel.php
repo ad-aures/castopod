@@ -23,7 +23,7 @@ class AnalyticsUnknownUserAgentsModel extends Model
     protected $table = 'analytics_unknown_useragents';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsUnknownUserAgent>
      */
     protected $returnType = AnalyticsUnknownUserAgent::class;
 

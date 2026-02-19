@@ -564,7 +564,6 @@ class VideoClipper
 
         imagefill($img, 0, 0, $alphacolor);
         imagecopyresampled($img, $src, 0, 0, 0, 0, $ns, $ns, $s, $s);
-        imagedestroy($src);
 
         imagearc($img, $radius - 1, $radius - 1, $radius * 2, $radius * 2, 180, 270, $alphacolor);
         imagefilltoborder($img, 0, 0, $alphacolor, $alphacolor);
@@ -586,7 +585,6 @@ class VideoClipper
         imagealphablending($dest, false);
         imagefilledrectangle($dest, 0, 0, $s, $s, $alphacolor);
         imagecopyresampled($dest, $img, 0, 0, 0, 0, $s, $s, $ns, $ns);
-        imagedestroy($img);
 
         # output image
         imagealphablending($source, false);
@@ -595,7 +593,6 @@ class VideoClipper
         imagecopy($source, $dest, $ws - $corner, $hs - $corner, $corner, $corner, $corner, $corner);
         imagecopy($source, $dest, 0, $hs - $corner, 0, $corner, $corner, $corner);
         imagealphablending($source, true);
-        imagedestroy($dest);
 
         return $source;
     }

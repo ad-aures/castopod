@@ -32,7 +32,7 @@ class FollowModel extends Model
     protected $allowedFields = ['actor_id', 'target_actor_id'];
 
     /**
-     * @var string
+     * @var class-string<Follow>
      */
     protected $returnType = Follow::class;
 

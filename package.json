@@ -52,13 +52,13 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "lit": "^3.3.2",
-    "marked": "^17.0.2",
+    "marked": "^17.0.3",
     "wavesurfer.js": "^7.12.1",
     "xml-formatter": "^3.6.7"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.4.1",
-    "@commitlint/config-conventional": "^20.4.1",
+    "@commitlint/cli": "^20.4.2",
+    "@commitlint/config-conventional": "^20.4.2",
     "@csstools/css-tokenizer": "^4.0.0",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^10.0.1",

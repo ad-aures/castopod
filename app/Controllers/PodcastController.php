@@ -285,10 +285,8 @@ class PodcastController extends BaseController
             $pager = $episodes->pager;
 
             $orderedItems = [];
-            if ($paginatedEpisodes !== null) {
-                foreach ($paginatedEpisodes as $episode) {
-                    $orderedItems[] = new PodcastEpisode($episode)->toArray();
-                }
+            foreach ($paginatedEpisodes as $episode) {
+                $orderedItems[] = new PodcastEpisode($episode)->toArray();
             }
 
             // @phpstan-ignore-next-line

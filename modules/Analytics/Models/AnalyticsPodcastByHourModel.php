@@ -23,7 +23,7 @@ class AnalyticsPodcastByHourModel extends Model
     protected $table = 'analytics_podcasts_by_hour';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsPodcastsByHour>
      */
     protected $returnType = AnalyticsPodcastsByHour::class;
 

@@ -17,7 +17,7 @@ use Override;
 class ActorModel extends FediverseActorModel
 {
     /**
-     * @var string
+     * @var class-string<Actor>
      */
     protected $returnType = Actor::class;
 

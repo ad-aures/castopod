@@ -16,7 +16,7 @@ use Modules\Fediverse\Models\PostModel as FediversePostModel;
 class PostModel extends FediversePostModel
 {
     /**
-     * @var string
+     * @var class-string<Post>
      */
     protected $returnType = Post::class;
 

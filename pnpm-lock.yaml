@@ -74,8 +74,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       marked:
-        specifier: ^17.0.2
-        version: 17.0.2
+        specifier: ^17.0.3
+        version: 17.0.3
       wavesurfer.js:
         specifier: ^7.12.1
         version: 7.12.1
@@ -84,11 +84,11 @@ importers:
         version: 3.6.7
     devDependencies:
       "@commitlint/cli":
-        specifier: ^20.4.1
-        version: 20.4.1(@types/node@24.7.0)(typescript@5.9.3)
+        specifier: ^20.4.2
+        version: 20.4.2(@types/node@24.7.0)(typescript@5.9.3)
       "@commitlint/config-conventional":
-        specifier: ^20.4.1
-        version: 20.4.1
+        specifier: ^20.4.2
+        version: 20.4.2
       "@csstools/css-tokenizer":
         specifier: ^4.0.0
         version: 4.0.0
@@ -1137,18 +1137,18 @@ packages:
       }
     engines: { node: ">=0.1.90" }
 
-  "@commitlint/cli@20.4.1":
+  "@commitlint/cli@20.4.2":
     resolution:
       {
-        integrity: sha512-uuFKKpc7OtQM+6SRqT+a4kV818o1pS+uvv/gsRhyX7g4x495jg+Q7P0+O9VNGyLXBYP0syksS7gMRDJKcekr6A==,
+        integrity: sha512-YjYSX2yj/WsVoxh9mNiymfFS2ADbg2EK4+1WAsMuckwKMCqJ5PDG0CJU/8GvmHWcv4VRB2V02KqSiecRksWqZQ==,
       }
     engines: { node: ">=v18" }
     hasBin: true
 
-  "@commitlint/config-conventional@20.4.1":
+  "@commitlint/config-conventional@20.4.2":
     resolution:
       {
-        integrity: sha512-0YUvIeBtpi86XriqrR+TCULVFiyYTIOEPjK7tTRMxjcBm1qlzb+kz7IF2WxL6Fq5DaundG8VO37BNgMkMTBwqA==,
+        integrity: sha512-rwkTF55q7Q+6dpSKUmJoScV0f3EpDlWKw2UPzklkLS4o5krMN1tPWAVOgHRtyUTMneIapLeQwaCjn44Td6OzBQ==,
       }
     engines: { node: ">=v18" }
 
@@ -1187,10 +1187,10 @@ packages:
       }
     engines: { node: ">=v18" }
 
-  "@commitlint/lint@20.4.1":
+  "@commitlint/lint@20.4.2":
     resolution:
       {
-        integrity: sha512-g94LrGl/c6UhuhDQqNqU232aslLEN2vzc7MPfQTHzwzM4GHNnEAwVWWnh0zX8S5YXecuLXDwbCsoGwmpAgPWKA==,
+        integrity: sha512-buquzNRtFng6xjXvBU1abY/WPEEjCgUipNQrNmIWe8QuJ6LWLtei/LDBAzEe5ASm45+Q9L2Xi3/GVvlj50GAug==,
       }
     engines: { node: ">=v18" }
 
@@ -1229,10 +1229,10 @@ packages:
       }
     engines: { node: ">=v18" }
 
-  "@commitlint/rules@20.4.1":
+  "@commitlint/rules@20.4.2":
     resolution:
       {
-        integrity: sha512-WtqypKEPbQEuJwJS4aKs0OoJRBKz1HXPBC9wRtzVNH68FLhPWzxXlF09hpUXM9zdYTpm4vAdoTGkWiBgQ/vL0g==,
+        integrity: sha512-oz83pnp5Yq6uwwTAabuVQPNlPfeD2Y5ZjMb7Wx8FSUlu4sLYJjbBWt8031Z0osCFPfHzAwSYrjnfDFKtuSMdKg==,
       }
     engines: { node: ">=v18" }
 
@@ -2520,10 +2520,10 @@ packages:
       }
     engines: { node: ">= 20" }
 
-  "@octokit/endpoint@11.0.2":
+  "@octokit/endpoint@11.0.3":
     resolution:
       {
-        integrity: sha512-4zCpzP1fWc7QlqunZ5bSEjxc6yLAlRTnDwKtgXfcI/FxxGoqedDG8V2+xJ60bV2kODqcGB+nATdtap/XYq2NZQ==,
+        integrity: sha512-FWFlNxghg4HrXkD3ifYbS/IdL/mDHjh9QcsNyhQjN8dplUoZbejsdpmuqdA76nxj2xoWPs7p8uX2SNr9rYu0Ag==,
       }
     engines: { node: ">= 20" }
 
@@ -2549,10 +2549,10 @@ packages:
     peerDependencies:
       "@octokit/core": ">=6"
 
-  "@octokit/plugin-retry@8.0.3":
+  "@octokit/plugin-retry@8.1.0":
     resolution:
       {
-        integrity: sha512-vKGx1i3MC0za53IzYBSBXcrhmd+daQDzuZfYDd52X5S0M2otf3kVZTVP8bLA3EkU0lTvd1WEC2OlNNa4G+dohA==,
+        integrity: sha512-O1FZgXeiGb2sowEr/hYTr6YunGdSAFWnr2fyW39Ah85H8O33ELASQxcvOFF5LE6Tjekcyu2ms4qAzJVhSaJxTw==,
       }
     engines: { node: ">= 20" }
     peerDependencies:
@@ -3487,10 +3487,10 @@ packages:
       }
     engines: { node: ">= 16" }
 
-  balanced-match@4.0.2:
+  balanced-match@4.0.3:
     resolution:
       {
-        integrity: sha512-x0K50QvKQ97fdEz2kPehIerj+YTeptKF9hyYkKf6egnwmMWAkADiO0QCzSp0R5xN8FTZgYaBfSaue46Ej62nMg==,
+        integrity: sha512-1pHv8LX9CpKut1Zp4EXey7Z8OfH11ONNH6Dhi2WDUt31VVZFXZzKwXcysBgqSumFCmR+0dqjMK5v5JiFHzi0+g==,
       }
     engines: { node: 20 || >=22 }
 
@@ -3506,11 +3506,12 @@ packages:
         integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==,
       }
 
-  baseline-browser-mapping@2.9.19:
+  baseline-browser-mapping@2.10.0:
     resolution:
       {
-        integrity: sha512-ipDqC8FrAl/76p2SSWKSI+H9tFwm7vYqXQrItCuiVPt26Km0jS+NzSsBWAaBusvSbQcfJG+JitdMm+wZAgTYqg==,
+        integrity: sha512-lIyg0szRfYbiy67j9KN8IyeD7q7hcmqnJ1ddWmNt19ItGpNN64mnllmxUNFIOdOm6by97jlL6wfpTTJrmnjWAA==,
       }
+    engines: { node: ">=6.0.0" }
     hasBin: true
 
   before-after-hook@4.0.0:
@@ -5161,10 +5162,10 @@ packages:
       }
     engines: { node: 6.* || 8.* || >= 10.* }
 
-  get-east-asian-width@1.4.0:
+  get-east-asian-width@1.5.0:
     resolution:
       {
-        integrity: sha512-QZjmEOC+IT1uk6Rx0sX22V6uHWVwbdbxf1faPqJ1QhLdGgsRGCZoyaQBm/piRdJy/D2um6hM1UP7ZEeQ4EkP+Q==,
+        integrity: sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA==,
       }
     engines: { node: ">=18" }
 
@@ -5337,10 +5338,10 @@ packages:
       }
     engines: { node: ">=18" }
 
-  globby@16.1.0:
+  globby@16.1.1:
     resolution:
       {
-        integrity: sha512-+A4Hq7m7Ze592k9gZRy4gJ27DrXRNnC1vPjxTt1qQxEY8RxagBkBxivkCwg7FxSTG0iLLEMaUx13oOr0R2/qcQ==,
+        integrity: sha512-dW7vl+yiAJSp6aCekaVnVJxurRv7DCOLyXqEG3RYMYUg7AuJ2jCqPkZTA8ooqC2vtnkaMcV5WfFBMuEnTu1OQg==,
       }
     engines: { node: ">=20" }
 
@@ -5439,10 +5440,10 @@ packages:
       }
     engines: { node: ">= 0.4" }
 
-  hashery@1.4.0:
+  hashery@1.5.0:
     resolution:
       {
-        integrity: sha512-Wn2i1In6XFxl8Az55kkgnFRiAlIAushzh26PTjL2AKtQcEfXrcLa7Hn5QOWGZEf3LU057P9TwwZjFyxfS1VuvQ==,
+        integrity: sha512-nhQ6ExaOIqti2FDWoEMWARUqIKyjr2VcZzXShrI+A3zpeiuPWzx6iPftt44LhP74E5sW36B75N6VHbvRtpvO6Q==,
       }
     engines: { node: ">=20" }
 
@@ -6543,10 +6544,10 @@ packages:
     engines: { node: ">= 18" }
     hasBin: true
 
-  marked@17.0.2:
+  marked@17.0.3:
     resolution:
       {
-        integrity: sha512-s5HZGFQea7Huv5zZcAGhJLT3qLpAfnY7v7GWkICUr0+Wd5TFEtdlRR2XUL5Gg+RH7u2Df595ifrxR03mBaw7gA==,
+        integrity: sha512-jt1v2ObpyOKR8p4XaUJVk3YWRJ5n+i4+rjQopxvV32rSndTJXvIzuUdWWIy/1pFQMkQmvTXawzDNqOH/CUmx6A==,
       }
     engines: { node: ">= 20" }
     hasBin: true
@@ -6705,10 +6706,10 @@ packages:
         integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==,
       }
 
-  minipass@7.1.2:
+  minipass@7.1.3:
     resolution:
       {
-        integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==,
+        integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==,
       }
     engines: { node: ">=16 || 14 >=14.17" }
 
@@ -8737,10 +8738,10 @@ packages:
       }
     engines: { node: ">=18" }
 
-  string-width@8.1.1:
+  string-width@8.2.0:
     resolution:
       {
-        integrity: sha512-KpqHIdDL9KwYk22wEOg/VIqYbrnLeSApsKT/bSj6Ez7pn3CftUiLAv2Lccpq1ALcpLV9UX1Ppn92npZWu2w/aw==,
+        integrity: sha512-6hJPQ8N0V0P3SNmP6h2J99RLuzrWz2gvT7VnK5tKvrNqJoyS9W4/Fb8mo31UiPvy00z7DQXkP2hnKBVav76thw==,
       }
     engines: { node: ">=20" }
 
@@ -10646,7 +10647,7 @@ snapshots:
 
   "@cacheable/utils@2.3.4":
     dependencies:
-      hashery: 1.4.0
+      hashery: 1.5.0
       keyv: 5.6.0
 
   "@codemirror/autocomplete@6.20.0":
@@ -10737,10 +10738,10 @@ snapshots:
   "@colors/colors@1.5.0":
     optional: true
 
-  "@commitlint/cli@20.4.1(@types/node@24.7.0)(typescript@5.9.3)":
+  "@commitlint/cli@20.4.2(@types/node@24.7.0)(typescript@5.9.3)":
     dependencies:
       "@commitlint/format": 20.4.0
-      "@commitlint/lint": 20.4.1
+      "@commitlint/lint": 20.4.2
       "@commitlint/load": 20.4.0(@types/node@24.7.0)(typescript@5.9.3)
       "@commitlint/read": 20.4.0
       "@commitlint/types": 20.4.0
@@ -10750,7 +10751,7 @@ snapshots:
       - "@types/node"
       - typescript
 
-  "@commitlint/config-conventional@20.4.1":
+  "@commitlint/config-conventional@20.4.2":
     dependencies:
       "@commitlint/types": 20.4.0
       conventional-changelog-conventionalcommits: 9.1.0
@@ -10781,11 +10782,11 @@ snapshots:
       "@commitlint/types": 20.4.0
       semver: 7.7.4
 
-  "@commitlint/lint@20.4.1":
+  "@commitlint/lint@20.4.2":
     dependencies:
       "@commitlint/is-ignored": 20.4.1
       "@commitlint/parse": 20.4.1
-      "@commitlint/rules": 20.4.1
+      "@commitlint/rules": 20.4.2
       "@commitlint/types": 20.4.0
 
   "@commitlint/load@20.4.0(@types/node@24.7.0)(typescript@5.9.3)":
@@ -10828,7 +10829,7 @@ snapshots:
       lodash.mergewith: 4.6.2
       resolve-from: 5.0.0
 
-  "@commitlint/rules@20.4.1":
+  "@commitlint/rules@20.4.2":
     dependencies:
       "@commitlint/ensure": 20.4.1
       "@commitlint/message": 20.4.0
@@ -11476,7 +11477,7 @@ snapshots:
 
   "@keyv/bigmap@1.3.1(keyv@5.6.0)":
     dependencies:
-      hashery: 1.4.0
+      hashery: 1.5.0
       hookified: 1.15.1
       keyv: 5.6.0
 
@@ -11552,7 +11553,7 @@ snapshots:
       before-after-hook: 4.0.0
       universal-user-agent: 7.0.3
 
-  "@octokit/endpoint@11.0.2":
+  "@octokit/endpoint@11.0.3":
     dependencies:
       "@octokit/types": 16.0.0
       universal-user-agent: 7.0.3
@@ -11570,7 +11571,7 @@ snapshots:
       "@octokit/core": 7.0.6
       "@octokit/types": 16.0.0
 
-  "@octokit/plugin-retry@8.0.3(@octokit/core@7.0.6)":
+  "@octokit/plugin-retry@8.1.0(@octokit/core@7.0.6)":
     dependencies:
       "@octokit/core": 7.0.6
       "@octokit/request-error": 7.1.0
@@ -11589,7 +11590,7 @@ snapshots:
 
   "@octokit/request@10.0.7":
     dependencies:
-      "@octokit/endpoint": 11.0.2
+      "@octokit/endpoint": 11.0.3
       "@octokit/request-error": 7.1.0
       "@octokit/types": 16.0.0
       fast-content-type-parse: 3.0.0
@@ -11811,7 +11812,7 @@ snapshots:
     dependencies:
       "@octokit/core": 7.0.6
       "@octokit/plugin-paginate-rest": 14.0.0(@octokit/core@7.0.6)
-      "@octokit/plugin-retry": 8.0.3(@octokit/core@7.0.6)
+      "@octokit/plugin-retry": 8.1.0(@octokit/core@7.0.6)
       "@octokit/plugin-throttling": 11.0.3(@octokit/core@7.0.6)
       "@semantic-release/error": 4.0.0
       aggregate-error: 5.0.0
@@ -12196,15 +12197,13 @@ snapshots:
 
   balanced-match@3.0.1: {}
 
-  balanced-match@4.0.2:
-    dependencies:
-      jackspeak: 4.2.3
+  balanced-match@4.0.3: {}
 
   base64-js@1.3.1: {}
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.9.19: {}
+  baseline-browser-mapping@2.10.0: {}
 
   before-after-hook@4.0.0: {}
 
@@ -12233,7 +12232,7 @@ snapshots:
 
   brace-expansion@5.0.2:
     dependencies:
-      balanced-match: 4.0.2
+      balanced-match: 4.0.3
 
   braces@3.0.3:
     dependencies:
@@ -12245,7 +12244,7 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.9.19
+      baseline-browser-mapping: 2.10.0
       caniuse-lite: 1.0.30001770
       electron-to-chromium: 1.5.286
       node-releases: 2.0.27
@@ -12387,7 +12386,7 @@ snapshots:
   cli-truncate@5.1.1:
     dependencies:
       slice-ansi: 7.1.2
-      string-width: 8.1.1
+      string-width: 8.2.0
 
   cli-width@3.0.0: {}
 
@@ -13290,7 +13289,7 @@ snapshots:
 
   get-caller-file@2.0.5: {}
 
-  get-east-asian-width@1.4.0: {}
+  get-east-asian-width@1.5.0: {}
 
   get-intrinsic@1.3.0:
     dependencies:
@@ -13357,14 +13356,14 @@ snapshots:
       foreground-child: 3.3.1
       jackspeak: 4.2.3
       minimatch: 10.2.1
-      minipass: 7.1.2
+      minipass: 7.1.3
       package-json-from-dist: 1.0.1
       path-scurry: 2.0.1
 
   glob@13.0.5:
     dependencies:
       minimatch: 10.2.1
-      minipass: 7.1.2
+      minipass: 7.1.3
       path-scurry: 2.0.1
 
   glob@7.2.3:
@@ -13422,7 +13421,7 @@ snapshots:
       slash: 5.1.0
       unicorn-magic: 0.3.0
 
-  globby@16.1.0:
+  globby@16.1.1:
     dependencies:
       "@sindresorhus/merge-streams": 4.0.0
       fast-glob: 3.3.3
@@ -13485,7 +13484,7 @@ snapshots:
     dependencies:
       has-symbols: 1.1.0
 
-  hashery@1.4.0:
+  hashery@1.5.0:
     dependencies:
       hookified: 1.15.1
 
@@ -13709,7 +13708,7 @@ snapshots:
 
   is-fullwidth-code-point@5.1.0:
     dependencies:
-      get-east-asian-width: 1.4.0
+      get-east-asian-width: 1.5.0
 
   is-generator-function@1.1.2:
     dependencies:
@@ -14053,7 +14052,7 @@ snapshots:
 
   marked@15.0.12: {}
 
-  marked@17.0.2: {}
+  marked@17.0.3: {}
 
   math-intrinsics@1.1.0: {}
 
@@ -14112,7 +14111,7 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  minipass@7.1.2: {}
+  minipass@7.1.3: {}
 
   mitt@3.0.1: {}
 
@@ -14373,7 +14372,7 @@ snapshots:
   path-scurry@2.0.1:
     dependencies:
       lru-cache: 11.2.6
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   path-type@4.0.0: {}
 
@@ -15363,12 +15362,12 @@ snapshots:
   string-width@7.2.0:
     dependencies:
       emoji-regex: 10.6.0
-      get-east-asian-width: 1.4.0
+      get-east-asian-width: 1.5.0
       strip-ansi: 7.1.2
 
-  string-width@8.1.1:
+  string-width@8.2.0:
     dependencies:
-      get-east-asian-width: 1.4.0
+      get-east-asian-width: 1.5.0
       strip-ansi: 7.1.2
 
   string.prototype.matchall@4.0.12:
@@ -15484,7 +15483,7 @@ snapshots:
       fastest-levenshtein: 1.0.16
       file-entry-cache: 11.1.2
       global-modules: 2.0.0
-      globby: 16.1.0
+      globby: 16.1.1
       globjoin: 0.1.4
       html-tags: 5.1.0
       ignore: 7.0.5
@@ -15501,7 +15500,7 @@ snapshots:
       postcss-safe-parser: 7.0.1(postcss@8.5.6)
       postcss-selector-parser: 7.1.1
       postcss-value-parser: 4.2.0
-      string-width: 8.1.1
+      string-width: 8.2.0
       supports-hyperlinks: 4.4.0
       svg-tags: 1.0.0
       table: 6.9.0

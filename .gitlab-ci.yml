@@ -1,4 +1,4 @@
-image: code.castopod.org:5050/adaures/castopod:ci-php8.4
+image: code.castopod.org:5050/adaures/castopod:ci-php8.5
 
 stages:
   - prepare

@@ -39,7 +39,7 @@ class PreviewCardModel extends Model
     ];
 
     /**
-     * @var string
+     * @var class-string<PreviewCard>
      */
     protected $returnType = PreviewCard::class;
 

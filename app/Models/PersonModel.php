@@ -39,7 +39,7 @@ class PersonModel extends Model
     ];
 
     /**
-     * @var string
+     * @var class-string<Person>
      */
     protected $returnType = Person::class;
 

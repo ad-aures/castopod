@@ -23,7 +23,7 @@ class AnalyticsWebsiteByEntryPageModel extends Model
     protected $table = 'analytics_website_by_entry_page';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsWebsiteByEntryPage>
      */
     protected $returnType = AnalyticsWebsiteByEntryPage::class;
 

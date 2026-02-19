@@ -33,7 +33,7 @@ class PlatformModel extends Model
     protected $allowedFields = ['podcast_id', 'type', 'slug', 'link_url', 'account_id', 'is_visible'];
 
     /**
-     * @var string
+     * @var class-string<Platform>
      */
     protected $returnType = Platform::class;
 

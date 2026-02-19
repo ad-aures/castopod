@@ -102,7 +102,7 @@ class RssFeed extends SimpleXMLElement
 
         foreach ($nodes as $element) {
             $namespaces = $element->getNamespaces();
-            $namespace = $namespaces[array_key_first($namespaces)] ?? null;
+            $namespace = array_first($namespaces) ?? null;
 
             if (trim((string) $element) === '') {
                 $simpleRSS = $this->addChild($element->getName(), null, $namespace);

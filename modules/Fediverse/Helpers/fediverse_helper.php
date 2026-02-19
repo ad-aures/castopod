@@ -163,7 +163,7 @@ if (! function_exists('create_preview_card_from_url')) {
 
         if ($mediaData !== []) {
             $mediaUrl = array_key_first($mediaData);
-            $media = array_values($mediaData)[0];
+            $media = array_first($mediaData);
 
             if (array_key_exists('title', $media)) {
                 $typeMapping = [

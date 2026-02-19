@@ -23,7 +23,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     protected $table = 'analytics_website_by_referer';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsWebsiteByReferer>
      */
     protected $returnType = AnalyticsWebsiteByReferer::class;
 

@@ -145,11 +145,9 @@ class EpisodeCommentController extends BaseController
             $pager = $commentReplies->pager;
 
             $orderedItems = [];
-            if ($paginatedReplies !== null) {
-                foreach ($paginatedReplies as $reply) {
-                    $replyObject = new CommentObject($reply);
-                    $orderedItems[] = $replyObject;
-                }
+            foreach ($paginatedReplies as $reply) {
+                $replyObject = new CommentObject($reply);
+                $orderedItems[] = $replyObject;
             }
 
             $collection = new OrderedCollectionPage($pager, $orderedItems);

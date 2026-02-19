@@ -36,7 +36,7 @@ class FavouriteModel extends UuidModel
     protected $allowedFields = ['actor_id', 'post_id'];
 
     /**
-     * @var string
+     * @var class-string<Favourite>
      */
     protected $returnType = Favourite::class;
 

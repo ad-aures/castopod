@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "469f61ba87e9ecee8c664a7c48999320",
+  "content-hash": "de1c665976cbb37fec3de326336d83f5",
   "packages": [
     {
       "name": "adaures/castopod-plugins-manager",
@@ -261,16 +261,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.369.35",
+      "version": "3.369.37",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "0f3e296342fe965271b5dd0bded4a18bdab8aba5"
+        "reference": "bc599ce989b101ee630d5e1a1aeda387632df47b"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0f3e296342fe965271b5dd0bded4a18bdab8aba5",
-        "reference": "0f3e296342fe965271b5dd0bded4a18bdab8aba5",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bc599ce989b101ee630d5e1a1aeda387632df47b",
+        "reference": "bc599ce989b101ee630d5e1a1aeda387632df47b",
         "shasum": ""
       },
       "require": {
@@ -352,9 +352,9 @@
       "support": {
         "forum": "https://github.com/aws/aws-sdk-php/discussions",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.369.35"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.369.37"
       },
-      "time": "2026-02-16T19:15:41+00:00"
+      "time": "2026-02-18T19:16:34+00:00"
     },
     {
       "name": "brick/math",
@@ -539,23 +539,23 @@
     },
     {
       "name": "codeigniter4/framework",
-      "version": "v4.6.5",
+      "version": "v4.7.0",
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/framework.git",
-        "reference": "116e0919590a412c09d2b9e4f6b8addda18224d8"
+        "reference": "e7753bc03f8b74af428f46b5e2bb74925487c930"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/116e0919590a412c09d2b9e4f6b8addda18224d8",
-        "reference": "116e0919590a412c09d2b9e4f6b8addda18224d8",
+        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/e7753bc03f8b74af428f46b5e2bb74925487c930",
+        "reference": "e7753bc03f8b74af428f46b5e2bb74925487c930",
         "shasum": ""
       },
       "require": {
         "ext-intl": "*",
         "ext-mbstring": "*",
-        "laminas/laminas-escaper": "^2.17",
-        "php": "^8.1",
+        "laminas/laminas-escaper": "^2.18",
+        "php": "^8.2",
         "psr/log": "^3.0"
       },
       "require-dev": {
@@ -569,6 +569,7 @@
         "predis/predis": "^3.0"
       },
       "suggest": {
+        "ext-apcu": "If you use Cache class ApcuHandler",
         "ext-curl": "If you use CURLRequest class",
         "ext-dom": "If you use TestResponse",
         "ext-exif": "If you run Image class tests",
@@ -580,7 +581,9 @@
         "ext-memcached": "If you use Cache class MemcachedHandler with Memcached",
         "ext-mysqli": "If you use MySQL",
         "ext-oci8": "If you use Oracle Database",
+        "ext-pcntl": "If you use Signals",
         "ext-pgsql": "If you use PostgreSQL",
+        "ext-posix": "If you use Signals",
         "ext-readline": "Improves CLI::input() usability",
         "ext-redis": "If you use Cache class RedisHandler",
         "ext-simplexml": "If you format XML",
@@ -609,7 +612,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/codeigniter4/CodeIgniter4"
       },
-      "time": "2026-02-01T17:59:34+00:00"
+      "time": "2026-02-01T20:39:35+00:00"
     },
     {
       "name": "codeigniter4/queue",
@@ -4556,16 +4559,16 @@
     },
     {
       "name": "friendsofphp/php-cs-fixer",
-      "version": "v3.94.0",
+      "version": "v3.94.1",
       "source": {
         "type": "git",
         "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-        "reference": "883b20fb38c7866de9844ab6d0a205c423bde2d4"
+        "reference": "d1a3634e29916367b885250e1fc4dfd5ffe3b091"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/883b20fb38c7866de9844ab6d0a205c423bde2d4",
-        "reference": "883b20fb38c7866de9844ab6d0a205c423bde2d4",
+        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/d1a3634e29916367b885250e1fc4dfd5ffe3b091",
+        "reference": "d1a3634e29916367b885250e1fc4dfd5ffe3b091",
         "shasum": ""
       },
       "require": {
@@ -4648,7 +4651,7 @@
       ],
       "support": {
         "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.94.0"
+        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.94.1"
       },
       "funding": [
         {
@@ -4656,7 +4659,7 @@
           "type": "github"
         }
       ],
-      "time": "2026-02-11T16:44:33+00:00"
+      "time": "2026-02-18T12:24:42+00:00"
     },
     {
       "name": "mikey179/vfsstream",
@@ -5431,16 +5434,16 @@
     },
     {
       "name": "phpunit/phpunit",
-      "version": "13.0.3",
+      "version": "13.0.5",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "reference": "a9c20642ffd2098c0f9e687c00849afbce2f23c7"
+        "reference": "d57826e8921a534680c613924bfd921ded8047f4"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a9c20642ffd2098c0f9e687c00849afbce2f23c7",
-        "reference": "a9c20642ffd2098c0f9e687c00849afbce2f23c7",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d57826e8921a534680c613924bfd921ded8047f4",
+        "reference": "d57826e8921a534680c613924bfd921ded8047f4",
         "shasum": ""
       },
       "require": {
@@ -5509,7 +5512,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/phpunit/issues",
         "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-        "source": "https://github.com/sebastianbergmann/phpunit/tree/13.0.3"
+        "source": "https://github.com/sebastianbergmann/phpunit/tree/13.0.5"
       },
       "funding": [
         {
@@ -5533,7 +5536,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2026-02-16T08:38:33+00:00"
+      "time": "2026-02-18T12:40:03+00:00"
     },
     {
       "name": "psr/container",

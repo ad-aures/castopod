@@ -64,7 +64,7 @@ class PodcastModel extends Model
     ];
 
     /**
-     * @var string
+     * @var class-string<Podcast>
      */
     protected $returnType = Podcast::class;
 

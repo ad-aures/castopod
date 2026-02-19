@@ -403,10 +403,8 @@ class EpisodeController extends BaseController
             $pager = $episodeComments->pager;
 
             $orderedItems = [];
-            if ($paginatedComments !== null) {
-                foreach ($paginatedComments as $comment) {
-                    $orderedItems[] = new NoteObject($comment)->toArray();
-                }
+            foreach ($paginatedComments as $comment) {
+                $orderedItems[] = new NoteObject($comment)->toArray();
             }
 
             // @phpstan-ignore-next-line

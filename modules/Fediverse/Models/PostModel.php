@@ -60,7 +60,7 @@ class PostModel extends UuidModel
     ];
 
     /**
-     * @var string
+     * @var class-string<Post>
      */
     protected $returnType = Post::class;
 

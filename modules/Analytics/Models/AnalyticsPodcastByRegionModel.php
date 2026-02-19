@@ -23,7 +23,7 @@ class AnalyticsPodcastByRegionModel extends Model
     protected $table = 'analytics_podcasts_by_region';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsPodcastsByRegion>
      */
     protected $returnType = AnalyticsPodcastsByRegion::class;
 

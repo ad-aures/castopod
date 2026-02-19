@@ -36,7 +36,7 @@ class LikeModel extends UuidModel
     protected $allowedFields = ['actor_id', 'comment_id'];
 
     /**
-     * @var string
+     * @var class-string<Like>
      */
     protected $returnType = Like::class;
 

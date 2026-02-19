@@ -26,7 +26,7 @@ class NotificationModel extends UuidModel
     protected $primaryKey = 'id';
 
     /**
-     * @var string
+     * @var class-string<Notification>
      */
     protected $returnType = Notification::class;
 

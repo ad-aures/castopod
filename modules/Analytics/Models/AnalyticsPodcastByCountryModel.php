@@ -23,7 +23,7 @@ class AnalyticsPodcastByCountryModel extends Model
     protected $table = 'analytics_podcasts_by_country';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsPodcastsByCountry>
      */
     protected $returnType = AnalyticsPodcastsByCountry::class;
 

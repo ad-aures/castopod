@@ -28,7 +28,7 @@ class OrderedCollectionObject extends ObjectType
     protected ?string $last = null;
 
     /**
-     * @param ObjectType[]|null $orderedItems
+     * @param ObjectType[]|list<string>|null $orderedItems
      */
     public function __construct(
         protected ?array $orderedItems = null,

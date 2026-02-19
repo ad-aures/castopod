@@ -58,7 +58,7 @@ class ActivityModel extends UuidModel
     ];
 
     /**
-     * @var string
+     * @var class-string<Activity>
      */
     protected $returnType = Activity::class;
 

@@ -21,7 +21,7 @@ class AnalyticsPodcastBySubscriptionModel extends Model
     protected $table = 'analytics_podcasts_by_subscription';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsPodcastsBySubscription>
      */
     protected $returnType = AnalyticsPodcastsBySubscription::class;
 

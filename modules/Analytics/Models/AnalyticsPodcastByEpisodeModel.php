@@ -23,7 +23,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     protected $table = 'analytics_podcasts_by_episode';
 
     /**
-     * @var string
+     * @var class-string<AnalyticsPodcastsByEpisode>
      */
     protected $returnType = AnalyticsPodcastsByEpisode::class;
 

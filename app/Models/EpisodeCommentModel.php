@@ -25,7 +25,7 @@ use Modules\Fediverse\Objects\TombstoneObject;
 class EpisodeCommentModel extends UuidModel
 {
     /**
-     * @var string
+     * @var class-string<EpisodeComment>
      */
     protected $returnType = EpisodeComment::class;
 

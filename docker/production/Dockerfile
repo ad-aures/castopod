@@ -7,7 +7,7 @@
 #   2. BUILD the FrankenPHP/debian based prod image
 #---------------------------------------------------
     
-ARG PHP_VERSION="8.4"
+ARG PHP_VERSION="8.5"
 
 ####################################################
 # BUNDLE STAGE

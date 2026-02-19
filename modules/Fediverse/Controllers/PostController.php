@@ -97,11 +97,9 @@ class PostController extends Controller
             $orderedItems = [];
             $noteObjectClass = $this->config->noteObject;
 
-            if ($paginatedReplies !== null) {
-                foreach ($paginatedReplies as $reply) {
-                    $replyObject = new $noteObjectClass($reply);
-                    $orderedItems[] = $replyObject->toArray();
-                }
+            foreach ($paginatedReplies as $reply) {
+                $replyObject = new $noteObjectClass($reply);
+                $orderedItems[] = $replyObject->toArray();
             }
 
             $collection = new OrderedCollectionPage($pager, $orderedItems);

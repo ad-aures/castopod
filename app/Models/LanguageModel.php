@@ -31,7 +31,7 @@ class LanguageModel extends Model
     protected $allowedFields = ['code', 'native_name'];
 
     /**
-     * @var string
+     * @var class-string<Language>
      */
     protected $returnType = Language::class;
 

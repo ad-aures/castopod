@@ -21,7 +21,7 @@ class CreditModel extends Model
     protected $table = 'credits';
 
     /**
-     * @var string
+     * @var class-string<Credit>
      */
     protected $returnType = Credit::class;
 }

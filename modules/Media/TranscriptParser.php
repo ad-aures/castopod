@@ -133,7 +133,7 @@ class TranscriptParser
 
         $lines = explode(PHP_EOL, $this->transcriptContent);
         // add a newline as last item, if it isn't already a newline
-        if ($lines[array_key_last($lines)] !== '') {
+        if (array_last($lines) !== '') {
             $lines[] = PHP_EOL;
         }
 

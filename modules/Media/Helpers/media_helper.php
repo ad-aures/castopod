@@ -38,7 +38,6 @@ if (! function_exists('download_file')) {
         curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 
         curl_exec($ch);
-        curl_close($ch);
 
         fclose($file);
 

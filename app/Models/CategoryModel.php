@@ -31,7 +31,7 @@ class CategoryModel extends Model
     protected $allowedFields = ['parent_id', 'code', 'apple_category', 'google_category'];
 
     /**
-     * @var string
+     * @var class-string<Category>
      */
     protected $returnType = Category::class;
 

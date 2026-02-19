@@ -4,7 +4,7 @@
 # ⚠️ NOT optimized for production
 # should be used only for development purposes
 #---------------------------------------------------
-FROM php:8.4-fpm
+FROM php:8.5-fpm
 
 LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 

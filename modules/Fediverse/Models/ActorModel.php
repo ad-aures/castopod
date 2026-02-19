@@ -46,7 +46,7 @@ class ActorModel extends Model
     ];
 
     /**
-     * @var string
+     * @var class-string<Actor>
      */
     protected $returnType = Actor::class;
 

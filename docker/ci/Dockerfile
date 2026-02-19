@@ -4,7 +4,7 @@
 # ⚠️ NOT optimized for production
 # should be used only for continuous integration
 #---------------------------------------------------
-FROM php:8.4-fpm-alpine3.21
+FROM php:8.5-fpm-alpine3.23
 
 LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 

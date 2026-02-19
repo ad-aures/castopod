@@ -31,7 +31,7 @@ class PageModel extends Model
     protected $allowedFields = ['id', 'title', 'slug', 'content_markdown', 'content_html'];
 
     /**
-     * @var string
+     * @var class-string<Page>
      */
     protected $returnType = Page::class;
 

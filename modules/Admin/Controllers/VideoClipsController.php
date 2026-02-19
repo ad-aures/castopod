@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use App\Entities\Clip\BaseClip;
 use App\Entities\Clip\VideoClip;
 use App\Entities\Episode;
 use App\Entities\Podcast;
@@ -59,6 +60,7 @@ class VideoClipsController extends BaseController
             ])
             ->orderBy('created_at', 'desc');
 
+        /** @var BaseClip[] $clips */
         $clips = $videoClipsBuilder->paginate(10);
 
         $videoClips = [];

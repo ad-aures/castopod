@@ -19,7 +19,7 @@ class ExampleModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string
+     * @var 'object'
      */
     protected $returnType = 'object';
 

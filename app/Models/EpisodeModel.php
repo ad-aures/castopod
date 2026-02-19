@@ -98,7 +98,7 @@ class EpisodeModel extends UuidModel
     ];
 
     /**
-     * @var string
+     * @var class-string<Episode>
      */
     protected $returnType = Episode::class;
 
