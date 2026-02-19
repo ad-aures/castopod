@@ -1,3 +1,12 @@
+## [1.15.4](https://code.castopod.org/adaures/castopod/compare/v1.15.3...v1.15.4) (2026-02-19)
+
+### Bug Fixes
+
+- **emails:** display verification link in clear text for email clients only
+  displaying text
+  ([37c89df](https://code.castopod.org/adaures/castopod/commit/37c89df3424e4f67fb05c09094560df7edbd76d4)),
+  closes [#328](https://code.castopod.org/adaures/castopod/issues/328)
+
 ## [1.15.3](https://code.castopod.org/adaures/castopod/compare/v1.15.2...v1.15.3) (2026-02-19)
 
 ### Bug Fixes
