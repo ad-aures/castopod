@@ -60,10 +60,16 @@ docker-build-release:
     # copy credentials to authenticate against registry
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
 
-    # extract Castopod version from tag (remove "v" prefix)
-    - export CP_VERSION=$(echo "$CI_COMMIT_TAG" | sed 's/^v//')
-    # extract pre release identifier (eg. alpha, beta, next, ...) from CP_VERSION or "latest" if none exists
-    - export CP_TAG=$(echo "$CP_VERSION" | sed 's/^[^-]*-\([^.]*\)\..*/\1/; t; s/.*/latest/')
+    ## Prepare Docker image tags from git tag
+    ## --------------------------------------
+    # extract full SemVer from git tag (remove leading "v")
+    - export IMAGE_TAG_VERSION=$(echo "$CI_COMMIT_TAG" | sed 's/^v//')
+    # extract channel (prerelease like "alpha", "beta", "next"; "latest" for stable)
+    - export IMAGE_TAG_CHANNEL=$(echo "$IMAGE_TAG_VERSION" | sed 's/^[^-]*-\([^.]*\)\..*/\1/; t; s/.*/latest/')
+    # extract major version number (first SemVer component)
+    - export IMAGE_TAG_MAJOR=$(echo "$IMAGE_TAG_VERSION" | sed 's/\..*//')
+    # construct major-channel tag ("X" for stable, "X-channel" for prerelease)
+    - export IMAGE_TAG_MAJOR_CHANNEL=$([ "$IMAGE_TAG_CHANNEL" = "latest" ] && echo "$IMAGE_TAG_MAJOR" || echo "${IMAGE_TAG_MAJOR}-${IMAGE_TAG_CHANNEL}")
 
     - docker context create tls-environment
 
@@ -86,8 +92,9 @@ docker-build-release:
       --platform linux/amd64
       --file docker/production/Dockerfile
       --push
-      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION}
-      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_TAG}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_VERSION}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_CHANNEL}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_MAJOR_CHANNEL}
       .
     # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
     # --> build and push amd64 image first, then overwrite manifest after building arm64
@@ -97,8 +104,9 @@ docker-build-release:
       --platform linux/amd64,linux/arm64
       --file docker/production/Dockerfile
       --push
-      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION}
-      --tag ${DOCKER_IMAGE_CASTOPOD}:${CP_TAG}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_VERSION}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_CHANNEL}
+      --tag ${DOCKER_IMAGE_CASTOPOD}:${IMAGE_TAG_MAJOR_CHANNEL}
       .
   rules:
     - if: $CI_COMMIT_TAG
