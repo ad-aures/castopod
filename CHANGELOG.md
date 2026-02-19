@@ -1,3 +1,11 @@
+## [1.15.3](https://code.castopod.org/adaures/castopod/compare/v1.15.2...v1.15.3) (2026-02-19)
+
+### Bug Fixes
+
+- **bundle:** include resources folder for icons during rsync
+  ([70ca0c7](https://code.castopod.org/adaures/castopod/commit/70ca0c7928cabb99a07de01cb4e12f5d81689bbe)),
+  closes [#588](https://code.castopod.org/adaures/castopod/issues/588)
+
 ## [1.15.2](https://code.castopod.org/adaures/castopod/compare/v1.15.1...v1.15.2) (2026-02-18)
 
 ### Bug Fixes
