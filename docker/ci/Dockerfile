@@ -32,9 +32,8 @@ RUN \
         mysqli \
     && apk del .php-ext-build-dep \
     # install pnpm
-    && wget -qO- https://get.pnpm.io/install.sh | ENV="~/.shrc" SHELL="$(which sh)" sh - \
-    && mv ~/.local/share/pnpm/pnpm /usr/bin/pnpm \
-    && rm -rf ~/.local \
+    && npm install --global corepack@latest \
+    && corepack enable pnpm \
     # set pnpm store directory
     && pnpm config set store-dir .pnpm-store \
     # set composer cache directory
