@@ -17,18 +17,19 @@ service can be configured as the caching layer.
 
 ## Supported tags
 
-- `1.x.x` [stable], specific version build (since `1.0.0`)
-- `latest` [stable], latest version build
+- `1.x.x`, specific version build (since `1.0.0`)
+- `1`, latest build for version 1
+- `latest`, latest version build
 - `develop` [unstable], latest development branch build
 
-Other unstable tags (e.g., `beta`, `next`) may be actively pushed during development phases.
+Other unstable channels (e.g., `beta`, `next`, `2-next`) may be actively pushed during development phases.
 See [all tags in the docker hub](https://hub.docker.com/r/castopod/castopod/tags).
 
-<Aside type="tip">
-  To ensure reproducibility and stability during production, always pin to a
-  specific version tag like `1.x.x` (e.g., `1.15.1`) instead of `latest`.
+<Aside type="caution">
+  For production stability, prefer specific tags like `1.x.x` (e.g., `1.15.1`)
+  over generic channels (e.g., `latest`, `1`).
   <br />
-  The latest tag changes unexpectedly, risking downtime and inconsistent
+  Generic tags change unexpectedly, risking downtime and inconsistent
   deployments.
 </Aside>
 
@@ -41,7 +42,7 @@ See [all tags in the docker hub](https://hub.docker.com/r/castopod/castopod/tags
     ```yml
     services:
       castopod:
-        image: castopod/castopod:latest # Pin to a specific version during production
+        image: castopod/castopod:1 # Pin to a specific version during production
         container_name: "castopod"
         volumes:
           - castopod-media:/app/public/media
