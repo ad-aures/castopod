@@ -353,13 +353,14 @@ if (! function_exists('audio_player')) {
                 theme="light"
                 language="{$language}"
                 class="{$class} relative z-0"
+                icons="castopod-vm-player-icons"
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
             >
                 <vm-audio preload="none">
                     <source src="{$source}" type="{$mediaType}" />
                 </vm-audio>
                 <vm-ui>
-                    <vm-icon-library></vm-icon-library>
+                    <vm-icon-library name="castopod-vm-player-icons"></vm-icon-library>
                     <vm-controls full-width>
                         <vm-playback-control></vm-playback-control>
                         <vm-volume-control></vm-volume-control>
