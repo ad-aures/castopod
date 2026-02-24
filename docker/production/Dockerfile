@@ -62,13 +62,21 @@ LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 
 USER root
 
-# Latest releases available at https://github.com/aptible/supercronic/releases
-ARG SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.42/supercronic-linux-amd64 \
-    SUPERCRONIC_SHA1SUM=b444932b81583b7860849f59fdb921217572ece2 \
-    SUPERCRONIC=supercronic-linux-amd64
+ARG TARGETARCH
 
+# Latest releases available at https://github.com/aptible/supercronic/releases
 # add supercronic to handle cron jobs
-RUN \
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+        SUPERCRONIC_URL="https://github.com/aptible/supercronic/releases/download/v0.2.43/supercronic-linux-amd64"; \
+        SUPERCRONIC_SHA1SUM="f97b92132b61a8f827c3faf67106dc0e4467ccf2"; \
+        SUPERCRONIC="supercronic-linux-amd64"; \
+    elif [ "$TARGETARCH" = "arm64" ]; then \
+        SUPERCRONIC_URL="https://github.com/aptible/supercronic/releases/download/v0.2.43/supercronic-linux-arm64"; \
+        SUPERCRONIC_SHA1SUM="5c6266786c2813d6f8a99965d84452faae42b483"; \
+        SUPERCRONIC="supercronic-linux-arm64"; \
+    else \
+        echo "Unsupported TARGETARCH: $TARGETARCH"; exit 1; \
+    fi && \
     curl -fsSLO "$SUPERCRONIC_URL" \
     && echo "${SUPERCRONIC_SHA1SUM}  ${SUPERCRONIC}" | sha1sum -c - \
     && chmod +x "$SUPERCRONIC" \
@@ -80,8 +88,19 @@ ARG S6_OVERLAY_VERSION=3.2.2.0
 # add s6-overlay process manager
 ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz /tmp
 RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz
-ADD https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-x86_64.tar.xz /tmp
-RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
+
+# add Arch-specific tarball
+RUN if [ "$TARGETARCH" = "amd64" ]; then \
+      S6_ARCH="x86_64"; \
+    elif [ "$TARGETARCH" = "arm64" ]; then \
+      S6_ARCH="aarch64"; \
+    else \
+      echo "Unsupported TARGETARCH: $TARGETARCH"; exit 1; \
+    fi && \
+    curl -fsSL -o /tmp/s6-overlay-${S6_ARCH}.tar.xz \
+      "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz" && \
+    tar -C / -Jxpf /tmp/s6-overlay-${S6_ARCH}.tar.xz && \
+    rm /tmp/s6-overlay-${S6_ARCH}.tar.xz
 
 # copy s6-overlay services
 COPY --chown=www-data:www-data docker/production/s6-rc.d /etc/s6-overlay/s6-rc.d
