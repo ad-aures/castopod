@@ -1,3 +1,11 @@
+## [1.15.5](https://code.castopod.org/adaures/castopod/compare/v1.15.4...v1.15.5) (2026-02-24)
+
+### Bug Fixes
+
+- **docker:** add arch-specific supercronic and s6-overlay services
+  ([243ce3a](https://code.castopod.org/adaures/castopod/commit/243ce3a45c740352841bf67fe1ff63151f276eb9)),
+  closes [#580](https://code.castopod.org/adaures/castopod/issues/580)
+
 ## [1.15.4](https://code.castopod.org/adaures/castopod/compare/v1.15.3...v1.15.4) (2026-02-19)
 
 ### Bug Fixes
