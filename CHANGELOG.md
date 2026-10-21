@@ -1,3 +1,10 @@
+## [1.15.6](https://code.castopod.org/adaures/castopod/compare/v1.15.5...v1.15.6) (2026-10-21)
+
+### Bug Fixes
+
+- **docker:** pin PHP to 8.4.27 for CVE-2026-109618 and CVE-2026-109619
+  ([a558971](https://code.castopod.org/adaures/castopod/commit/a558971138f0a2755a8d9a97bc889016dea06826))
+
 ## [1.15.5](https://code.castopod.org/adaures/castopod/compare/v1.15.4...v1.15.5) (2026-02-24)
 
 ### Bug Fixes
