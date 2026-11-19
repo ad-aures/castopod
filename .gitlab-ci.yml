@@ -168,6 +168,16 @@ release:
       when: never
     - if: $CI_COMMIT_BRANCH =~ /^(main|alpha|beta|next)$/
 
+# castopod.org website has been moved to Codeberg, comment awaiting migration
+#
+# website:
+#   stage: deploy
+#   trigger: adaures/castopod.org
+#   rules:
+#     - if: $CI_PROJECT_NAMESPACE != "adaures"
+#       when: never
+#     - if: $CI_COMMIT_MESSAGE =~ /^chore\(release\):/ && $CI_COMMIT_TAG
+
 documentation:
   stage: deploy
   trigger:

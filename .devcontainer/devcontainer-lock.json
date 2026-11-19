@@ -1,0 +1,19 @@
+{
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "1.3.8",
+      "resolved": "ghcr.io/devcontainers/features/git@sha256:fd75977de13a9979000e0e78baf949adb0ca71d2398995fa22e0a36d7e7e7fe2",
+      "integrity": "sha256:fd75977de13a9979000e0e78baf949adb0ca71d2398995fa22e0a36d7e7e7fe2"
+    },
+    "ghcr.io/guiyomh/features/vim:0": {
+      "version": "0.0.1",
+      "resolved": "ghcr.io/guiyomh/features/vim@sha256:53c64a458fe88f40862ad5f94ea3f8d7fdf46c3fb42bdaa8a6a09f7d44f182f7",
+      "integrity": "sha256:53c64a458fe88f40862ad5f94ea3f8d7fdf46c3fb42bdaa8a6a09f7d44f182f7"
+    },
+    "ghcr.io/NicoVIII/devcontainer-features/pnpm:2": {
+      "version": "2.0.2",
+      "resolved": "ghcr.io/nicoviii/devcontainer-features/pnpm@sha256:f0e298a694ff42f68b6e7258b128be3aee85132e48ee4661de8106845f1ca6cc",
+      "integrity": "sha256:f0e298a694ff42f68b6e7258b128be3aee85132e48ee4661de8106845f1ca6cc"
+    }
+  }
+}
