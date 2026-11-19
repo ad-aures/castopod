@@ -1,3 +1,10 @@
+## [1.15.7](https://code.castopod.org/adaures/castopod/compare/v1.15.6...v1.15.7) (2026-11-19)
+
+### Bug Fixes
+
+- **docker:** pin production image with PHP v8.4.28 to address CVE-2026-115560
+  ([50cbbe1](https://code.castopod.org/adaures/castopod/commit/50cbbe1160b75cf57174b2c749d5804e22c2f9cf))
+
 ## [1.15.6](https://code.castopod.org/adaures/castopod/compare/v1.15.5...v1.15.6) (2026-10-21)
 
 ### Bug Fixes
